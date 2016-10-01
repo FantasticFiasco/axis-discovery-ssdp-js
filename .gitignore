@@ -1,0 +1,8 @@
+## npm Packages
+**/node_modules/*
+
+## JavaScript files
+**/*.js
+
+## Node
+**/npm-*.log

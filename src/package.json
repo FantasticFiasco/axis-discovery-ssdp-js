@@ -1,0 +1,18 @@
+{
+  "name": "axis-discovery-ssdp",
+  "version": "0.0.1",
+  "description": "Node module capable of searching for Axis video cameras using SSDP.",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "tsc -p .",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@types/lodash": "^4.14.36",
+    "@types/node": "^6.0.41",
+    "lodash": "^4.16.2"
+  }
+}
