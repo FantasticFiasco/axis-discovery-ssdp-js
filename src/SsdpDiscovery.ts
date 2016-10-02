@@ -24,17 +24,13 @@ export class SsdpDiscovery extends EventEmitter {
 	 * Start listen for SSDP advertisements on all network interface addresses.
 	 */
 	startOnAll() {
-		_.forEach(
-			this.networkInterfaces.getIPv4Addresses(),
-			address => this.startOn(address));
+		_.forEach(this.networkInterfaces.getIPv4Addresses(), address => this.startOn(address));
 	}
 
 	/**
 	 * Starts a search for Axis cameras on the network by using HTTP method M-SEARCH.
 	 */
 	search() {
-		_.forEach(
-			this.sockets,
-			(socket: SsdpSocket) => socket.search());
+		_.forEach(this.sockets, socket => socket.search());
 	}
 }

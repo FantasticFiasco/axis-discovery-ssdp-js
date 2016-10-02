@@ -16,8 +16,7 @@ export class SsdpSocket {
 	 */
 	startOn(address: string) {
 		if (this.socket != null) {
-			
-			throw 'Socket has already been created'
+			throw 'Socket has already been started on an address'
 		}
 
 		this.socket = createSocket({ type: 'udp4', reuseAddr: true });

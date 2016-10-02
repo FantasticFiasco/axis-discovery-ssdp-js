@@ -39,26 +39,29 @@ export class MSearchResponse {
 	 */
 	getParameterValue(parameterName: string): string | null {
 		const value = this.parameters[parameterName];
-		return value !== undefined ? value : null;
+		
+		if (value == null) {
+			return null;
+		}
+
+		return value;
 	}
 
 	private parseMessage(message: Buffer) {
-		const messageString = message
+		const parameters = message
 			.toString()
 			.trim();
 		
-		if (messageString === '') {
+		if (parameters == '') {
 			return;
 		}
 
-		_.forEach(
-			messageString.split('\r\n'),
-			parameter => {
-				const split = parameter.split(':');
-				const name = split[0].trim();
-				const value = split[1].trim();
+		_.forEach(parameters.split('\r\n'), parameter => {
+			const split = parameter.split(':');
+			const name = split[0].trim();
+			const value = split[1].trim();
 
-				this.parameters[name] = value;
-			});
+			this.parameters[name] = value;
+		});
 	}
 }
