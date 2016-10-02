@@ -1,9 +1,12 @@
 import * as _ from 'lodash';
-import {networkInterfaces, NetworkInterfaceInfo} from 'os';
+import { networkInterfaces, NetworkInterfaceInfo } from 'os';
 
 export class NetworkInterfaces {
 	
-	getAddresses(): string[] {
+	/**
+	 * Returns all public IPv4 addresses from all network interface cards.
+	 */
+	getIPv4Addresses(): string[] {
 		const interfaces = networkInterfaces();
 
 		const addresses = _.chain(interfaces)

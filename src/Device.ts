@@ -1,5 +1,18 @@
 export class Device {
-	constructor(public serialNumber: string,
-				public location: string) {
+	
+	/**
+	 * The address.
+	 */
+	address: string;
+
+	/**
+	 * The serial number.
+	 */
+	serialNumber: string;
+	
+	constructor(address: string,
+				serialNumber: string) {
+		this.address = address;
+		this.serialNumber = serialNumber;
 	}
 }

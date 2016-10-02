@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+
 /**
  * Class describing the response for available services on a network. Is sent via unicast
  * addressing to the originating search request address and port number. 
@@ -49,9 +51,9 @@ export class MSearchResponse {
 			return;
 		}
 
-		messageString
-			.split('\r\n')
-			.forEach(parameter => {
+		_.forEach(
+			messageString.split('\r\n'),
+			parameter => {
 				const split = parameter.split(':');
 				const name = split[0].trim();
 				const value = split[1].trim();

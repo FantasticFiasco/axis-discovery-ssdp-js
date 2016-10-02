@@ -1,5 +1,5 @@
-import {expect} from 'chai';
-import {MSearchResponse} from './MSearchResponse';
+import { expect } from 'chai';
+import { MSearchResponse } from './MSearchResponse';
 
 describe('when parsing M-SEARCH response', function() {
 	it ('should return remote address information', () => {
