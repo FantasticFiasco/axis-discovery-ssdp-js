@@ -1,10 +1,13 @@
 import * as _ from 'lodash';
 import {Socket, BindOptions, createSocket} from 'dgram';
 import {EventEmitter} from 'events';
+import {Device} from './Device';
+import {MessageParser} from './MessageParser';
 
 export class Ssdp extends EventEmitter {
 
-	private sockets: Socket[] = []; 
+	private sockets: Socket[] = [];
+	private parser = new MessageParser();
 
 	private searchMessage = 
 		'M-SEARCH * HTTP/1.1\r\n' +
@@ -22,8 +25,13 @@ export class Ssdp extends EventEmitter {
       		console.log(`SSDP now listening on ${socket.address().address}:${socket.address().port}`);
 	    });
 
-		socket.on('message', (message, remote) => {   
-        	this.emit('message', {message, remote});
+		socket.on('message', (message, remote) => {
+			var device = this.parser.parse(message);
+			if (device != null)
+			{
+				this.emit('message', device);
+			}
+        	
     	});
 
 		socket.on('error', error => {
