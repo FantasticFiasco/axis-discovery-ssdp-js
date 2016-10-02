@@ -19,7 +19,7 @@ export class MSearchResponse {
 	 */
 	remoteFamily: string;
 
-	private parameters = {};
+	private parameters: any = {};
 	
 	constructor(message: Buffer,
 				remoteAddress: string,
@@ -36,12 +36,20 @@ export class MSearchResponse {
 	 * Returns the value of the specified parameter name.
 	 */
 	getParameterValue(parameterName: string): string | null {
-		return this.parameters[parameterName];
+		const value = this.parameters[parameterName];
+		return value !== undefined ? value : null;
 	}
 
 	private parseMessage(message: Buffer) {
-		message
+		const messageString = message
 			.toString()
+			.trim();
+		
+		if (messageString === '') {
+			return;
+		}
+
+		messageString
 			.split('\r\n')
 			.forEach(parameter => {
 				const split = parameter.split(':');
