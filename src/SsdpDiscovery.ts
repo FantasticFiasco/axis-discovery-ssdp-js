@@ -15,6 +15,11 @@ export class SsdpDiscovery extends EventEmitter {
 	 */
 	startOn(address: string) {
 		const socket = new SsdpSocket();
+		
+		socket.on('hello', device => {
+			this.emit('hello', device);
+		});
+		
 		socket.startOn(address);
 
 		this.sockets.push(socket);
