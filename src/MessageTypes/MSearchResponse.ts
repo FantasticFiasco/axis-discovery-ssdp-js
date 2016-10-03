@@ -48,18 +48,20 @@ export class MSearchResponse {
 	}
 
 	private parseMessage(message: Buffer) {
-		const parameters = message
+		const messageRows = message
 			.toString()
-			.trim();
-		
-		if (parameters == '') {
-			return;
+			.trim()
+			.split('\r\n');
+
+		const method = messageRows.shift();
+		if (method != 'HTTP/1.1 200 OK') {
+			throw 'Message is not describing a M-SEARCH response'
 		}
 
-		_.forEach(parameters.split('\r\n'), parameter => {
-			const split = parameter.split(':');
-			const name = split[0].trim();
-			const value = split[1].trim();
+		_.forEach(messageRows, messageRow => {
+			const index = messageRow.indexOf(':');
+			const name = messageRow.slice(0, index).trim();
+			const value = messageRow.slice(index + 1, messageRow.length).trim();
 
 			this.parameters[name] = value;
 		});
