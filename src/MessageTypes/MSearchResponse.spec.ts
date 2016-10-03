@@ -84,7 +84,7 @@ describe('when parsing M-SEARCH response', function() {
 				'SERVER: Linux/2.6.35, UPnP/1.0, Portable SDK for UPnP devices/1.6.18\r\n' +
 				'X-User-Agent: redsonic\r\n' +
 				'ST: urn:axis-com:service:BasicService:1\r\n' +
-				'SN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1\r\n'),
+				'USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1\r\n'),
 			'192.168.1.100',
 			443,
 			'IPv4');
@@ -98,7 +98,7 @@ describe('when parsing M-SEARCH response', function() {
 		const server = subject.getParameterValue('SERVER');
 		const userAgent = subject.getParameterValue('X-User-Agent');
 		const st = subject.getParameterValue('ST');
-		const sn = subject.getParameterValue('SN');
+		const usn = subject.getParameterValue('USN');
 
 		expect(cacheControl).to.equal('max-age=1800');
 		expect(date).to.equal('Sun, 02 Oct 2016 21:11:25 GMT');
@@ -109,6 +109,6 @@ describe('when parsing M-SEARCH response', function() {
 		expect(server).to.equal('Linux/2.6.35, UPnP/1.0, Portable SDK for UPnP devices/1.6.18');
 		expect(userAgent).to.equal('redsonic');
 		expect(st).to.equal('urn:axis-com:service:BasicService:1');
-		expect(sn).to.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
+		expect(usn).to.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
 	})
 });

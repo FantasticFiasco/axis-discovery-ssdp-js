@@ -1,14 +1,18 @@
 import { BindOptions, createSocket, Socket } from 'dgram';
+import { EventEmitter } from 'events';
 
 import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from './Constants';
+import { Device } from './Device';
 import { MSearch } from './MessageTypes/MSearch';
+import { MSearchResponse } from './MessageTypes/MSearchResponse';
 
 /**
  * Class representing a SSDP socket.
  */
-export class SsdpSocket {
+export class SsdpSocket extends EventEmitter {
 
 	private socket: Socket;
+	private uuidRegExp = /^uuid:\s*([^:\r]*)(::.*)*/i;
 
 	/**
 	 * Start listen for SSDP advertisements on specified network interface address.
@@ -25,11 +29,15 @@ export class SsdpSocket {
 			const address = this.socket.address();
       		console.log(`Socket is now listening on ${address.address}:${address.port}`);
 
+			// Trigger a search when socket is ready
 			this.search();
 	    });
 
 		this.socket.on('message', (message, remote) => {
-        	console.log(`Message from ${remote.address}:${remote.port}:\r\n${message}`);
+			const response = new MSearchResponse(message, remote.address, remote.port, remote.family);
+			const device = this.mapToDevice(response);
+
+			this.emit('hello', device);
     	});
 
 		this.socket.on('error', error => {
@@ -45,5 +53,25 @@ export class SsdpSocket {
 	search() {
 		const message = new MSearch().toBuffer();
 		this.socket.send(message, 0, message.length, SSDP_PORT, SSDP_MULTICAST_ADDRESS);
+	}
+
+	private mapToDevice(response: MSearchResponse): Device {
+		const usn = response.getParameterValue('USN');
+		if (usn ==  null) {
+			throw 'M-SEARCH response does not contain parameter called USN.';
+		}
+
+		const uuidMatch = this.uuidRegExp.exec(usn);
+		if (uuidMatch == null) {
+			throw 'M-SEARCH parameter USN does not contain uuid.';
+		}
+
+		const start = uuidMatch[1].length - 12;
+		const end = uuidMatch[1].length;
+		const serialNumber = uuidMatch[1].slice(start, end).toUpperCase();
+		
+		return new Device(
+			response.remoteAddress,
+			serialNumber);
 	}
 }
