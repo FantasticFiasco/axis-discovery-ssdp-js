@@ -56,7 +56,7 @@ export class SsdpSocket extends EventEmitter {
 	}
 
 	private mapToDevice(response: MSearchResponse): Device {
-		const usn = response.getParameterValue('USN');
+		const usn = response.getHeaderValue('USN');
 		if (usn ==  null) {
 			throw 'M-SEARCH response does not contain parameter called USN.';
 		}

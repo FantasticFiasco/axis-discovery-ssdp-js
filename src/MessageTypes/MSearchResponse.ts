@@ -21,7 +21,7 @@ export class MSearchResponse {
 	 */
 	remoteFamily: string;
 
-	private parameters: any = {};
+	private headers: any = {};
 	
 	constructor(message: Buffer,
 				remoteAddress: string,
@@ -35,10 +35,10 @@ export class MSearchResponse {
 	}
 
 	/**
-	 * Returns the value of the specified parameter name.
+	 * Returns the value of the specified header name.
 	 */
-	getParameterValue(parameterName: string): string | null {
-		const value = this.parameters[parameterName];
+	getHeaderValue(headerName: string): string | null {
+		const value = this.headers[headerName];
 		
 		if (value == null) {
 			return null;
@@ -48,22 +48,22 @@ export class MSearchResponse {
 	}
 
 	private parseMessage(message: Buffer) {
-		const messageRows = message
+		const headers = message
 			.toString()
 			.trim()
 			.split('\r\n');
 
-		const method = messageRows.shift();
+		const method = headers.shift();
 		if (method != 'HTTP/1.1 200 OK') {
 			throw 'Message is not describing a M-SEARCH response'
 		}
 
-		_.forEach(messageRows, messageRow => {
-			const index = messageRow.indexOf(':');
-			const name = messageRow.slice(0, index).trim();
-			const value = messageRow.slice(index + 1, messageRow.length).trim();
+		_.forEach(headers, header => {
+			const indexOfValueSeparator = header.indexOf(':');
+			const name = header.slice(0, indexOfValueSeparator).trim();
+			const value = header.slice(indexOfValueSeparator + 1, header.length).trim();
 
-			this.parameters[name] = value;
+			this.headers[name] = value;
 		});
 	}
 }

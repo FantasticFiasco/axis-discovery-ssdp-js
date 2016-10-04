@@ -23,7 +23,7 @@ describe('when parsing M-SEARCH response', function() {
 			443,
 			'IPv4');
 
-		const value = subject.getParameterValue('name');
+		const value = subject.getHeaderValue('name');
 
 		expect(value).to.equal('value');
 	});
@@ -38,8 +38,8 @@ describe('when parsing M-SEARCH response', function() {
 			443,
 			'IPv4');
 
-		const value1 = subject.getParameterValue('name1');
-		const value2 = subject.getParameterValue('name2');
+		const value1 = subject.getHeaderValue('name1');
+		const value2 = subject.getHeaderValue('name2');
 
 		expect(value1).to.equal('value1');
 		expect(value2).to.equal('value2');
@@ -52,7 +52,7 @@ describe('when parsing M-SEARCH response', function() {
 			443,
 			'IPv4');
 
-		const value = subject.getParameterValue('unknown-name');
+		const value = subject.getHeaderValue('unknown-name');
 
 		expect(value).to.be.null;
 	});
@@ -66,7 +66,7 @@ describe('when parsing M-SEARCH response', function() {
 			443,
 			'IPv4');
 
-		const value = subject.getParameterValue('name');
+		const value = subject.getHeaderValue('name');
 
 		expect(value).to.equal('value');
 	});
@@ -89,16 +89,16 @@ describe('when parsing M-SEARCH response', function() {
 			443,
 			'IPv4');
 
-		const cacheControl = subject.getParameterValue('CACHE-CONTROL');
-		const date = subject.getParameterValue('DATE');
-		const ext = subject.getParameterValue('EXT');
-		const location = subject.getParameterValue('LOCATION');
-		const opt = subject.getParameterValue('OPT');
-		const nls = subject.getParameterValue('01-NLS');
-		const server = subject.getParameterValue('SERVER');
-		const userAgent = subject.getParameterValue('X-User-Agent');
-		const st = subject.getParameterValue('ST');
-		const usn = subject.getParameterValue('USN');
+		const cacheControl = subject.getHeaderValue('CACHE-CONTROL');
+		const date = subject.getHeaderValue('DATE');
+		const ext = subject.getHeaderValue('EXT');
+		const location = subject.getHeaderValue('LOCATION');
+		const opt = subject.getHeaderValue('OPT');
+		const nls = subject.getHeaderValue('01-NLS');
+		const server = subject.getHeaderValue('SERVER');
+		const userAgent = subject.getHeaderValue('X-User-Agent');
+		const st = subject.getHeaderValue('ST');
+		const usn = subject.getHeaderValue('USN');
 
 		expect(cacheControl).to.equal('max-age=1800');
 		expect(date).to.equal('Sun, 02 Oct 2016 21:11:25 GMT');
