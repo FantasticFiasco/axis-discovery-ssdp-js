@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
 import { EventEmitter } from 'events';
 
-import { NetworkInterfaces } from './NetworkInterfaces';
-import { SsdpSocket } from './SsdpSocket';
+import { NetworkInterfaces } from './network/NetworkInterfaces';
+import { SsdpSocket } from './network/SsdpSocket';
 
 export class SsdpDiscovery extends EventEmitter {
 
