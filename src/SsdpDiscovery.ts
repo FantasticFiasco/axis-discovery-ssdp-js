@@ -2,11 +2,11 @@ import * as _ from 'lodash';
 import { EventEmitter } from 'events';
 
 import { NetworkInterfaces } from './network/NetworkInterfaces';
-import { SsdpSocket } from './network/SsdpSocket';
+import { ActiveSsdpSocket } from './network/ActiveSsdpSocket';
 
 export class SsdpDiscovery extends EventEmitter {
 
-	private sockets = new Array<SsdpSocket>();
+	private sockets = new Array<ActiveSsdpSocket>();
 	private networkInterfaces = new NetworkInterfaces();
 
 	/**
@@ -26,7 +26,7 @@ export class SsdpDiscovery extends EventEmitter {
 	}
 
 	private startOn(address: string) {
-		const socket = new SsdpSocket();
+		const socket = new ActiveSsdpSocket();
 		
 		socket.on('hello', device => {
 			this.emit('hello', device);

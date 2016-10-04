@@ -7,9 +7,9 @@ import { MSearch } from '../message-types/MSearch';
 import { MSearchResponse } from '../message-types/MSearchResponse';
 
 /**
- * Class representing a SSDP socket.
+ * Class representing a SSDP socket that support the HTTP method M-SEARCH.
  */
-export class SsdpSocket extends EventEmitter {
+export class ActiveSsdpSocket extends EventEmitter {
 
 	private socket: Socket;
 	private uuidRegExp = /^uuid:\s*([^:\r]*)(::.*)*/i;
