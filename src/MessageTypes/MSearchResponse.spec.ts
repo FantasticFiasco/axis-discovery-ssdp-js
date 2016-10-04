@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { MSearchResponse } from './MSearchResponse';
 
-describe('when parsing M-SEARCH response', function() {
+describe('when parsing M-SEARCH response', () => {
 	it ('should return remote address information', () => {
 		const subject = new MSearchResponse(
 			new Buffer('HTTP/1.1 200 OK'),
@@ -14,7 +14,7 @@ describe('when parsing M-SEARCH response', function() {
 		expect(subject.remoteFamily).to.equal('IPv4');
 	})
 	
-	it('should be possible to get single value', function() {
+	it('should be possible to get single value', () => {
 		const subject = new MSearchResponse(
 			new Buffer(
 				'HTTP/1.1 200 OK\r\n' +
@@ -28,7 +28,7 @@ describe('when parsing M-SEARCH response', function() {
 		expect(value).to.equal('value');
 	});
 
-	it('should be possible to get multiple values', function() {
+	it('should be possible to get multiple values', () => {
 		const subject = new MSearchResponse(
 			new Buffer(
 				'HTTP/1.1 200 OK\r\n' +
