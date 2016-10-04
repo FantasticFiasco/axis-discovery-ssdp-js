@@ -10,10 +10,22 @@ export class SsdpDiscovery extends EventEmitter {
 	private networkInterfaces = new NetworkInterfaces();
 
 	/**
-	 * Start listen for SSDP advertisements on specified network interface address.
-	 * @address The network address to start listening for SSDP advertisements on.
+	 * Start listen for SSDP advertisements on all network interface addresses.
 	 */
-	startOn(address: string) {
+	start() {
+		_.forEach(
+			this.networkInterfaces.getIPv4Addresses(),
+			address => this.startOn(address));
+	}
+
+	/**
+	 * Starts a search by using HTTP method M-SEARCH.
+	 */
+	search() {
+		_.forEach(this.sockets, socket => socket.search());
+	}
+
+	private startOn(address: string) {
 		const socket = new SsdpSocket();
 		
 		socket.on('hello', device => {
@@ -21,21 +33,7 @@ export class SsdpDiscovery extends EventEmitter {
 		});
 		
 		socket.startOn(address);
-
+		
 		this.sockets.push(socket);
-	}
-
-	/**
-	 * Start listen for SSDP advertisements on all network interface addresses.
-	 */
-	startOnAll() {
-		_.forEach(this.networkInterfaces.getIPv4Addresses(), address => this.startOn(address));
-	}
-
-	/**
-	 * Starts a search for Axis cameras on the network by using HTTP method M-SEARCH.
-	 */
-	search() {
-		_.forEach(this.sockets, socket => socket.search());
 	}
 }

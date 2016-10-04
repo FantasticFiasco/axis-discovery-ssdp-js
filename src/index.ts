@@ -1,10 +1,10 @@
 import { SsdpDiscovery } from './SsdpDiscovery';
 import { Device } from './Device';
 
-const ssdpDiscovery = new SsdpDiscovery();
+const discovery = new SsdpDiscovery();
 
-ssdpDiscovery.on('hello', (device: Device) => {
+discovery.on('hello', (device: Device) => {
 	console.log(`Hello from ${device.serialNumber} on ${device.address}`);
 });
 
-ssdpDiscovery.startOnAll();
+discovery.start();
