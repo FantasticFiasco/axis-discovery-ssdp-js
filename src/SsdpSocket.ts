@@ -3,8 +3,8 @@ import { EventEmitter } from 'events';
 
 import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from './Constants';
 import { Device } from './Device';
-import { MSearch } from './MessageTypes/MSearch';
-import { MSearchResponse } from './MessageTypes/MSearchResponse';
+import { MSearch } from './message-types/MSearch';
+import { MSearchResponse } from './message-types/MSearchResponse';
 
 /**
  * Class representing a SSDP socket.
