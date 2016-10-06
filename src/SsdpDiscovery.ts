@@ -7,8 +7,8 @@ import { NotifySocket } from './notify/NotifySocket';
 
 export class SsdpDiscovery extends EventEmitter {
 
-	private mSearchSockets = new Array<MSearchSocket>();
-	private networkInterfaces = new NetworkInterfaces();
+	private readonly mSearchSockets = new Array<MSearchSocket>();
+	private readonly networkInterfaces = new NetworkInterfaces();
 
 	/**
 	 * Start listen for SSDP advertisements on all network interface addresses.
