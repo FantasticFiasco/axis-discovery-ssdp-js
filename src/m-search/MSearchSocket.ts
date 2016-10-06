@@ -4,7 +4,7 @@ import { EventEmitter } from 'events';
 import { MSearch } from './MSearch';
 import { MSearchResponse } from './MSearchResponse';
 import { Device } from '../Device';
-import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from '../network/Constants';
+import { Constants } from '../network/Constants';
 
 /**
  * Class representing a SSDP socket that support the HTTP method M-SEARCH.
@@ -52,7 +52,12 @@ export class MSearchSocket extends EventEmitter {
 	 */
 	search() {
 		const message = new MSearch().toBuffer();
-		this.socket.send(message, 0, message.length, SSDP_PORT, SSDP_MULTICAST_ADDRESS);
+		this.socket.send(
+			message,
+			0,
+			message.length,
+			Constants.SSDP_PORT,
+			Constants.SSDP_MULTICAST_ADDRESS);
 	}
 
 	private mapToDevice(response: MSearchResponse): Device {
