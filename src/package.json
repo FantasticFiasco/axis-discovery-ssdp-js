@@ -4,9 +4,10 @@
   "description": "Node module capable of searching for Axis video cameras using SSDP.",
   "main": "index.js",
   "scripts": {
-    "prestart": "tsc -p .",
+    "build":  "tsc -p .",
+    "prestart": "npm run build",
     "start": "node index.js",
-    "pretest": "tsc -p .",
+    "pretest": "npm run build",
     "test": "mocha **/*.spec.js"
   },
   "author": "",
