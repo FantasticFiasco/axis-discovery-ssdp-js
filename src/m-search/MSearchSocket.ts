@@ -1,22 +1,22 @@
 import { BindOptions, createSocket, Socket } from 'dgram';
 import { EventEmitter } from 'events';
 
-import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from './Constants';
+import { MSearch } from './MSearch';
+import { MSearchResponse } from './MSearchResponse';
 import { Device } from '../Device';
-import { MSearch } from '../message-types/MSearch';
-import { MSearchResponse } from '../message-types/MSearchResponse';
+import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from '../network/Constants';
 
 /**
  * Class representing a SSDP socket that support the HTTP method M-SEARCH.
  */
-export class ActiveSsdpSocket extends EventEmitter {
+export class MSearchSocket extends EventEmitter {
 
 	private socket: Socket;
 	private uuidRegExp = /^uuid:\s*([^:\r]*)(::.*)*/i;
 
 	/**
-	 * Start listen for SSDP advertisements on specified network interface address.
-	 * @address The network address to start listening for SSDP advertisements on.
+	 * Start listening for M-SEARCH responses on specified network interface address.
+	 * @address The network address to start listening for M-SEARCH responses on.
 	 */
 	startOn(address: string) {
 		if (this.socket != null) {
@@ -27,7 +27,7 @@ export class ActiveSsdpSocket extends EventEmitter {
 
 		this.socket.on('listening', () => {
 			const address = this.socket.address();
-      		console.log(`Socket is now listening on ${address.address}:${address.port}`);
+      		console.log(`M-SEARCH socket is now listening on ${address.address}:${address.port}`);
 
 			// Trigger a search when socket is ready
 			this.search();
@@ -48,7 +48,7 @@ export class ActiveSsdpSocket extends EventEmitter {
 	}
 
 	/**
-	 * Starts a search for Axis cameras on the network by using HTTP method M-SEARCH.
+	 * Starts a search by using HTTP method M-SEARCH.
 	 */
 	search() {
 		const message = new MSearch().toBuffer();
