@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { EventEmitter } from 'events';
 
-import { NetworkInterfaces } from './network/NetworkInterfaces';
+import { NetworkInterfaces } from './shared/NetworkInterfaces';
 import { MSearchSocket } from './m-search/MSearchSocket';
 import { NotifySocket } from './notify/NotifySocket';
 
@@ -28,6 +28,15 @@ export class SsdpDiscovery extends EventEmitter {
 
 	private startNotify(addresses: string[]) {
 		const socket = new NotifySocket();
+
+		socket.on('hello', device => {
+			this.emit('hello', device);
+		});
+
+		socket.on('goodbye', device => {
+			this.emit('goodbye', device);
+		});
+
 		socket.startOn(addresses);
 	}
 

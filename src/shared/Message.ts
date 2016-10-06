@@ -1,15 +1,17 @@
 import * as _ from 'lodash';
 
+import { Device } from '../Device';
+
 /**
- * Class describing the response for available services on a network. Is sent via unicast
- * addressing to the originating search request address and port number. 
+ * Class describing a received SSDP message.
  */
-export class MSearchResponse {
+export class Message {
+
+	private static readonly uuidRegExp = /^uuid:\s*([^:\r]*)(::.*)*/i;
 
 	private readonly headers: any = {};
-	
-	constructor(message: Buffer,
-				/**
+
+	constructor(/**
 				 * The address of the sender.
 				 */
 				readonly remoteAddress: string,
@@ -20,8 +22,16 @@ export class MSearchResponse {
 				/**
 	 			 * The family of the sender.
 	 			 */
-				readonly remoteFamily: string) {
+				readonly remoteFamily: string,
+				message: Buffer) {
 		this.parseMessage(message);
+	}
+
+	/**
+	 * Gets the HTTP method.
+	 */
+	get method(): string {
+		return this.headers.method;
 	}
 
 	/**
@@ -37,17 +47,37 @@ export class MSearchResponse {
 		return value;
 	}
 
+	/**
+	 * Maps the message to a device.
+	 */
+	mapToDevice(): Device {
+		const usn = this.getHeaderValue('USN');
+		if (usn ==  null) {
+			throw 'Message does not contain parameter called USN.';
+		}
+
+		const uuidMatch = Message.uuidRegExp.exec(usn);
+		if (uuidMatch == null) {
+			throw 'Parameter USN does not contain uuid.';
+		}
+
+		const start = uuidMatch[1].length - 12;
+		const end = uuidMatch[1].length;
+		const serialNumber = uuidMatch[1].slice(start, end).toUpperCase();
+		
+		return new Device(
+			this.remoteAddress,
+			serialNumber);
+	}
+
 	private parseMessage(message: Buffer) {
 		const headers = message
 			.toString()
 			.trim()
 			.split('\r\n');
 
-		const method = headers.shift();
-		if (method != 'HTTP/1.1 200 OK') {
-			throw 'Message is not describing a M-SEARCH response'
-		}
-
+		this.headers.method = headers.shift();
+		
 		_.forEach(headers, header => {
 			const indexOfValueSeparator = header.indexOf(':');
 			const name = header.slice(0, indexOfValueSeparator).trim();

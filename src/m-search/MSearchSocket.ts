@@ -1,17 +1,14 @@
 import { BindOptions, createSocket, Socket } from 'dgram';
 import { EventEmitter } from 'events';
 
+import { Constants } from '../shared/Constants';
+import { Message } from '../shared/Message';
 import { MSearch } from './MSearch';
-import { MSearchResponse } from './MSearchResponse';
-import { Device } from '../Device';
-import { Constants } from '../network/Constants';
 
 /**
  * Class representing a SSDP socket that support the HTTP method M-SEARCH.
  */
 export class MSearchSocket extends EventEmitter {
-
-	private static readonly uuidRegExp = /^uuid:\s*([^:\r]*)(::.*)*/i;
 
 	private socket: Socket;
 
@@ -35,8 +32,8 @@ export class MSearchSocket extends EventEmitter {
 	    });
 
 		this.socket.on('message', (message, remote) => {
-			const response = new MSearchResponse(message, remote.address, remote.port, remote.family);
-			const device = this.mapToDevice(response);
+			const device = new Message(remote.address, remote.port, remote.family, message)
+				.mapToDevice();
 
 			this.emit('hello', device);
     	});
@@ -59,25 +56,5 @@ export class MSearchSocket extends EventEmitter {
 			message.length,
 			Constants.SSDP_PORT,
 			Constants.SSDP_MULTICAST_ADDRESS);
-	}
-
-	private mapToDevice(response: MSearchResponse): Device {
-		const usn = response.getHeaderValue('USN');
-		if (usn ==  null) {
-			throw 'M-SEARCH response does not contain parameter called USN.';
-		}
-
-		const uuidMatch = MSearchSocket.uuidRegExp.exec(usn);
-		if (uuidMatch == null) {
-			throw 'M-SEARCH parameter USN does not contain uuid.';
-		}
-
-		const start = uuidMatch[1].length - 12;
-		const end = uuidMatch[1].length;
-		const serialNumber = uuidMatch[1].slice(start, end).toUpperCase();
-		
-		return new Device(
-			response.remoteAddress,
-			serialNumber);
 	}
 }

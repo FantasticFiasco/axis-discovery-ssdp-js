@@ -2,7 +2,8 @@ import * as _ from 'lodash';
 import { BindOptions, createSocket, Socket } from 'dgram';
 import { EventEmitter } from 'events';
 
-import { Constants } from '../network/Constants';
+import { Constants } from '../shared/Constants';
+import { Message } from '../shared/Message';
 
 /**
  * Class representing a SSDP socket that support the HTTP method NOTIFY.
@@ -32,7 +33,22 @@ export class NotifySocket extends EventEmitter {
 	    });
 
 		this.socket.on('message', (message, remote) => {
-			console.log(`NOTIFY from ${remote.address}\r\n${message.toString()}`);
+			const notifyMessage = new Message(remote.address, remote.port, remote.family, message);
+
+			if (notifyMessage.method != 'NOTIFY * HTTP/1.1' ||
+				notifyMessage.getHeaderValue('NT') != 'urn:axis-com:service:BasicService:1') {
+				return;
+			}
+			
+			const device = notifyMessage.mapToDevice();
+			const nts = notifyMessage.getHeaderValue('NTS');
+
+			if (nts === 'ssdp:alive') {
+				this.emit('hello', device);
+			}
+			else if (nts === 'ssdp:byebye') {
+				this.emit('goodbye', device);
+			}
     	});
 
 		this.socket.on('error', error => {
