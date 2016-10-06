@@ -5,32 +5,22 @@ import * as _ from 'lodash';
  * addressing to the originating search request address and port number. 
  */
 export class MSearchResponse {
-	
-	/**
-	 * The address of the sender.
-	 */
-	remoteAddress: string;
 
-	/**
-	 * The port of the sender.
-	 */
-	remotePort: number;
-
-	/**
-	 * The family of the sender.
-	 */
-	remoteFamily: string;
-
-	private headers: any = {};
+	private readonly headers: any = {};
 	
 	constructor(message: Buffer,
-				remoteAddress: string,
-				remotePort: number,
-				remoteFamily: string) {
-		this.remoteAddress = remoteAddress;
-		this.remotePort = remotePort;
-		this.remoteFamily = remoteFamily;
-
+				/**
+				 * The address of the sender.
+				 */
+				readonly remoteAddress: string,
+				/**
+	 			 * The port of the sender.
+	 			 */
+				readonly remotePort: number,
+				/**
+	 			 * The family of the sender.
+	 			 */
+				readonly remoteFamily: string) {
 		this.parseMessage(message);
 	}
 

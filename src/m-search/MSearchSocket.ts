@@ -11,8 +11,9 @@ import { Constants } from '../network/Constants';
  */
 export class MSearchSocket extends EventEmitter {
 
+	private static readonly uuidRegExp = /^uuid:\s*([^:\r]*)(::.*)*/i;
+
 	private socket: Socket;
-	private uuidRegExp = /^uuid:\s*([^:\r]*)(::.*)*/i;
 
 	/**
 	 * Start listening for M-SEARCH responses on specified network interface address.
@@ -66,7 +67,7 @@ export class MSearchSocket extends EventEmitter {
 			throw 'M-SEARCH response does not contain parameter called USN.';
 		}
 
-		const uuidMatch = this.uuidRegExp.exec(usn);
+		const uuidMatch = MSearchSocket.uuidRegExp.exec(usn);
 		if (uuidMatch == null) {
 			throw 'M-SEARCH parameter USN does not contain uuid.';
 		}
