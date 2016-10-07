@@ -29,12 +29,12 @@ export class NotifySocket extends SsdpSocket {
 		const ssdpMessage = new Message(remote.address, remote.port, remote.family, message);
 
 		if (ssdpMessage.method != 'NOTIFY * HTTP/1.1' ||
-			ssdpMessage.getHeaderValue('NT') != 'urn:axis-com:service:BasicService:1') {
+			ssdpMessage.nt != 'urn:axis-com:service:BasicService:1') {
 			return;
 		}
 		
 		const device = ssdpMessage.mapToDevice();
-		const nts = ssdpMessage.getHeaderValue('NTS');
+		const nts = ssdpMessage.nts;
 
 		if (nts === 'ssdp:alive') {
 			this.emit('hello', device);

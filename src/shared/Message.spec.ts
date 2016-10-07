@@ -24,61 +24,44 @@ describe('when parsing message', () => {
 		expect(subject.method).to.equal('HTTP/1.1 200 OK');
 	});
 	
-	it('should be possible to get single value', () => {
+	it('should return USN', () => {
 		const subject = new Message(
 			'192.168.1.100',
 			443,
 			'IPv4',
 			new Buffer(
 				'HTTP/1.1 200 OK\r\n' +
-				'name: value'));
+				'USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1\r\n'));
 
-		const value = subject.getHeaderValue('name');
+		const value = subject.usn;
 
-		expect(value).to.equal('value');
+		expect(value).to.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
 	});
 
-	it('should be possible to get multiple values', () => {
-		const subject = new Message(
-			'192.168.1.100',
-			443,
-			'IPv4',
-			new Buffer(
-				'HTTP/1.1 200 OK\r\n' +
-				'name1: value1\r\n' +
-				'name2: value2'));
-
-		const value1 = subject.getHeaderValue('name1');
-		const value2 = subject.getHeaderValue('name2');
-
-		expect(value1).to.equal('value1');
-		expect(value2).to.equal('value2');
-	});
-
-	it('should return null for unknown parameters', () => {
+	it('should return null if USN is missing', () => {
 		const subject = new Message(
 			'192.168.1.100',
 			443,
 			'IPv4',
 			new Buffer('HTTP/1.1 200 OK'));
 
-		const value = subject.getHeaderValue('unknown-name');
+		const value = subject.usn;
 
 		expect(value).to.be.null;
 	});
 
-	it('should trim parameter name and value', () => {
+	it('should trim USN name and value', () => {
 		const subject = new Message(
 			'192.168.1.100',
 			443,
 			'IPv4',
 			new Buffer(
 				'HTTP/1.1 200 OK\r\n' +
-				' name : value '));
+				' USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1 \r\n'));
 
-		const value = subject.getHeaderValue('name');
+		const value = subject.usn;
 
-		expect(value).to.equal('value');
+		expect(value).to.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
 	});
 
 	it('should parse device response', () => {
@@ -99,27 +82,9 @@ describe('when parsing message', () => {
 				'ST: urn:axis-com:service:BasicService:1\r\n' +
 				'USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1\r\n'));
 
-		const cacheControl = subject.getHeaderValue('CACHE-CONTROL');
-		const date = subject.getHeaderValue('DATE');
-		const ext = subject.getHeaderValue('EXT');
-		const location = subject.getHeaderValue('LOCATION');
-		const opt = subject.getHeaderValue('OPT');
-		const nls = subject.getHeaderValue('01-NLS');
-		const server = subject.getHeaderValue('SERVER');
-		const userAgent = subject.getHeaderValue('X-User-Agent');
-		const st = subject.getHeaderValue('ST');
-		const usn = subject.getHeaderValue('USN');
+		const usn = subject.usn;
 
 		expect(subject.method).to.equal('HTTP/1.1 200 OK');
-		expect(cacheControl).to.equal('max-age=1800');
-		expect(date).to.equal('Sun, 02 Oct 2016 21:11:25 GMT');
-		expect(ext).to.equal('');
-		expect(location).to.equal('http://192.168.1.102:45895/rootdesc1.xml');
-		expect(opt).to.equal('"http://schemas.upnp.org/upnp/1/0/"; ns=01');
-		expect(nls).to.equal('8fb2638a-1dd2-11b2-a915-c89968cce2ca');
-		expect(server).to.equal('Linux/2.6.35, UPnP/1.0, Portable SDK for UPnP devices/1.6.18');
-		expect(userAgent).to.equal('redsonic');
-		expect(st).to.equal('urn:axis-com:service:BasicService:1');
 		expect(usn).to.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
 	});
 

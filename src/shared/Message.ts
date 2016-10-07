@@ -24,7 +24,7 @@ export class Message {
 	 			 */
 				readonly remoteFamily: string,
 				message: Buffer) {
-		this.parseMessage(message);
+		this.parseHeaders(message);
 	}
 
 	/**
@@ -35,23 +35,31 @@ export class Message {
 	}
 
 	/**
-	 * Returns the value of the specified header name.
+	 * Gets the Unique Service Name (USN) header.
 	 */
-	getHeaderValue(headerName: string): string | null {
-		const value = this.headers[headerName];
-		
-		if (value == null) {
-			return null;
-		}
+	get usn(): string | null {
+		return this.getHeaderValue('USN');
+	}
 
-		return value;
+	/**
+	 * Gets the Notification Type (NT) header.
+	 */
+	get nt(): string | null {
+		return this.getHeaderValue('NT');
+	}
+
+	/**
+	 * Gets the Notification Sub Type (NTS).
+	 */
+	get nts(): string | null {
+		return this.getHeaderValue('NTS');
 	}
 
 	/**
 	 * Maps the message to a device.
 	 */
 	mapToDevice(): Device {
-		const usn = this.getHeaderValue('USN');
+		const usn = this.usn;
 		if (usn ==  null) {
 			throw 'Message does not contain parameter called USN.';
 		}
@@ -70,7 +78,7 @@ export class Message {
 			serialNumber);
 	}
 
-	private parseMessage(message: Buffer) {
+	private parseHeaders(message: Buffer) {
 		const headers = message
 			.toString()
 			.trim()
@@ -85,5 +93,15 @@ export class Message {
 
 			this.headers[name] = value;
 		});
+	}
+
+	private getHeaderValue(name: string): string | null {
+		const value = this.headers[name];
+		
+		if (value == null) {
+			return null;
+		}
+
+		return value;
 	}
 }
