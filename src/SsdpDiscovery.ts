@@ -27,7 +27,7 @@ export class SsdpDiscovery extends EventEmitter {
 	}
 
 	private startNotify(addresses: string[]) {
-		const socket = new NotifySocket();
+		const socket = new NotifySocket(addresses);
 
 		socket.on('hello', device => {
 			this.emit('hello', device);
@@ -37,19 +37,19 @@ export class SsdpDiscovery extends EventEmitter {
 			this.emit('goodbye', device);
 		});
 
-		socket.startOn(addresses);
+		socket.start();
 	}
 
 	private startMSearch(addresses: string[]) {
 		_.forEach(addresses, address => {
-			const socket = new MSearchSocket();
+			const socket = new MSearchSocket(address);
 			this.mSearchSockets.push(socket);
 		
 			socket.on('hello', device => {
 				this.emit('hello', device);
 			});
 		
-			socket.startOn(address);
+			socket.start();
 		});
 	}
 }

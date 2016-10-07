@@ -13,36 +13,23 @@ export class MSearchSocket extends EventEmitter {
 	private socket: Socket;
 
 	/**
-	 * Start listening for M-SEARCH responses on specified network interface address.
-	 * @address The network address to start listening for M-SEARCH responses on.
+	 * @address The network address to listen for M-SEARCH responses on.
 	 */
-	startOn(address: string) {
-		if (this.socket != null) {
-			throw 'Socket has already been started on an address'
-		}
+	constructor(private address: string) {
+		super();
+	}
+
+	/**
+	 * Start listen for M-SEARCH responses.
+	 */
+	start() {
+		this.assertNotAlreadyStarted();
 
 		this.socket = createSocket({ type: 'udp4', reuseAddr: true });
-
-		this.socket.on('listening', () => {
-			const address = this.socket.address();
-      		console.log(`M-SEARCH socket is now listening on ${address.address}:${address.port}`);
-
-			// Trigger a search when socket is ready
-			this.search();
-	    });
-
-		this.socket.on('message', (message, remote) => {
-			const device = new Message(remote.address, remote.port, remote.family, message)
-				.mapToDevice();
-
-			this.emit('hello', device);
-    	});
-
-		this.socket.on('error', error => {
-      		console.log('Socket error', error);
-    	});
-
-		this.socket.bind(undefined, address);
+		this.socket.on('listening', () => this.onListening());
+		this.socket.on('message', (message, remote) => this.onMessage(message, remote));
+		this.socket.on('error', error => this.onError(error));
+		this.socket.bind(undefined, this.address);
 	}
 
 	/**
@@ -56,5 +43,30 @@ export class MSearchSocket extends EventEmitter {
 			message.length,
 			Constants.SSDP_PORT,
 			Constants.SSDP_MULTICAST_ADDRESS);
+	}
+
+	private assertNotAlreadyStarted() {
+		if (this.socket != null) {
+			throw 'M-SEARCH socket has already been started'
+		}
+	}
+
+	private onListening() {
+		const address = this.socket.address();
+		console.log(`M-SEARCH socket is now listening on ${address.address}:${address.port}`);
+
+		// Trigger a search when socket is ready
+		this.search();
+	}
+
+	private onMessage(message: Buffer, remote: any) {
+		const device = new Message(remote.address, remote.port, remote.family, message)
+			.mapToDevice();
+
+		this.emit('hello', device);
+	}
+
+	private onError(error: any) {
+		console.log('M-SEARCH socket error', error);
 	}
 }
