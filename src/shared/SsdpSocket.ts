@@ -33,7 +33,7 @@ export abstract class SsdpSocket extends EventEmitter {
 
 	private assertNotStarted() {
 		if (this.socket != null) {
-			throw 'M-SEARCH socket has already been started'
+			throw 'M-SEARCH socket has already been started';
 		}
 	}
 }

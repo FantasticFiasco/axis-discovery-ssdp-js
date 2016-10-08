@@ -2,7 +2,6 @@ import * as _ from 'lodash';
 import { networkInterfaces, NetworkInterfaceInfo } from 'os';
 
 export class NetworkInterfaces {
-	
 	/**
 	 * Returns all public IPv4 addresses from all network interface cards.
 	 */

@@ -44,11 +44,11 @@ export class SsdpDiscovery extends EventEmitter {
 		_.forEach(addresses, address => {
 			const socket = new MSearchSocket(address);
 			this.mSearchSockets.push(socket);
-		
+
 			socket.on('hello', device => {
 				this.emit('hello', device);
 			});
-		
+
 			socket.start();
 		});
 	}

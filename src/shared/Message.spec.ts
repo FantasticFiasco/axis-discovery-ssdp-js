@@ -16,7 +16,7 @@ describe('when parsing message', () => {
 		expect(subject.sender.address).to.equal('192.168.1.100');
 		expect(subject.sender.port).to.equal(443);
 		expect(subject.sender.family).to.equal('IPv4');
-	})
+	});
 
 	it('should return method', () => {
 		const subject = new Message(
@@ -29,7 +29,7 @@ describe('when parsing message', () => {
 
 		expect(subject.method).to.equal('HTTP/1.1 200 OK');
 	});
-	
+
 	it('should return USN', () => {
 		const subject = new Message(
 			{
@@ -90,7 +90,7 @@ describe('when parsing message', () => {
 				'EXT:\r\n' +
 				'LOCATION: http://192.168.1.102:45895/rootdesc1.xml\r\n' +
 				'OPT: "http://schemas.upnp.org/upnp/1/0/"; ns=01\r\n' +
-				'01-NLS: 8fb2638a-1dd2-11b2-a915-c89968cce2ca\r\n'+
+				'01-NLS: 8fb2638a-1dd2-11b2-a915-c89968cce2ca\r\n' +
 				'SERVER: Linux/2.6.35, UPnP/1.0, Portable SDK for UPnP devices/1.6.18\r\n' +
 				'X-User-Agent: redsonic\r\n' +
 				'ST: urn:axis-com:service:BasicService:1\r\n' +
@@ -116,7 +116,7 @@ describe('when parsing message', () => {
 				'EXT:\r\n' +
 				'LOCATION: http://192.168.1.102:45895/rootdesc1.xml\r\n' +
 				'OPT: "http://schemas.upnp.org/upnp/1/0/"; ns=01\r\n' +
-				'01-NLS: 8fb2638a-1dd2-11b2-a915-c89968cce2ca\r\n'+
+				'01-NLS: 8fb2638a-1dd2-11b2-a915-c89968cce2ca\r\n' +
 				'SERVER: Linux/2.6.35, UPnP/1.0, Portable SDK for UPnP devices/1.6.18\r\n' +
 				'X-User-Agent: redsonic\r\n' +
 				'ST: urn:axis-com:service:BasicService:1\r\n' +

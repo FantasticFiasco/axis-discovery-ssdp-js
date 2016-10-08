@@ -29,11 +29,11 @@ export class NotifySocket extends SsdpSocket {
 	protected onMessage(message: Buffer, remote: AddressInfo) {
 		const ssdpMessage = new Message(remote, message);
 
-		if (ssdpMessage.method != 'NOTIFY * HTTP/1.1' ||
-			ssdpMessage.nt != 'urn:axis-com:service:BasicService:1') {
+		if (ssdpMessage.method !== 'NOTIFY * HTTP/1.1' ||
+			ssdpMessage.nt !== 'urn:axis-com:service:BasicService:1') {
 			return;
 		}
-		
+
 		const device = ssdpMessage.mapToDevice();
 		const nts = ssdpMessage.nts;
 

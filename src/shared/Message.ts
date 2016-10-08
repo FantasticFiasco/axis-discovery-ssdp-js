@@ -13,8 +13,8 @@ export class Message {
 	private readonly headers: any = {};
 
 	constructor(/**
-				 * The sender address information.
-				 */
+				* The sender address information.
+				*/
 				readonly sender: AddressInfo,
 				message: Buffer) {
 		this.parseHeaders(message);
@@ -65,7 +65,7 @@ export class Message {
 		const start = uuidMatch[1].length - 12;
 		const end = uuidMatch[1].length;
 		const serialNumber = uuidMatch[1].slice(start, end).toUpperCase();
-		
+
 		return new Device(
 			this.sender.address,
 			serialNumber);
@@ -78,7 +78,7 @@ export class Message {
 			.split('\r\n');
 
 		this.headers.method = headers.shift();
-		
+
 		_.forEach(headers, header => {
 			const indexOfValueSeparator = header.indexOf(':');
 			const name = header.slice(0, indexOfValueSeparator).trim();
@@ -90,7 +90,7 @@ export class Message {
 
 	private getHeaderValue(name: string): string | null {
 		const value = this.headers[name];
-		
+
 		if (value == null) {
 			return null;
 		}
