@@ -4,6 +4,7 @@
   "description": "Node module capable of searching for Axis video cameras using SSDP.",
   "main": "index.js",
   "scripts": {
+    "postinstall": "npm install -g typescript",
     "build":  "tsc -p .",
     "prestart": "npm run build",
     "start": "node index.js",
