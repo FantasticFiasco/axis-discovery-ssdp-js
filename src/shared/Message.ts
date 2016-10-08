@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+import { AddressInfo } from 'dgram';
 
 import { Device } from '../Device';
 
@@ -12,17 +13,9 @@ export class Message {
 	private readonly headers: any = {};
 
 	constructor(/**
-				 * The address of the sender.
+				 * The sender address information.
 				 */
-				readonly remoteAddress: string,
-				/**
-	 			 * The port of the sender.
-	 			 */
-				readonly remotePort: number,
-				/**
-	 			 * The family of the sender.
-	 			 */
-				readonly remoteFamily: string,
+				readonly sender: AddressInfo,
 				message: Buffer) {
 		this.parseHeaders(message);
 	}
@@ -74,7 +67,7 @@ export class Message {
 		const serialNumber = uuidMatch[1].slice(start, end).toUpperCase();
 		
 		return new Device(
-			this.remoteAddress,
+			this.sender.address,
 			serialNumber);
 	}
 

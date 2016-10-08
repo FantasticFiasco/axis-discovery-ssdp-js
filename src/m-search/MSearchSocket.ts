@@ -1,3 +1,5 @@
+import { AddressInfo } from 'dgram';
+
 import { Constants } from '../shared/Constants';
 import { Message } from '../shared/Message';
 import { SsdpSocket } from '../shared/SsdpSocket';
@@ -36,8 +38,8 @@ export class MSearchSocket extends SsdpSocket {
 		this.search();
 	}
 
-	protected onMessage(message: Buffer, remote: any) {
-		const device = new Message(remote.address, remote.port, remote.family, message)
+	protected onMessage(message: Buffer, remote: AddressInfo) {
+		const device = new Message(remote, message)
 			.mapToDevice();
 
 		this.emit('hello', device);

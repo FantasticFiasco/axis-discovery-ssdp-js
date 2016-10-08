@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { BindOptions, createSocket, Socket } from 'dgram';
+import { AddressInfo, BindOptions, createSocket, Socket } from 'dgram';
 
 /**
  * Abstract class acting as a SSDP socket.
@@ -12,26 +12,26 @@ export abstract class SsdpSocket extends EventEmitter {
 	 * Start listen for advertisements.
 	 */
 	start() {
-		this.assertNotAlreadyStarted();
+		this.assertNotStarted();
 
 		this.socket = createSocket({ type: 'udp4', reuseAddr: true });
 		this.socket.on('listening', () => this.onListening());
-		this.socket.on('message', (message, remote) => this.onMessage(message, remote));
-		this.socket.on('error', error => this.onError(error));
+		this.socket.on('message', (message: Buffer, remote: AddressInfo) => this.onMessage(message, remote));
+		this.socket.on('error', (error: Error) => this.onError(error));
 		this.bind();
 	}
 
-	protected abstract onListening();
+	protected abstract onListening(): void;
 
-	protected abstract onMessage(message: Buffer, remote: any);
+	protected abstract onMessage(message: Buffer, remote: AddressInfo): void;
 
-	protected abstract bind();
+	protected abstract bind(): void;
 
-	protected onError(error: any) {
-		console.log('NOTIFY Socket error', error);
+	protected onError(error: Error) {
+		console.log('Socket error', error);
 	}
 
-	private assertNotAlreadyStarted() {
+	private assertNotStarted() {
 		if (this.socket != null) {
 			throw 'M-SEARCH socket has already been started'
 		}

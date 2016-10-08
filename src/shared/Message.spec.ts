@@ -1,24 +1,30 @@
 import { expect } from 'chai';
+import { AddressInfo } from 'dgram';
+
 import { Message } from './Message';
 
 describe('when parsing message', () => {
 	it('should return remote address information', () => {
 		const subject = new Message(
-			'192.168.1.100',
-			443,
-			'IPv4',
+			{
+				address: '192.168.1.100',
+				port: 443,
+				family: 'IPv4'
+			},
 			new Buffer('HTTP/1.1 200 OK'));
 
-		expect(subject.remoteAddress).to.equal('192.168.1.100');
-		expect(subject.remotePort).to.equal(443);
-		expect(subject.remoteFamily).to.equal('IPv4');
+		expect(subject.sender.address).to.equal('192.168.1.100');
+		expect(subject.sender.port).to.equal(443);
+		expect(subject.sender.family).to.equal('IPv4');
 	})
 
 	it('should return method', () => {
 		const subject = new Message(
-			'192.168.1.100',
-			443,
-			'IPv4',
+			{
+				address: '192.168.1.100',
+				port: 443,
+				family: 'IPv4'
+			},
 			new Buffer('HTTP/1.1 200 OK'));
 
 		expect(subject.method).to.equal('HTTP/1.1 200 OK');
@@ -26,9 +32,11 @@ describe('when parsing message', () => {
 	
 	it('should return USN', () => {
 		const subject = new Message(
-			'192.168.1.100',
-			443,
-			'IPv4',
+			{
+				address: '192.168.1.100',
+				port: 443,
+				family: 'IPv4'
+			},
 			new Buffer(
 				'HTTP/1.1 200 OK\r\n' +
 				'USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1\r\n'));
@@ -40,9 +48,11 @@ describe('when parsing message', () => {
 
 	it('should return null if USN is missing', () => {
 		const subject = new Message(
-			'192.168.1.100',
-			443,
-			'IPv4',
+			{
+				address: '192.168.1.100',
+				port: 443,
+				family: 'IPv4'
+			},
 			new Buffer('HTTP/1.1 200 OK'));
 
 		const value = subject.usn;
@@ -52,9 +62,11 @@ describe('when parsing message', () => {
 
 	it('should trim USN name and value', () => {
 		const subject = new Message(
-			'192.168.1.100',
-			443,
-			'IPv4',
+			{
+				address: '192.168.1.100',
+				port: 443,
+				family: 'IPv4'
+			},
 			new Buffer(
 				'HTTP/1.1 200 OK\r\n' +
 				' USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1 \r\n'));
@@ -66,9 +78,11 @@ describe('when parsing message', () => {
 
 	it('should parse device response', () => {
 		const subject = new Message(
-			'192.168.1.100',
-			443,
-			'IPv4',
+			{
+				address: '192.168.1.100',
+				port: 443,
+				family: 'IPv4'
+			},
 			new Buffer(
 				'HTTP/1.1 200 OK\r\n' +
 				'CACHE-CONTROL: max-age=1800\r\n' +
@@ -90,9 +104,11 @@ describe('when parsing message', () => {
 
 	it('should map to device', () => {
 		const subject = new Message(
-			'192.168.1.100',
-			443,
-			'IPv4',
+			{
+				address: '192.168.1.100',
+				port: 443,
+				family: 'IPv4'
+			},
 			new Buffer(
 				'HTTP/1.1 200 OK\r\n' +
 				'CACHE-CONTROL: max-age=1800\r\n' +
