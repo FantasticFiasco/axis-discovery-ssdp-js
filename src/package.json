@@ -8,7 +8,8 @@
     "prestart": "npm run build",
     "start": "node index.js",
     "pretest": "npm run build",
-    "test": "mocha **/*.spec.js"
+    "test": "mocha **/*.spec.js",
+    "lint": "tslint **/*.ts --exclude node_modules/**/*"
   },
   "author": "",
   "license": "Apache-2.0",
@@ -22,6 +23,7 @@
     "@types/mocha": "^2.2.32",
     "chai": "^3.5.0",
     "mocha": "^3.1.0",
+    "tslint": "^3.15.1",
     "typescript": "^2.0.3"
   }
 }
