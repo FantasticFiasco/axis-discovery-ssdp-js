@@ -20,20 +20,25 @@ export class SsdpDiscovery extends EventEmitter {
      */
     start() {
         const addresses = this.networkInterfaces.getIPv4Addresses();
-        this.startNotify(addresses);
-        this.startMSearch(addresses);
+
+        // Start passive SSDP
+        this.startSocket(new NotifySocket(addresses));
+
+        // Start active SSDP
+        _.forEach(addresses, address => this.startSocket(new MSearchSocket(address)));
     }
 
     /**
      * Starts a search by using HTTP method M-SEARCH.
      */
     search() {
-        const mSearchSockets = _.filter(this.sockets, socket => socket instanceof MSearchSocket);
-        _.forEach(mSearchSockets, socket => (<MSearchSocket>socket).search());
+        _.chain(this.sockets)
+            .filter(socket => socket instanceof MSearchSocket)
+            .map(socket => <MSearchSocket>socket)
+            .forEach(socket => socket.search());
     }
 
-    private startNotify(addresses: string[]) {
-        const socket = new NotifySocket(addresses);
+    private startSocket(socket: SsdpSocket) {
         this.sockets.push(socket);
 
         socket.on('hello', (ssdpMessage: SsdpMessage) => {
@@ -45,19 +50,6 @@ export class SsdpDiscovery extends EventEmitter {
         });
 
         socket.start();
-    }
-
-    private startMSearch(addresses: string[]) {
-        _.forEach(addresses, address => {
-            const socket = new MSearchSocket(address);
-            this.sockets.push(socket);
-
-            socket.on('hello', (ssdpMessage: SsdpMessage) => {
-                this.emit('hello', this.mapToDevice(ssdpMessage));
-            });
-
-            socket.start();
-        });
     }
 
     private mapToDevice(ssdpMessage: SsdpMessage): Device {
