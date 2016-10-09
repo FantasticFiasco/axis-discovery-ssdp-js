@@ -10,8 +10,6 @@ import { Device } from './Device';
 
 export class SsdpDiscovery extends EventEmitter {
 
-    private static readonly uuidRegExp = /^uuid:\s*([^:\r]*)(::.*)*/i;
-
     private readonly sockets = new Array<SsdpSocket>();
     private readonly networkInterfaces = new NetworkInterfaces();
 
@@ -42,29 +40,13 @@ export class SsdpDiscovery extends EventEmitter {
         this.sockets.push(socket);
 
         socket.on('hello', (ssdpMessage: SsdpMessage) => {
-            this.emit('hello', this.mapToDevice(ssdpMessage));
+            this.emit('hello', Device.mapFromSsdpMessage(ssdpMessage));
         });
 
         socket.on('goodbye', (ssdpMessage: SsdpMessage) => {
-            this.emit('goodbye', this.mapToDevice(ssdpMessage));
+            this.emit('goodbye', Device.mapFromSsdpMessage(ssdpMessage));
         });
 
         socket.start();
-    }
-
-    private mapToDevice(ssdpMessage: SsdpMessage): Device {
-        const uuidMatch = SsdpDiscovery.uuidRegExp.exec(ssdpMessage.usn);
-        if (uuidMatch == null) {
-            throw 'Parameter USN on SSDP message does not contain uuid.';
-        }
-
-        const start = uuidMatch[1].length - 12;
-        const end = uuidMatch[1].length;
-        const serialNumber = uuidMatch[1].slice(start, end).toUpperCase();
-
-        return new Device(
-            ssdpMessage.sender.address,
-            serialNumber,
-            ssdpMessage.location);
     }
 }
