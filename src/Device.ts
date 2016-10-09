@@ -1,4 +1,4 @@
-import { SsdpMessage } from './sockets/SsdpMessage';
+import { SsdpMessage } from './ssdp/SsdpMessage';
 
 /**
  * Class describing a device on the network.
