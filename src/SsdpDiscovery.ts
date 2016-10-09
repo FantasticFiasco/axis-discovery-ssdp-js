@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { EventEmitter } from 'events';
 
 import { MSearchSocket } from './sockets/MSearchSocket';
-import { NetworkInterfaces } from './shared/NetworkInterfaces';
+import { NetworkInterfaces } from './network-interfaces/NetworkInterfaces';
 import { NotifySocket } from './sockets/NotifySocket';
 import { SsdpMessage } from './sockets/SsdpMessage';
 import { SsdpSocket } from './sockets/SsdpSocket';
