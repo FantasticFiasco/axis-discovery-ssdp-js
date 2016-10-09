@@ -1,6 +1,6 @@
 import { AddressInfo } from 'dgram';
 
-import { Constants } from '../ssdp/Constants';
+import { Constants } from './Constants';
 import { MSearch } from './MSearch';
 import { SsdpMessage } from './SsdpMessage';
 import { SsdpSocket } from './SsdpSocket';

@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { AddressInfo } from 'dgram';
 
-import { Constants } from '../ssdp/Constants';
+import { Constants } from './Constants';
 import { SsdpMessage } from './SsdpMessage';
 import { SsdpSocket } from './SsdpSocket';
 
