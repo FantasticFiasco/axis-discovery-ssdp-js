@@ -3,6 +3,7 @@ import { EventEmitter } from 'events';
 
 import { NetworkInterfaces } from './shared/NetworkInterfaces';
 import { SsdpMessage } from './shared/SsdpMessage';
+import { SsdpSocket } from './shared/SsdpSocket';
 import { MSearchSocket } from './m-search/MSearchSocket';
 import { NotifySocket } from './notify/NotifySocket';
 import { Device } from './Device';
@@ -11,7 +12,7 @@ export class SsdpDiscovery extends EventEmitter {
 
     private static readonly uuidRegExp = /^uuid:\s*([^:\r]*)(::.*)*/i;
 
-    private readonly mSearchSockets = new Array<MSearchSocket>();
+    private readonly sockets = new Array<SsdpSocket>();
     private readonly networkInterfaces = new NetworkInterfaces();
 
     /**
@@ -27,11 +28,13 @@ export class SsdpDiscovery extends EventEmitter {
      * Starts a search by using HTTP method M-SEARCH.
      */
     search() {
-        _.forEach(this.mSearchSockets, socket => socket.search());
+        const mSearchSockets = _.filter(this.sockets, socket => socket instanceof MSearchSocket);
+        _.forEach(mSearchSockets, socket => (<MSearchSocket>socket).search());
     }
 
     private startNotify(addresses: string[]) {
         const socket = new NotifySocket(addresses);
+        this.sockets.push(socket);
 
         socket.on('hello', (ssdpMessage: SsdpMessage) => {
             this.emit('hello', this.mapToDevice(ssdpMessage));
@@ -47,7 +50,7 @@ export class SsdpDiscovery extends EventEmitter {
     private startMSearch(addresses: string[]) {
         _.forEach(addresses, address => {
             const socket = new MSearchSocket(address);
-            this.mSearchSockets.push(socket);
+            this.sockets.push(socket);
 
             socket.on('hello', (ssdpMessage: SsdpMessage) => {
                 this.emit('hello', this.mapToDevice(ssdpMessage));
