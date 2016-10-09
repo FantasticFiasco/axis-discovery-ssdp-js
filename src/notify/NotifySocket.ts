@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import { AddressInfo } from 'dgram';
 
 import { Constants } from '../shared/Constants';
-import { Message } from '../shared/Message';
+import { SsdpMessage } from '../shared/SsdpMessage';
 import { SsdpSocket } from '../shared/SsdpSocket';
 
 /**
@@ -26,21 +26,18 @@ export class NotifySocket extends SsdpSocket {
     }
 
     protected onMessage(message: Buffer, remote: AddressInfo) {
-        const ssdpMessage = new Message(remote, message);
+        const ssdpMessage = new SsdpMessage(remote, message);
 
         if (ssdpMessage.method !== 'NOTIFY * HTTP/1.1' ||
             ssdpMessage.nt !== 'urn:axis-com:service:BasicService:1') {
             return;
         }
 
-        const device = ssdpMessage.mapToDevice();
-        const nts = ssdpMessage.nts;
-
-        if (nts === 'ssdp:alive') {
-            this.emit('hello', device);
+        if (ssdpMessage.nts === 'ssdp:alive') {
+            this.emit('hello', ssdpMessage);
         }
-        else if (nts === 'ssdp:byebye') {
-            this.emit('goodbye', device);
+        else if (ssdpMessage.nts === 'ssdp:byebye') {
+            this.emit('goodbye', ssdpMessage);
         }
     }
 
