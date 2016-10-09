@@ -4,22 +4,21 @@
  * multicast request. 
  */
 export class MSearch {
-
-	/**
-	 * The M-SEARCH payload for searching for Axis cameras on the network.
-	 */
+    /**
+     * The M-SEARCH payload for searching for Axis cameras on the network.
+     */
 	private static Payload =
-		'M-SEARCH * HTTP/1.1\r\n' +
-		'Host:239.255.255.250:1900\r\n' +
-		'ST:urn:axis-com:service:BasicService:1\r\n' +
-		'Man:"ssdp:discover"\r\n' +
-		'MX:3\r\n' +
-		'\r\n';
+        'M-SEARCH * HTTP/1.1\r\n' +
+        'Host:239.255.255.250:1900\r\n' +
+        'ST:urn:axis-com:service:BasicService:1\r\n' +
+        'Man:"ssdp:discover"\r\n' +
+        'MX:3\r\n' +
+        '\r\n';
 
-	/**
-	 * Converts the M-SEARCH request into a buffer.
-	 */
-	toBuffer(): Buffer {
-		return new Buffer(MSearch.Payload);
-	}
+    /**
+     * Converts the M-SEARCH request into a buffer.
+     */
+    toBuffer(): Buffer {
+        return new Buffer(MSearch.Payload);
+    }
 }
