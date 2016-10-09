@@ -1,8 +1,6 @@
 import * as _ from 'lodash';
 import { AddressInfo } from 'dgram';
 
-import { Device } from '../Device';
-
 /**
  * Class describing a received SSDP message.
  */

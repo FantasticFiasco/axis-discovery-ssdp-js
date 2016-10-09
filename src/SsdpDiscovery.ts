@@ -1,11 +1,11 @@
 import * as _ from 'lodash';
 import { EventEmitter } from 'events';
 
+import { MSearchSocket } from './sockets/MSearchSocket';
 import { NetworkInterfaces } from './shared/NetworkInterfaces';
-import { SsdpMessage } from './shared/SsdpMessage';
-import { SsdpSocket } from './shared/SsdpSocket';
-import { MSearchSocket } from './m-search/MSearchSocket';
-import { NotifySocket } from './notify/NotifySocket';
+import { NotifySocket } from './sockets/NotifySocket';
+import { SsdpMessage } from './sockets/SsdpMessage';
+import { SsdpSocket } from './sockets/SsdpSocket';
 import { Device } from './Device';
 
 export class SsdpDiscovery extends EventEmitter {
