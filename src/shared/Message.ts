@@ -28,6 +28,13 @@ export class Message {
 	}
 
 	/**
+	 * Gets the URL to the UPnP description of the root device.
+	 */
+	get location(): string | null {
+		return this.getHeaderValue('LOCATION');
+	}
+
+	/**
 	 * Gets the Unique Service Name (USN) header.
 	 */
 	get usn(): string | null {
@@ -66,9 +73,15 @@ export class Message {
 		const end = uuidMatch[1].length;
 		const serialNumber = uuidMatch[1].slice(start, end).toUpperCase();
 
+		const location = this.location;
+		if (location == null) {
+			throw 'Message does not contain parameter called Location.';
+		}
+
 		return new Device(
 			this.sender.address,
-			serialNumber);
+			serialNumber,
+			location);
 	}
 
 	private parseHeaders(message: Buffer) {

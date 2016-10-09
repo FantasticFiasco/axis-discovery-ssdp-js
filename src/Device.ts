@@ -8,6 +8,10 @@ export class Device {
 		/**
 	 	 * The serial number.
 	 	 */
-		readonly serialNumber: string) {
+		readonly serialNumber: string,
+		/**
+		 * The URL to the UPnP description of the root device.
+		 */
+		readonly location: string) {
 	}
 }
