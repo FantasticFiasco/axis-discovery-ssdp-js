@@ -4,6 +4,7 @@ import { EventEmitter } from 'events';
 import { NetworkInterfaces } from './network-interfaces/NetworkInterfaces';
 import { MSearchSocket } from './ssdp/MSearchSocket';
 import { NotifySocket } from './ssdp/NotifySocket';
+import { RootDescriptionRequest } from './ssdp/RootDescriptionRequest';
 import { SsdpMessage } from './ssdp/SsdpMessage';
 import { SsdpSocket } from './ssdp/SsdpSocket';
 import { Device } from './Device';
@@ -41,6 +42,8 @@ export class SsdpDiscovery extends EventEmitter {
 
         socket.on('hello', (ssdpMessage: SsdpMessage) => {
             this.emit('hello', Device.mapFromSsdpMessage(ssdpMessage));
+
+            this.requestRootDescription(ssdpMessage.location);
         });
 
         socket.on('goodbye', (ssdpMessage: SsdpMessage) => {
@@ -48,5 +51,11 @@ export class SsdpDiscovery extends EventEmitter {
         });
 
         socket.start();
+    }
+
+    private async requestRootDescription(location: string) {
+        // TODO: How is async/await handled in TypeScript?
+        const request = new RootDescriptionRequest(location);
+        await request.send();
     }
 }
