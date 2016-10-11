@@ -14,11 +14,11 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@types/lodash": "^4.14.36",
-    "@types/node": "^6.0.41",
     "lodash": "^4.16.2"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.36",
+    "@types/node": "^6.0.41",
     "@types/chai": "^3.4.34",
     "@types/mocha": "^2.2.32",
     "chai": "^3.5.0",
