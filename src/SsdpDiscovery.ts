@@ -39,23 +39,22 @@ export class SsdpDiscovery extends EventEmitter {
 
     private startSocket(socket: SsdpSocket) {
         this.sockets.push(socket);
-
-        socket.on('hello', (ssdpMessage: SsdpMessage) => {
-            this.emit('hello', Device.mapFromSsdpMessage(ssdpMessage));
-
-            this.requestRootDescriptionAsync(ssdpMessage.location);
-        });
-
-        socket.on('goodbye', (ssdpMessage: SsdpMessage) => {
-            this.emit('goodbye', Device.mapFromSsdpMessage(ssdpMessage));
-        });
-
+        socket.on('hello', (ssdpMessage: SsdpMessage) => this.onHello(ssdpMessage));
+        socket.on('goodbye', (ssdpMessage: SsdpMessage) => this.onGoodbye(ssdpMessage));
         socket.start();
     }
 
-    private requestRootDescriptionAsync(location: string) {
-        // TODO: How is async/await handled in TypeScript?
-        const request = new RootDescriptionRequest(location);
-        request.send();
+    private async onHello(ssdpMessage: SsdpMessage) {
+        // Emit initial hello
+        this.emit('hello', Device.mapFromSsdpMessage(ssdpMessage));
+
+        // Get root description and emit new 'hello' when we know more about the device
+        const request = new RootDescriptionRequest(ssdpMessage.location);
+        const device = await request.sendAsync();
+        this.emit('hello', device);
+    }
+
+    private onGoodbye(ssdpMessage: SsdpMessage) {
+        this.emit('goodbye', Device.mapFromSsdpMessage(ssdpMessage));
     }
 }

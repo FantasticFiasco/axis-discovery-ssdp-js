@@ -1,10 +1,10 @@
-import { RootDescription } from './RootDescription';
+import { Device } from '../Device';
 
 export class RootDescriptionRequest {
 	constructor(private readonly location: string) {
 	}
 
-	async send(): Promise<RootDescription> {
+	async sendAsync(): Promise<Device> {
 		throw 'Not implemented!';
 	}
 }

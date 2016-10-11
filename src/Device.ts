@@ -18,9 +18,25 @@ export class Device {
          */
         readonly serialNumber: string,
         /**
-         * The URL to the UPnP description of the root device.
+         * Gets the short description for the end user.
          */
-        readonly location: string) {
+        readonly friendlyName: string | null = null,
+        /**
+         * Gets the model name.
+         */
+        readonly modelName: string | null = null,
+        /**
+         * Gets the long model description for the end user.
+         */
+        readonly modelDescription: string | null = null,
+		/**
+		 * Gets the model number.
+		 */
+		readonly modelNumber: string | null = null,
+        /**
+         * Gets the URL to presentation for device.
+         */
+        readonly presentationURL: string | null = null) {
     }
 
     /**
@@ -38,7 +54,6 @@ export class Device {
 
         return new Device(
             ssdpMessage.sender.address,
-            serialNumber,
-            ssdpMessage.location);
+            serialNumber);
     }
 }
