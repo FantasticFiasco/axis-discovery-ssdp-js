@@ -1,3 +1,5 @@
+import requestPromise = require('request-promise');
+
 import { Device } from '../Device';
 
 export class RootDescriptionRequest {
@@ -5,6 +7,9 @@ export class RootDescriptionRequest {
 	}
 
 	async sendAsync(): Promise<Device> {
+		const rootDescription = await requestPromise.get(this.location);
+		console.log(rootDescription);
+
 		throw 'Not implemented!';
 	}
 }
