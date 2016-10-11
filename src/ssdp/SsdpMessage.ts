@@ -6,7 +6,7 @@ import { AddressInfo } from 'dgram';
  */
 export class SsdpMessage {
 
-    private readonly headers: any = {};
+    private readonly headers: { [name: string]: string } = {};
 
     constructor(/**
                  * The sender address information.
@@ -20,35 +20,35 @@ export class SsdpMessage {
      * Gets the HTTP method.
      */
     get method(): string {
-        return this.headers.method;
+        return this.headers['method'];
     }
 
     /**
      * Gets the URL to the UPnP description of the root device.
      */
     get location(): string {
-        return this.getRequiredHeaderValue('LOCATION');
+        return this.headers['LOCATION'];
     }
 
     /**
      * Gets the Unique Service Name (USN) header.
      */
     get usn(): string {
-        return this.getRequiredHeaderValue('USN');
+        return this.headers['USN'];
     }
 
     /**
      * Gets the Notification Type (NT) header.
      */
     get nt(): string {
-        return this.getRequiredHeaderValue('NT');
+        return this.headers['NT'];
     }
 
     /**
      * Gets the Notification Sub Type (NTS).
      */
     get nts(): string {
-        return this.getRequiredHeaderValue('NTS');
+        return this.headers['NTS'];
     }
 
     private parseHeaders(message: Buffer) {
@@ -57,7 +57,12 @@ export class SsdpMessage {
             .trim()
             .split('\r\n');
 
-        this.headers.method = headers.shift();
+        const method = headers.shift();
+        if (method === undefined) {
+            throw 'SSDP message is not specifying the method.';
+        }
+
+        this.headers['method'] = method;
 
         _.forEach(headers, header => {
             const indexOfValueSeparator = header.indexOf(':');
@@ -66,15 +71,5 @@ export class SsdpMessage {
 
             this.headers[name] = value;
         });
-    }
-
-    private getRequiredHeaderValue(name: string): string {
-        const value = this.headers[name];
-
-        if (value == null) {
-            throw `Parameter ${name} is required according to the SSDP specificarion.`;
-        }
-
-        return value;
     }
 }
