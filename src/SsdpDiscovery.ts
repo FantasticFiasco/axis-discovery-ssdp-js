@@ -43,7 +43,7 @@ export class SsdpDiscovery extends EventEmitter {
         socket.on('hello', (ssdpMessage: SsdpMessage) => {
             this.emit('hello', Device.mapFromSsdpMessage(ssdpMessage));
 
-            this.requestRootDescription(ssdpMessage.location);
+            this.requestRootDescriptionAsync(ssdpMessage.location);
         });
 
         socket.on('goodbye', (ssdpMessage: SsdpMessage) => {
@@ -53,9 +53,9 @@ export class SsdpDiscovery extends EventEmitter {
         socket.start();
     }
 
-    private async requestRootDescription(location: string) {
+    private requestRootDescriptionAsync(location: string) {
         // TODO: How is async/await handled in TypeScript?
         const request = new RootDescriptionRequest(location);
-        await request.send();
+        request.send();
     }
 }
