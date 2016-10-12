@@ -1,21 +1,25 @@
 import * as requestPromise from 'request-promise';
 
-import { Device } from '../Device';
+import { RootDescription } from './RootDescription';
 
+/**
+ * Class responsible for requesting a root description.
+ */
 export class RootDescriptionRequest {
 	constructor(private readonly location: string) {
 	}
 
-	async sendAsync(): Promise<Device | null> {
+	/**
+	 * Sends the request for a root description asynchronously.
+	 */
+	async sendAsync(): Promise<RootDescription | null> {
 		try {
 			const rootDescription = await requestPromise.get(this.location);
-			console.log(rootDescription);
+			return new RootDescription(rootDescription);
 		}
 		catch (e) {
 			console.log(`Unable to get root description. ${e}`);
 			return null;
 		}
-
-		throw 'Not implemented!';
 	}
 }
