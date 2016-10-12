@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { AddressInfo } from 'dgram';
+import * as dgram from 'dgram';
 
 /**
  * Class describing a received SSDP message.
@@ -11,7 +11,7 @@ export class SsdpMessage {
     constructor(/**
                  * The sender address information.
                  */
-                readonly sender: AddressInfo,
+                readonly sender: dgram.AddressInfo,
                 message: Buffer) {
         this.parseHeaders(message);
     }

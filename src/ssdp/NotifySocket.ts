@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { AddressInfo } from 'dgram';
+import * as dgram from 'dgram';
 
 import { Constants } from './Constants';
 import { SsdpMessage } from './SsdpMessage';
@@ -25,7 +25,7 @@ export class NotifySocket extends SsdpSocket {
         });
     }
 
-    protected onMessage(message: Buffer, remote: AddressInfo) {
+    protected onMessage(message: Buffer, remote: dgram.AddressInfo) {
         const ssdpMessage = new SsdpMessage(remote, message);
 
         if (ssdpMessage.method !== 'NOTIFY * HTTP/1.1' ||

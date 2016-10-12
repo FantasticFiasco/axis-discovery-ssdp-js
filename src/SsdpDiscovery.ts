@@ -1,5 +1,5 @@
 import * as _ from 'lodash';
-import { EventEmitter } from 'events';
+import * as events from 'events';
 
 import { NetworkInterfaces } from './network-interfaces/NetworkInterfaces';
 import { MSearchSocket } from './ssdp/MSearchSocket';
@@ -9,7 +9,7 @@ import { SsdpMessage } from './ssdp/SsdpMessage';
 import { SsdpSocket } from './ssdp/SsdpSocket';
 import { Device } from './Device';
 
-export class SsdpDiscovery extends EventEmitter {
+export class SsdpDiscovery extends events.EventEmitter {
 
     private readonly sockets = new Array<SsdpSocket>();
     private readonly networkInterfaces = new NetworkInterfaces();

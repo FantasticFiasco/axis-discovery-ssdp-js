@@ -1,12 +1,12 @@
-import { EventEmitter } from 'events';
-import { AddressInfo, BindOptions, createSocket, Socket } from 'dgram';
+import * as events from 'events';
+import * as dgram from 'dgram';
 
 /**
  * Abstract class acting as a SSDP socket.
  */
-export abstract class SsdpSocket extends EventEmitter {
+export abstract class SsdpSocket extends events.EventEmitter {
 
-    protected socket: Socket;
+    protected socket: dgram.Socket;
 
     /**
      * Start listen for advertisements.
@@ -14,16 +14,16 @@ export abstract class SsdpSocket extends EventEmitter {
     start() {
         this.assertNotStarted();
 
-        this.socket = createSocket({ type: 'udp4', reuseAddr: true });
+        this.socket = dgram.createSocket({ type: 'udp4', reuseAddr: true });
         this.socket.on('listening', () => this.onListening());
-        this.socket.on('message', (message: Buffer, remote: AddressInfo) => this.onMessage(message, remote));
+        this.socket.on('message', (message: Buffer, remote: dgram.AddressInfo) => this.onMessage(message, remote));
         this.socket.on('error', (error: Error) => this.onError(error));
         this.bind();
     }
 
     protected abstract onListening(): void;
 
-    protected abstract onMessage(message: Buffer, remote: AddressInfo): void;
+    protected abstract onMessage(message: Buffer, remote: dgram.AddressInfo): void;
 
     protected abstract bind(): void;
 

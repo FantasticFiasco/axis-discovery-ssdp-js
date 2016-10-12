@@ -1,4 +1,4 @@
-import requestPromise = require('request-promise');
+import * as requestPromise from 'request-promise';
 
 import { Device } from '../Device';
 

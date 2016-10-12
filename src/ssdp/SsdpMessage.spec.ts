@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import { AddressInfo } from 'dgram';
 
 import { SsdpMessage } from './SsdpMessage';
 

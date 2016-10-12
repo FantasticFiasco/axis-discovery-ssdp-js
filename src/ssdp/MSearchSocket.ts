@@ -1,4 +1,4 @@
-import { AddressInfo } from 'dgram';
+import * as dgram from 'dgram';
 
 import { Constants } from './Constants';
 import { MSearch } from './MSearch';
@@ -37,7 +37,7 @@ export class MSearchSocket extends SsdpSocket {
         this.search();
     }
 
-    protected onMessage(message: Buffer, remote: AddressInfo) {
+    protected onMessage(message: Buffer, remote: dgram.AddressInfo) {
         const ssdpMessage = new SsdpMessage(remote, message);
 
         if (ssdpMessage.method !== 'HTTP/1.1 200 OK') {
