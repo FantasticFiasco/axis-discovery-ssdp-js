@@ -51,7 +51,10 @@ export class SsdpDiscovery extends events.EventEmitter {
         // Get root description and emit new 'hello' when we know more about the device
         const request = new RootDescriptionRequest(ssdpMessage.location);
         const device = await request.sendAsync();
-        this.emit('hello', device);
+
+        if (device !== null) {
+            this.emit('hello', device);
+        }
     }
 
     private onGoodbye(ssdpMessage: SsdpMessage) {
