@@ -1,5 +1,6 @@
-import * as _ from 'lodash';
 import * as events from 'events';
+import * as dgram from 'dgram';
+import * as _ from 'lodash';
 
 import { NetworkInterfaces } from './network-interfaces/NetworkInterfaces';
 import { MSearchSocket } from './ssdp/MSearchSocket';
@@ -45,20 +46,25 @@ export class SsdpDiscovery extends events.EventEmitter {
         socket.start();
     }
 
-    private async onHello(ssdpMessage: SsdpMessage) {
+    private onHello(ssdpMessage: SsdpMessage) {
         // Emit initial hello
         this.emit('hello', this.deviceMapper.fromSsdpMessage(ssdpMessage));
 
-        // Get root description and emit new 'hello' when we know more about the device
-        const request = new RootDescriptionRequest(ssdpMessage.location);
-        const device = await request.sendAsync();
-
-        if (device !== null) {
-            this.emit('hello', device);
-        }
+        // Request root description
+        this.requestRootDescriptionAsync(ssdpMessage.remote, ssdpMessage.location);
     }
 
     private onGoodbye(ssdpMessage: SsdpMessage) {
         this.emit('goodbye', this.deviceMapper.fromSsdpMessage(ssdpMessage));
+    }
+
+    private async requestRootDescriptionAsync(remote: dgram.AddressInfo, location: string): Promise<void> {
+        const request = new RootDescriptionRequest(remote, location);
+        const rootDescription = await request.sendAsync();
+
+        if (rootDescription !== null) {
+            const device = await this.deviceMapper.fromRootDescriptionAsync(rootDescription);
+            this.emit('hello', device);
+        }
     }
 }

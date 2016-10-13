@@ -1,4 +1,5 @@
 import { Device } from './Device';
+import { RootDescription } from './ssdp/RootDescription';
 import { SsdpMessage } from './ssdp/SsdpMessage';
 
 export class DeviceMapper {
@@ -20,7 +21,28 @@ export class DeviceMapper {
         const serialNumber = uuidMatch[1].slice(start, end).toUpperCase();
 
         return new Device(
-            ssdpMessage.sender.address,
+            ssdpMessage.remote.address,
             serialNumber);
+    }
+
+    /**
+     * Maps a root description to a device.
+     */
+    async fromRootDescriptionAsync(rootDescription: RootDescription): Promise<Device> {
+        const serialNumber = await rootDescription.getSerialNumberAsync();
+        const friendlyName = await rootDescription.getFriendlyNameAsync();
+        const modelName = await rootDescription.getModelNameAsync();
+        const modelDescription = await rootDescription.getModelDescriptionAsync();
+        const modelNumber = await rootDescription.getModelNumberAsync();
+        const presentationUrl = await rootDescription.getPresentationUrlAsync();
+
+        return new Device(
+            rootDescription.remote.address,
+            serialNumber,
+            friendlyName,
+            modelName,
+            modelDescription,
+            modelNumber,
+            presentationUrl);
     }
 }

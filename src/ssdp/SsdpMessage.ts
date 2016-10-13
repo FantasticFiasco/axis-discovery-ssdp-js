@@ -9,9 +9,9 @@ export class SsdpMessage {
     private readonly headers: { [name: string]: string } = {};
 
     constructor(/**
-                 * The sender address information.
+                 * The remote address information.
                  */
-                readonly sender: dgram.AddressInfo,
+                readonly remote: dgram.AddressInfo,
                 message: Buffer) {
         this.parseHeaders(message);
     }

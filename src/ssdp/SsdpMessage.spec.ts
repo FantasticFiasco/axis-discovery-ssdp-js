@@ -12,9 +12,9 @@ describe('when parsing message', () => {
             },
             new Buffer('HTTP/1.1 200 OK'));
 
-        expect(subject.sender.address).to.equal('192.168.1.100');
-        expect(subject.sender.port).to.equal(443);
-        expect(subject.sender.family).to.equal('IPv4');
+        expect(subject.remote.address).to.equal('192.168.1.100');
+        expect(subject.remote.port).to.equal(443);
+        expect(subject.remote.family).to.equal('IPv4');
     });
 
     it('should return required SSDP headers on M-SEARCH response', () => {

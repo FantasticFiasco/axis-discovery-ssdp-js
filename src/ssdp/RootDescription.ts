@@ -1,5 +1,6 @@
 import * as xml2js from 'xml2js';
 import * as bluebird from 'bluebird';
+import * as dgram from 'dgram';
 
 const xml2jsAsync: any = bluebird.promisifyAll(xml2js);
 
@@ -9,7 +10,11 @@ const xml2jsAsync: any = bluebird.promisifyAll(xml2js);
 export class RootDescription {
 	private rootDescription: any = null;
 
-	constructor(private readonly rootDescriptionXml: string) {
+	constructor(/**
+                 * The remote address information.
+                 */
+                readonly remote: dgram.AddressInfo,
+				private readonly rootDescriptionXml: string) {
 	}
 
 	/**
