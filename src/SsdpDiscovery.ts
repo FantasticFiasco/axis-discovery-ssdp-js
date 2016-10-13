@@ -7,12 +7,13 @@ import { NotifySocket } from './ssdp/NotifySocket';
 import { RootDescriptionRequest } from './ssdp/RootDescriptionRequest';
 import { SsdpMessage } from './ssdp/SsdpMessage';
 import { SsdpSocket } from './ssdp/SsdpSocket';
-import { Device } from './Device';
+import { DeviceMapper } from './DeviceMapper';
 
 export class SsdpDiscovery extends events.EventEmitter {
 
     private readonly sockets = new Array<SsdpSocket>();
     private readonly networkInterfaces = new NetworkInterfaces();
+    private readonly deviceMapper = new DeviceMapper();
 
     /**
      * Start listen for SSDP advertisements on all network interface addresses.
@@ -46,7 +47,7 @@ export class SsdpDiscovery extends events.EventEmitter {
 
     private async onHello(ssdpMessage: SsdpMessage) {
         // Emit initial hello
-        this.emit('hello', Device.mapFromSsdpMessage(ssdpMessage));
+        this.emit('hello', this.deviceMapper.fromSsdpMessage(ssdpMessage));
 
         // Get root description and emit new 'hello' when we know more about the device
         const request = new RootDescriptionRequest(ssdpMessage.location);
@@ -58,6 +59,6 @@ export class SsdpDiscovery extends events.EventEmitter {
     }
 
     private onGoodbye(ssdpMessage: SsdpMessage) {
-        this.emit('goodbye', Device.mapFromSsdpMessage(ssdpMessage));
+        this.emit('goodbye', this.deviceMapper.fromSsdpMessage(ssdpMessage));
     }
 }
