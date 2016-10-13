@@ -5,7 +5,7 @@ import { RootDescription } from './RootDescription';
 
 describe('when parsing root description', () => {
     it('should return address', () => {
-        const subject = new RootDescription(address, rootDescriptionXml);
+        const subject = new RootDescription(remote, rootDescriptionXml);
 
 		const actual = subject.remote;
 
@@ -15,7 +15,7 @@ describe('when parsing root description', () => {
     });
 
     it('should return friendly name', async () => {
-		const subject = new RootDescription(address, rootDescriptionXml);
+		const subject = new RootDescription(remote, rootDescriptionXml);
 
 		const actual = await subject.getFriendlyNameAsync();
 
@@ -23,7 +23,7 @@ describe('when parsing root description', () => {
     });
 
 	it('should return model description', async () => {
-		const subject = new RootDescription(address, rootDescriptionXml);
+		const subject = new RootDescription(remote, rootDescriptionXml);
 
 		const actual = await subject.getModelDescriptionAsync();
 
@@ -31,7 +31,7 @@ describe('when parsing root description', () => {
     });
 
 	it('should return model name', async () => {
-		const subject = new RootDescription(address, rootDescriptionXml);
+		const subject = new RootDescription(remote, rootDescriptionXml);
 
 		const actual = await subject.getModelNameAsync();
 
@@ -39,7 +39,7 @@ describe('when parsing root description', () => {
     });
 
 	it('should return model number', async () => {
-		const subject = new RootDescription(address, rootDescriptionXml);
+		const subject = new RootDescription(remote, rootDescriptionXml);
 
 		const actual = await subject.getModelNumberAsync();
 
@@ -47,7 +47,7 @@ describe('when parsing root description', () => {
     });
 
 	it('should return serial number', async () => {
-		const subject = new RootDescription(address, rootDescriptionXml);
+		const subject = new RootDescription(remote, rootDescriptionXml);
 
 		const actual = await subject.getSerialNumberAsync();
 
@@ -55,7 +55,7 @@ describe('when parsing root description', () => {
     });
 
 	it('should return presentation URL', async () => {
-		const subject = new RootDescription(address, rootDescriptionXml);
+		const subject = new RootDescription(remote, rootDescriptionXml);
 
 		const actual = await subject.getPresentationUrlAsync();
 
@@ -63,7 +63,7 @@ describe('when parsing root description', () => {
     });
 });
 
-const address: dgram.AddressInfo = {
+const remote: dgram.AddressInfo = {
         address: '192.168.1.102',
         family: 'IPv4',
         port: 443
