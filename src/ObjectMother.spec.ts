@@ -1,3 +1,5 @@
+export const remoteAddress = '192.168.1.102';
+
 export const NotifyMessage =
     'NOTIFY * HTTP/1.1\r\n' +
     'HOST: 239.255.255.250:1900\r\n' +

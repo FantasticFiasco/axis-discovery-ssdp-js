@@ -1,4 +1,3 @@
-import * as dgram from 'dgram';
 import { expect } from 'chai';
 
 import * as objectMother from './objectMother.spec';
@@ -9,7 +8,9 @@ import { SsdpMessage } from './ssdp/SsdpMessage';
 describe('when mapping to device', () => {
     it('should handle Notify messages', () => {
         const subject = new DeviceMapper();
-        const message = new SsdpMessage(remote, new Buffer(objectMother.NotifyMessage));
+        const message = new SsdpMessage(
+            objectMother.remoteAddress,
+            new Buffer(objectMother.NotifyMessage));
 
 		const actual = subject.fromSsdpMessage(message);
 
@@ -24,7 +25,9 @@ describe('when mapping to device', () => {
 
     it('should handle M-Search messages', () => {
         const subject = new DeviceMapper();
-        const message = new SsdpMessage(remote, new Buffer(objectMother.MSearchMessage));
+        const message = new SsdpMessage(
+            objectMother.remoteAddress,
+            new Buffer(objectMother.MSearchMessage));
 
 		const actual = subject.fromSsdpMessage(message);
 
@@ -39,7 +42,9 @@ describe('when mapping to device', () => {
 
 	it('should handle root descriptions', async () => {
         const subject = new DeviceMapper();
-        const rootDescription = new RootDescription(remote, objectMother.RootDescriptionXml);
+        const rootDescription = new RootDescription(
+            objectMother.remoteAddress,
+            objectMother.RootDescriptionXml);
 
 		const actual = await subject.fromRootDescriptionAsync(rootDescription);
 
@@ -52,9 +57,3 @@ describe('when mapping to device', () => {
         expect(actual.presentationURL).to.equal('http://192.168.1.102:80/');
     });
 });
-
-const remote: dgram.AddressInfo = {
-        address: '192.168.1.102',
-        family: 'IPv4',
-        port: 443
-    };

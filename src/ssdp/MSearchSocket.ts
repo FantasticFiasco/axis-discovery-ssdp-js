@@ -37,8 +37,8 @@ export class MSearchSocket extends SsdpSocket {
         this.search();
     }
 
-    protected onMessage(message: Buffer, remote: dgram.AddressInfo) {
-        const ssdpMessage = new SsdpMessage(remote, message);
+    protected onMessage(message: Buffer, remoteAddress: string) {
+        const ssdpMessage = new SsdpMessage(remoteAddress, message);
 
         if (ssdpMessage.method !== 'HTTP/1.1 200 OK') {
             return;

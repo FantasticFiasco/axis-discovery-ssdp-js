@@ -1,5 +1,4 @@
 import * as events from 'events';
-import * as dgram from 'dgram';
 import * as _ from 'lodash';
 
 import { NetworkInterfaces } from './network-interfaces/NetworkInterfaces';
@@ -51,15 +50,15 @@ export class SsdpDiscovery extends events.EventEmitter {
         this.emit('hello', this.deviceMapper.fromSsdpMessage(ssdpMessage));
 
         // Request root description
-        this.requestRootDescriptionAsync(ssdpMessage.remote, ssdpMessage.location);
+        this.requestRootDescriptionAsync(ssdpMessage.remoteAddress, ssdpMessage.location);
     }
 
     private onGoodbye(ssdpMessage: SsdpMessage) {
         this.emit('goodbye', this.deviceMapper.fromSsdpMessage(ssdpMessage));
     }
 
-    private async requestRootDescriptionAsync(remote: dgram.AddressInfo, location: string): Promise<void> {
-        const request = new RootDescriptionRequest(remote, location);
+    private async requestRootDescriptionAsync(remoteAddress: string, location: string): Promise<void> {
+        const request = new RootDescriptionRequest(remoteAddress, location);
         const rootDescription = await request.sendAsync();
 
         if (rootDescription !== null) {

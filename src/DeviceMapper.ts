@@ -21,7 +21,7 @@ export class DeviceMapper {
         const serialNumber = uuidMatch[1].slice(start, end).toUpperCase();
 
         return new Device(
-            ssdpMessage.remote.address,
+            ssdpMessage.remoteAddress,
             serialNumber);
     }
 
@@ -37,7 +37,7 @@ export class DeviceMapper {
         const presentationUrl = await rootDescription.getPresentationUrlAsync();
 
         return new Device(
-            rootDescription.remote.address,
+            rootDescription.remoteAddress,
             serialNumber,
             friendlyName,
             modelName,
