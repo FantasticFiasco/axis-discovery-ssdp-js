@@ -2,11 +2,11 @@ import * as events from 'events';
 import * as _ from 'lodash';
 
 import { NetworkInterfaces } from './network-interfaces/NetworkInterfaces';
-import { MSearchSocket } from './ssdp/MSearchSocket';
-import { NotifySocket } from './ssdp/NotifySocket';
 import { RootDescriptionRequest } from './root-description/RootDescriptionRequest';
-import { SsdpMessage } from './ssdp/SsdpMessage';
-import { SsdpSocket } from './ssdp/SsdpSocket';
+import { MSearchSocket } from './sockets/MSearchSocket';
+import { NotifySocket } from './sockets/NotifySocket';
+import { SsdpMessage } from './sockets/SsdpMessage';
+import { SsdpSocket } from './sockets/SsdpSocket';
 import { DeviceMapper } from './DeviceMapper';
 
 export class SsdpDiscovery extends events.EventEmitter {
