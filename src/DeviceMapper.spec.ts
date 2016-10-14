@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import * as ObjectMother from './ObjectMother.spec';
 import { DeviceMapper } from './DeviceMapper';
-import { RootDescription } from './ssdp/RootDescription';
+import { RootDescription } from './root-description/RootDescription';
 import { SsdpMessage } from './ssdp/SsdpMessage';
 
 describe('when mapping to device', () => {

@@ -1,5 +1,5 @@
 import { Device } from './Device';
-import { RootDescription } from './ssdp/RootDescription';
+import { RootDescription } from './root-description/RootDescription';
 import { SsdpMessage } from './ssdp/SsdpMessage';
 
 export class DeviceMapper {
