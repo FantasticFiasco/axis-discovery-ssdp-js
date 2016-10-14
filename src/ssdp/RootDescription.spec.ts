@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 
-import * as objectMother from '../ObjectMother.spec';
+import * as ObjectMother from '../ObjectMother.spec';
 import { RootDescription } from './RootDescription';
 
 describe('when parsing root description', () => {
     it('should return remote address', () => {
         const subject = new RootDescription(
-            objectMother.remoteAddress,
-            objectMother.RootDescriptionXml);
+            ObjectMother.REMOTE_ADDRESS,
+            ObjectMother.ROOT_DESCRIPTION);
 
     const actual = subject.remoteAddress;
 
@@ -16,8 +16,8 @@ describe('when parsing root description', () => {
 
     it('should return friendly name', async () => {
         const subject = new RootDescription(
-            objectMother.remoteAddress,
-            objectMother.RootDescriptionXml);
+            ObjectMother.REMOTE_ADDRESS,
+            ObjectMother.ROOT_DESCRIPTION);
 
         const actual = await subject.getFriendlyNameAsync();
 
@@ -26,8 +26,8 @@ describe('when parsing root description', () => {
 
 	it('should return model description', async () => {
         const subject = new RootDescription(
-            objectMother.remoteAddress,
-            objectMother.RootDescriptionXml);
+            ObjectMother.REMOTE_ADDRESS,
+            ObjectMother.ROOT_DESCRIPTION);
 
         const actual = await subject.getModelDescriptionAsync();
 
@@ -36,8 +36,8 @@ describe('when parsing root description', () => {
 
     it('should return model name', async () => {
         const subject = new RootDescription(
-            objectMother.remoteAddress,
-            objectMother.RootDescriptionXml);
+            ObjectMother.REMOTE_ADDRESS,
+            ObjectMother.ROOT_DESCRIPTION);
 
         const actual = await subject.getModelNameAsync();
 
@@ -46,8 +46,8 @@ describe('when parsing root description', () => {
 
     it('should return model number', async () => {
         const subject = new RootDescription(
-            objectMother.remoteAddress,
-            objectMother.RootDescriptionXml);
+            ObjectMother.REMOTE_ADDRESS,
+            ObjectMother.ROOT_DESCRIPTION);
 
         const actual = await subject.getModelNumberAsync();
 
@@ -56,8 +56,8 @@ describe('when parsing root description', () => {
 
     it('should return serial number', async () => {
         const subject = new RootDescription(
-            objectMother.remoteAddress,
-            objectMother.RootDescriptionXml);
+            ObjectMother.REMOTE_ADDRESS,
+            ObjectMother.ROOT_DESCRIPTION);
 
         const actual = await subject.getSerialNumberAsync();
 
@@ -66,8 +66,8 @@ describe('when parsing root description', () => {
 
     it('should return presentation URL', async () => {
         const subject = new RootDescription(
-            objectMother.remoteAddress,
-            objectMother.RootDescriptionXml);
+            ObjectMother.REMOTE_ADDRESS,
+            ObjectMother.ROOT_DESCRIPTION);
 
         const actual = await subject.getPresentationUrlAsync();
 

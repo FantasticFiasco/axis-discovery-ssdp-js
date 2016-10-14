@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import { Constants } from './Constants';
+import * as constants from './Constants';
 import { SsdpMessage } from './SsdpMessage';
 import { SsdpSocket } from './SsdpSocket';
 
@@ -20,7 +20,7 @@ export class NotifySocket extends SsdpSocket {
         console.log(`NOTIFY socket is now listening on ${address.address}:${address.port}`);
 
         _.forEach(this.addresses, address => {
-            this.socket.addMembership(Constants.SSDP_MULTICAST_ADDRESS, address);
+            this.socket.addMembership(constants.SSDP_MULTICAST_ADDRESS, address);
         });
     }
 
@@ -41,6 +41,6 @@ export class NotifySocket extends SsdpSocket {
     }
 
     protected bind() {
-        this.socket.bind(Constants.SSDP_PORT);
+        this.socket.bind(constants.SSDP_PORT);
     }
 }

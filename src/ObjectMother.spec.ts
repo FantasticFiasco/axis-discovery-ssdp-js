@@ -1,6 +1,6 @@
-export const remoteAddress = '192.168.1.102';
+export const REMOTE_ADDRESS = '192.168.1.102';
 
-export const NotifyMessage =
+export const NOTIFY_MESSAGE =
     'NOTIFY * HTTP/1.1\r\n' +
     'HOST: 239.255.255.250:1900\r\n' +
     'CACHE-CONTROL: max-age=1800\r\n' +
@@ -13,7 +13,7 @@ export const NotifyMessage =
     'X-User-Agent: redsonic\r\n' +
     'USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1\r\n';
 
-export const MSearchMessage =
+export const MSEARCH_MESSAGE =
     'HTTP/1.1 200 OK\r\n' +
     'CACHE-CONTROL: max-age=1800\r\n' +
     'DATE: Sun, 02 Oct 2016 21:11:25 GMT\r\n' +
@@ -26,7 +26,7 @@ export const MSearchMessage =
     'ST: urn:axis-com:service:BasicService:1\r\n' +
     'USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1\r\n';
 
-export const RootDescriptionXml =
+export const ROOT_DESCRIPTION =
     '<?xml version="1.0"?>' +
     '<root xmlns="urn:schemas-upnp-org:device-1-0">' +
     '    <specVersion>' +

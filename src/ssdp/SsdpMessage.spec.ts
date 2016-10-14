@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import * as objectMother from '../ObjectMother.spec';
+import * as ObjectMother from '../ObjectMother.spec';
 import { SsdpMessage } from './SsdpMessage';
 
 describe('when parsing message', () => {
@@ -11,7 +11,7 @@ describe('when parsing message', () => {
     });
 
     it('should return required SSDP headers on M-SEARCH response', () => {
-        const subject = new SsdpMessage('192.168.1.100', new Buffer(objectMother.MSearchMessage));
+        const subject = new SsdpMessage('192.168.1.100', new Buffer(ObjectMother.MSEARCH_MESSAGE));
 
         expect(subject.method).to.equal('HTTP/1.1 200 OK');
         expect(subject.location).to.equal('http://192.168.1.102:45895/rootdesc1.xml');
@@ -26,7 +26,7 @@ describe('when parsing message', () => {
     });
 
     it('should return required SSDP headers on NOTIFY', () => {
-        const subject = new SsdpMessage('192.168.1.100', new Buffer(objectMother.NotifyMessage));
+        const subject = new SsdpMessage('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
 
         expect(subject.method).to.equal('NOTIFY * HTTP/1.1');
         expect(subject.location).to.equal('http://192.168.1.102:45895/rootdesc1.xml');

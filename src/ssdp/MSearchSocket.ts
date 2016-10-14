@@ -1,6 +1,6 @@
 import * as dgram from 'dgram';
 
-import { Constants } from './Constants';
+import * as constants from './Constants';
 import { MSearch } from './MSearch';
 import { SsdpMessage } from './SsdpMessage';
 import { SsdpSocket } from './SsdpSocket';
@@ -25,8 +25,8 @@ export class MSearchSocket extends SsdpSocket {
             message,
             0,
             message.length,
-            Constants.SSDP_PORT,
-            Constants.SSDP_MULTICAST_ADDRESS);
+            constants.SSDP_PORT,
+            constants.SSDP_MULTICAST_ADDRESS);
     }
 
     protected onListening() {

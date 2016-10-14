@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import * as objectMother from './objectMother.spec';
+import * as ObjectMother from './ObjectMother.spec';
 import { DeviceMapper } from './DeviceMapper';
 import { RootDescription } from './ssdp/RootDescription';
 import { SsdpMessage } from './ssdp/SsdpMessage';
@@ -9,8 +9,8 @@ describe('when mapping to device', () => {
     it('should handle Notify messages', () => {
         const subject = new DeviceMapper();
         const message = new SsdpMessage(
-            objectMother.remoteAddress,
-            new Buffer(objectMother.NotifyMessage));
+            ObjectMother.REMOTE_ADDRESS,
+            new Buffer(ObjectMother.NOTIFY_MESSAGE));
 
 		const actual = subject.fromSsdpMessage(message);
 
@@ -26,8 +26,8 @@ describe('when mapping to device', () => {
     it('should handle M-Search messages', () => {
         const subject = new DeviceMapper();
         const message = new SsdpMessage(
-            objectMother.remoteAddress,
-            new Buffer(objectMother.MSearchMessage));
+            ObjectMother.REMOTE_ADDRESS,
+            new Buffer(ObjectMother.MSEARCH_MESSAGE));
 
 		const actual = subject.fromSsdpMessage(message);
 
@@ -43,8 +43,8 @@ describe('when mapping to device', () => {
 	it('should handle root descriptions', async () => {
         const subject = new DeviceMapper();
         const rootDescription = new RootDescription(
-            objectMother.remoteAddress,
-            objectMother.RootDescriptionXml);
+            ObjectMother.REMOTE_ADDRESS,
+            ObjectMother.ROOT_DESCRIPTION);
 
 		const actual = await subject.fromRootDescriptionAsync(rootDescription);
 
