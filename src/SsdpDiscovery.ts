@@ -1,7 +1,7 @@
 import * as events from 'events';
 import * as _ from 'lodash';
 
-import { NetworkInterfaces } from './network-interfaces/NetworkInterfaces';
+import { NetworkInterfaceMonitor } from './network-interfaces/NetworkInterfaceMonitor';
 import { RootDescriptionRequest } from './root-description/RootDescriptionRequest';
 import { MSearchSocket } from './sockets/MSearchSocket';
 import { NotifySocket } from './sockets/NotifySocket';
@@ -12,14 +12,14 @@ import { DeviceMapper } from './DeviceMapper';
 export class SsdpDiscovery extends events.EventEmitter {
 
     private readonly sockets = new Array<SsdpSocket>();
-    private readonly networkInterfaces = new NetworkInterfaces();
+    private readonly networkInterfaceMonitor = new NetworkInterfaceMonitor();
     private readonly deviceMapper = new DeviceMapper();
 
     /**
      * Start listen for SSDP advertisements on all network interface addresses.
      */
     start() {
-        const addresses = this.networkInterfaces.getIPv4Addresses();
+        const addresses = this.networkInterfaceMonitor.getIPv4Addresses();
 
         // Start passive SSDP
         this.startSocket(new NotifySocket(addresses));
