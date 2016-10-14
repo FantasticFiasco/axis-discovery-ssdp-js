@@ -26,28 +26,28 @@ export class SsdpMessage {
      * Gets the URL to the UPnP description of the root device.
      */
     get location(): string {
-        return this.headers['LOCATION'];
+        return this.getHeaderValue('LOCATION');
     }
 
     /**
      * Gets the Unique Service Name (USN) header.
      */
     get usn(): string {
-        return this.headers['USN'];
+        return this.getHeaderValue('USN');
     }
 
     /**
      * Gets the Notification Type (NT) header.
      */
     get nt(): string {
-        return this.headers['NT'];
+        return this.getHeaderValue('NT');
     }
 
     /**
      * Gets the Notification Sub Type (NTS).
      */
     get nts(): string {
-        return this.headers['NTS'];
+        return this.getHeaderValue('NTS');
     }
 
     private parseHeaders(message: Buffer) {
@@ -70,5 +70,15 @@ export class SsdpMessage {
 
             this.headers[name] = value;
         });
+    }
+
+    private getHeaderValue(headerName: string): string {
+        const headerValue = this.headers[headerName];
+
+        if (!headerValue) {
+            throw `Header with name ${headerName} does not exist.`;
+        }
+
+        return headerValue;
     }
 }
