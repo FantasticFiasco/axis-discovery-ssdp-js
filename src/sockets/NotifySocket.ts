@@ -1,3 +1,4 @@
+import * as dgram from 'dgram';
 import * as _ from 'lodash';
 
 import * as constants from './Constants';
@@ -24,8 +25,8 @@ export class NotifySocket extends SsdpSocket {
         });
     }
 
-    protected onMessage(message: Buffer, remoteAddress: string) {
-        const ssdpMessage = new SsdpMessage(remoteAddress, message);
+    protected onMessage(message: Buffer, remote: dgram.AddressInfo) {
+        const ssdpMessage = new SsdpMessage(remote.address, message);
 
         if (ssdpMessage.method !== 'NOTIFY * HTTP/1.1' ||
             ssdpMessage.nt !== 'urn:axis-com:service:BasicService:1') {

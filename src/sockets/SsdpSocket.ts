@@ -16,14 +16,14 @@ export abstract class SsdpSocket extends events.EventEmitter {
 
         this.socket = dgram.createSocket({ type: 'udp4', reuseAddr: true });
         this.socket.on('listening', () => this.onListening());
-        this.socket.on('message', (message: Buffer, remoteAddress: string) => this.onMessage(message, remoteAddress));
+        this.socket.on('message', (message: Buffer, remote: dgram.AddressInfo) => this.onMessage(message, remote));
         this.socket.on('error', (error: Error) => this.onError(error));
         this.bind();
     }
 
     protected abstract onListening(): void;
 
-    protected abstract onMessage(message: Buffer, remoteAddress: string): void;
+    protected abstract onMessage(message: Buffer, remote: dgram.AddressInfo): void;
 
     protected abstract bind(): void;
 
