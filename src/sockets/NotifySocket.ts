@@ -1,6 +1,7 @@
 import * as dgram from 'dgram';
 import * as _ from 'lodash';
 
+import { Log } from '../Log';
 import * as constants from './Constants';
 import { Message } from './Message';
 import { SocketBase } from './SocketBase';
@@ -18,7 +19,7 @@ export class NotifySocket extends SocketBase {
 
     protected onListening() {
         const address = this.socket.address();
-        console.log(`NOTIFY socket is now listening on ${address.address}:${address.port}`);
+        Log.write(`NOTIFY socket is now listening on ${address.address}:${address.port}`);
 
         _.forEach(this.addresses, address => {
             this.socket.addMembership(constants.SSDP_MULTICAST_ADDRESS, address);

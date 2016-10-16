@@ -8,6 +8,7 @@ import { NotifySocket } from './sockets/NotifySocket';
 import { Message } from './sockets/Message';
 import { SocketBase } from './sockets/SocketBase';
 import { DeviceMapper } from './DeviceMapper';
+import { Log } from './Log';
 
 export class SsdpDiscovery extends events.EventEmitter {
 
@@ -64,7 +65,7 @@ export class SsdpDiscovery extends events.EventEmitter {
             const device = await this.deviceMapper.fromRootDescriptionAsync(rootDescription);
             this.emit('hello', device);
         } catch (e) {
-            console.log(`Unable to get root description. ${e}`);
+            Log.write(`Unable to get root description. ${e}`);
         }
     }
 }

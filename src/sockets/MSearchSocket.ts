@@ -1,5 +1,6 @@
 import * as dgram from 'dgram';
 
+import { Log } from '../Log';
 import * as constants from './Constants';
 import { MSearch } from './MSearch';
 import { Message } from './Message';
@@ -31,7 +32,7 @@ export class MSearchSocket extends SocketBase {
 
     protected onListening() {
         const address = this.socket.address();
-        console.log(`M-SEARCH socket is now listening on ${address.address}:${address.port}`);
+        Log.write(`M-SEARCH socket is now listening on ${address.address}:${address.port}`);
 
         // Trigger a search when socket is ready
         this.search();

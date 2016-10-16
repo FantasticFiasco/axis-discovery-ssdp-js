@@ -1,6 +1,8 @@
 import * as events from 'events';
 import * as dgram from 'dgram';
 
+import { Log } from '../Log';
+
 /**
  * Abstract class acting as a SSDP socket.
  */
@@ -28,7 +30,7 @@ export abstract class SocketBase extends events.EventEmitter {
     protected abstract bind(): void;
 
     protected onError(error: Error) {
-        console.log('Socket error', error);
+        Log.write('Socket error', error);
     }
 
     private assertNotStarted() {
