@@ -2,13 +2,13 @@ import * as dgram from 'dgram';
 import * as _ from 'lodash';
 
 import * as constants from './Constants';
-import { SsdpMessage } from './SsdpMessage';
-import { SsdpSocket } from './SsdpSocket';
+import { Message } from './Message';
+import { SocketBase } from './SocketBase';
 
 /**
  * Class representing a SSDP socket that support the HTTP method NOTIFY.
  */
-export class NotifySocket extends SsdpSocket {
+export class NotifySocket extends SocketBase {
     /**
      * @addresses The network addresses to listen for NOTIFY advertisements on.
      */
@@ -25,19 +25,19 @@ export class NotifySocket extends SsdpSocket {
         });
     }
 
-    protected onMessage(message: Buffer, remote: dgram.AddressInfo) {
-        const ssdpMessage = new SsdpMessage(remote.address, message);
+    protected onMessage(messageBuffer: Buffer, remote: dgram.AddressInfo) {
+        const message = new Message(remote.address, messageBuffer);
 
-        if (ssdpMessage.method !== 'NOTIFY * HTTP/1.1' ||
-            ssdpMessage.nt !== 'urn:axis-com:service:BasicService:1') {
+        if (message.method !== 'NOTIFY * HTTP/1.1' ||
+            message.nt !== 'urn:axis-com:service:BasicService:1') {
             return;
         }
 
-        if (ssdpMessage.nts === 'ssdp:alive') {
-            this.emit('hello', ssdpMessage);
+        if (message.nts === 'ssdp:alive') {
+            this.emit('hello', message);
         }
-        else if (ssdpMessage.nts === 'ssdp:byebye') {
-            this.emit('goodbye', ssdpMessage);
+        else if (message.nts === 'ssdp:byebye') {
+            this.emit('goodbye', message);
         }
     }
 

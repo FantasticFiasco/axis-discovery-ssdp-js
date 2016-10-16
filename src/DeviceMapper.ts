@@ -1,6 +1,6 @@
 import { Device } from './Device';
 import { RootDescription } from './root-description/RootDescription';
-import { SsdpMessage } from './sockets/SsdpMessage';
+import { Message } from './sockets/Message';
 
 export class DeviceMapper {
 
@@ -10,8 +10,8 @@ export class DeviceMapper {
 	/**
      * Maps from a SSDP message to a device.
      */
-    fromSsdpMessage(ssdpMessage: SsdpMessage): Device {
-        const uuidMatch = DeviceMapper.uuidRegExp.exec(ssdpMessage.usn);
+    fromMessage(message: Message): Device {
+        const uuidMatch = DeviceMapper.uuidRegExp.exec(message.usn);
         if (uuidMatch == null) {
             throw 'Parameter USN on SSDP message does not contain uuid.';
         }
@@ -21,7 +21,7 @@ export class DeviceMapper {
         const serialNumber = uuidMatch[1].slice(start, end).toUpperCase();
 
         return new Device(
-            ssdpMessage.remoteAddress,
+            message.remoteAddress,
             serialNumber);
     }
 

@@ -1,17 +1,17 @@
 import { expect } from 'chai';
 
 import * as ObjectMother from '../ObjectMother.spec';
-import { SsdpMessage } from './SsdpMessage';
+import { Message } from './Message';
 
 describe('when parsing message', () => {
     it('should return remote address', () => {
-        const subject = new SsdpMessage('192.168.1.100', new Buffer('HTTP/1.1 200 OK'));
+        const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK'));
 
         expect(subject.remoteAddress).to.equal('192.168.1.100');
     });
 
     it('should return required SSDP headers on M-SEARCH response', () => {
-        const subject = new SsdpMessage('192.168.1.100', new Buffer(ObjectMother.MSEARCH_MESSAGE));
+        const subject = new Message('192.168.1.100', new Buffer(ObjectMother.MSEARCH_MESSAGE));
 
         expect(subject.method).to.equal('HTTP/1.1 200 OK');
         expect(subject.location).to.equal('http://192.168.1.102:45895/rootdesc1.xml');
@@ -19,14 +19,14 @@ describe('when parsing message', () => {
     });
 
     it('should throw error on missing SSDP headers on M-SEARCH response', () => {
-        const subject = new SsdpMessage('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
+        const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
 
         expect(() => subject.location).to.throw();
         expect(() => subject.usn).to.throw();
     });
 
     it('should return required SSDP headers on NOTIFY', () => {
-        const subject = new SsdpMessage('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
+        const subject = new Message('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
 
         expect(subject.method).to.equal('NOTIFY * HTTP/1.1');
         expect(subject.location).to.equal('http://192.168.1.102:45895/rootdesc1.xml');
@@ -36,7 +36,7 @@ describe('when parsing message', () => {
     });
 
     it('should throw error on missing SSDP headers on NOTIFY', () => {
-        const subject = new SsdpMessage('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
+        const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
 
         expect(() => subject.location).to.throw();
         expect(() => subject.usn).to.throw();
@@ -45,7 +45,7 @@ describe('when parsing message', () => {
     });
 
     it('should trim header value', () => {
-        const subject = new SsdpMessage(
+        const subject = new Message(
             '192.168.1.100',
             new Buffer(
                 'HTTP/1.1 200 OK\r\n' +

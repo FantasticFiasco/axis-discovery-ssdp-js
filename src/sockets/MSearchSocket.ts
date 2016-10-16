@@ -2,13 +2,13 @@ import * as dgram from 'dgram';
 
 import * as constants from './Constants';
 import { MSearch } from './MSearch';
-import { SsdpMessage } from './SsdpMessage';
-import { SsdpSocket } from './SsdpSocket';
+import { Message } from './Message';
+import { SocketBase } from './SocketBase';
 
 /**
  * Class representing a SSDP socket that support the HTTP method M-SEARCH.
  */
-export class MSearchSocket extends SsdpSocket {
+export class MSearchSocket extends SocketBase {
     /**
      * @address The network address to listen for M-SEARCH responses on.
      */
@@ -37,14 +37,14 @@ export class MSearchSocket extends SsdpSocket {
         this.search();
     }
 
-    protected onMessage(message: Buffer, remote: dgram.AddressInfo) {
-        const ssdpMessage = new SsdpMessage(remote.address, message);
+    protected onMessage(messageBuffer: Buffer, remote: dgram.AddressInfo) {
+        const message = new Message(remote.address, messageBuffer);
 
-        if (ssdpMessage.method !== 'HTTP/1.1 200 OK') {
+        if (message.method !== 'HTTP/1.1 200 OK') {
             return;
         }
 
-        this.emit('hello', ssdpMessage);
+        this.emit('hello', message);
     }
 
     protected bind() {

@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 /**
  * Class describing a received SSDP message.
  */
-export class SsdpMessage {
+export class Message {
 
     private readonly headers: { [name: string]: string } = {};
 

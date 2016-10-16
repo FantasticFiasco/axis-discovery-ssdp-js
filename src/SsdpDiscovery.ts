@@ -5,13 +5,13 @@ import { NetworkInterfaceMonitor } from './network-interfaces/NetworkInterfaceMo
 import { RootDescriptionRequest } from './root-description/RootDescriptionRequest';
 import { MSearchSocket } from './sockets/MSearchSocket';
 import { NotifySocket } from './sockets/NotifySocket';
-import { SsdpMessage } from './sockets/SsdpMessage';
-import { SsdpSocket } from './sockets/SsdpSocket';
+import { Message } from './sockets/Message';
+import { SocketBase } from './sockets/SocketBase';
 import { DeviceMapper } from './DeviceMapper';
 
 export class SsdpDiscovery extends events.EventEmitter {
 
-    private readonly sockets = new Array<SsdpSocket>();
+    private readonly sockets = new Array<SocketBase>();
     private readonly networkInterfaceMonitor = new NetworkInterfaceMonitor();
     private readonly deviceMapper = new DeviceMapper();
 
@@ -38,23 +38,23 @@ export class SsdpDiscovery extends events.EventEmitter {
             .forEach(socket => socket.search());
     }
 
-    private startSocket(socket: SsdpSocket) {
+    private startSocket(socket: SocketBase) {
         this.sockets.push(socket);
-        socket.on('hello', (ssdpMessage: SsdpMessage) => this.onHello(ssdpMessage));
-        socket.on('goodbye', (ssdpMessage: SsdpMessage) => this.onGoodbye(ssdpMessage));
+        socket.on('hello', (message: Message) => this.onHello(message));
+        socket.on('goodbye', (message: Message) => this.onGoodbye(message));
         socket.start();
     }
 
-    private onHello(ssdpMessage: SsdpMessage) {
+    private onHello(message: Message) {
         // Emit initial hello
-        this.emit('hello', this.deviceMapper.fromSsdpMessage(ssdpMessage));
+        this.emit('hello', this.deviceMapper.fromMessage(message));
 
         // Request root description
-        this.requestRootDescriptionAsync(ssdpMessage.remoteAddress, ssdpMessage.location);
+        this.requestRootDescriptionAsync(message.remoteAddress, message.location);
     }
 
-    private onGoodbye(ssdpMessage: SsdpMessage) {
-        this.emit('goodbye', this.deviceMapper.fromSsdpMessage(ssdpMessage));
+    private onGoodbye(message: Message) {
+        this.emit('goodbye', this.deviceMapper.fromMessage(message));
     }
 
     private async requestRootDescriptionAsync(remoteAddress: string, location: string): Promise<void> {

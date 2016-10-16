@@ -3,16 +3,16 @@ import { expect } from 'chai';
 import * as ObjectMother from './ObjectMother.spec';
 import { DeviceMapper } from './DeviceMapper';
 import { RootDescription } from './root-description/RootDescription';
-import { SsdpMessage } from './sockets/SsdpMessage';
+import { Message } from './sockets/Message';
 
 describe('when mapping to device', () => {
     it('should handle Notify messages', () => {
         const subject = new DeviceMapper();
-        const message = new SsdpMessage(
+        const message = new Message(
             ObjectMother.REMOTE_ADDRESS,
             new Buffer(ObjectMother.NOTIFY_MESSAGE));
 
-		const actual = subject.fromSsdpMessage(message);
+		const actual = subject.fromMessage(message);
 
         expect(actual.address).to.equal('192.168.1.102');
         expect(actual.serialNumber).to.equal('ACCC8E270AD8');
@@ -25,11 +25,11 @@ describe('when mapping to device', () => {
 
     it('should handle M-Search messages', () => {
         const subject = new DeviceMapper();
-        const message = new SsdpMessage(
+        const message = new Message(
             ObjectMother.REMOTE_ADDRESS,
             new Buffer(ObjectMother.MSEARCH_MESSAGE));
 
-		const actual = subject.fromSsdpMessage(message);
+		const actual = subject.fromMessage(message);
 
         expect(actual.address).to.equal('192.168.1.102');
         expect(actual.serialNumber).to.equal('ACCC8E270AD8');

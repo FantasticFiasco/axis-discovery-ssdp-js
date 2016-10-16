@@ -4,7 +4,7 @@ import * as dgram from 'dgram';
 /**
  * Abstract class acting as a SSDP socket.
  */
-export abstract class SsdpSocket extends events.EventEmitter {
+export abstract class SocketBase extends events.EventEmitter {
 
     protected socket: dgram.Socket;
 
@@ -23,7 +23,7 @@ export abstract class SsdpSocket extends events.EventEmitter {
 
     protected abstract onListening(): void;
 
-    protected abstract onMessage(message: Buffer, remote: dgram.AddressInfo): void;
+    protected abstract onMessage(messageBuffer: Buffer, remote: dgram.AddressInfo): void;
 
     protected abstract bind(): void;
 
