@@ -10,7 +10,7 @@ export class Device {
         /**
          * The serial number.
          */
-        readonly serialNumber: string,
+        readonly serialNumber: string | null = null,
         /**
          * Gets the short description for the end user.
          */

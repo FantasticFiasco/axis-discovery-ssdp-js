@@ -20,42 +20,66 @@ export class RootDescription {
 	 * Gets the friendly name asynchronously.
 	 */
 	async getFriendlyNameAsync(): Promise<string> {
-		return (await this.getRootDescriptionAsync())['root']['device'][0]['friendlyName'][0];
+		return (await this.getDeviceDescriptionAsync())['friendlyName'][0];
 	}
 
 	/**
-	 * Gets the model description asynchronously.
+	 * Gets the model description asynchronously. In the event of being missing, after all the
+	 * parameter is optional, null is returned.
 	 */
-	async getModelDescriptionAsync(): Promise<string> {
-		return (await this.getRootDescriptionAsync())['root']['device'][0]['modelDescription'][0];
+	async getModelDescriptionAsync(): Promise<string | null> {
+		const deviceDescription = await this.getDeviceDescriptionAsync();
+		if (!deviceDescription['modelDescription']) {
+			return null;
+		}
+
+		return deviceDescription['modelDescription'][0];
 	}
 
 	/**
 	 * Gets the model name asynchronously.
 	 */
 	async getModelNameAsync(): Promise<string> {
-		return (await this.getRootDescriptionAsync())['root']['device'][0]['modelName'][0];
+		return (await this.getDeviceDescriptionAsync())['modelName'][0];
 	}
 
 	/**
-	 * Gets the model number asynchronously.
+	 * Gets the model number asynchronously. In the event of being missing, after all the
+	 * parameter is optional, null is returned.
 	 */
-	async getModelNumberAsync(): Promise<string> {
-		return (await this.getRootDescriptionAsync())['root']['device'][0]['modelNumber'][0];
+	async getModelNumberAsync(): Promise<string | null> {
+		const deviceDescription = await this.getDeviceDescriptionAsync();
+		if (!deviceDescription['modelNumber']) {
+			return null;
+		}
+
+		return deviceDescription['modelNumber'][0];
 	}
 
 	/**
-	 * Gets the serial number asynchronously.
+	 * Gets the serial number asynchronously. In the event of being missing, after all the
+	 * parameter is optional, null is returned.
 	 */
-	async getSerialNumberAsync(): Promise<string> {
-		return (await this.getRootDescriptionAsync())['root']['device'][0]['serialNumber'][0];
+	async getSerialNumberAsync(): Promise<string | null> {
+		const deviceDescription = await this.getDeviceDescriptionAsync();
+		if (!deviceDescription['serialNumber']) {
+			return null;
+		}
+
+		return deviceDescription['serialNumber'][0];
 	}
 
 	/**
-	 * Gets the presentation URL asynchronously.
+	 * Gets the presentation URL asynchronously. In the event of being missing, after all the
+	 * parameter is optional, null is returned.
 	 */
-	async getPresentationUrlAsync(): Promise<string> {
-		return (await this.getRootDescriptionAsync())['root']['device'][0]['presentationURL'][0];
+	async getPresentationUrlAsync(): Promise<string | null> {
+		const deviceDescription = await this.getDeviceDescriptionAsync();
+		if (!deviceDescription['presentationURL']) {
+			return null;
+		}
+
+		return deviceDescription['presentationURL'][0];
 	}
 
 	private async getRootDescriptionAsync(): Promise<any> {
@@ -64,5 +88,9 @@ export class RootDescription {
 		}
 
 		return this.rootDescription;
+	}
+
+	private async getDeviceDescriptionAsync(): Promise<any> {
+		return (await this.getRootDescriptionAsync())['root']['device'][0];
 	}
 }

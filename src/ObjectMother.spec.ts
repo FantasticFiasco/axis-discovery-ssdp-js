@@ -57,3 +57,28 @@ export const ROOT_DESCRIPTION =
     '    </device>' +
     '    <URLBase>http://192.168.1.102:51578/</URLBase>' +
     '</root>';
+
+export const ROOT_DESCRIPTION_REQUIRED_PROPERTIES =
+    '<?xml version="1.0"?>' +
+    '<root xmlns="urn:schemas-upnp-org:device-1-0">' +
+    '    <specVersion>' +
+    '        <major>1</major>' +
+    '        <minor>0</minor>' +
+    '    </specVersion>' +
+    '    <device>' +
+    '        <deviceType>urn:schemas-upnp-org:device:Basic:1</deviceType>' +
+    '        <friendlyName>AXIS M1014 - ACCC8E270AD8</friendlyName>' +
+    '        <manufacturer>AXIS</manufacturer>' +
+    '        <modelName>AXIS M1014</modelName>' +
+    '        <UDN>uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8</UDN>' +
+    '        <serviceList>' +
+    '            <service>' +
+    '                <serviceType>urn:axis-com:service:BasicService:1</serviceType>' +
+    '                <serviceId>urn:axis-com:serviceId:BasicServiceId</serviceId>' +
+    '                <controlURL>/upnp/control/BasicServiceId</controlURL>' +
+    '                <eventSubURL>/upnp/event/BasicServiceId</eventSubURL>' +
+    '                <SCPDURL>/scpd_basic.xml</SCPDURL>' +
+    '            </service>' +
+    '        </serviceList>' +
+    '    </device>' +
+    '</root>';
