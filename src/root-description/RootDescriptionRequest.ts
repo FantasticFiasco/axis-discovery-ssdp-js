@@ -13,14 +13,8 @@ export class RootDescriptionRequest {
     /**
      * Sends the request for a root description asynchronously.
      */
-    async sendAsync(): Promise<RootDescription | null> {
-        try {
-            const rootDescription = await requestPromise.get(this.location);
-            return new RootDescription(this.remoteAddress, rootDescription);
-        }
-        catch (e) {
-            console.log(`Unable to get root description. ${e}`);
-            return null;
-        }
+    async sendAsync(): Promise<RootDescription> {
+        const rootDescription = await requestPromise.get(this.location);
+        return new RootDescription(this.remoteAddress, rootDescription);
     }
 }

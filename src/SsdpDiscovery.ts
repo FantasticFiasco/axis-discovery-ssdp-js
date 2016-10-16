@@ -58,12 +58,13 @@ export class SsdpDiscovery extends events.EventEmitter {
     }
 
     private async requestRootDescriptionAsync(remoteAddress: string, location: string): Promise<void> {
-        const request = new RootDescriptionRequest(remoteAddress, location);
-        const rootDescription = await request.sendAsync();
-
-        if (rootDescription !== null) {
+        try {
+            const request = new RootDescriptionRequest(remoteAddress, location);
+            const rootDescription = await request.sendAsync();
             const device = await this.deviceMapper.fromRootDescriptionAsync(rootDescription);
             this.emit('hello', device);
+        } catch (e) {
+            console.log(`Unable to get root description. ${e}`);
         }
     }
 }
