@@ -24,7 +24,12 @@ export class DeviceMapper {
         return new Device(
             message.remoteAddress,
             null,
-            serialNumber);
+            serialNumber,
+            null,
+            null,
+            null,
+            null,
+            null);
     }
 
     /**
