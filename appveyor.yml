@@ -11,12 +11,11 @@ install:
   - ps: Install-Product node $env:nodejs_version $env:platform
   - cd ./src
   - npm install
-
-test_script:
-  # Output useful info for debugging.
+  # Output useful info for debugging
   - node --version
   - npm --version
-  # run tests
+
+test_script:
   - npm test
 
 # Don't actually build.
