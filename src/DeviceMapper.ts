@@ -6,6 +6,7 @@ export class DeviceMapper {
 
 	private static readonly uuidRegExp = /^uuid:\s*([^:\r]*)(::.*)*/i;
     private static readonly serialNumberLength = 12;
+    private static readonly portFromPresentationUrlRegExp = /:(\d+)\/?$/i;
 
 	/**
      * Maps from a SSDP message to a device.
@@ -22,6 +23,7 @@ export class DeviceMapper {
 
         return new Device(
             message.remoteAddress,
+            null,
             serialNumber);
     }
 
@@ -36,13 +38,29 @@ export class DeviceMapper {
         const modelNumber = await rootDescription.getModelNumberAsync();
         const presentationUrl = await rootDescription.getPresentationUrlAsync();
 
+        const port = this.parsePortFromPresentationUrl(presentationUrl);
+
         return new Device(
             rootDescription.remoteAddress,
+            port,
             serialNumber,
             friendlyName,
             modelName,
             modelDescription,
             modelNumber,
             presentationUrl);
+    }
+
+    private parsePortFromPresentationUrl(presentationUrl: string | null): number | null {
+        if (presentationUrl === null) {
+            return null;
+        }
+
+        const portMatch = DeviceMapper.portFromPresentationUrlRegExp.exec(presentationUrl);
+        if (portMatch == null) {
+            return null;
+        }
+
+        return Number(portMatch[1]);
     }
 }

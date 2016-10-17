@@ -8,6 +8,10 @@ export class Device {
          */
         readonly address: string,
         /**
+         * The port.
+         */
+        readonly port: number | null = null,
+        /**
          * The serial number.
          */
         readonly serialNumber: string | null = null,
