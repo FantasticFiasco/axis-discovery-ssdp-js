@@ -11,8 +11,12 @@
     "test": "mocha **/*.spec.js",
     "lint": "tslint **/*.ts --exclude node_modules/**/*"
   },
-  "author": "",
+  "author": "Mattias Kindborg",
   "license": "Apache-2.0",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/FantasticFiasco/axis-discovery-ssdp.git"
+  },
   "dependencies": {
     "bluebird": "^3.4.6",
     "lodash": "^4.16.2",
