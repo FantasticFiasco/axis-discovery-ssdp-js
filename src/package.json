@@ -9,7 +9,7 @@
     "start": "node index.js",
     "pretest": "npm run build",
     "test": "mocha **/*.spec.js",
-    "test-ci": "mocha --reporter mocha-appveyor-reporter **/*.spec.js",
+    "test-ci": "npm run build && mocha --reporter mocha-appveyor-reporter **/*.spec.js",
     "lint": "tslint **/*.ts --exclude node_modules/**/*"
   },
   "author": "Mattias Kindborg",
