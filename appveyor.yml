@@ -5,6 +5,10 @@ environment:
     - nodejs_version: "4"   # LTS - Recommended for most users
     - nodejs_version: "6"   # Current - Latest features
 
+# Finish on first failed build
+matrix:
+  fast_finish: true
+
 platform:
   - x86
   - x64
