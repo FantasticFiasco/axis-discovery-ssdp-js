@@ -17,8 +17,11 @@ install:
   - node --version
   - npm --version
 
+build_script:
+  - npm run build
+
 test_script:
   - npm run test-ci
 
-# Don't actually build.
+# Don't actually build
 build: off
