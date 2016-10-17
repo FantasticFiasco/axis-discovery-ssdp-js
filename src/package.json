@@ -2,6 +2,19 @@
   "name": "axis-discovery-ssdp",
   "version": "0.0.1",
   "description": "Node module capable of searching for Axis video cameras using SSDP.",
+  "keywords": [
+    "axis",
+    "camera",
+    "discovery",
+    "ssdp"
+  ],
+  "homepage": "https://github.com/FantasticFiasco/axis-discovery-ssdp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FantasticFiasco/axis-discovery-ssdp.git"
+  },
+  "author": "Mattias Kindborg",
+  "license": "Apache-2.0",
   "main": "index.js",
   "scripts": {
     "build": "tsc -p .",
@@ -11,12 +24,6 @@
     "test": "mocha **/*.spec.js",
     "test-ci": "mocha --reporter mocha-appveyor-reporter **/*.spec.js",
     "lint": "tslint **/*.ts --exclude node_modules/**/*"
-  },
-  "author": "Mattias Kindborg",
-  "license": "Apache-2.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/FantasticFiasco/axis-discovery-ssdp.git"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
