@@ -9,13 +9,14 @@
     "start": "node index.js",
     "pretest": "npm run build",
     "test": "mocha **/*.spec.js",
+    "test-ci": "mocha --reporter mocha-appveyor-reporter **/*.spec.js",
     "lint": "tslint **/*.ts --exclude node_modules/**/*"
   },
   "author": "Mattias Kindborg",
   "license": "Apache-2.0",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/FantasticFiasco/axis-discovery-ssdp.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FantasticFiasco/axis-discovery-ssdp.git"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
@@ -35,6 +36,7 @@
     "@types/xml2js": "0.0.28",
     "chai": "^3.5.0",
     "mocha": "^3.1.0",
+    "mocha-appveyor-reporter": "^0.2.1",
     "tslint": "^3.15.1",
     "typescript": "^2.0.3"
   }
