@@ -19,6 +19,7 @@ install:
 
 build_script:
   - npm run build
+  - npm run lint
 
 test_script:
   - npm run test-ci
