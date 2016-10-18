@@ -7,11 +7,12 @@ export class Message {
 
     private readonly headers: { [name: string]: string } = {};
 
-    constructor(/**
-                 * The remote address.
-                 */
-                readonly remoteAddress: string,
-                message: Buffer) {
+    constructor(
+        /**
+         * The remote address.
+         */
+        readonly remoteAddress: string,
+        message: Buffer) {
         this.parseHeaders(message);
     }
 

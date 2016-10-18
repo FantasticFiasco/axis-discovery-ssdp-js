@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"module": "commonjs",
+		"sourceMap": true,
+		"strictNullChecks": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"compileOnSave": true,
+	"include": [
+		"src/**/*",
+		"test/**/*"
+	]
+}

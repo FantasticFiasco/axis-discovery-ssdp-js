@@ -30,7 +30,7 @@ export class Device {
 		/**
 		 * Gets the model number.
 		 */
-		readonly modelNumber: string | null,
+        readonly modelNumber: string | null,
         /**
          * Gets the URL to presentation for device.
          */

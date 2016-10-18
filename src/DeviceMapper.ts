@@ -4,7 +4,7 @@ import { Message } from './sockets/Message';
 
 export class DeviceMapper {
 
-	private static readonly uuidRegExp = /^uuid:\s*([^:\r]*)(::.*)*/i;
+    private static readonly uuidRegExp = /^uuid:\s*([^:\r]*)(::.*)*/i;
     private static readonly serialNumberLength = 12;
     private static readonly portFromPresentationUrlRegExp = /:(\d+)\/?$/i;
 

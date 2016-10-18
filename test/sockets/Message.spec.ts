@@ -1,16 +1,16 @@
 import { expect } from 'chai';
 
 import * as ObjectMother from '../ObjectMother.spec';
-import { Message } from './Message';
+import { Message } from '../../src/sockets/Message';
 
 describe('when parsing message', () => {
-    it('should return remote address', () => {
+    it('should return remote address', function() {
         const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK'));
 
         expect(subject.remoteAddress).to.equal('192.168.1.100');
     });
 
-    it('should return required SSDP headers on M-SEARCH response', () => {
+    it('should return required SSDP headers on M-SEARCH response', function() {
         const subject = new Message('192.168.1.100', new Buffer(ObjectMother.MSEARCH_MESSAGE));
 
         expect(subject.method).to.equal('HTTP/1.1 200 OK');
@@ -18,14 +18,14 @@ describe('when parsing message', () => {
         expect(subject.usn).to.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
     });
 
-    it('should throw error on missing SSDP headers on M-SEARCH response', () => {
+    it('should throw error on missing SSDP headers on M-SEARCH response', function() {
         const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
 
         expect(() => subject.location).to.throw();
         expect(() => subject.usn).to.throw();
     });
 
-    it('should return required SSDP headers on NOTIFY', () => {
+    it('should return required SSDP headers on NOTIFY', function() {
         const subject = new Message('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
 
         expect(subject.method).to.equal('NOTIFY * HTTP/1.1');
@@ -35,7 +35,7 @@ describe('when parsing message', () => {
         expect(subject.nts).to.equal('ssdp:byebye');
     });
 
-    it('should throw error on missing SSDP headers on NOTIFY', () => {
+    it('should throw error on missing SSDP headers on NOTIFY', function() {
         const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
 
         expect(() => subject.location).to.throw();
@@ -44,7 +44,7 @@ describe('when parsing message', () => {
         expect(() => subject.nts).to.throw();
     });
 
-    it('should trim header value', () => {
+    it('should trim header value', function() {
         const subject = new Message(
             '192.168.1.100',
             new Buffer(

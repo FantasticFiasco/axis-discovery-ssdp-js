@@ -18,15 +18,17 @@
   },
   "author": "Mattias Kindborg",
   "license": "Apache-2.0",
-  "main": "index.js",
+  "main": "./src/index.js",
+  "engines": {
+    "node": ">=4.6.1"
+  },
   "scripts": {
-    "build": "tsc -p .",
+    "build": "tsc",
     "prestart": "npm run build",
-    "start": "node index.js",
+    "start": "node lib/index.js",
     "pretest": "npm run build",
-    "test": "mocha **/*.spec.js",
-    "test-ci": "mocha --reporter mocha-appveyor-reporter **/*.spec.js",
-    "lint": "tslint **/*.ts --exclude node_modules/**/*"
+    "test": "mocha --recursive",
+    "lint": "tslint src/**/*.ts"
   },
   "dependencies": {
     "bluebird": "^3.4.6",
@@ -38,6 +40,7 @@
   "devDependencies": {
     "@types/bluebird": "^3.0.35",
     "@types/chai": "^3.4.34",
+    "@types/chai-as-promised": "0.0.29",
     "@types/lodash": "^4.14.36",
     "@types/mocha": "^2.2.32",
     "@types/node": "^6.0.41",
@@ -45,8 +48,8 @@
     "@types/request-promise": "^3.0.32",
     "@types/xml2js": "0.0.28",
     "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
     "mocha": "^3.1.0",
-    "mocha-appveyor-reporter": "^0.2.1",
     "tslint": "^3.15.1",
     "typescript": "^2.0.3"
   }

@@ -6,8 +6,9 @@ import { RootDescription } from './RootDescription';
  * Class responsible for requesting a root description.
  */
 export class RootDescriptionRequest {
-    constructor(private readonly remoteAddress: string,
-                private readonly location: string) {
+    constructor(
+        private readonly remoteAddress: string,
+        private readonly location: string) {
     }
 
     /**

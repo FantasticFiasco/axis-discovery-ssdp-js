@@ -1,0 +1,19 @@
+language: node_js
+
+node_js:
+  - "node"  # Current - Latest features
+  - "4"     # LTS - Recommended for most users
+
+matrix:
+  fast_finish: true
+
+install:
+  - npm install
+
+script:
+  - npm test
+  - npm run lint
+
+cache:
+  directories:
+    - node_modules
