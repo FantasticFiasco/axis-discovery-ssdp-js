@@ -1,7 +1,7 @@
-import { SsdpDiscovery } from './SsdpDiscovery';
+import { Discovery } from './Discovery';
 import { Device } from './Device';
 
-const discovery = new SsdpDiscovery();
+const discovery = new Discovery();
 
 discovery.on('hello', (device: Device) => {
     console.log(`${new Date().toLocaleTimeString()} - Hello from ${device.serialNumber} on ${device.address}:${device.port}. Friendly name: ${device.friendlyName}`);
