@@ -3,7 +3,7 @@ import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 
 import * as ObjectMother from '../ObjectMother.spec';
-import { RootDescription } from '../../src/root-description/RootDescription';
+import { RootDescription } from './RootDescription';
 
 chai.use(chaiAsPromised);
 

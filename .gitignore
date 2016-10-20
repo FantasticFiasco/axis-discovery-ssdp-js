@@ -4,8 +4,8 @@
 # TypeScript source maps
 **/*.js.map
 
-## JavaScript files
-**/*.js
-
 ## Node
 **/npm-*.log*
+
+## Distribution directory
+dist

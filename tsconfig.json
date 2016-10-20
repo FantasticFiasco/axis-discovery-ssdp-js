@@ -6,9 +6,5 @@
 		"strictNullChecks": true,
 		"forceConsistentCasingInFileNames": true
 	},
-	"compileOnSave": true,
-	"include": [
-		"src/**/*",
-		"test/**/*"
-	]
+	"compileOnSave": true
 }

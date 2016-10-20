@@ -2,7 +2,9 @@
 {
 	// Configure glob patterns for excluding files and folders.
 	"files.exclude": {
-        "**/*.js": {"when": "$(basename).ts"}
+        "**/*.js": {"when": "$(basename).ts"},
+        "**/*.js.map": true,
+        "**/npm-debug.log": true
     },
 
     // Specifies the folder path containing the tsserver and lib*.d.ts files to use.
