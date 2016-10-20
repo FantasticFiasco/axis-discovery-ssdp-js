@@ -14,8 +14,8 @@ gulp.task('clean', function() {
 
 gulp.task('build', ['clean'], function() {
 	return gulp.src('src/**/*.ts')
-        .pipe(tsProject())
-        .pipe(gulp.dest("dist/js"));
+		.pipe(tsProject())
+		.pipe(gulp.dest("dist/js"));
 });
 
 gulp.task('test', ['build'], function() {
