@@ -7,5 +7,5 @@
 ## Node
 **/npm-*.log*
 
-## Distribution directory
-dist
+## Deliverables directory
+lib

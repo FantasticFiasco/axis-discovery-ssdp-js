@@ -8,18 +8,18 @@ var tsProject = ts.createProject('tsconfig.json');
 
 gulp.task('clean', function() {
 	return del([
-		'dist/**/*'
+		'lib/**/*'
 	]);
 });
 
 gulp.task('build', ['clean'], function() {
 	return gulp.src('src/**/*.ts')
 		.pipe(tsProject())
-		.pipe(gulp.dest("dist/js"));
+		.pipe(gulp.dest("lib"));
 });
 
 gulp.task('test', ['build'], function() {
-	return gulp.src(['dist/js/**/*.spec.js'], { read: false })
+	return gulp.src(['lib/**/*.spec.js'], { read: false })
 		.pipe(mocha());
 });
 

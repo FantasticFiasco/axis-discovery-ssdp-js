@@ -18,14 +18,14 @@
   },
   "author": "Mattias Kindborg",
   "license": "Apache-2.0",
-  "main": "./dist/js/index.js",
+  "main": "./lib/index.js",
   "engines": {
     "node": ">=4.6.1"
   },
   "scripts": {
     "build": "gulp build",
     "prestart": "npm run build",
-    "start": "node dist/js/index.js",
+    "start": "node lib/index.js",
     "test": "gulp test",
     "lint": "gulp lint"
   },
