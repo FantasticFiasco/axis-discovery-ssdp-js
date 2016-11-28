@@ -4,7 +4,9 @@
   "description": "Node module capable of searching for Axis video cameras using SSDP.",
   "keywords": [
     "axis",
+    "communications",
     "camera",
+    "device",
     "discovery",
     "ssdp"
   ],
@@ -19,6 +21,7 @@
   "author": "Mattias Kindborg",
   "license": "Apache-2.0",
   "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "engines": {
     "node": ">=4.6.1"
   },
