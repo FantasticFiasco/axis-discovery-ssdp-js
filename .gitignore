@@ -1,7 +1,7 @@
 ## npm Packages
 **/node_modules/*
 
-# TypeScript source maps
+## TypeScript source maps
 **/*.js.map
 
 ## Node

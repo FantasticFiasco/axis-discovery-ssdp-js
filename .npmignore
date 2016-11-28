@@ -1,0 +1,21 @@
+## Source code
+src
+.gitattributes
+
+## Visual Studio Code settings
+.vscode
+
+## Documentation
+doc
+
+## NPM
+.npmignore
+
+## Build files
+.travis.yml
+gulpfile.js
+tsconfig.json
+tslint.json
+
+## Tests
+**/*.spec.d.ts
