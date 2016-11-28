@@ -1,6 +1,6 @@
 {
   "name": "axis-discovery-ssdp",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Node module capable of searching for Axis video cameras using SSDP.",
   "keywords": [
     "axis",
