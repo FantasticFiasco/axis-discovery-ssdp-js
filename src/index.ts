@@ -3,11 +3,12 @@ import { Device } from './Device';
 
 const discovery = new Discovery();
 
-discovery.on('hello', (device: Device) => {
-    console.log(`${new Date().toLocaleTimeString()} - Hello from ${device.serialNumber} on ${device.address}:${device.port}. Friendly name: ${device.friendlyName}`);
+discovery.onHello((device: Device) => {
+    console.log(`${new Date().toLocaleTimeString()} - Hello from ${device.serialNumber} on ${device.address}:${device.port}`);
+    console.log(`JSON:\r\n${JSON.stringify(device)}`);
 });
 
-discovery.on('goodbye', (device: Device) => {
+discovery.onGoodbye((device: Device) => {
     console.log(`${new Date().toLocaleTimeString()} - Goodbye from ${device.serialNumber} on ${device.address}`);
 });
 

@@ -8,13 +8,15 @@ import { NotifySocket } from './sockets/NotifySocket';
 import { Message } from './sockets/Message';
 import { SocketBase } from './sockets/SocketBase';
 import { DeviceMapper } from './DeviceMapper';
+import { Device } from './Device';
 import { Log } from './Log';
 
-export class Discovery extends events.EventEmitter {
+export class Discovery {
 
     private readonly sockets = new Array<SocketBase>();
     private readonly networkInterfaceMonitor = new NetworkInterfaceMonitor();
     private readonly deviceMapper = new DeviceMapper();
+    private readonly eventEmitter = new events.EventEmitter();
 
     /**
      * Start listen for SSDP advertisements on all network interface addresses.
@@ -30,7 +32,7 @@ export class Discovery extends events.EventEmitter {
     }
 
     /**
-     * Starts a search by using HTTP method M-SEARCH.
+     * Triggers a new SSDP search for devices on the network.
      */
     search() {
         _.chain(this.sockets)
@@ -39,23 +41,38 @@ export class Discovery extends events.EventEmitter {
             .forEach(socket => socket.search());
     }
 
+    /**
+     * Register a callback that is invoked when a device is found on the network.
+     */
+    onHello(callback: (device: Device) => void) {
+        this.eventEmitter.on('hello', (device: Device) => callback(device));
+    }
+
+    /**
+     * Register a callback that is invoked when a device intentionally is disconnecting from the
+     * network.
+     */
+    onGoodbye(callback: (device: Device) => void) {
+        this.eventEmitter.on('goodbye', (device: Device) => callback(device));
+    }
+
     private startSocket(socket: SocketBase) {
         this.sockets.push(socket);
-        socket.on('hello', (message: Message) => this.onHello(message));
-        socket.on('goodbye', (message: Message) => this.onGoodbye(message));
+        socket.on('hello', (message: Message) => this.onHelloMessage(message));
+        socket.on('goodbye', (message: Message) => this.onGoodbyeMessage(message));
         socket.start();
     }
 
-    private onHello(message: Message) {
+    private onHelloMessage(message: Message) {
         // Emit initial hello
-        this.emit('hello', this.deviceMapper.fromMessage(message));
+        this.eventEmitter.emit('hello', this.deviceMapper.fromMessage(message));
 
         // Request root description
         this.requestRootDescriptionAsync(message.remoteAddress, message.location);
     }
 
-    private onGoodbye(message: Message) {
-        this.emit('goodbye', this.deviceMapper.fromMessage(message));
+    private onGoodbyeMessage(message: Message) {
+        this.eventEmitter.emit('goodbye', this.deviceMapper.fromMessage(message));
     }
 
     private async requestRootDescriptionAsync(remoteAddress: string, location: string): Promise<void> {
@@ -63,7 +80,7 @@ export class Discovery extends events.EventEmitter {
             const request = new RootDescriptionRequest(remoteAddress, location);
             const rootDescription = await request.sendAsync();
             const device = await this.deviceMapper.fromRootDescriptionAsync(rootDescription);
-            this.emit('hello', device);
+            this.eventEmitter.emit('hello', device);
         } catch (e) {
             Log.write(`Unable to get root description. ${e}`);
         }
