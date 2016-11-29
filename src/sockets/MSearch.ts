@@ -5,7 +5,7 @@
  */
 export class MSearch {
     /**
-     * The M-SEARCH payload for searching for Axis cameras on the network.
+     * The M-SEARCH payload for searching for Axis devices on the network.
      */
     private static Payload =
         'M-SEARCH * HTTP/1.1\r\n' +
