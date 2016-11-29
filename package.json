@@ -21,7 +21,7 @@
   "author": "Mattias Kindborg",
   "license": "Apache-2.0",
   "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "types": "./lib/Discovery.d.ts",
   "engines": {
     "node": ">=4.6.1"
   },
