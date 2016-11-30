@@ -21,7 +21,7 @@
   "author": "Mattias Kindborg",
   "license": "Apache-2.0",
   "main": "./lib/index.js",
-  "types": "./lib/Discovery.d.ts",
+  "types": "./lib/axis.discovery.ssdp.d.ts",
   "engines": {
     "node": ">=4.6.1"
   },
@@ -53,6 +53,7 @@
     "chai-as-promised": "latest",
     "del": "latest",
     "gulp": "latest",
+    "gulp-concat": "latest",
     "gulp-mocha": "latest",
     "gulp-tslint": "latest",
     "gulp-typescript": "latest",
