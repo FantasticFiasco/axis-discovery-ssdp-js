@@ -31,8 +31,7 @@
     "start": "node lib/index.js",
     "test": "gulp test",
     "lint": "gulp lint",
-    "pack": "gulp lint && npm pack",
-    "publish": "gulp lint && npm publish"
+    "pack": "gulp lint && npm pack"
   },
   "dependencies": {
     "bluebird": "latest",
