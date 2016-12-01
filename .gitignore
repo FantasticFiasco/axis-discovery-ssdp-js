@@ -6,6 +6,7 @@
 
 ## Node
 **/npm-*.log*
+**/*.tgz
 
 ## Deliverables directory
 lib
