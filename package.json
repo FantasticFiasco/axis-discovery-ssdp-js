@@ -1,14 +1,15 @@
 {
   "name": "axis-discovery-ssdp",
   "version": "0.0.6",
-  "description": "Node module capable of searching for Axis Communication cameras using SSDP.",
+  "description": "A node.js SSDP client library written in TypeScript capable of searching for Axis Communication cameras.",
   "keywords": [
     "axis",
     "communications",
     "camera",
     "device",
     "discovery",
-    "ssdp"
+    "ssdp",
+    "upnp"
   ],
   "homepage": "https://github.com/FantasticFiasco/axis-discovery-ssdp",
   "repository": {
