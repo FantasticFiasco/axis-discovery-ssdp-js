@@ -24,7 +24,7 @@ gulp.task('test', ['build'], function() {
 		.pipe(mocha());
 });
 
-gulp.task('lint', function() {
+gulp.task('lint', ['test'], function() {
 	return gulp.src('src/**/*.ts')
 		.pipe(tslint())
 		.pipe(tslint.report());

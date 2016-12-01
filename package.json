@@ -30,7 +30,8 @@
     "prestart": "npm run build",
     "start": "node lib/index.js",
     "test": "gulp test",
-    "lint": "gulp lint"
+    "lint": "gulp lint",
+    "pack": "gulp lint && npm pack"
   },
   "dependencies": {
     "bluebird": "latest",
