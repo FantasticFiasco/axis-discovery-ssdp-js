@@ -13,7 +13,4 @@ install:
 script:
   - npm test
   - npm run lint
-
-cache:
-  directories:
-    - node_modules
+  
