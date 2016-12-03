@@ -10,6 +10,7 @@ doc
 
 ## NPM
 .npmignore
+*.tgz
 
 ## Build files
 .travis.yml

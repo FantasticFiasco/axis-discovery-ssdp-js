@@ -1,0 +1,31 @@
+{
+  "name": "axis-discovery-ssdp-demo-application",
+  "version": "1.0.0",
+  "description": "Demo application showing how one would search for Axis Communication cameras using axis-discovery-ssdp.",
+  "homepage": "https://github.com/FantasticFiasco/axis-discovery-ssdp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FantasticFiasco/axis-discovery-ssdp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FantasticFiasco/axis-discovery-ssdp/issues"
+  },
+  "author": "Mattias Kindborg",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "engines": {
+    "node": ">=4.6.1"
+  },
+  "scripts": {
+    "prestart": "tsc",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "axis-discovery-ssdp": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "typescript": "latest"
+  }
+}
