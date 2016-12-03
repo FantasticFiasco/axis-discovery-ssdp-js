@@ -5,7 +5,7 @@ const discovery = new Discovery();
 
 discovery.onHello((device: Device) => {
     console.log(`${new Date().toLocaleTimeString()} - Hello from ${device.serialNumber} on ${device.address}:${device.port}`);
-    console.log(`JSON:\r\n${JSON.stringify(device)}`);
+    console.log(`JSON:\n${JSON.stringify(device)}`);
 });
 
 discovery.onGoodbye((device: Device) => {

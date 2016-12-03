@@ -16,23 +16,23 @@ export class Device {
          */
         readonly serialNumber: string | null,
         /**
-         * Gets the short description for the end user.
+         * The short description for the end user.
          */
         readonly friendlyName: string | null,
         /**
-         * Gets the model name.
+         * The model name.
          */
         readonly modelName: string | null,
         /**
-         * Gets the long model description for the end user.
+         * The long model description for the end user.
          */
         readonly modelDescription: string | null,
 		/**
-		 * Gets the model number.
+		 * The model number.
 		 */
         readonly modelNumber: string | null,
         /**
-         * Gets the URL to presentation for device.
+         * The URL to presentation for device.
          */
         readonly presentationURL: string | null) {
     }
