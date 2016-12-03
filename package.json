@@ -1,6 +1,6 @@
 {
   "name": "axis-discovery-ssdp",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A node.js SSDP client library written in TypeScript capable of searching for Axis Communication cameras.",
   "keywords": [
     "axis",
@@ -32,7 +32,7 @@
     "start": "node lib/server.js",
     "test": "gulp test",
     "lint": "gulp lint",
-    "pack": "gulp lint && npm pack"
+    "prepublish": "gulp lint"
   },
   "dependencies": {
     "bluebird": "latest",
