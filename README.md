@@ -1,6 +1,8 @@
 # axis-discovery-ssdp
 
 [![Build Status](https://travis-ci.org/FantasticFiasco/axis-discovery-ssdp.svg?branch=master)](https://travis-ci.org/FantasticFiasco/axis-discovery-ssdp)
+[![Dependency Status](https://gemnasium.com/FantasticFiasco/axis-discovery-ssdp.png)](https://gemnasium.com/FantasticFiasco/axis-discovery-ssdp)
+[![NPM version](https://badge.fury.io/js/axis-discovery-ssdp.svg)](http://badge.fury.io/js/axis-discovery-ssdp)
 
 A node.js SSDP client library written in TypeScript capable of searching for Axis Communication cameras.
 
@@ -14,7 +16,7 @@ npm install axis-discovery-ssdp
 
 The following code is from the [demo application](https://github.com/FantasticFiasco/axis-discovery-ssdp/tree/master/demo-application).
 
-```typescript
+```javascript
 import * as ssdp from 'axis-discovery-ssdp';
 
 const discovery = new ssdp.Discovery();
@@ -36,7 +38,7 @@ discovery.start();
 
 The `Discovery` class is the main class in the package. With it you can register for changes to cameras on the network and respond accordingly when a camera is found on, or intentionally disconnects from, the network. 
 
-```typescript
+```javascript
 class Discovery {
      /**
      * Start listen for SSDP advertisements on all network interface addresses.
@@ -65,7 +67,7 @@ class Discovery {
 
 The `Device` class is a immutable description of a camera on the network.
 
-```typescript
+```javascript
 class Device {
     /**
      * The address.
