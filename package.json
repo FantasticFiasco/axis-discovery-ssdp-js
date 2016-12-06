@@ -32,7 +32,7 @@
     "start": "node lib/server.js",
     "test": "gulp test",
     "lint": "gulp lint",
-    "prepublish": "gulp lint"
+    "pack": "gulp lint && npm pack"
   },
   "dependencies": {
     "bluebird": "latest",
