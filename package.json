@@ -42,7 +42,7 @@
     "xml2js": "0.4.17"
   },
   "devDependencies": {
-    "@types/bluebird": "3.0.36",
+    "@types/bluebird": "3.0.37",
     "@types/chai": "3.4.34",
     "@types/chai-as-promised": "0.0.29",
     "@types/lodash": "4.14.44",
