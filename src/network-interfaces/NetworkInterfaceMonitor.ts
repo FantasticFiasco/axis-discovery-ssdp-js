@@ -1,11 +1,11 @@
-import * as os from 'os';
 import * as _ from 'lodash';
+import * as os from 'os';
 
 export class NetworkInterfaceMonitor {
     /**
      * Returns all public IPv4 addresses from all network interface cards.
      */
-    getIPv4Addresses(): string[] {
+    public getIPv4Addresses(): string[] {
         const interfaces = os.networkInterfaces();
 
         const addresses = _.chain(interfaces)

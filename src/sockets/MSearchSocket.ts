@@ -2,8 +2,8 @@ import * as dgram from 'dgram';
 
 import { Log } from '../Log';
 import * as constants from './Constants';
-import { MSearch } from './MSearch';
 import { Message } from './Message';
+import { MSearch } from './MSearch';
 import { SocketBase } from './SocketBase';
 
 /**
@@ -20,7 +20,7 @@ export class MSearchSocket extends SocketBase {
     /**
      * Starts a search by using HTTP method M-SEARCH.
      */
-    search() {
+    public search() {
         const message = new MSearch().toBuffer();
         this.socket.send(
             message,

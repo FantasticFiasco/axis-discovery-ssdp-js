@@ -8,10 +8,10 @@ export class DeviceMapper {
     private static readonly serialNumberLength = 12;
     private static readonly portFromPresentationUrlRegExp = /:(\d+)\/?$/i;
 
-	/**
+    /**
      * Maps from a SSDP message to a device.
      */
-    fromMessage(message: Message): Device {
+    public fromMessage(message: Message): Device {
         const uuidMatch = DeviceMapper.uuidRegExp.exec(message.usn);
         if (uuidMatch == null) {
             throw 'Parameter USN on SSDP message does not contain uuid.';
@@ -35,7 +35,7 @@ export class DeviceMapper {
     /**
      * Maps a root description to a device.
      */
-    async fromRootDescriptionAsync(rootDescription: RootDescription): Promise<Device> {
+    public async fromRootDescriptionAsync(rootDescription: RootDescription): Promise<Device> {
         const serialNumber = await rootDescription.getSerialNumberAsync();
         const friendlyName = await rootDescription.getFriendlyNameAsync();
         const modelName = await rootDescription.getModelNameAsync();

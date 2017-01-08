@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
-import * as ObjectMother from '../ObjectMother.spec';
-import { Message } from './Message';
+import * as ObjectMother from '../ObjectMother';
+import { Message } from './../../src/sockets/Message';
 
 describe('when parsing message', () => {
     it('should return remote address', function() {

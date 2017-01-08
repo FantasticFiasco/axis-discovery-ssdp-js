@@ -1,5 +1,5 @@
-import * as xml2js from 'xml2js';
 import * as bluebird from 'bluebird';
+import * as xml2js from 'xml2js';
 
 const xml2jsAsync: any = bluebird.promisifyAll(xml2js);
 
@@ -20,7 +20,7 @@ export class RootDescription {
 	/**
 	 * Gets the friendly name asynchronously.
 	 */
-    async getFriendlyNameAsync(): Promise<string> {
+    public async getFriendlyNameAsync(): Promise<string> {
         return (await this.getDeviceDescriptionAsync())['friendlyName'][0];
     }
 
@@ -28,7 +28,7 @@ export class RootDescription {
      * Gets the model description asynchronously. In the event of being missing, after all the
      * parameter is optional, null is returned.
      */
-    async getModelDescriptionAsync(): Promise<string | null> {
+    public async getModelDescriptionAsync(): Promise<string | null> {
         const deviceDescription = await this.getDeviceDescriptionAsync();
         if (!deviceDescription['modelDescription']) {
             return null;
@@ -40,7 +40,7 @@ export class RootDescription {
 	/**
 	 * Gets the model name asynchronously.
 	 */
-    async getModelNameAsync(): Promise<string> {
+    public async getModelNameAsync(): Promise<string> {
         return (await this.getDeviceDescriptionAsync())['modelName'][0];
     }
 
@@ -48,7 +48,7 @@ export class RootDescription {
      * Gets the model number asynchronously. In the event of being missing, after all the
      * parameter is optional, null is returned.
      */
-    async getModelNumberAsync(): Promise<string | null> {
+    public async getModelNumberAsync(): Promise<string | null> {
         const deviceDescription = await this.getDeviceDescriptionAsync();
         if (!deviceDescription['modelNumber']) {
             return null;
@@ -61,7 +61,7 @@ export class RootDescription {
      * Gets the serial number asynchronously. In the event of being missing, after all the
      * parameter is optional, null is returned.
      */
-    async getSerialNumberAsync(): Promise<string | null> {
+    public async getSerialNumberAsync(): Promise<string | null> {
         const deviceDescription = await this.getDeviceDescriptionAsync();
         if (!deviceDescription['serialNumber']) {
             return null;
@@ -74,7 +74,7 @@ export class RootDescription {
 	 * Gets the presentation URL asynchronously. In the event of being missing, after all the
 	 * parameter is optional, null is returned.
 	 */
-    async getPresentationUrlAsync(): Promise<string | null> {
+    public async getPresentationUrlAsync(): Promise<string | null> {
         const deviceDescription = await this.getDeviceDescriptionAsync();
         if (!deviceDescription['presentationURL']) {
             return null;

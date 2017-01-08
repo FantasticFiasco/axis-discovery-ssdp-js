@@ -1,5 +1,5 @@
-import * as events from 'events';
 import * as dgram from 'dgram';
+import * as events from 'events';
 
 import { Log } from '../Log';
 
@@ -13,7 +13,7 @@ export abstract class SocketBase extends events.EventEmitter {
     /**
      * Start listen for advertisements.
      */
-    start() {
+    public start() {
         this.assertNotStarted();
 
         this.socket = dgram.createSocket({ type: 'udp4', reuseAddr: true });

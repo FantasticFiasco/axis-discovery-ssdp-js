@@ -64,7 +64,7 @@ export class Message {
 
         this.headers['method'] = method;
 
-        _.forEach(headers, header => {
+        _.forEach(headers, (header) => {
             const indexOfValueSeparator = header.indexOf(':');
             const name = header.slice(0, indexOfValueSeparator).trim();
             const value = header.slice(indexOfValueSeparator + 1, header.length).trim();

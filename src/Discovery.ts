@@ -1,15 +1,15 @@
 import * as events from 'events';
 import * as _ from 'lodash';
 
+import { Device } from './Device';
+import { DeviceMapper } from './DeviceMapper';
+import { Log } from './Log';
 import { NetworkInterfaceMonitor } from './network-interfaces/NetworkInterfaceMonitor';
 import { RootDescriptionRequest } from './root-description/RootDescriptionRequest';
+import { Message } from './sockets/Message';
 import { MSearchSocket } from './sockets/MSearchSocket';
 import { NotifySocket } from './sockets/NotifySocket';
-import { Message } from './sockets/Message';
 import { SocketBase } from './sockets/SocketBase';
-import { DeviceMapper } from './DeviceMapper';
-import { Device } from './Device';
-import { Log } from './Log';
 
 export class Discovery {
 
@@ -21,30 +21,30 @@ export class Discovery {
     /**
      * Start listen for SSDP advertisements on all network interface addresses.
      */
-    start() {
+    public start() {
         const addresses = this.networkInterfaceMonitor.getIPv4Addresses();
 
         // Start passive SSDP
         this.startSocket(new NotifySocket(addresses));
 
         // Start active SSDP
-        _.forEach(addresses, address => this.startSocket(new MSearchSocket(address)));
+        _.forEach(addresses, (address) => this.startSocket(new MSearchSocket(address)));
     }
 
     /**
      * Triggers a new SSDP search for devices on the network.
      */
-    search() {
+    public search() {
         _.chain(this.sockets)
-            .filter(socket => socket instanceof MSearchSocket)
-            .map(socket => <MSearchSocket>socket)
-            .forEach(socket => socket.search());
+            .filter((socket) => socket instanceof MSearchSocket)
+            .map((socket) => <MSearchSocket> socket)
+            .forEach((socket) => socket.search());
     }
 
     /**
      * Register a callback that is invoked when a device is found on the network.
      */
-    onHello(callback: (device: Device) => void) {
+    public onHello(callback: (device: Device) => void) {
         this.eventEmitter.on('hello', (device: Device) => callback(device));
     }
 
@@ -52,7 +52,7 @@ export class Discovery {
      * Register a callback that is invoked when a device intentionally is disconnecting from the
      * network.
      */
-    onGoodbye(callback: (device: Device) => void) {
+    public onGoodbye(callback: (device: Device) => void) {
         this.eventEmitter.on('goodbye', (device: Device) => callback(device));
     }
 

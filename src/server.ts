@@ -1,5 +1,5 @@
-import { Discovery } from './Discovery';
 import { Device } from './Device';
+import { Discovery } from './Discovery';
 
 const discovery = new Discovery();
 
