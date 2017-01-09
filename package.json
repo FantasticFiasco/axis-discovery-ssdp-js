@@ -54,7 +54,7 @@
     "@types/chai": "3.4.34",
     "@types/chai-as-promised": "0.0.29",
     "@types/lodash": "4.14.48",
-    "@types/mocha": "2.2.36",
+    "@types/mocha": "2.2.37",
     "@types/node": "6.0.59",
     "@types/request": "0.0.38",
     "@types/request-promise": "4.1.33",
