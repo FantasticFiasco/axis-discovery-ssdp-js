@@ -2,10 +2,10 @@ import { expect } from 'chai';
 import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 
-import * as ObjectMother from './ObjectMother.spec';
-import { DeviceMapper } from './DeviceMapper';
-import { RootDescription } from './root-description/RootDescription';
-import { Message } from './sockets/Message';
+import * as ObjectMother from './ObjectMother';
+import { DeviceMapper } from './../src/DeviceMapper';
+import { RootDescription } from './../src/root-description/RootDescription';
+import { Message } from './../src/sockets/Message';
 
 chai.use(chaiAsPromised);
 

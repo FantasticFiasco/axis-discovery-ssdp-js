@@ -18,10 +18,9 @@ export class NotifySocket extends SocketBase {
     }
 
     protected onListening() {
-        const address = this.socket.address();
-        Log.write(`NOTIFY socket is now listening on ${address.address}:${address.port}`);
+        Log.write(`NOTIFY socket is now listening on ${this.socket.address().address}:${this.socket.address().port}`);
 
-        _.forEach(this.addresses, address => {
+        _.forEach(this.addresses, (address) => {
             this.socket.addMembership(constants.SSDP_MULTICAST_ADDRESS, address);
         });
     }
@@ -36,8 +35,7 @@ export class NotifySocket extends SocketBase {
 
         if (message.nts === 'ssdp:alive') {
             this.emit('hello', message);
-        }
-        else if (message.nts === 'ssdp:byebye') {
+        } else if (message.nts === 'ssdp:byebye') {
             this.emit('goodbye', message);
         }
     }

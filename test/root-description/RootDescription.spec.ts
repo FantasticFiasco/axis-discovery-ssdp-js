@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 
-import * as ObjectMother from '../ObjectMother.spec';
-import { RootDescription } from './RootDescription';
+import * as ObjectMother from '../ObjectMother';
+import { RootDescription } from './../../src/root-description/RootDescription';
 
 chai.use(chaiAsPromised);
 

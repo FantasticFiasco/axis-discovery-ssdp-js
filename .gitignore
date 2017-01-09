@@ -1,8 +1,13 @@
 ## npm packages
 **/node_modules/*
 
-## TypeScript source maps
+## TypeScript
+**/*.d.ts
 **/*.js.map
+
+## Compiled JavaScript
+src/**/*.js
+test/**/*.js
 
 ## Node
 **/npm-*.log*
