@@ -18,10 +18,12 @@ doc
 
 ## Build files
 .travis.yml
-gulpfile.js
 tsconfig.json
 tslint.json
 
 ## Tests
 **/*.spec.js
 **/*.spec.d.ts
+
+## Code coverage
+coverage
