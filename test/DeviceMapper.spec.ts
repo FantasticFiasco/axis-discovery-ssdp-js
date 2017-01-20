@@ -10,7 +10,7 @@ import * as ObjectMother from './ObjectMother';
 chai.use(chaiAsPromised);
 
 describe('when mapping to device', () => {
-    it('should handle Notify messages', function() {
+    it('should handle Notify messages', () => {
         const subject = new DeviceMapper();
         const message = new Message(
             ObjectMother.REMOTE_ADDRESS,
@@ -27,7 +27,7 @@ describe('when mapping to device', () => {
         expect(actual.presentationURL).to.be.null;
     });
 
-    it('should handle M-Search messages', function() {
+    it('should handle M-Search messages', () => {
         const subject = new DeviceMapper();
         const message = new Message(
             ObjectMother.REMOTE_ADDRESS,
@@ -44,7 +44,7 @@ describe('when mapping to device', () => {
         expect(actual.presentationURL).to.be.null;
     });
 
-    it('should handle root descriptions', function() {
+    it('should handle root descriptions', () => {
         const subject = new DeviceMapper();
         const rootDescription = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
@@ -63,7 +63,7 @@ describe('when mapping to device', () => {
             expect(actual).to.eventually.have.property('presentationURL', 'http://192.168.1.102:80/')]);
     });
 
-    it('should handle root descriptions describing default HTTP port', function() {
+    it('should handle root descriptions describing default HTTP port', () => {
         const subject = new DeviceMapper();
         const rootDescription = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
@@ -73,7 +73,7 @@ describe('when mapping to device', () => {
             .to.eventually.have.property('port', 80);
     });
 
-    it('should handle root descriptions describing default HTTPS port', function() {
+    it('should handle root descriptions describing default HTTPS port', () => {
         const subject = new DeviceMapper();
         const rootDescription = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
@@ -83,7 +83,7 @@ describe('when mapping to device', () => {
             .to.eventually.have.property('port', 443);
     });
 
-    it('should handle root descriptions describing no port', function() {
+    it('should handle root descriptions describing no port', () => {
         const subject = new DeviceMapper();
         const rootDescription = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
