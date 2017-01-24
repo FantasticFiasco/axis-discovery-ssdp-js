@@ -57,7 +57,7 @@
     "@types/chai-as-promised": "0.0.29",
     "@types/lodash": "4.14.50",
     "@types/mocha": "2.2.37",
-    "@types/node": "7.0.0",
+    "@types/node": "7.0.4",
     "@types/request": "0.0.39",
     "@types/request-promise": "4.1.33",
     "@types/xml2js": "0.0.32",
