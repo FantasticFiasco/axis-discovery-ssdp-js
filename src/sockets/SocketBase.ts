@@ -30,7 +30,7 @@ export abstract class SocketBase extends events.EventEmitter {
     protected abstract bind(): void;
 
     protected onError(error: Error) {
-        Log.write('Socket error', error);
+        Log.write(`Socket error: ${error}`);
     }
 
     private assertNotStarted() {
