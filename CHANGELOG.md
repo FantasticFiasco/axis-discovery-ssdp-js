@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## 1.0.2 - 2017-01-26
+
 ### Fixed
 - [#40](https://github.com/FantasticFiasco/axis-discovery-ssdp/issues/40) - Fixed issue where calling `Discovery.search` didn't trigger a new search
 
