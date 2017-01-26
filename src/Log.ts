@@ -5,11 +5,7 @@ export class Log {
     /**
      * Logs specified message.
      */
-    public static write(message?: any, ...optionalParams: any[]) {
-        if (optionalParams.length === 0) {
-            console.log(message);
-        } else {
-            console.log(message, optionalParams);
-        }
+    public static write(message?: any) {
+        console.log(message);
     }
 }

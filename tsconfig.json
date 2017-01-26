@@ -11,7 +11,7 @@
 	},
 	"exclude": [
 		"demo-application",
-		"node_modules"		
+		"node_modules"
 	],
 	"compileOnSave": true
 }

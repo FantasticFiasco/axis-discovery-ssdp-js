@@ -45,7 +45,7 @@ discovery.start();
 
 ### Discovery
 
-The `Discovery` class is the main class in the package. With it you can register for changes to cameras on the network and respond accordingly when a camera is found on, or intentionally disconnects from, the network. 
+The `Discovery` class is the main class in the package. With it you can register for changes to cameras on the network and respond accordingly when a camera is found on, or intentionally disconnects from, the network.
 
 ```javascript
 class Discovery {
@@ -68,7 +68,7 @@ class Discovery {
      * Register a callback that is invoked when a device intentionally is disconnecting from the
      * network.
      */
-    onGoodbye(callback: (device: Device) => void): void;    
+    onGoodbye(callback: (device: Device) => void): void;
 }
 ```
 

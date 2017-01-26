@@ -57,9 +57,10 @@
     "@types/chai-as-promised": "0.0.29",
     "@types/lodash": "4.14.50",
     "@types/mocha": "2.2.37",
-    "@types/node": "7.0.0",
+    "@types/node": "7.0.4",
     "@types/request": "0.0.39",
     "@types/request-promise": "4.1.33",
+    "@types/sinon": "1.16.34",
     "@types/xml2js": "0.0.32",
     "chai": "3.5.0",
     "chai-as-promised": "6.0.0",
@@ -69,6 +70,7 @@
     "mocha": "3.2.0",
     "remap-istanbul": "0.8.4",
     "rimraf": "2.5.4",
+    "sinon": "1.17.7",
     "tslint": "4.4.1",
     "typescript": "2.1.5"
   }
