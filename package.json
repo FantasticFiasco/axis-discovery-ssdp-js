@@ -58,7 +58,7 @@
     "@types/lodash": "4.14.52",
     "@types/mocha": "2.2.39",
     "@types/node": "7.0.5",
-    "@types/request": "0.0.39",
+    "@types/request": "0.0.40",
     "@types/request-promise": "4.1.33",
     "@types/sinon": "1.16.35",
     "@types/xml2js": "0.0.32",
