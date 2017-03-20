@@ -60,7 +60,7 @@
     "@types/node": "7.0.8",
     "@types/request": "0.0.41",
     "@types/request-promise": "4.1.33",
-    "@types/sinon": "1.16.35",
+    "@types/sinon": "1.16.36",
     "@types/xml2js": "0.0.33",
     "chai": "3.5.0",
     "chai-as-promised": "6.0.0",
