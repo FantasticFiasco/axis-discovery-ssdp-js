@@ -55,7 +55,7 @@
     "@types/bluebird": "3.5.1",
     "@types/chai": "3.4.35",
     "@types/chai-as-promised": "0.0.30",
-    "@types/lodash": "4.14.54",
+    "@types/lodash": "4.14.56",
     "@types/mocha": "2.2.34",
     "@types/node": "7.0.8",
     "@types/request": "0.0.41",
