@@ -14,7 +14,7 @@ export class DeviceMapper {
     public fromMessage(message: Message): Device {
         const uuidMatch = DeviceMapper.uuidRegExp.exec(message.usn);
         if (uuidMatch == null) {
-            throw 'Parameter USN on SSDP message does not contain uuid.';
+            throw new Error('Parameter USN on SSDP message does not contain uuid.');
         }
 
         const start = uuidMatch[1].length - DeviceMapper.serialNumberLength;

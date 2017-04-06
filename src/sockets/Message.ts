@@ -59,7 +59,7 @@ export class Message {
 
         const method = headers.shift();
         if (method === undefined) {
-            throw 'SSDP message is not specifying the method.';
+            throw new Error('SSDP message is not specifying the method.');
         }
 
         this.headers['method'] = method;
@@ -77,7 +77,7 @@ export class Message {
         const headerValue = this.headers[headerName];
 
         if (!headerValue) {
-            throw `Header with name ${headerName} does not exist.`;
+            throw new Error(`Header with name ${headerName} does not exist.`);
         }
 
         return headerValue;
