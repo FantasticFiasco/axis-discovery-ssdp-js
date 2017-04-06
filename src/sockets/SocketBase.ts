@@ -35,7 +35,7 @@ export abstract class SocketBase extends events.EventEmitter {
 
     private assertNotStarted() {
         if (this.socket != null) {
-            throw 'M-SEARCH socket has already been started';
+            throw new Error('M-SEARCH socket has already been started');
         }
     }
 }

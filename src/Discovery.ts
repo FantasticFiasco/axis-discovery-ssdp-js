@@ -37,7 +37,7 @@ export class Discovery {
     public search() {
         _.chain(this.sockets)
             .filter((socket) => socket instanceof MSearchSocket)
-            .map((socket) => <MSearchSocket> socket)
+            .map((socket) => socket as MSearchSocket)
             .value()
             .forEach((socket) => socket.search());
     }
