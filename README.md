@@ -8,7 +8,7 @@
 
 A node.js SSDP client library written in TypeScript capable of searching for [Axis Communication](http://www.axis.com) cameras.
 
-### Features
+## Features
 
 - Supports passively listening for SSDP announcements from cameras
 - Supports actively searching for cameras using M-SEARCH
