@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/FantasticFiasco/axis-discovery-ssdp.svg?branch=master)](https://travis-ci.org/FantasticFiasco/axis-discovery-ssdp)
 [![Coverage Status](https://coveralls.io/repos/github/FantasticFiasco/axis-discovery-ssdp/badge.svg)](https://coveralls.io/github/FantasticFiasco/axis-discovery-ssdp)
+[![npm version](https://img.shields.io/npm/v/axis-discovery-ssdp.svg)](https://www.npmjs.com/package/axis-discovery-ssdp)
 [![dependencies Status](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp/status.svg)](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp)
 [![devDependencies Status](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp/dev-status.svg)](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp?type=dev)
-[![npm version](https://img.shields.io/npm/v/axis-discovery-ssdp.svg)](https://www.npmjs.com/package/axis-discovery-ssdp)
 
 A node.js SSDP client library written in TypeScript capable of searching for [Axis Communication](http://www.axis.com) cameras.
 
