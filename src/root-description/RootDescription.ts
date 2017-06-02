@@ -17,9 +17,9 @@ export class RootDescription {
         private readonly rootDescriptionXml: string) {
     }
 
-	/**
-	 * Gets the friendly name asynchronously.
-	 */
+    /**
+     * Gets the friendly name asynchronously.
+     */
     public async getFriendlyNameAsync(): Promise<string> {
         return (await this.getDeviceDescriptionAsync())['friendlyName'][0];
     }
@@ -37,9 +37,9 @@ export class RootDescription {
         return deviceDescription['modelDescription'][0];
     }
 
-	/**
-	 * Gets the model name asynchronously.
-	 */
+    /**
+     * Gets the model name asynchronously.
+     */
     public async getModelNameAsync(): Promise<string> {
         return (await this.getDeviceDescriptionAsync())['modelName'][0];
     }
@@ -70,10 +70,10 @@ export class RootDescription {
         return deviceDescription['serialNumber'][0];
     }
 
-	/**
-	 * Gets the presentation URL asynchronously. In the event of being missing, after all the
-	 * parameter is optional, null is returned.
-	 */
+    /**
+     * Gets the presentation URL asynchronously. In the event of being missing, after all the
+     * parameter is optional, null is returned.
+     */
     public async getPresentationUrlAsync(): Promise<string | null> {
         const deviceDescription = await this.getDeviceDescriptionAsync();
         if (!deviceDescription['presentationURL']) {

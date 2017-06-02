@@ -27,9 +27,9 @@ export class Device {
          * The long model description for the end user.
          */
         readonly modelDescription: string | null,
-		/**
-		 * The model number.
-		 */
+        /**
+         * The model number.
+         */
         readonly modelNumber: string | null,
         /**
          * The URL to presentation for device.
