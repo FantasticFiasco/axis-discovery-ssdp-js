@@ -5,7 +5,6 @@ node_js:
   - "7"
   - "6"     # LTS - Recommended for most users
   - "5"
-  - "4"
 
 matrix:
   fast_finish: true
