@@ -1,9 +1,11 @@
-import { expect } from 'chai';
+import * as chai from 'chai';
 import * as os from 'os';
 import * as sinon from 'sinon';
 
 import { NetworkInterfaceMonitor } from './../../src/network-interfaces/NetworkInterfaceMonitor';
 import * as data from './NetworkInterfaceData';
+
+chai.should();
 
 describe('when monitoring IPv4 addresses on network interfaces', () => {
 
@@ -23,7 +25,7 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
         let addresses = networkInterfaceMonitor.getIPv4Addresses();
 
         // Assert
-        expect(addresses).to.be.eql(['1.1.1.1', '2.2.2.2']);
+        addresses.should.be.eql(['1.1.1.1', '2.2.2.2']);
     });
 
     it('should return addresses from multiple network interfaces', () => {
@@ -35,7 +37,7 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
         let addresses = networkInterfaceMonitor.getIPv4Addresses();
 
         // Assert
-        expect(addresses).to.be.eql(['1.1.1.1', '2.2.2.2']);
+        addresses.should.be.eql(['1.1.1.1', '2.2.2.2']);
     });
 
     it('should return an empty sequence if only internal addresses exists', () => {
@@ -47,7 +49,7 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
         let addresses = networkInterfaceMonitor.getIPv4Addresses();
 
         // Assert
-        expect(addresses).to.be.empty;
+        addresses.should.be.empty;
     });
 
     it('should return an empty sequence if only IPv6 addresses exists', () => {
@@ -59,7 +61,7 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
         let addresses = networkInterfaceMonitor.getIPv4Addresses();
 
         // Assert
-        expect(addresses).to.be.empty;
+        addresses.should.be.empty;
     });
 
     it('should return an empty sequence if no interfaces exists', () => {
@@ -71,6 +73,6 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
         let addresses = networkInterfaceMonitor.getIPv4Addresses();
 
         // Assert
-        expect(addresses).to.be.empty;
+        addresses.should.be.empty;
     });
 });

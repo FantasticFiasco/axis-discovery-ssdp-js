@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import * as chai from 'chai';
 import * as chaiAsPromised from 'chai-as-promised';
 
@@ -6,93 +5,116 @@ import * as ObjectMother from '../ObjectMother';
 import { RootDescription } from './../../src/root-description/RootDescription';
 
 chai.use(chaiAsPromised);
+chai.should();
 
 describe('when parsing root description', () => {
     it('should return remote address', () => {
+        // Arrange
         const subject = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
-        expect(subject.remoteAddress).to.equal('192.168.1.102');
+        // Assert
+        subject.remoteAddress.should.equal('192.168.1.102');
     });
 
     it('should return friendly name', () => {
+        // Arrange
         const subject = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
-        return expect(subject.getFriendlyNameAsync()).to.eventually.equal('AXIS M1014 - ACCC8E270AD8');
+        // Assert
+        return subject.getFriendlyNameAsync().should.eventually.equal('AXIS M1014 - ACCC8E270AD8');
     });
 
     it('should return model description', () => {
+        // Arrange
         const subject = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
-        return expect(subject.getModelDescriptionAsync()).to.eventually.equal('AXIS M1014 Fixed Network Camera');
+        // Assert
+        return subject.getModelDescriptionAsync().should.eventually.equal('AXIS M1014 Fixed Network Camera');
     });
 
     it('should not return model description if missing', () => {
+        // Arrange
         const subject = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
 
-        return expect(subject.getModelDescriptionAsync()).to.eventually.be.null;
+        // Assert
+        return subject.getModelDescriptionAsync().should.eventually.be.null;
     });
 
     it('should return model name', () => {
+        // Arrange
         const subject = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
-        return expect(subject.getModelNameAsync()).to.eventually.equal('AXIS M1014');
+        // Assert
+        return subject.getModelNameAsync().should.eventually.equal('AXIS M1014');
     });
 
     it('should return model number', () => {
+        // Arrange
         const subject = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
-        return expect(subject.getModelNumberAsync()).to.eventually.equal('M1014');
+        // Assert
+        return subject.getModelNumberAsync().should.eventually.equal('M1014');
       });
 
     it('should not return model number if missing', () => {
+        // Arrange
         const subject = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
 
-        return expect(subject.getModelNumberAsync()).to.eventually.be.null;
+        // Assert
+        return subject.getModelNumberAsync().should.eventually.be.null;
     });
 
     it('should return serial number', () => {
+        // Arrange
         const subject = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
-        return expect(subject.getSerialNumberAsync()).to.eventually.equal('ACCC8E270AD8');
+        // Assert
+        return subject.getSerialNumberAsync().should.eventually.equal('ACCC8E270AD8');
     });
 
     it('should not return serial number if missing', () => {
+        // Arrange
         const subject = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
 
-        return expect(subject.getSerialNumberAsync()).to.eventually.be.null;
+        // Assert
+        return subject.getSerialNumberAsync().should.eventually.be.null;
     });
 
     it('should return presentation URL', () => {
+        // Arrange
         const subject = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
-        return expect(subject.getPresentationUrlAsync()).to.eventually.equal('http://192.168.1.102:80/');
+        // Assert
+        return subject.getPresentationUrlAsync().should.eventually.equal('http://192.168.1.102:80/');
     });
 
     it('should not return presentation URL if missing', () => {
+        // Arrange
         const subject = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
 
-        return expect(subject.getPresentationUrlAsync()).to.eventually.be.null;
+        // Assert
+        return subject.getPresentationUrlAsync().should.eventually.be.null;
     });
 });

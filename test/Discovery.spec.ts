@@ -1,10 +1,12 @@
-import { expect } from 'chai';
+import * as chai from 'chai';
 import * as dgram from 'dgram';
 import * as os from 'os';
 import * as sinon from 'sinon';
 
 import { Discovery } from './../src/Discovery';
 import * as data from './network-interfaces/NetworkInterfaceData';
+
+chai.should();
 
 describe('when performing a discovery', () => {
 
@@ -46,6 +48,6 @@ describe('when performing a discovery', () => {
         discovery.search();
 
         // Assert
-        expect(socketStub.callCount).to.equal(2);
+        socketStub.callCount.should.equal(2);
     });
 });
