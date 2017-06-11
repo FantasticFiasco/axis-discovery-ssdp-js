@@ -34,9 +34,9 @@ describe('when performing a discovery', () => {
     });
 
     afterEach(() => {
-        sinon.restore(osStub);
-        sinon.restore(dgramStub);
-        sinon.restore(socketStub);
+        osStub.restore();
+        dgramStub.restore();
+        socketStub.restore();
     });
 
     it('should send M-SEARCH messages on all registered addresses', () => {
