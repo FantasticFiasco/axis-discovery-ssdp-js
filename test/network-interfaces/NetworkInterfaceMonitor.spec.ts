@@ -13,7 +13,7 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
     let networkInterfaceMonitor = new NetworkInterfaceMonitor();
 
     afterEach(() => {
-        sinon.restore(osStub);
+        osStub.restore();
     });
 
     it('should return addresses from one network interface', () => {
