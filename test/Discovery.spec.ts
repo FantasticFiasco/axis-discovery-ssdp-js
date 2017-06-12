@@ -19,7 +19,7 @@ describe('when performing a discovery', () => {
         osStub = sinon.stub(os, 'networkInterfaces')
             .returns(data.NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
 
-        let socketApi = {
+        const socketApi = {
             bind: () => { },
             on: () => { },
             send: () => { }
@@ -41,7 +41,7 @@ describe('when performing a discovery', () => {
 
     it('should send M-SEARCH messages on all registered addresses', () => {
         // Arrange
-        let discovery = new Discovery();
+        const discovery = new Discovery();
         discovery.start();
 
         // Act

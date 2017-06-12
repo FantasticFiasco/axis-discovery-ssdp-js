@@ -10,7 +10,7 @@ chai.should();
 describe('when monitoring IPv4 addresses on network interfaces', () => {
 
     let osStub: sinon.SinonStub;
-    let networkInterfaceMonitor = new NetworkInterfaceMonitor();
+    const networkInterfaceMonitor = new NetworkInterfaceMonitor();
 
     afterEach(() => {
         osStub.restore();
@@ -22,7 +22,7 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
             .returns(data.NETWORK_INTERFACE_WITH_TWO_ADDRESSES);
 
         // Act
-        let addresses = networkInterfaceMonitor.getIPv4Addresses();
+        const addresses = networkInterfaceMonitor.getIPv4Addresses();
 
         // Assert
         addresses.should.be.eql(['1.1.1.1', '2.2.2.2']);
@@ -34,7 +34,7 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
             .returns(data.NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
 
         // Act
-        let addresses = networkInterfaceMonitor.getIPv4Addresses();
+        const addresses = networkInterfaceMonitor.getIPv4Addresses();
 
         // Assert
         addresses.should.be.eql(['1.1.1.1', '2.2.2.2']);
@@ -46,7 +46,7 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
             .returns(data.NETWORK_INTERFACES_WITH_INTERNAL_ADDRESSES);
 
         // Act
-        let addresses = networkInterfaceMonitor.getIPv4Addresses();
+        const addresses = networkInterfaceMonitor.getIPv4Addresses();
 
         // Assert
         addresses.should.be.empty;
@@ -58,7 +58,7 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
             .returns(data.NETWORK_INTERFACES_WITH_IPV6_ADDRESSES);
 
         // Act
-        let addresses = networkInterfaceMonitor.getIPv4Addresses();
+        const addresses = networkInterfaceMonitor.getIPv4Addresses();
 
         // Assert
         addresses.should.be.empty;
@@ -70,7 +70,7 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
             .returns(data.NO_NETWORK_INTERFACES);
 
         // Act
-        let addresses = networkInterfaceMonitor.getIPv4Addresses();
+        const addresses = networkInterfaceMonitor.getIPv4Addresses();
 
         // Assert
         addresses.should.be.empty;

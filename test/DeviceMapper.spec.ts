@@ -1,12 +1,10 @@
 import * as chai from 'chai';
-import * as chaiAsPromised from 'chai-as-promised';
 
 import { DeviceMapper } from './../src/DeviceMapper';
 import { RootDescription } from './../src/root-description/RootDescription';
 import { Message } from './../src/sockets/Message';
 import * as ObjectMother from './ObjectMother';
 
-chai.use(chaiAsPromised);
 const should = chai.should();
 
 describe('when mapping to device', () => {
@@ -50,7 +48,7 @@ describe('when mapping to device', () => {
         should.not.exist(actual.presentationURL);
     });
 
-    it('should handle root descriptions', () => {
+    it('should handle root descriptions', async () => {
         // Arrange
         const subject = new DeviceMapper();
         const rootDescription = new RootDescription(
@@ -58,53 +56,58 @@ describe('when mapping to device', () => {
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
         // Act
-        const actual = subject.fromRootDescriptionAsync(rootDescription);
+        const actual = await subject.fromRootDescriptionAsync(rootDescription);
 
         // Assert
-        return Promise.all([
-            actual.should.eventually.have.property('address', '192.168.1.102'),
-            actual.should.eventually.have.property('port', 80),
-            actual.should.eventually.have.property('serialNumber', 'ACCC8E270AD8'),
-            actual.should.eventually.have.property('friendlyName', 'AXIS M1014 - ACCC8E270AD8'),
-            actual.should.eventually.have.property('modelName', 'AXIS M1014'),
-            actual.should.eventually.have.property('modelDescription', 'AXIS M1014 Fixed Network Camera'),
-            actual.should.eventually.have.property('modelNumber', 'M1014'),
-            actual.should.eventually.have.property('presentationURL', 'http://192.168.1.102:80/')]);
+        actual.address.should.equal('192.168.1.102');
+        (actual.port as number).should.equal(80);
+        (actual.serialNumber as string).should.equal('ACCC8E270AD8');
+        (actual.friendlyName as string).should.equal('AXIS M1014 - ACCC8E270AD8');
+        (actual.modelName as string).should.equal('AXIS M1014');
+        (actual.modelDescription as string).should.equal('AXIS M1014 Fixed Network Camera');
+        (actual.modelNumber as string).should.equal('M1014');
+        (actual.presentationURL as string).should.equal('http://192.168.1.102:80/');
     });
 
-    it('should handle root descriptions describing default HTTP port', () => {
+    it('should handle root descriptions describing default HTTP port', async () => {
         // Arrange
         const subject = new DeviceMapper();
         const rootDescription = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
+        // Act
+        const actual = await subject.fromRootDescriptionAsync(rootDescription);
+
         // Assert
-        return subject.fromRootDescriptionAsync(rootDescription).should.eventually
-            .have.property('port', 80);
+        (actual.port as number).should.equal(80);
     });
 
-    it('should handle root descriptions describing default HTTPS port', () => {
+    it('should handle root descriptions describing default HTTPS port', async () => {
         // Arrange
         const subject = new DeviceMapper();
         const rootDescription = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTPS_PORT);
 
+        // Act
+        const actual = await subject.fromRootDescriptionAsync(rootDescription);
+
         // Assert
-        return subject.fromRootDescriptionAsync(rootDescription).should.eventually
-            .have.property('port', 443);
+        (actual.port as number).should.equal(443);
     });
 
-    it('should handle root descriptions describing no port', () => {
+    it('should handle root descriptions describing no port', async () => {
         // Arrange
         const subject = new DeviceMapper();
         const rootDescription = new RootDescription(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_NO_PORT);
 
+        // Act
+        const actual = await subject.fromRootDescriptionAsync(rootDescription);
+
         // Assert
-        return subject.fromRootDescriptionAsync(rootDescription).should.eventually
-            .have.property('port', null);
+        should.not.exist(actual.port);
     });
 });
