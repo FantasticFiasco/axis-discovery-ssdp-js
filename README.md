@@ -9,20 +9,17 @@
 
 A Node.js SSDP client library written in TypeScript capable of searching for [Axis Communication](http://www.axis.com) cameras.
 
-## Features
+## Table of contents
 
-- Supports passively listening for SSDP announcements from cameras
-- Supports actively searching for cameras using M-SEARCH
-- Supports discovering cameras on multiple network interfaces
-- TypeScript declarations are bundled together with the package
+- [Super simple to use](#super-simple-to-use)
+- [Features](#features)
+- [Installation](#installation)
+- [API](#api)
+- [Credit](#credit)
 
-## Installation
+---
 
-```sh
-npm install axis-discovery-ssdp
-```
-
-## Usage
+## Super simple to use
 
 The following code is from the [demo application](https://github.com/FantasticFiasco/axis-discovery-ssdp/tree/master/demo-application).
 
@@ -40,6 +37,19 @@ discovery.onGoodbye((device: ssdp.Device) => {
 });
 
 discovery.start();
+```
+
+## Features
+
+- Supports passively listening for SSDP announcements from cameras
+- Supports actively searching for cameras using M-SEARCH
+- Supports discovering cameras on multiple network interfaces
+- TypeScript declarations are bundled together with the package
+
+## Installation
+
+```sh
+npm install axis-discovery-ssdp
 ```
 
 ## API
