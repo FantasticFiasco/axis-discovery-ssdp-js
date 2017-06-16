@@ -54,7 +54,7 @@ npm install axis-discovery-ssdp
 
 ## API
 
-### Discovery
+### `Discovery`
 
 The `Discovery` class is the main class in the package. With it you can register for changes to cameras on the network and respond accordingly when a camera is found on, or intentionally disconnects from, the network.
 
@@ -83,7 +83,7 @@ class Discovery {
 }
 ```
 
-### Device
+### `Device`
 
 The `Device` class is a immutable description of a camera on the network.
 
