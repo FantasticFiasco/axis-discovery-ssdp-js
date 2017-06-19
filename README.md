@@ -21,8 +21,6 @@ A Node.js SSDP client library written in TypeScript capable of searching for [Ax
 
 ## Super simple to use
 
-The following code is from the [demo application](https://github.com/FantasticFiasco/axis-discovery-ssdp/tree/master/demo-application).
-
 ```javascript
 import * as ssdp from 'axis-discovery-ssdp';
 

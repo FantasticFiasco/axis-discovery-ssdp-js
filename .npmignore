@@ -3,9 +3,6 @@ src
 test
 .gitattributes
 
-## Demo application
-demo-application
-
 ## Visual Studio Code settings
 .vscode
 
