@@ -32,6 +32,14 @@ export class Discovery {
     }
 
     /**
+     * Stop listening for SSDP advertisements.
+     */
+    public stop() {
+        _.forEach(this.sockets, (socket) => socket.stop());
+        this.sockets.splice(0, this.sockets.length);
+    }
+
+    /**
      * Triggers a new SSDP search for devices on the network.
      */
     public search() {

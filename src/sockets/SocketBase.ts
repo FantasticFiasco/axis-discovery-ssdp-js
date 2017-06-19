@@ -23,6 +23,12 @@ export abstract class SocketBase extends events.EventEmitter {
         this.bind();
     }
 
+    public stop(): void {
+        this.assertStarted();
+
+        this.socket.close();
+    }
+
     protected abstract onListening(): void;
 
     protected abstract onMessage(messageBuffer: Buffer, remote: dgram.AddressInfo): void;
@@ -31,6 +37,12 @@ export abstract class SocketBase extends events.EventEmitter {
 
     protected onError(error: Error) {
         Log.write(`Socket error: ${error}`);
+    }
+
+    private assertStarted() {
+        if (this.socket == null) {
+            throw new Error('M-SEARCH socket has never been started');
+        }
     }
 
     private assertNotStarted() {
