@@ -18,18 +18,18 @@ export class RootDescription {
     }
 
     /**
-     * Gets the friendly name asynchronously.
+     * Gets the friendly name.
      */
-    public async getFriendlyNameAsync(): Promise<string> {
-        return (await this.getDeviceDescriptionAsync())['friendlyName'][0];
+    public async getFriendlyName(): Promise<string> {
+        const deviceDescription = await this.getDeviceDescription();
+        return deviceDescription['friendlyName'][0];
     }
 
     /**
-     * Gets the model description asynchronously. In the event of being missing, after all the
-     * parameter is optional, null is returned.
+     * Gets the model description.
      */
-    public async getModelDescriptionAsync(): Promise<string | null> {
-        const deviceDescription = await this.getDeviceDescriptionAsync();
+    public async getModelDescription(): Promise<string | null> {
+        const deviceDescription = await this.getDeviceDescription();
         if (!deviceDescription['modelDescription']) {
             return null;
         }
@@ -38,18 +38,18 @@ export class RootDescription {
     }
 
     /**
-     * Gets the model name asynchronously.
+     * Gets the model name.
      */
-    public async getModelNameAsync(): Promise<string> {
-        return (await this.getDeviceDescriptionAsync())['modelName'][0];
+    public async getModelName(): Promise<string> {
+        const deviceDescription = await this.getDeviceDescription();
+        return deviceDescription['modelName'][0];
     }
 
     /**
-     * Gets the model number asynchronously. In the event of being missing, after all the
-     * parameter is optional, null is returned.
+     * Gets the model number.
      */
-    public async getModelNumberAsync(): Promise<string | null> {
-        const deviceDescription = await this.getDeviceDescriptionAsync();
+    public async getModelNumber(): Promise<string | null> {
+        const deviceDescription = await this.getDeviceDescription();
         if (!deviceDescription['modelNumber']) {
             return null;
         }
@@ -58,11 +58,10 @@ export class RootDescription {
     }
 
     /**
-     * Gets the serial number asynchronously. In the event of being missing, after all the
-     * parameter is optional, null is returned.
+     * Gets the serial number.
      */
-    public async getSerialNumberAsync(): Promise<string | null> {
-        const deviceDescription = await this.getDeviceDescriptionAsync();
+    public async getSerialNumber(): Promise<string | null> {
+        const deviceDescription = await this.getDeviceDescription();
         if (!deviceDescription['serialNumber']) {
             return null;
         }
@@ -71,11 +70,10 @@ export class RootDescription {
     }
 
     /**
-     * Gets the presentation URL asynchronously. In the event of being missing, after all the
-     * parameter is optional, null is returned.
+     * Gets the presentation URL.
      */
-    public async getPresentationUrlAsync(): Promise<string | null> {
-        const deviceDescription = await this.getDeviceDescriptionAsync();
+    public async getPresentationUrl(): Promise<string | null> {
+        const deviceDescription = await this.getDeviceDescription();
         if (!deviceDescription['presentationURL']) {
             return null;
         }
@@ -83,15 +81,16 @@ export class RootDescription {
         return deviceDescription['presentationURL'][0];
     }
 
-    private async getRootDescriptionAsync(): Promise<any> {
+    private async getDeviceDescription(): Promise<any> {
+        const rootDescription = await this.getRootDescription();
+        return rootDescription['root']['device'][0];
+    }
+
+    private async getRootDescription(): Promise<any> {
         if (this.rootDescription === null) {
             this.rootDescription = await xml2jsAsync.parseStringAsync(this.rootDescriptionXml);
         }
 
         return this.rootDescription;
-    }
-
-    private async getDeviceDescriptionAsync(): Promise<any> {
-        return (await this.getRootDescriptionAsync())['root']['device'][0];
     }
 }

@@ -24,7 +24,7 @@ describe('when parsing root description', () => {
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
         // Act
-        const actual = await subject.getFriendlyNameAsync();
+        const actual = await subject.getFriendlyName();
 
         // Assert
         actual.should.equal('AXIS M1014 - ACCC8E270AD8');
@@ -37,7 +37,7 @@ describe('when parsing root description', () => {
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
         // Act
-        const actual = await subject.getModelDescriptionAsync();
+        const actual = await subject.getModelDescription();
 
         // Assert
         (actual as string).should.equal('AXIS M1014 Fixed Network Camera');
@@ -50,7 +50,7 @@ describe('when parsing root description', () => {
             ObjectMother.ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
 
         // Act
-        const actual = await subject.getModelDescriptionAsync();
+        const actual = await subject.getModelDescription();
 
         // Assert
         should.not.exist(actual);
@@ -63,7 +63,7 @@ describe('when parsing root description', () => {
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
         // Act
-        const actual = await subject.getModelNameAsync();
+        const actual = await subject.getModelName();
 
         // Assert
         actual.should.equal('AXIS M1014');
@@ -76,7 +76,7 @@ describe('when parsing root description', () => {
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
         // Act
-        const actual = await subject.getModelNumberAsync();
+        const actual = await subject.getModelNumber();
 
         // Assert
         (actual as string).should.equal('M1014');
@@ -89,7 +89,7 @@ describe('when parsing root description', () => {
             ObjectMother.ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
 
         // Act
-        const actual = await subject.getModelNumberAsync();
+        const actual = await subject.getModelNumber();
 
         // Assert
         should.not.exist(actual);
@@ -102,7 +102,7 @@ describe('when parsing root description', () => {
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
         // Act
-        const actual = await subject.getSerialNumberAsync();
+        const actual = await subject.getSerialNumber();
 
         // Assert
         (actual as string).should.equal('ACCC8E270AD8');
@@ -115,7 +115,7 @@ describe('when parsing root description', () => {
             ObjectMother.ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
 
         // Act
-        const actual = await subject.getSerialNumberAsync();
+        const actual = await subject.getSerialNumber();
 
         // Assert
         should.not.exist(actual);
@@ -128,7 +128,7 @@ describe('when parsing root description', () => {
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
         // Act
-        const actual = await subject.getPresentationUrlAsync();
+        const actual = await subject.getPresentationUrl();
 
         // Assert
         (actual as string).should.equal('http://192.168.1.102:80/');
@@ -141,7 +141,7 @@ describe('when parsing root description', () => {
             ObjectMother.ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
 
         // Act
-        const actual = await subject.getPresentationUrlAsync();
+        const actual = await subject.getPresentationUrl();
 
         // Assert
         should.not.exist(actual);

@@ -36,12 +36,12 @@ export class DeviceMapper {
      * Maps a root description to a device.
      */
     public async fromRootDescriptionAsync(rootDescription: RootDescription): Promise<Device> {
-        const serialNumber = await rootDescription.getSerialNumberAsync();
-        const friendlyName = await rootDescription.getFriendlyNameAsync();
-        const modelName = await rootDescription.getModelNameAsync();
-        const modelDescription = await rootDescription.getModelDescriptionAsync();
-        const modelNumber = await rootDescription.getModelNumberAsync();
-        const presentationUrl = await rootDescription.getPresentationUrlAsync();
+        const serialNumber = await rootDescription.getSerialNumber();
+        const friendlyName = await rootDescription.getFriendlyName();
+        const modelName = await rootDescription.getModelName();
+        const modelDescription = await rootDescription.getModelDescription();
+        const modelNumber = await rootDescription.getModelNumber();
+        const presentationUrl = await rootDescription.getPresentationUrl();
 
         const port = this.parsePortFromPresentationUrl(presentationUrl);
 
