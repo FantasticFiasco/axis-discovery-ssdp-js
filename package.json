@@ -68,7 +68,7 @@
     "mocha": "3.4.1",
     "remap-istanbul": "0.9.5",
     "rimraf": "2.6.1",
-    "sinon": "2.3.4",
+    "sinon": "2.3.5",
     "tslint": "5.4.2",
     "typescript": "2.3.4"
   }
