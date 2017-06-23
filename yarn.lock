@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@fantasticfiasco/expect@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@fantasticfiasco/expect/-/expect-1.0.0.tgz#fc700aee52122b3bc62a95b8ab95ffa4b65967ba"
+
 "@types/bluebird@*", "@types/bluebird@3.5.7":
   version "3.5.7"
   resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.7.tgz#6a976ee1f30a042731272402ea56cecc80fc7284"
@@ -46,9 +50,11 @@
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-2.3.1.tgz#5e214093e9e2345219ab0f31bf310c9790ad0712"
 
-"@types/xml2js@0.0.33":
-  version "0.0.33"
-  resolved "https://registry.yarnpkg.com/@types/xml2js/-/xml2js-0.0.33.tgz#20c5dd6460245284d64a55690015b95e409fb7de"
+"@types/xml2js@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@types/xml2js/-/xml2js-0.4.0.tgz#e54a89a0055d5ed69305b2610f970909bf363e45"
+  dependencies:
+    "@types/node" "*"
 
 abbrev@1, abbrev@1.0.x:
   version "1.0.9"

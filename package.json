@@ -45,6 +45,7 @@
     "pack": "npm pack"
   },
   "dependencies": {
+    "@fantasticfiasco/expect": "1.0.0",
     "bluebird": "3.5.0",
     "lodash": "4.17.4",
     "request": "2.81.0",
