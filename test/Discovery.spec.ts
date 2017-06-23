@@ -12,42 +12,52 @@ describe('when performing a discovery', () => {
 
     let osStub: sinon.SinonStub;
     let dgramStub: sinon.SinonStub;
-    let socketStub: sinon.SinonSpy;
+    let socketSpy: any;
+    let discovery: Discovery;
 
     beforeEach(() => {
         // Mock os
         osStub = sinon.stub(os, 'networkInterfaces')
             .returns(data.NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
 
-        const socketApi = {
-            bind: () => { },
-            on: () => { },
-            send: () => { }
+        // Mock dgram
+        socketSpy = {
+            bind: () => sinon.spy(),
+            close: () => sinon.spy(),
+            on: () => sinon.spy(),
+            send: () => sinon.spy(),
         };
 
-        // Mock socket
-        socketStub = sinon.spy(socketApi, 'send');
-
-        // Mock dgram
         dgramStub = sinon.stub(dgram, 'createSocket')
-            .returns(socketApi);
+            .returns(socketSpy);
+
+        discovery = new Discovery();
     });
 
     afterEach(() => {
         osStub.restore();
         dgramStub.restore();
-        socketStub.restore();
     });
 
-    it('should send M-SEARCH messages on all registered addresses', () => {
+    it('should send M-SEARCH messages on all registered addresses', async () => {
         // Arrange
-        const discovery = new Discovery();
-        discovery.start();
+        await discovery.start();
 
         // Act
-        discovery.search();
+        await discovery.search();
 
         // Assert
-        socketStub.callCount.should.equal(2);
+        socketSpy.send.callCount.should.equal(2);
+    });
+
+    it('should close all sockets when stopping', async () => {
+        // Arrange
+        await discovery.start();
+
+        // Act
+        await discovery.stop();
+
+        // Assert
+        socketSpy.close.callCount.should.equal(2);
     });
 });

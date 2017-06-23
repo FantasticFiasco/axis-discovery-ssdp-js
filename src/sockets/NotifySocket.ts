@@ -40,7 +40,9 @@ export class NotifySocket extends SocketBase {
         }
     }
 
-    protected bind() {
-        this.socket.bind(constants.SSDP_PORT);
+    protected bind(): Promise<void> {
+        return new Promise<void>((resolve) => {
+            this.socket.bind(constants.SSDP_PORT, undefined, () => resolve());
+        });
     }
 }

@@ -1,3 +1,4 @@
+import * as expect from '@fantasticfiasco/expect';
 import * as dgram from 'dgram';
 import * as events from 'events';
 
@@ -13,41 +14,35 @@ export abstract class SocketBase extends events.EventEmitter {
     /**
      * Start listen for advertisements.
      */
-    public start() {
-        this.assertNotStarted();
+    public async start(): Promise<void> {
+        expect.toNotExist(this.socket, 'M-SEARCH socket has already been started');
 
         this.socket = dgram.createSocket({ type: 'udp4', reuseAddr: true });
         this.socket.on('listening', () => this.onListening());
         this.socket.on('message', (message: Buffer, remote: dgram.AddressInfo) => this.onMessage(message, remote));
         this.socket.on('error', (error: Error) => this.onError(error));
-        this.bind();
+
+        await this.bind();
     }
 
-    public stop(): void {
-        this.assertStarted();
+    /**
+     * Stop listen for advertisements.
+     */
+    public stop(): Promise<void> {
+        expect.toExist(this.socket, 'M-SEARCH socket has never been started');
 
-        this.socket.close();
+        return new Promise<void>((resolve) => {
+            this.socket.close(() => resolve());
+        });
     }
 
     protected abstract onListening(): void;
 
     protected abstract onMessage(messageBuffer: Buffer, remote: dgram.AddressInfo): void;
 
-    protected abstract bind(): void;
+    protected abstract bind(): Promise<void>;
 
     protected onError(error: Error) {
         Log.write(`Socket error: ${error}`);
-    }
-
-    private assertStarted() {
-        if (this.socket == null) {
-            throw new Error('M-SEARCH socket has never been started');
-        }
-    }
-
-    private assertNotStarted() {
-        if (this.socket != null) {
-            throw new Error('M-SEARCH socket has already been started');
-        }
     }
 }

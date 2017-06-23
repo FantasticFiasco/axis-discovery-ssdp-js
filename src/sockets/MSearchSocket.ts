@@ -20,14 +20,26 @@ export class MSearchSocket extends SocketBase {
     /**
      * Starts a search by using HTTP method M-SEARCH.
      */
-    public search() {
+    public search(): Promise<void> {
         const message = new MSearch().toBuffer();
-        this.socket.send(
-            message,
-            0,
-            message.length,
-            constants.SSDP_PORT,
-            constants.SSDP_MULTICAST_ADDRESS);
+
+        return new Promise<void>((resolve, reject) => {
+            this.socket.send(
+                message,
+                0,
+                message.length,
+                constants.SSDP_PORT,
+                constants.SSDP_MULTICAST_ADDRESS,
+                (error: Error) => {
+                    if (error) {
+                        Log.write(`Socket error: ${error}`);
+                        reject(error);
+                    } else {
+                        resolve();
+                    }
+                },
+            );
+        });
     }
 
     protected onListening() {
@@ -48,7 +60,9 @@ export class MSearchSocket extends SocketBase {
         this.emit('hello', message);
     }
 
-    protected bind() {
-        this.socket.bind(undefined, this.address);
+    protected bind(): Promise<void> {
+        return new Promise<void>((resove) => {
+            this.socket.bind(undefined, this.address, () => resove());
+        });
     }
 }
