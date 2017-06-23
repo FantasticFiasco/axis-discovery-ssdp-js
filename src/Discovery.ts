@@ -28,31 +28,32 @@ export class Discovery {
         await this.startSocket(new NotifySocket(addresses));
 
         // Start active SSDP
-        _.forEach(addresses, async (address) => await this.startSocket(new MSearchSocket(address)));
+        for (const address of addresses) {
+            await this.startSocket(new MSearchSocket(address));
+        }
     }
 
     /**
      * Stop listening for SSDP advertisements.
      */
-    public stop(): Promise<void> {
-        _.forEach(
-            this.sockets.splice(0, this.sockets.length),
-            async (socket) => await socket.stop());
-
-        return Promise.resolve();
+    public async stop(): Promise<void> {
+        for (const socket of this.sockets.splice(0, this.sockets.length)) {
+            await socket.stop();
+        }
     }
 
     /**
      * Triggers a new SSDP search for devices on the network.
      */
-    public search(): Promise<void> {
-        _.chain(this.sockets)
+    public async search(): Promise<void> {
+        const mSearchSockets = _.chain(this.sockets)
             .map((socket) => socket as MSearchSocket)
             .filter((socket) => socket)
-            .value()
-            .forEach(async (socket) => await socket.search());
+            .value();
 
-        return Promise.resolve();
+        for (const mSearchSocket of mSearchSockets) {
+            await mSearchSocket.search();
+        }
     }
 
     /**
