@@ -23,13 +23,13 @@ export class DeviceMapper {
 
         return new Device(
             message.remoteAddress,
-            null,
+            undefined,
             serialNumber,
-            null,
-            null,
-            null,
-            null,
-            null);
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined);
     }
 
     /**
@@ -56,14 +56,14 @@ export class DeviceMapper {
             presentationUrl);
     }
 
-    private parsePortFromPresentationUrl(presentationUrl: string | null): number | null {
-        if (presentationUrl === null) {
-            return null;
+    private parsePortFromPresentationUrl(presentationUrl: string | undefined): number | undefined {
+        if (presentationUrl === undefined) {
+            return undefined;
         }
 
         const portMatch = DeviceMapper.portFromPresentationUrlRegExp.exec(presentationUrl);
         if (portMatch == null) {
-            return null;
+            return undefined;
         }
 
         return Number(portMatch[1]);

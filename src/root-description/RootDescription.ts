@@ -7,7 +7,7 @@ const xml2jsAsync: any = bluebird.promisifyAll(xml2js);
  * Class describing a root description.
  */
 export class RootDescription {
-    private rootDescription: any = null;
+    private rootDescription: any = undefined;
 
     constructor(
         /**
@@ -28,10 +28,10 @@ export class RootDescription {
     /**
      * Gets the model description.
      */
-    public async getModelDescription(): Promise<string | null> {
+    public async getModelDescription(): Promise<string | undefined> {
         const deviceDescription = await this.getDeviceDescription();
         if (!deviceDescription['modelDescription']) {
-            return null;
+            return undefined;
         }
 
         return deviceDescription['modelDescription'][0];
@@ -48,10 +48,10 @@ export class RootDescription {
     /**
      * Gets the model number.
      */
-    public async getModelNumber(): Promise<string | null> {
+    public async getModelNumber(): Promise<string | undefined> {
         const deviceDescription = await this.getDeviceDescription();
         if (!deviceDescription['modelNumber']) {
-            return null;
+            return undefined;
         }
 
         return deviceDescription['modelNumber'][0];
@@ -60,10 +60,10 @@ export class RootDescription {
     /**
      * Gets the serial number.
      */
-    public async getSerialNumber(): Promise<string | null> {
+    public async getSerialNumber(): Promise<string | undefined> {
         const deviceDescription = await this.getDeviceDescription();
         if (!deviceDescription['serialNumber']) {
-            return null;
+            return undefined;
         }
 
         return deviceDescription['serialNumber'][0];
@@ -72,10 +72,10 @@ export class RootDescription {
     /**
      * Gets the presentation URL.
      */
-    public async getPresentationUrl(): Promise<string | null> {
+    public async getPresentationUrl(): Promise<string | undefined> {
         const deviceDescription = await this.getDeviceDescription();
         if (!deviceDescription['presentationURL']) {
-            return null;
+            return undefined;
         }
 
         return deviceDescription['presentationURL'][0];
@@ -87,7 +87,7 @@ export class RootDescription {
     }
 
     private async getRootDescription(): Promise<any> {
-        if (this.rootDescription === null) {
+        if (this.rootDescription === undefined) {
             this.rootDescription = await xml2jsAsync.parseStringAsync(this.rootDescriptionXml);
         }
 
