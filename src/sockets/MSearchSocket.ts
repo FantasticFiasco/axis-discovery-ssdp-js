@@ -45,9 +45,6 @@ export class MSearchSocket extends SocketBase {
     protected onListening() {
         const address = this.socket.address();
         Log.write(`M-SEARCH socket is now listening on ${address.address}:${address.port}`);
-
-        // Trigger a search when socket is ready
-        this.search();
     }
 
     protected onMessage(messageBuffer: Buffer, remote: dgram.AddressInfo) {

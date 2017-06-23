@@ -12,7 +12,7 @@ describe('when performing a discovery', () => {
 
     let osStub: sinon.SinonStub;
     let dgramStub: sinon.SinonStub;
-    let socketSpy: any;
+    let socket: any;
     let discovery: Discovery;
 
     beforeEach(() => {
@@ -21,7 +21,7 @@ describe('when performing a discovery', () => {
             .returns(data.NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
 
         // Mock dgram
-        socketSpy = {
+        socket = {
             bind: () => sinon.spy(),
             close: () => sinon.spy(),
             on: () => sinon.spy(),
@@ -29,7 +29,7 @@ describe('when performing a discovery', () => {
         };
 
         dgramStub = sinon.stub(dgram, 'createSocket')
-            .returns(socketSpy);
+            .returns(socket);
 
         discovery = new Discovery();
     });
@@ -47,7 +47,7 @@ describe('when performing a discovery', () => {
         await discovery.search();
 
         // Assert
-        socketSpy.send.callCount.should.equal(2);
+        socket.send.callCount.should.equal(2);
     });
 
     it('should close all sockets when stopping', async () => {
@@ -58,6 +58,6 @@ describe('when performing a discovery', () => {
         await discovery.stop();
 
         // Assert
-        socketSpy.close.callCount.should.equal(2);
+        socket.close.callCount.should.equal(2);
     });
 });
