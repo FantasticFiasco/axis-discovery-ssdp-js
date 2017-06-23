@@ -56,7 +56,7 @@ describe('when mapping to device', () => {
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
         // Act
-        const actual = await subject.fromRootDescriptionAsync(rootDescription);
+        const actual = await subject.fromRootDescription(rootDescription);
 
         // Assert
         actual.address.should.equal('192.168.1.102');
@@ -77,7 +77,7 @@ describe('when mapping to device', () => {
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
         // Act
-        const actual = await subject.fromRootDescriptionAsync(rootDescription);
+        const actual = await subject.fromRootDescription(rootDescription);
 
         // Assert
         (actual.port as number).should.equal(80);
@@ -91,7 +91,7 @@ describe('when mapping to device', () => {
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTPS_PORT);
 
         // Act
-        const actual = await subject.fromRootDescriptionAsync(rootDescription);
+        const actual = await subject.fromRootDescription(rootDescription);
 
         // Assert
         (actual.port as number).should.equal(443);
@@ -105,7 +105,7 @@ describe('when mapping to device', () => {
             ObjectMother.ROOT_DESCRIPTION_NO_PORT);
 
         // Act
-        const actual = await subject.fromRootDescriptionAsync(rootDescription);
+        const actual = await subject.fromRootDescription(rootDescription);
 
         // Assert
         should.not.exist(actual.port);

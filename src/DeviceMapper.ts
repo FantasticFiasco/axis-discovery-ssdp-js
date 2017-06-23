@@ -35,7 +35,7 @@ export class DeviceMapper {
     /**
      * Maps a root description to a device.
      */
-    public async fromRootDescriptionAsync(rootDescription: RootDescription): Promise<Device> {
+    public async fromRootDescription(rootDescription: RootDescription): Promise<Device> {
         const serialNumber = await rootDescription.getSerialNumber();
         const friendlyName = await rootDescription.getFriendlyName();
         const modelName = await rootDescription.getModelName();
