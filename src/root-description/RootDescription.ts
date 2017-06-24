@@ -1,7 +1,4 @@
-import * as bluebird from 'bluebird';
 import * as xml2js from 'xml2js';
-
-const xml2jsAsync: any = bluebird.promisifyAll(xml2js);
 
 /**
  * Class describing a root description.
@@ -18,79 +15,77 @@ export class RootDescription {
     }
 
     /**
+     * Parse the root description XML. This method must be called before any properties can be
+     * read.
+     */
+    public parse(): Promise<void> {
+        return new Promise<any>((resolve, reject) => {
+            xml2js.parseString(this.rootDescriptionXml, (error, result) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    this.rootDescription = result;
+                    resolve();
+                }
+            });
+        });
+    }
+
+    /**
      * Gets the friendly name.
      */
-    public async getFriendlyName(): Promise<string> {
-        const deviceDescription = await this.getDeviceDescription();
-        return deviceDescription['friendlyName'][0];
+    public get friendlyName(): string {
+        return this.rootDescription['root']['device'][0]['friendlyName'][0];
     }
 
     /**
      * Gets the model description.
      */
-    public async getModelDescription(): Promise<string | undefined> {
-        const deviceDescription = await this.getDeviceDescription();
-        if (!deviceDescription['modelDescription']) {
+    public get modelDescription(): string | undefined {
+        if (!this.rootDescription['root']['device'][0]['modelDescription']) {
             return undefined;
         }
 
-        return deviceDescription['modelDescription'][0];
+        return this.rootDescription['root']['device'][0]['modelDescription'][0];
     }
 
     /**
      * Gets the model name.
      */
-    public async getModelName(): Promise<string> {
-        const deviceDescription = await this.getDeviceDescription();
-        return deviceDescription['modelName'][0];
+    public get modelName(): string {
+        return this.rootDescription['root']['device'][0]['modelName'][0];
     }
 
     /**
      * Gets the model number.
      */
-    public async getModelNumber(): Promise<string | undefined> {
-        const deviceDescription = await this.getDeviceDescription();
-        if (!deviceDescription['modelNumber']) {
+    public get modelNumber(): string | undefined {
+        if (!this.rootDescription['root']['device'][0]['modelNumber']) {
             return undefined;
         }
 
-        return deviceDescription['modelNumber'][0];
+        return this.rootDescription['root']['device'][0]['modelNumber'][0];
     }
 
     /**
      * Gets the serial number.
      */
-    public async getSerialNumber(): Promise<string | undefined> {
-        const deviceDescription = await this.getDeviceDescription();
-        if (!deviceDescription['serialNumber']) {
+    public get serialNumber(): string | undefined {
+        if (!this.rootDescription['root']['device'][0]['serialNumber']) {
             return undefined;
         }
 
-        return deviceDescription['serialNumber'][0];
+        return this.rootDescription['root']['device'][0]['serialNumber'][0];
     }
 
     /**
      * Gets the presentation URL.
      */
-    public async getPresentationUrl(): Promise<string | undefined> {
-        const deviceDescription = await this.getDeviceDescription();
-        if (!deviceDescription['presentationURL']) {
+    public get presentationUrl(): string | undefined {
+        if (!this.rootDescription['root']['device'][0]['presentationURL']) {
             return undefined;
         }
 
-        return deviceDescription['presentationURL'][0];
-    }
-
-    private async getDeviceDescription(): Promise<any> {
-        const rootDescription = await this.getRootDescription();
-        return rootDescription['root']['device'][0];
-    }
-
-    private async getRootDescription(): Promise<any> {
-        if (this.rootDescription === undefined) {
-            this.rootDescription = await xml2jsAsync.parseStringAsync(this.rootDescriptionXml);
-        }
-
-        return this.rootDescription;
+        return this.rootDescription['root']['device'][0]['presentationURL'][0];
     }
 }

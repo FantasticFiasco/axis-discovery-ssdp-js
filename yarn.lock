@@ -2,11 +2,11 @@
 # yarn lockfile v1
 
 
-"@fantasticfiasco/expect@^1.0.0":
+"@fantasticfiasco/expect@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@fantasticfiasco/expect/-/expect-1.0.0.tgz#fc700aee52122b3bc62a95b8ab95ffa4b65967ba"
 
-"@types/bluebird@*", "@types/bluebird@3.5.7":
+"@types/bluebird@*":
   version "3.5.7"
   resolved "https://registry.yarnpkg.com/@types/bluebird/-/bluebird-3.5.7.tgz#6a976ee1f30a042731272402ea56cecc80fc7284"
 
@@ -228,7 +228,7 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@3.5.0, bluebird@^3.5.0:
+bluebird@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
 

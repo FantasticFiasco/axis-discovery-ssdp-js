@@ -35,25 +35,16 @@ export class DeviceMapper {
     /**
      * Maps a root description to a device.
      */
-    public async fromRootDescription(rootDescription: RootDescription): Promise<Device> {
-        const serialNumber = await rootDescription.getSerialNumber();
-        const friendlyName = await rootDescription.getFriendlyName();
-        const modelName = await rootDescription.getModelName();
-        const modelDescription = await rootDescription.getModelDescription();
-        const modelNumber = await rootDescription.getModelNumber();
-        const presentationUrl = await rootDescription.getPresentationUrl();
-
-        const port = this.parsePortFromPresentationUrl(presentationUrl);
-
+    public fromRootDescription(rootDescription: RootDescription): Device {
         return new Device(
             rootDescription.remoteAddress,
-            port,
-            serialNumber,
-            friendlyName,
-            modelName,
-            modelDescription,
-            modelNumber,
-            presentationUrl);
+            this.parsePortFromPresentationUrl(rootDescription.presentationUrl),
+            rootDescription.serialNumber,
+            rootDescription.friendlyName,
+            rootDescription.modelName,
+            rootDescription.modelDescription,
+            rootDescription.modelNumber,
+            rootDescription.presentationUrl);
     }
 
     private parsePortFromPresentationUrl(presentationUrl: string | undefined): number | undefined {
