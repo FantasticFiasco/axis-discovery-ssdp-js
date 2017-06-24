@@ -4,31 +4,27 @@ import * as xml2js from 'xml2js';
  * Class describing a root description.
  */
 export class RootDescription {
-    private rootDescription: any = undefined;
+    /**
+     * Parse the XML and return a root description.
+     */
+    public static parse(remoteAddress: string, xml: string): Promise<RootDescription> {
+        return new Promise<RootDescription>((resolve, reject) => {
+            xml2js.parseString(xml, (error, result) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(new RootDescription(remoteAddress, result));
+                }
+            });
+        });
+    }
 
-    constructor(
+    private constructor(
         /**
          * The remote address.
          */
         readonly remoteAddress: string,
-        private readonly rootDescriptionXml: string) {
-    }
-
-    /**
-     * Parse the root description XML. This method must be called before any properties can be
-     * read.
-     */
-    public parse(): Promise<void> {
-        return new Promise<any>((resolve, reject) => {
-            xml2js.parseString(this.rootDescriptionXml, (error, result) => {
-                if (error) {
-                    reject(error);
-                } else {
-                    this.rootDescription = result;
-                    resolve();
-                }
-            });
-        });
+        private readonly rootDescription: any) {
     }
 
     /**

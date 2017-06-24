@@ -7,9 +7,9 @@ chai.should();
 const should = chai.should();
 
 describe('when parsing root description', () => {
-    it('should return remote address', () => {
+    it('should return remote address', async () => {
         // Arrange
-        const subject = new RootDescription(
+        const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
@@ -19,11 +19,9 @@ describe('when parsing root description', () => {
 
     it('should return friendly name', async () => {
         // Arrange
-        const subject = new RootDescription(
+        const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
-
-        await subject.parse();
 
         // Act
         const actual = subject.friendlyName;
@@ -34,11 +32,9 @@ describe('when parsing root description', () => {
 
     it('should return model description', async () => {
         // Arrange
-        const subject = new RootDescription(
+        const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
-
-        await subject.parse();
 
         // Act
         const actual = subject.modelDescription;
@@ -49,11 +45,9 @@ describe('when parsing root description', () => {
 
     it('should not return model description if missing', async () => {
         // Arrange
-        const subject = new RootDescription(
+        const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
-
-        await subject.parse();
 
         // Act
         const actual = subject.modelDescription;
@@ -64,11 +58,9 @@ describe('when parsing root description', () => {
 
     it('should return model name', async () => {
         // Arrange
-        const subject = new RootDescription(
+        const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
-
-        await subject.parse();
 
         // Act
         const actual = subject.modelName;
@@ -79,11 +71,9 @@ describe('when parsing root description', () => {
 
     it('should return model number', async () => {
         // Arrange
-        const subject = new RootDescription(
+        const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
-
-        await subject.parse();
 
         // Act
         const actual = subject.modelNumber;
@@ -94,11 +84,9 @@ describe('when parsing root description', () => {
 
     it('should not return model number if missing', async () => {
         // Arrange
-        const subject = new RootDescription(
+        const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
-
-        await subject.parse();
 
         // Act
         const actual = subject.modelNumber;
@@ -109,11 +97,9 @@ describe('when parsing root description', () => {
 
     it('should return serial number', async () => {
         // Arrange
-        const subject = new RootDescription(
+        const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
-
-        await subject.parse();
 
         // Act
         const actual = subject.serialNumber;
@@ -124,11 +110,9 @@ describe('when parsing root description', () => {
 
     it('should not return serial number if missing', async () => {
         // Arrange
-        const subject = new RootDescription(
+        const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
-
-        await subject.parse();
 
         // Act
         const actual = subject.serialNumber;
@@ -139,11 +123,9 @@ describe('when parsing root description', () => {
 
     it('should return presentation URL', async () => {
         // Arrange
-        const subject = new RootDescription(
+        const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
-
-        await subject.parse();
 
         // Act
         const actual = subject.presentationUrl;
@@ -154,11 +136,9 @@ describe('when parsing root description', () => {
 
     it('should not return presentation URL if missing', async () => {
         // Arrange
-        const subject = new RootDescription(
+        const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
-
-        await subject.parse();
 
         // Act
         const actual = subject.presentationUrl;

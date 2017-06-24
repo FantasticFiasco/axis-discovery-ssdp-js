@@ -1,4 +1,4 @@
-import * as requestPromise from 'request-promise';
+import * as request from 'request';
 
 import { RootDescription } from './RootDescription';
 
@@ -15,7 +15,14 @@ export class RootDescriptionRequest {
      * Sends the request for a root description asynchronously.
      */
     public async send(): Promise<RootDescription> {
-        const rootDescription = await requestPromise.get(this.location);
-        return new RootDescription(this.remoteAddress, rootDescription);
+        return new Promise<RootDescription>((resolve, reject) => {
+            request.get(this.location, undefined, (error: any, _, body: string) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(RootDescription.parse(this.remoteAddress, body));
+                }
+            });
+        });
     }
 }

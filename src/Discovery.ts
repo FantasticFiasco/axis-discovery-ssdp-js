@@ -94,7 +94,6 @@ export class Discovery {
         try {
             const request = new RootDescriptionRequest(remoteAddress, location);
             const rootDescription = await request.send();
-            await rootDescription.parse();
             const device = this.deviceMapper.fromRootDescription(rootDescription);
             this.eventEmitter.emit('hello', device);
         } catch (error) {
