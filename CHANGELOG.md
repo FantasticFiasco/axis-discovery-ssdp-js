@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Added
 - [#2](https://github.com/FantasticFiasco/axis-discovery-ssdp/issues/2) - Calling `Discovery.stop()` stops listening for SSDP advertisements
 
+### Changed
+
+- Replaced `null` with `undefined` according to [TypeScript guidelines](https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines#null-and-undefined)
+
 ## 1.0.2 - 2017-01-26
 
 ### Fixed
