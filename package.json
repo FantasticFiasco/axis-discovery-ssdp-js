@@ -1,7 +1,7 @@
 {
   "name": "axis-discovery-ssdp",
   "version": "2.0.0",
-  "description": "A node.js SSDP client library written in TypeScript capable of searching for Axis Communication cameras.",
+  "description": "A Node.js SSDP client library written in TypeScript capable of searching for Axis Communication cameras.",
   "keywords": [
     "axis",
     "communications",
