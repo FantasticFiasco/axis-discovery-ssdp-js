@@ -23,47 +23,38 @@ export class DeviceMapper {
 
         return new Device(
             message.remoteAddress,
-            null,
+            undefined,
             serialNumber,
-            null,
-            null,
-            null,
-            null,
-            null);
+            undefined,
+            undefined,
+            undefined,
+            undefined,
+            undefined);
     }
 
     /**
      * Maps a root description to a device.
      */
-    public async fromRootDescriptionAsync(rootDescription: RootDescription): Promise<Device> {
-        const serialNumber = await rootDescription.getSerialNumberAsync();
-        const friendlyName = await rootDescription.getFriendlyNameAsync();
-        const modelName = await rootDescription.getModelNameAsync();
-        const modelDescription = await rootDescription.getModelDescriptionAsync();
-        const modelNumber = await rootDescription.getModelNumberAsync();
-        const presentationUrl = await rootDescription.getPresentationUrlAsync();
-
-        const port = this.parsePortFromPresentationUrl(presentationUrl);
-
+    public fromRootDescription(rootDescription: RootDescription): Device {
         return new Device(
             rootDescription.remoteAddress,
-            port,
-            serialNumber,
-            friendlyName,
-            modelName,
-            modelDescription,
-            modelNumber,
-            presentationUrl);
+            this.parsePortFromPresentationUrl(rootDescription.presentationUrl),
+            rootDescription.serialNumber,
+            rootDescription.friendlyName,
+            rootDescription.modelName,
+            rootDescription.modelDescription,
+            rootDescription.modelNumber,
+            rootDescription.presentationUrl);
     }
 
-    private parsePortFromPresentationUrl(presentationUrl: string | null): number | null {
-        if (presentationUrl === null) {
-            return null;
+    private parsePortFromPresentationUrl(presentationUrl: string | undefined): number | undefined {
+        if (presentationUrl === undefined) {
+            return undefined;
         }
 
         const portMatch = DeviceMapper.portFromPresentationUrlRegExp.exec(presentationUrl);
         if (portMatch == null) {
-            return null;
+            return undefined;
         }
 
         return Number(portMatch[1]);

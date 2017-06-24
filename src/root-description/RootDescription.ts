@@ -1,97 +1,87 @@
-import * as bluebird from 'bluebird';
 import * as xml2js from 'xml2js';
-
-const xml2jsAsync: any = bluebird.promisifyAll(xml2js);
 
 /**
  * Class describing a root description.
  */
 export class RootDescription {
-    private rootDescription: any = null;
+    /**
+     * Parse the XML and return a root description.
+     */
+    public static parse(remoteAddress: string, xml: string): Promise<RootDescription> {
+        return new Promise<RootDescription>((resolve, reject) => {
+            xml2js.parseString(xml, (error, result) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(new RootDescription(remoteAddress, result));
+                }
+            });
+        });
+    }
 
-    constructor(
+    private constructor(
         /**
          * The remote address.
          */
         readonly remoteAddress: string,
-        private readonly rootDescriptionXml: string) {
+        private readonly rootDescription: any) {
     }
 
     /**
-     * Gets the friendly name asynchronously.
+     * Gets the friendly name.
      */
-    public async getFriendlyNameAsync(): Promise<string> {
-        return (await this.getDeviceDescriptionAsync())['friendlyName'][0];
+    public get friendlyName(): string {
+        return this.rootDescription['root']['device'][0]['friendlyName'][0];
     }
 
     /**
-     * Gets the model description asynchronously. In the event of being missing, after all the
-     * parameter is optional, null is returned.
+     * Gets the model description.
      */
-    public async getModelDescriptionAsync(): Promise<string | null> {
-        const deviceDescription = await this.getDeviceDescriptionAsync();
-        if (!deviceDescription['modelDescription']) {
-            return null;
+    public get modelDescription(): string | undefined {
+        if (!this.rootDescription['root']['device'][0]['modelDescription']) {
+            return undefined;
         }
 
-        return deviceDescription['modelDescription'][0];
+        return this.rootDescription['root']['device'][0]['modelDescription'][0];
     }
 
     /**
-     * Gets the model name asynchronously.
+     * Gets the model name.
      */
-    public async getModelNameAsync(): Promise<string> {
-        return (await this.getDeviceDescriptionAsync())['modelName'][0];
+    public get modelName(): string {
+        return this.rootDescription['root']['device'][0]['modelName'][0];
     }
 
     /**
-     * Gets the model number asynchronously. In the event of being missing, after all the
-     * parameter is optional, null is returned.
+     * Gets the model number.
      */
-    public async getModelNumberAsync(): Promise<string | null> {
-        const deviceDescription = await this.getDeviceDescriptionAsync();
-        if (!deviceDescription['modelNumber']) {
-            return null;
+    public get modelNumber(): string | undefined {
+        if (!this.rootDescription['root']['device'][0]['modelNumber']) {
+            return undefined;
         }
 
-        return deviceDescription['modelNumber'][0];
+        return this.rootDescription['root']['device'][0]['modelNumber'][0];
     }
 
     /**
-     * Gets the serial number asynchronously. In the event of being missing, after all the
-     * parameter is optional, null is returned.
+     * Gets the serial number.
      */
-    public async getSerialNumberAsync(): Promise<string | null> {
-        const deviceDescription = await this.getDeviceDescriptionAsync();
-        if (!deviceDescription['serialNumber']) {
-            return null;
+    public get serialNumber(): string | undefined {
+        if (!this.rootDescription['root']['device'][0]['serialNumber']) {
+            return undefined;
         }
 
-        return deviceDescription['serialNumber'][0];
+        return this.rootDescription['root']['device'][0]['serialNumber'][0];
     }
 
     /**
-     * Gets the presentation URL asynchronously. In the event of being missing, after all the
-     * parameter is optional, null is returned.
+     * Gets the presentation URL.
      */
-    public async getPresentationUrlAsync(): Promise<string | null> {
-        const deviceDescription = await this.getDeviceDescriptionAsync();
-        if (!deviceDescription['presentationURL']) {
-            return null;
+    public get presentationUrl(): string | undefined {
+        if (!this.rootDescription['root']['device'][0]['presentationURL']) {
+            return undefined;
         }
 
-        return deviceDescription['presentationURL'][0];
-    }
-
-    private async getRootDescriptionAsync(): Promise<any> {
-        if (this.rootDescription === null) {
-            this.rootDescription = await xml2jsAsync.parseStringAsync(this.rootDescriptionXml);
-        }
-
-        return this.rootDescription;
-    }
-
-    private async getDeviceDescriptionAsync(): Promise<any> {
-        return (await this.getRootDescriptionAsync())['root']['device'][0];
+        return this.rootDescription['root']['device'][0]['presentationURL'][0];
     }
 }

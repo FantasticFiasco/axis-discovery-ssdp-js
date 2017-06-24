@@ -10,7 +10,6 @@
 		"noUnusedLocals": true
 	},
 	"exclude": [
-		"demo-application",
 		"node_modules"
 	],
 	"compileOnSave": true

@@ -51,12 +51,12 @@ describe('when mapping to device', () => {
     it('should handle root descriptions', async () => {
         // Arrange
         const subject = new DeviceMapper();
-        const rootDescription = new RootDescription(
+        const rootDescription = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
         // Act
-        const actual = await subject.fromRootDescriptionAsync(rootDescription);
+        const actual = subject.fromRootDescription(rootDescription);
 
         // Assert
         actual.address.should.equal('192.168.1.102');
@@ -72,12 +72,12 @@ describe('when mapping to device', () => {
     it('should handle root descriptions describing default HTTP port', async () => {
         // Arrange
         const subject = new DeviceMapper();
-        const rootDescription = new RootDescription(
+        const rootDescription = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
         // Act
-        const actual = await subject.fromRootDescriptionAsync(rootDescription);
+        const actual = subject.fromRootDescription(rootDescription);
 
         // Assert
         (actual.port as number).should.equal(80);
@@ -86,12 +86,12 @@ describe('when mapping to device', () => {
     it('should handle root descriptions describing default HTTPS port', async () => {
         // Arrange
         const subject = new DeviceMapper();
-        const rootDescription = new RootDescription(
+        const rootDescription = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTPS_PORT);
 
         // Act
-        const actual = await subject.fromRootDescriptionAsync(rootDescription);
+        const actual = subject.fromRootDescription(rootDescription);
 
         // Assert
         (actual.port as number).should.equal(443);
@@ -100,12 +100,12 @@ describe('when mapping to device', () => {
     it('should handle root descriptions describing no port', async () => {
         // Arrange
         const subject = new DeviceMapper();
-        const rootDescription = new RootDescription(
+        const rootDescription = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_NO_PORT);
 
         // Act
-        const actual = await subject.fromRootDescriptionAsync(rootDescription);
+        const actual = subject.fromRootDescription(rootDescription);
 
         // Assert
         should.not.exist(actual.port);

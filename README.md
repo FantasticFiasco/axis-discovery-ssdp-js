@@ -12,7 +12,6 @@ A Node.js SSDP client library written in TypeScript capable of searching for [Ax
 ## Table of contents
 
 - [Super simple to use](#super-simple-to-use)
-- [Features](#features)
 - [Installation](#installation)
 - [API](#api)
 - [Credit](#credit)
@@ -20,8 +19,6 @@ A Node.js SSDP client library written in TypeScript capable of searching for [Ax
 ---
 
 ## Super simple to use
-
-The following code is from the [demo application](https://github.com/FantasticFiasco/axis-discovery-ssdp/tree/master/demo-application).
 
 ```javascript
 import * as ssdp from 'axis-discovery-ssdp';
@@ -36,15 +33,9 @@ discovery.onGoodbye((device: ssdp.Device) => {
     console.log(`Goodbye from ${device.address}`);
 });
 
-discovery.start();
+await discovery.start();
+await discovery.search();
 ```
-
-## Features
-
-- Supports passively listening for SSDP announcements from cameras
-- Supports actively searching for cameras using M-SEARCH
-- Supports discovering cameras on multiple network interfaces
-- TypeScript declarations are bundled together with the package
 
 ## Installation
 
@@ -97,37 +88,37 @@ class Device {
     /**
      * The port.
      */
-    readonly port: number | null;
+    readonly port: number | undefined;
 
     /**
      * The serial number.
      */
-    readonly serialNumber: string | null;
+    readonly serialNumber: string | undefined;
 
     /**
      * The short description for the end user.
      */
-    readonly friendlyName: string | null;
+    readonly friendlyName: string | undefined;
 
     /**
      * The model name.
      */
-    readonly modelName: string | null;
+    readonly modelName: string | undefined;
 
     /**
      * The long model description for the end user.
      */
-    readonly modelDescription: string | null;
+    readonly modelDescription: string | undefined;
 
     /**
      * The model number.
      */
-    readonly modelNumber: string | null;
+    readonly modelNumber: string | undefined;
 
     /**
      * The URL to presentation for device.
      */
-    readonly presentationURL: string | null;
+    readonly presentationURL: string | undefined;
 }
 ```
 
