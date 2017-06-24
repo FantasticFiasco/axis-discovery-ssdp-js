@@ -12,7 +12,6 @@ A Node.js SSDP client library written in TypeScript capable of searching for [Ax
 ## Table of contents
 
 - [Super simple to use](#super-simple-to-use)
-- [Features](#features)
 - [Installation](#installation)
 - [API](#api)
 - [Credit](#credit)
@@ -34,15 +33,9 @@ discovery.onGoodbye((device: ssdp.Device) => {
     console.log(`Goodbye from ${device.address}`);
 });
 
-discovery.start();
+await discovery.start();
+await discovery.search();
 ```
-
-## Features
-
-- Supports passively listening for SSDP announcements from cameras
-- Supports actively searching for cameras using M-SEARCH
-- Supports discovering cameras on multiple network interfaces
-- TypeScript declarations are bundled together with the package
 
 ## Installation
 
