@@ -13,3 +13,4 @@ discovery.onGoodbye((device: Device) => {
 });
 
 discovery.start();
+discovery.search();
