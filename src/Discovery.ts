@@ -47,8 +47,8 @@ export class Discovery {
      */
     public async search(): Promise<void> {
         const mSearchSockets = _.chain(this.sockets)
+            .filter((socket) => socket instanceof MSearchSocket)
             .map((socket) => socket as MSearchSocket)
-            .filter((socket) => socket)
             .value();
 
         for (const mSearchSocket of mSearchSockets) {

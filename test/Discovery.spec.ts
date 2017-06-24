@@ -22,15 +22,16 @@ describe('when performing a discovery', () => {
 
         // Mock dgram
         socket = {
-            bind: () => sinon.spy(),
-            close: () => sinon.spy(),
-            on: () => sinon.spy(),
-            send: () => sinon.spy(),
+            bind: () => { },
+            close: () => { },
+            on: () => { },
+            send: () => { },
         };
 
         dgramStub = sinon.stub(dgram, 'createSocket')
             .returns(socket);
 
+        // Create discovery
         discovery = new Discovery();
     });
 
@@ -39,25 +40,59 @@ describe('when performing a discovery', () => {
         dgramStub.restore();
     });
 
-    it('should send M-SEARCH messages on all registered addresses', async () => {
+    it('should not send M-SEARCH messages when started', async () => {
         // Arrange
+        const socketBind = sinon.stub(socket, 'bind')
+            .callsFake((_, __, callback: (() => void)) => {
+                callback();
+            });
+
+        // Act
+        await discovery.start();
+
+        // Assert
+        socketBind.callCount.should.equal(3);   // 1 passive and 2 active
+    });
+
+    it('should send M-SEARCH messages on all addresses when searching', async () => {
+        // Arrange
+        sinon.stub(socket, 'bind')
+            .callsFake((_, __, callback: (() => void)) => {
+                callback();
+            });
+
+        const socketSend = sinon.stub(socket, 'send')
+            .callsFake((_, __, ___, ____, _____, callback: (error: Error | null) => void) => {
+                callback(null);
+            });
+
         await discovery.start();
 
         // Act
         await discovery.search();
 
         // Assert
-        socket.send.callCount.should.equal(2);
+        socketSend.callCount.should.equal(2);
     });
 
-    it('should close all sockets when stopping', async () => {
+    it('should close all sockets when stoppedg', async () => {
         // Arrange
+        sinon.stub(socket, 'bind')
+            .callsFake((_, __, callback: (() => void)) => {
+                callback();
+            });
+
+        const socketClose = sinon.stub(socket, 'close')
+            .callsFake((callback: (() => void)) => {
+                callback();
+            });
+
         await discovery.start();
 
         // Act
         await discovery.stop();
 
         // Assert
-        socket.close.callCount.should.equal(2);
+        socketClose.callCount.should.equal(3);   // 1 passive and 2 active
     });
 });
