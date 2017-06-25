@@ -18,6 +18,7 @@ install:
 before_script: greenkeeper-lockfile-update
 
 script:
+  - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
   - if [ "$TRAVIS_NODE_VERSION" == "node" ]; then npm run coverage:publish; fi
   - if [ "$TRAVIS_NODE_VERSION" != "node" ]; then npm run test; fi
   - npm run lint
