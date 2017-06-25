@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/FantasticFiasco/axis-discovery-ssdp/issues"
   },
-  "author": "Mattias Kindborg",
+  "author": "Mattias Kindborg <mattias.kindborg@gmail.com> (https://twitter.com/FantasticFiasco)",
   "license": "Apache-2.0",
   "main": "./lib/index.js",
   "types": "./lib/index",
