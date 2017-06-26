@@ -20,7 +20,7 @@ describe('when mapping to device', () => {
 
         // Assert
         actual.address.should.equal('192.168.1.102');
-        (actual.serialNumber as string).should.equal('ACCC8E270AD8');
+        (actual.macAddress as string).should.equal('ACCC8E270AD8');
         should.not.exist(actual.friendlyName);
         should.not.exist(actual.modelName);
         should.not.exist(actual.modelDescription);
@@ -40,7 +40,7 @@ describe('when mapping to device', () => {
 
         // Assert
         actual.address.should.equal('192.168.1.102');
-        (actual.serialNumber as string).should.equal('ACCC8E270AD8');
+        (actual.macAddress as string).should.equal('ACCC8E270AD8');
         should.not.exist(actual.friendlyName);
         should.not.exist(actual.modelName);
         should.not.exist(actual.modelDescription);
@@ -61,7 +61,7 @@ describe('when mapping to device', () => {
         // Assert
         actual.address.should.equal('192.168.1.102');
         (actual.port as number).should.equal(80);
-        (actual.serialNumber as string).should.equal('ACCC8E270AD8');
+        (actual.macAddress as string).should.equal('ACCC8E270AD8');
         (actual.friendlyName as string).should.equal('AXIS M1014 - ACCC8E270AD8');
         (actual.modelName as string).should.equal('AXIS M1014');
         (actual.modelDescription as string).should.equal('AXIS M1014 Fixed Network Camera');

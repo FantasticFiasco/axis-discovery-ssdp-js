@@ -95,27 +95,27 @@ describe('when parsing root description', () => {
         should.not.exist(actual);
     });
 
-    it('should return serial number', async () => {
+    it('should return MAC address', async () => {
         // Arrange
         const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
         // Act
-        const actual = subject.serialNumber;
+        const actual = subject.macAddress;
 
         // Assert
         (actual as string).should.equal('ACCC8E270AD8');
     });
 
-    it('should not return serial number if missing', async () => {
+    it('should not return MAC address if missing', async () => {
         // Arrange
         const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
             ObjectMother.ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
 
         // Act
-        const actual = subject.serialNumber;
+        const actual = subject.macAddress;
 
         // Assert
         should.not.exist(actual);

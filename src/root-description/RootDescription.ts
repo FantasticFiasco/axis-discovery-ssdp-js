@@ -64,14 +64,17 @@ export class RootDescription {
     }
 
     /**
-     * Gets the serial number.
+     * Gets the MAC address.
      */
-    public get serialNumber(): string | undefined {
+    public get macAddress(): string | undefined {
+        // This package is opinionated regarding the terms 'serial number' and 'MAC address'. What
+        // the devices are calling 'serial numbers' are actually 'MAC addresses', so lets call them
+        // for what they are...
         if (!this.rootDescription['root']['device'][0]['serialNumber']) {
             return undefined;
         }
 
-        return this.rootDescription['root']['device'][0]['serialNumber'][0];
+        return (this.rootDescription['root']['device'][0]['serialNumber'][0] as string).toUpperCase();
     }
 
     /**

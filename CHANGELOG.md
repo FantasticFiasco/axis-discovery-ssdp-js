@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### Changed
+
+- Renamed `Device.serialNumber` to `Device.macAddress`. In most situations they are still the same, but the exceptions are the Axis products which bundle multiple physical devices into a single casing with a shared network interface. Because of the shared network interface they also share the same MAC address. This package is opinionated in that even though the devices via SSDP (UPnP) call the property _serial number_, it actually is a _MAC address_ and should be named accordingly.
+
 ## [2.0.0] - 2017-06-24
 
 ### Added
@@ -31,4 +35,4 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Added
 
-- Support for discovering [Axis Communications](http://www.axis.com/) devices on the network using SSDP
+- Support for discovering [Axis Communications](http://www.axis.com/) devices on the network using SSDP (UPnP)
