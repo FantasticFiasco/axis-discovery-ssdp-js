@@ -92,7 +92,7 @@ class Device {
 
     /**
      * The MAC address. In most situations this is identical to the serial number. The
-     * exceptions are the Axis products which bundle multipe physical devices into a single
+     * exceptions are the Axis products which bundle multiple physical devices into a single
      * casing with a shared network interface. Because of the shared network interface they
      * also share the same MAC address.
      */
