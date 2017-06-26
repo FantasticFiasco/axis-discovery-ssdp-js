@@ -5,7 +5,7 @@ import { Message } from './sockets/Message';
 export class DeviceMapper {
 
     private static readonly uuidRegExp = /^uuid:\s*([^:\r]*)(::.*)*/i;
-    private static readonly serialNumberLength = 12;
+    private static readonly macAddressLength = 12;
     private static readonly portFromPresentationUrlRegExp = /:(\d+)\/?$/i;
 
     /**
@@ -17,14 +17,14 @@ export class DeviceMapper {
             throw new Error('Parameter USN on SSDP message does not contain uuid.');
         }
 
-        const start = uuidMatch[1].length - DeviceMapper.serialNumberLength;
+        const start = uuidMatch[1].length - DeviceMapper.macAddressLength;
         const end = uuidMatch[1].length;
-        const serialNumber = uuidMatch[1].slice(start, end).toUpperCase();
+        const macAddress = uuidMatch[1].slice(start, end).toUpperCase();
 
         return new Device(
             message.remoteAddress,
             undefined,
-            serialNumber,
+            macAddress,
             undefined,
             undefined,
             undefined,
@@ -39,7 +39,7 @@ export class DeviceMapper {
         return new Device(
             rootDescription.remoteAddress,
             this.parsePortFromPresentationUrl(rootDescription.presentationUrl),
-            rootDescription.serialNumber,
+            rootDescription.macAddress,
             rootDescription.friendlyName,
             rootDescription.modelName,
             rootDescription.modelDescription,
