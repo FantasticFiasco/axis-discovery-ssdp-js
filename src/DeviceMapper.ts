@@ -16,7 +16,7 @@ export class DeviceMapper {
             throw new Error('Parameter USN on SSDP message does not contain uuid.');
         }
 
-        const macAddress = macAddressMatch[1].toUpperCase()
+        const macAddress = macAddressMatch[1].toUpperCase();
 
         return new Device(
             message.remoteAddress,
