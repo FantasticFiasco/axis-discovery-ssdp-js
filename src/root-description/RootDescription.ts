@@ -74,7 +74,7 @@ export class RootDescription {
             return undefined;
         }
 
-        return this.rootDescription['root']['device'][0]['serialNumber'][0];
+        return (this.rootDescription['root']['device'][0]['serialNumber'][0] as string).toUpperCase();
     }
 
     /**

@@ -4,22 +4,19 @@ import { Message } from './sockets/Message';
 
 export class DeviceMapper {
 
-    private static readonly uuidRegExp = /^uuid:\s*([^:\r]*)(::.*)*/i;
-    private static readonly macAddressLength = 12;
+    private static readonly macAddressRegExp = /^uuid:.*([0-9a-f]{12})::.*$/i;
     private static readonly portFromPresentationUrlRegExp = /:(\d+)\/?$/i;
 
     /**
      * Maps from a SSDP message to a device.
      */
     public fromMessage(message: Message): Device {
-        const uuidMatch = DeviceMapper.uuidRegExp.exec(message.usn);
-        if (uuidMatch == null) {
+        const macAddressMatch = DeviceMapper.macAddressRegExp.exec(message.usn);
+        if (macAddressMatch == null) {
             throw new Error('Parameter USN on SSDP message does not contain uuid.');
         }
 
-        const start = uuidMatch[1].length - DeviceMapper.macAddressLength;
-        const end = uuidMatch[1].length;
-        const macAddress = uuidMatch[1].slice(start, end).toUpperCase();
+        const macAddress = macAddressMatch[1].toUpperCase()
 
         return new Device(
             message.remoteAddress,
