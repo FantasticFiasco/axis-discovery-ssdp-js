@@ -8,24 +8,24 @@ import * as data from './network-interfaces/NetworkInterfaceData';
 
 chai.should();
 
-describe('when performing a discovery', () => {
+describe('when performing a discovery', function() {
 
     let osStub: sinon.SinonStub;
     let dgramStub: sinon.SinonStub;
     let socket: any;
     let discovery: Discovery;
 
-    beforeEach(() => {
+    beforeEach(function() {
         // Mock os
         osStub = sinon.stub(os, 'networkInterfaces')
             .returns(data.NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
 
         // Mock dgram
         socket = {
-            bind: () => { },
-            close: () => { },
-            on: () => { },
-            send: () => { },
+            bind: function() { },
+            close: function() { },
+            on: function() { },
+            send: function() { },
         };
 
         dgramStub = sinon.stub(dgram, 'createSocket')
@@ -35,12 +35,12 @@ describe('when performing a discovery', () => {
         discovery = new Discovery();
     });
 
-    afterEach(() => {
+    afterEach(function() {
         osStub.restore();
         dgramStub.restore();
     });
 
-    it('should not send M-SEARCH messages when started', async () => {
+    it('should not send M-SEARCH messages when started', async function() {
         // Arrange
         const socketBind = sinon.stub(socket, 'bind')
             .callsFake((_, __, callback: (() => void)) => {
@@ -54,7 +54,7 @@ describe('when performing a discovery', () => {
         socketBind.callCount.should.equal(3);   // 1 passive and 2 active
     });
 
-    it('should send M-SEARCH messages on all addresses when searching', async () => {
+    it('should send M-SEARCH messages on all addresses when searching', async function() {
         // Arrange
         sinon.stub(socket, 'bind')
             .callsFake((_, __, callback: (() => void)) => {
@@ -75,7 +75,7 @@ describe('when performing a discovery', () => {
         socketSend.callCount.should.equal(2);
     });
 
-    it('should close all sockets when stoppedg', async () => {
+    it('should close all sockets when stoppedg', async function() {
         // Arrange
         sinon.stub(socket, 'bind')
             .callsFake((_, __, callback: (() => void)) => {

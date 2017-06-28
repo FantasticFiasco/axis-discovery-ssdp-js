@@ -6,8 +6,8 @@ import { RootDescription } from './../../src/root-description/RootDescription';
 chai.should();
 const should = chai.should();
 
-describe('when parsing root description', () => {
-    it('should return remote address', async () => {
+describe('when parsing root description', function() {
+    it('should return remote address', async function() {
         // Arrange
         const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
@@ -17,7 +17,7 @@ describe('when parsing root description', () => {
         subject.remoteAddress.should.equal('192.168.1.102');
     });
 
-    it('should return friendly name', async () => {
+    it('should return friendly name', async function() {
         // Arrange
         const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
@@ -30,7 +30,7 @@ describe('when parsing root description', () => {
         actual.should.equal('AXIS M1014 - ACCC8E270AD8');
     });
 
-    it('should return model description', async () => {
+    it('should return model description', async function() {
         // Arrange
         const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
@@ -43,7 +43,7 @@ describe('when parsing root description', () => {
         (actual as string).should.equal('AXIS M1014 Fixed Network Camera');
     });
 
-    it('should not return model description if missing', async () => {
+    it('should not return model description if missing', async function() {
         // Arrange
         const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
@@ -56,7 +56,7 @@ describe('when parsing root description', () => {
         should.not.exist(actual);
     });
 
-    it('should return model name', async () => {
+    it('should return model name', async function() {
         // Arrange
         const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
@@ -69,7 +69,7 @@ describe('when parsing root description', () => {
         actual.should.equal('AXIS M1014');
     });
 
-    it('should return model number', async () => {
+    it('should return model number', async function() {
         // Arrange
         const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
@@ -82,7 +82,7 @@ describe('when parsing root description', () => {
         (actual as string).should.equal('M1014');
       });
 
-    it('should not return model number if missing', async () => {
+    it('should not return model number if missing', async function() {
         // Arrange
         const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
@@ -95,7 +95,7 @@ describe('when parsing root description', () => {
         should.not.exist(actual);
     });
 
-    it('should return MAC address', async () => {
+    it('should return MAC address', async function() {
         // Arrange
         const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
@@ -108,7 +108,7 @@ describe('when parsing root description', () => {
         (actual as string).should.equal('ACCC8E270AD8');
     });
 
-    it('should not return MAC address if missing', async () => {
+    it('should not return MAC address if missing', async function() {
         // Arrange
         const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
@@ -121,7 +121,7 @@ describe('when parsing root description', () => {
         should.not.exist(actual);
     });
 
-    it('should return presentation URL', async () => {
+    it('should return presentation URL', async function() {
         // Arrange
         const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,
@@ -134,7 +134,7 @@ describe('when parsing root description', () => {
         (actual as string).should.equal('http://192.168.1.102:80/');
     });
 
-    it('should not return presentation URL if missing', async () => {
+    it('should not return presentation URL if missing', async function() {
         // Arrange
         const subject = await RootDescription.parse(
             ObjectMother.REMOTE_ADDRESS,

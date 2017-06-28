@@ -7,8 +7,8 @@ import * as ObjectMother from './ObjectMother';
 
 const should = chai.should();
 
-describe('when mapping to device', () => {
-    it('should handle Notify messages', () => {
+describe('when mapping to device', function() {
+    it('should handle Notify messages', function() {
         // Arrange
         const subject = new DeviceMapper();
         const message = new Message(
@@ -28,7 +28,7 @@ describe('when mapping to device', () => {
         should.not.exist(actual.presentationURL);
     });
 
-    it('should handle M-Search messages', () => {
+    it('should handle M-Search messages', function() {
         // Arrange
         const subject = new DeviceMapper();
         const message = new Message(
@@ -48,7 +48,7 @@ describe('when mapping to device', () => {
         should.not.exist(actual.presentationURL);
     });
 
-    it('should handle root descriptions', async () => {
+    it('should handle root descriptions', async function() {
         // Arrange
         const subject = new DeviceMapper();
         const rootDescription = await RootDescription.parse(
@@ -69,7 +69,7 @@ describe('when mapping to device', () => {
         (actual.presentationURL as string).should.equal('http://192.168.1.102:80/');
     });
 
-    it('should handle root descriptions describing default HTTP port', async () => {
+    it('should handle root descriptions describing default HTTP port', async function() {
         // Arrange
         const subject = new DeviceMapper();
         const rootDescription = await RootDescription.parse(
@@ -83,7 +83,7 @@ describe('when mapping to device', () => {
         (actual.port as number).should.equal(80);
     });
 
-    it('should handle root descriptions describing default HTTPS port', async () => {
+    it('should handle root descriptions describing default HTTPS port', async function() {
         // Arrange
         const subject = new DeviceMapper();
         const rootDescription = await RootDescription.parse(
@@ -97,7 +97,7 @@ describe('when mapping to device', () => {
         (actual.port as number).should.equal(443);
     });
 
-    it('should handle root descriptions describing no port', async () => {
+    it('should handle root descriptions describing no port', async function() {
         // Arrange
         const subject = new DeviceMapper();
         const rootDescription = await RootDescription.parse(

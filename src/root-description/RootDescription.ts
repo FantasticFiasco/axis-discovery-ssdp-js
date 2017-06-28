@@ -4,6 +4,14 @@ import * as xml2js from 'xml2js';
  * Class describing a root description.
  */
 export class RootDescription {
+    private constructor(
+        /**
+         * The remote address.
+         */
+        readonly remoteAddress: string,
+        private readonly rootDescription: any) {
+    }
+
     /**
      * Parse the XML and return a root description.
      */
@@ -17,14 +25,6 @@ export class RootDescription {
                 }
             });
         });
-    }
-
-    private constructor(
-        /**
-         * The remote address.
-         */
-        readonly remoteAddress: string,
-        private readonly rootDescription: any) {
     }
 
     /**

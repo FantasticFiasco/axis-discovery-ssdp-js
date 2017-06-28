@@ -5,8 +5,8 @@ import { Message } from './../../src/sockets/Message';
 
 chai.should();
 
-describe('when parsing message', () => {
-    it('should return remote address', () => {
+describe('when parsing message', function() {
+    it('should return remote address', function() {
         // Arrange
         const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK'));
 
@@ -14,7 +14,7 @@ describe('when parsing message', () => {
         subject.remoteAddress.should.equal('192.168.1.100');
     });
 
-    it('should return required SSDP headers on M-SEARCH response', () => {
+    it('should return required SSDP headers on M-SEARCH response', function() {
         // Arrange
         const subject = new Message('192.168.1.100', new Buffer(ObjectMother.MSEARCH_MESSAGE));
 
@@ -24,7 +24,7 @@ describe('when parsing message', () => {
         subject.usn.should.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
     });
 
-    it('should throw error on missing SSDP headers on M-SEARCH response', () => {
+    it('should throw error on missing SSDP headers on M-SEARCH response', function() {
         // Arrange
         const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
 
@@ -33,7 +33,7 @@ describe('when parsing message', () => {
         (() => subject.usn).should.throw();
     });
 
-    it('should return required SSDP headers on NOTIFY', () => {
+    it('should return required SSDP headers on NOTIFY', function() {
         // Arrange
         const subject = new Message('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
 
@@ -45,7 +45,7 @@ describe('when parsing message', () => {
         subject.nts.should.equal('ssdp:byebye');
     });
 
-    it('should throw error on missing SSDP headers on NOTIFY', () => {
+    it('should throw error on missing SSDP headers on NOTIFY', function() {
         // Arrange
         const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
 
@@ -56,7 +56,7 @@ describe('when parsing message', () => {
         (() => subject.nts).should.throw();
     });
 
-    it('should trim header value', () => {
+    it('should trim header value', function() {
         // Arrange
         const subject = new Message(
             '192.168.1.100',

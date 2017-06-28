@@ -7,16 +7,16 @@ import * as data from './NetworkInterfaceData';
 
 chai.should();
 
-describe('when monitoring IPv4 addresses on network interfaces', () => {
+describe('when monitoring IPv4 addresses on network interfaces', function() {
 
     let osStub: sinon.SinonStub;
     const networkInterfaceMonitor = new NetworkInterfaceMonitor();
 
-    afterEach(() => {
+    afterEach(function() {
         osStub.restore();
     });
 
-    it('should return addresses from one network interface', () => {
+    it('should return addresses from one network interface', function() {
         // Arrange
         osStub = sinon.stub(os, 'networkInterfaces')
             .returns(data.NETWORK_INTERFACE_WITH_TWO_ADDRESSES);
@@ -28,7 +28,7 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
         addresses.should.be.eql(['1.1.1.1', '2.2.2.2']);
     });
 
-    it('should return addresses from multiple network interfaces', () => {
+    it('should return addresses from multiple network interfaces', function() {
         // Arrange
         osStub = sinon.stub(os, 'networkInterfaces')
             .returns(data.NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
@@ -40,7 +40,7 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
         addresses.should.be.eql(['1.1.1.1', '2.2.2.2']);
     });
 
-    it('should return an empty sequence if only internal addresses exists', () => {
+    it('should return an empty sequence if only internal addresses exists', function() {
         // Arrange
         osStub = sinon.stub(os, 'networkInterfaces')
             .returns(data.NETWORK_INTERFACES_WITH_INTERNAL_ADDRESSES);
@@ -52,7 +52,7 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
         addresses.should.be.empty;
     });
 
-    it('should return an empty sequence if only IPv6 addresses exists', () => {
+    it('should return an empty sequence if only IPv6 addresses exists', function() {
         // Arrange
         osStub = sinon.stub(os, 'networkInterfaces')
             .returns(data.NETWORK_INTERFACES_WITH_IPV6_ADDRESSES);
@@ -64,7 +64,7 @@ describe('when monitoring IPv4 addresses on network interfaces', () => {
         addresses.should.be.empty;
     });
 
-    it('should return an empty sequence if no interfaces exists', () => {
+    it('should return an empty sequence if no interfaces exists', function() {
         // Arrange
         osStub = sinon.stub(os, 'networkInterfaces')
             .returns(data.NO_NETWORK_INTERFACES);
