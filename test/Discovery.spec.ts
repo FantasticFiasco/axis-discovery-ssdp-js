@@ -40,59 +40,65 @@ describe('when performing a discovery', function() {
         dgramStub.restore();
     });
 
-    it('should not send M-SEARCH messages when started', async function() {
-        // Arrange
-        const socketBind = sinon.stub(socket, 'bind')
-            .callsFake((_, __, callback: (() => void)) => {
-                callback();
-            });
+    describe('#start"', function() {
+        it('should not send M-SEARCH messages', async function() {
+            // Arrange
+            const socketBind = sinon.stub(socket, 'bind')
+                .callsFake((_, __, callback: (() => void)) => {
+                    callback();
+                });
 
-        // Act
-        await discovery.start();
+            // Act
+            await discovery.start();
 
-        // Assert
-        socketBind.callCount.should.equal(3);   // 1 passive and 2 active
+            // Assert
+            socketBind.callCount.should.equal(3);   // 1 passive and 2 active
+        });
     });
 
-    it('should send M-SEARCH messages on all addresses when searching', async function() {
-        // Arrange
-        sinon.stub(socket, 'bind')
-            .callsFake((_, __, callback: (() => void)) => {
-                callback();
-            });
+    describe('#search"', function() {
+        it('should send M-SEARCH messages on all addresses', async function() {
+            // Arrange
+            sinon.stub(socket, 'bind')
+                .callsFake((_, __, callback: (() => void)) => {
+                    callback();
+                });
 
-        const socketSend = sinon.stub(socket, 'send')
-            .callsFake((_, __, ___, ____, _____, callback: (error: Error | null) => void) => {
-                callback(null);
-            });
+            const socketSend = sinon.stub(socket, 'send')
+                .callsFake((_, __, ___, ____, _____, callback: (error: Error | null) => void) => {
+                    callback(null);
+                });
 
-        await discovery.start();
+            await discovery.start();
 
-        // Act
-        await discovery.search();
+            // Act
+            await discovery.search();
 
-        // Assert
-        socketSend.callCount.should.equal(2);
+            // Assert
+            socketSend.callCount.should.equal(2);
+        });
     });
 
-    it('should close all sockets when stoppedg', async function() {
-        // Arrange
-        sinon.stub(socket, 'bind')
-            .callsFake((_, __, callback: (() => void)) => {
-                callback();
-            });
+    describe('#stop"', function() {
+        it('should close all sockets', async function() {
+            // Arrange
+            sinon.stub(socket, 'bind')
+                .callsFake((_, __, callback: (() => void)) => {
+                    callback();
+                });
 
-        const socketClose = sinon.stub(socket, 'close')
-            .callsFake((callback: (() => void)) => {
-                callback();
-            });
+            const socketClose = sinon.stub(socket, 'close')
+                .callsFake((callback: (() => void)) => {
+                    callback();
+                });
 
-        await discovery.start();
+            await discovery.start();
 
-        // Act
-        await discovery.stop();
+            // Act
+            await discovery.stop();
 
-        // Assert
-        socketClose.callCount.should.equal(3);   // 1 passive and 2 active
+            // Assert
+            socketClose.callCount.should.equal(3);   // 1 passive and 2 active
+        });
     });
 });
