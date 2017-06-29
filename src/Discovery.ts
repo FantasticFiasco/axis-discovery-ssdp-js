@@ -11,6 +11,9 @@ import { MSearchSocket } from './sockets/MSearchSocket';
 import { NotifySocket } from './sockets/NotifySocket';
 import { SocketBase } from './sockets/SocketBase';
 
+/**
+ * Class responsible for discovering Axis cameras on the network.
+ */
 export class Discovery {
 
     private readonly sockets = new Array<SocketBase>();
