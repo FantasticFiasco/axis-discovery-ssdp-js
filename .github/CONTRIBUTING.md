@@ -7,8 +7,7 @@ Please note we have a code of conduct, please follow it in all your interactions
 ## Pull Request Process
 
 1. Run tests and ensure that they all pass
-2. Ensure that ReSharper report no errors
-3. Rebase and squash your commits with meaningful commit messages
+2. Rebase and squash your commits with meaningful commit messages
 
 ## Commit Messages
 
@@ -70,7 +69,9 @@ Closes #234
 or in the case of multiple issues:
 
 ```
-Closes #123, #245, #992
+Closes #123
+Closes #245
+Closes #992
 ```
 
 #### Breaking changes
