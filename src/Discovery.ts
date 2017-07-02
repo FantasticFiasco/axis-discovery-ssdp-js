@@ -1,7 +1,7 @@
 import * as events from 'events';
 import * as _ from 'lodash';
 
-import { Device } from './Device';
+import { Device } from './';
 import { DeviceMapper } from './DeviceMapper';
 import { Log } from './Log';
 import { NetworkInterfaceMonitor } from './network-interfaces/NetworkInterfaceMonitor';
@@ -22,7 +22,8 @@ export class Discovery {
     private readonly eventEmitter = new events.EventEmitter();
 
     /**
-     * Start listen for SSDP advertisements on all network interface addresses.
+     * Start listen for device advertisements on all network interface
+     * addresses.
      */
     public async start(): Promise<void> {
         const addresses = this.networkInterfaceMonitor.getIPv4Addresses();
@@ -37,7 +38,7 @@ export class Discovery {
     }
 
     /**
-     * Stop listening for SSDP advertisements.
+     * Stop listening for device advertisements.
      */
     public async stop(): Promise<void> {
         for (const socket of this.sockets.splice(0, this.sockets.length)) {
@@ -46,7 +47,7 @@ export class Discovery {
     }
 
     /**
-     * Triggers a new SSDP search for devices on the network.
+     * Triggers a new search for devices on the network.
      */
     public async search(): Promise<void> {
         const mSearchSockets = _.chain(this.sockets)
@@ -60,15 +61,16 @@ export class Discovery {
     }
 
     /**
-     * Register a callback that is invoked when a device is found on the network.
+     * Register a callback that is invoked when a device is found on the
+     * network.
      */
     public onHello(callback: (device: Device) => void) {
         this.eventEmitter.on('hello', (device: Device) => callback(device));
     }
 
     /**
-     * Register a callback that is invoked when a device intentionally is disconnecting from the
-     * network.
+     * Register a callback that is invoked when a device intentionally is
+     * disconnecting from the network.
      */
     public onGoodbye(callback: (device: Device) => void) {
         this.eventEmitter.on('goodbye', (device: Device) => callback(device));

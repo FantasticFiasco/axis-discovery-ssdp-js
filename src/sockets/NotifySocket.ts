@@ -10,7 +10,8 @@ import { SocketBase } from './SocketBase';
  */
 export class NotifySocket extends SocketBase {
     /**
-     * @addresses The network addresses to listen for NOTIFY advertisements on.
+     * @param addresses The network addresses to listen for NOTIFY
+     * advertisements on.
      */
     constructor(private readonly addresses: string[]) {
         super();

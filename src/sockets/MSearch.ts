@@ -1,7 +1,7 @@
 /**
- * Class describing the wish to discover available services on a network. A response to such search
- * request is sent via unicast addressing to the originating address and port number of the
- * multicast request.
+ * Class describing the wish to discover available services on a network. A
+ * response to such search request is sent via unicast addressing to the
+ * originating address and port number of the multicast request.
  */
 export class MSearch {
     /**
