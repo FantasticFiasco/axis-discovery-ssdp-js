@@ -7,7 +7,7 @@ import * as mocks from './Mocks';
 
 chai.should();
 
-describe('when monitoring IPv4 addresses on network interfaces', function() {
+describe('NetworkInterface', function() {
     describe('#getIPv4Addresses', function() {
 
         let osStub: sinon.SinonStub;
@@ -40,7 +40,7 @@ describe('when monitoring IPv4 addresses on network interfaces', function() {
             addresses.should.be.eql(['1.1.1.1', '2.2.2.2']);
         });
 
-        it('should return an empty sequence if only internal addresses exists', function() {
+        it('should not return internal addresses', function() {
             // Arrange
             osStub = sinon.stub(os, 'networkInterfaces')
                 .returns(mocks.NETWORK_INTERFACES_WITH_INTERNAL_ADDRESSES);
@@ -52,7 +52,7 @@ describe('when monitoring IPv4 addresses on network interfaces', function() {
             addresses.should.be.empty;
         });
 
-        it('should return an empty sequence if only IPv6 addresses exists', function() {
+        it('should not return IPv6 addresses', function() {
             // Arrange
             osStub = sinon.stub(os, 'networkInterfaces')
                 .returns(mocks.NETWORK_INTERFACES_WITH_IPV6_ADDRESSES);
@@ -64,7 +64,7 @@ describe('when monitoring IPv4 addresses on network interfaces', function() {
             addresses.should.be.empty;
         });
 
-        it('should return an empty sequence if no interfaces exists', function() {
+        it('should not fail on systems without network interfaces', function() {
             // Arrange
             osStub = sinon.stub(os, 'networkInterfaces')
                 .returns(mocks.NO_NETWORK_INTERFACES);

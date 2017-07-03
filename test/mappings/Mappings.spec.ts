@@ -95,7 +95,7 @@ describe('Mappings', function() {
             (actual.presentationURL as string).should.equal('http://192.168.1.102:80/');
         });
 
-        it('should map root descriptions describing default HTTP port', async function() {
+        it('should map root descriptions with default HTTP port', async function() {
             // Arrange
             const rootDescription = await RootDescription.parse(
                 ObjectMother.REMOTE_ADDRESS,
@@ -108,7 +108,7 @@ describe('Mappings', function() {
             (actual.port as number).should.equal(80);
         });
 
-        it('should map root descriptions describing default HTTPS port', async function() {
+        it('should map root descriptions with default HTTPS port', async function() {
             // Arrange
             const rootDescription = await RootDescription.parse(
                 ObjectMother.REMOTE_ADDRESS,
@@ -121,7 +121,7 @@ describe('Mappings', function() {
             (actual.port as number).should.equal(443);
         });
 
-        it('should map root descriptions describing no port', async function() {
+        it('should map root descriptions without port', async function() {
             // Arrange
             const rootDescription = await RootDescription.parse(
                 ObjectMother.REMOTE_ADDRESS,
