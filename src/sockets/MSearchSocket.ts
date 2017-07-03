@@ -1,6 +1,6 @@
 import * as dgram from 'dgram';
 
-import { Log } from '../logging/Log';
+import { log } from '../logging/Log';
 import * as constants from './Constants';
 import { Message } from './Message';
 import { MSearch } from './MSearch';
@@ -32,7 +32,7 @@ export class MSearchSocket extends SocketBase {
                 constants.SSDP_MULTICAST_ADDRESS,
                 (error: Error) => {
                     if (error) {
-                        Log.write(`Socket error: ${error}`);
+                        log(`Socket error: ${error}`);
                         reject(error);
                     } else {
                         resolve();
@@ -44,7 +44,7 @@ export class MSearchSocket extends SocketBase {
 
     protected onListening() {
         const address = this.socket.address();
-        Log.write(`M-SEARCH socket is now listening on ${address.address}:${address.port}`);
+        log(`M-SEARCH socket is now listening on ${address.address}:${address.port}`);
     }
 
     protected onMessage(messageBuffer: Buffer, remote: dgram.AddressInfo) {

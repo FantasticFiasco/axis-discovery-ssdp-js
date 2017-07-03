@@ -2,7 +2,7 @@ import * as events from 'events';
 import * as _ from 'lodash';
 
 import { Device } from './';
-import { Log } from './logging/Log';
+import { log } from './logging/Log';
 import { DeviceMapper } from './mappers/DeviceMapper';
 import { NetworkInterfaceMonitor } from './network-interfaces/NetworkInterfaceMonitor';
 import { RootDescriptionRequest } from './root-descriptions/RootDescriptionRequest';
@@ -95,6 +95,7 @@ export class Discovery {
         this.eventEmitter.emit('goodbye', this.deviceMapper.fromMessage(message));
     }
 
+
     private async requestRootDescription(remoteAddress: string, location: string): Promise<void> {
         try {
             const request = new RootDescriptionRequest(remoteAddress, location);
@@ -102,7 +103,7 @@ export class Discovery {
             const device = this.deviceMapper.fromRootDescription(rootDescription);
             this.eventEmitter.emit('hello', device);
         } catch (error) {
-            Log.write(`Unable to get root description. ${error}`);
+            log(`Unable to get root description. ${error}`);
         }
     }
 }
