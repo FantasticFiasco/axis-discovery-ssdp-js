@@ -11,7 +11,7 @@ import { SocketBase } from './SocketBase';
  */
 export class MSearchSocket extends SocketBase {
     /**
-     * @address The network address to listen for M-SEARCH responses on.
+     * @param address The network address to listen for M-SEARCH responses on.
      */
     constructor(private address: string) {
         super();

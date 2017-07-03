@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import { Device } from './';
 import { log } from './logging/Log';
 import { mapFromMessage, mapFromRootDescription } from './mappings/Mappings';
-import { NetworkInterfaceMonitor } from './network-interfaces/NetworkInterfaceMonitor';
+import { getIPv4Addresses } from './network-interfaces/NetworkInterface';
 import { RootDescriptionRequest } from './root-descriptions/RootDescriptionRequest';
 import { Message } from './sockets/Message';
 import { MSearchSocket } from './sockets/MSearchSocket';
@@ -17,7 +17,6 @@ import { SocketBase } from './sockets/SocketBase';
 export class Discovery {
 
     private readonly sockets = new Array<SocketBase>();
-    private readonly networkInterfaceMonitor = new NetworkInterfaceMonitor();
     private readonly eventEmitter = new events.EventEmitter();
 
     /**
@@ -25,7 +24,7 @@ export class Discovery {
      * addresses.
      */
     public async start(): Promise<void> {
-        const addresses = this.networkInterfaceMonitor.getIPv4Addresses();
+        const addresses = getIPv4Addresses();
 
         // Start passive SSDP
         await this.startSocket(new NotifySocket(addresses));
