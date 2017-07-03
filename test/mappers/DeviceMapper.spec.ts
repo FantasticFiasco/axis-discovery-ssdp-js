@@ -1,9 +1,9 @@
 import * as chai from 'chai';
 
-import { DeviceMapper } from './../src/DeviceMapper';
-import { RootDescription } from './../src/root-description/RootDescription';
-import { Message } from './../src/sockets/Message';
-import * as ObjectMother from './ObjectMother';
+import { DeviceMapper } from './../../src/mappers/DeviceMapper';
+import { RootDescription } from './../../src/root-descriptions/RootDescription';
+import { Message } from './../../src/sockets/Message';
+import * as ObjectMother from './../ObjectMother';
 
 const should = chai.should();
 

@@ -2,10 +2,10 @@ import * as events from 'events';
 import * as _ from 'lodash';
 
 import { Device } from './';
-import { DeviceMapper } from './DeviceMapper';
-import { Log } from './Log';
+import { Log } from './logging/Log';
+import { DeviceMapper } from './mappers/DeviceMapper';
 import { NetworkInterfaceMonitor } from './network-interfaces/NetworkInterfaceMonitor';
-import { RootDescriptionRequest } from './root-description/RootDescriptionRequest';
+import { RootDescriptionRequest } from './root-descriptions/RootDescriptionRequest';
 import { Message } from './sockets/Message';
 import { MSearchSocket } from './sockets/MSearchSocket';
 import { NotifySocket } from './sockets/NotifySocket';

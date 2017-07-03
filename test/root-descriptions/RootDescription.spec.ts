@@ -1,7 +1,7 @@
 import * as chai from 'chai';
 
 import * as ObjectMother from '../ObjectMother';
-import { RootDescription } from './../../src/root-description/RootDescription';
+import { RootDescription } from './../../src/root-descriptions/RootDescription';
 
 chai.should();
 const should = chai.should();

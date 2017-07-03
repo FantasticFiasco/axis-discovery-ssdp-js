@@ -1,6 +1,6 @@
-import { Device } from './Device';
-import { RootDescription } from './root-description/RootDescription';
-import { Message } from './sockets/Message';
+import { Device } from './..';
+import { RootDescription } from './../root-descriptions/RootDescription';
+import { Message } from './../sockets/Message';
 
 export class DeviceMapper {
 

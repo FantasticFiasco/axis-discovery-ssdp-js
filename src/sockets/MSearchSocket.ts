@@ -1,6 +1,6 @@
 import * as dgram from 'dgram';
 
-import { Log } from '../Log';
+import { Log } from '../logging/Log';
 import * as constants from './Constants';
 import { Message } from './Message';
 import { MSearch } from './MSearch';

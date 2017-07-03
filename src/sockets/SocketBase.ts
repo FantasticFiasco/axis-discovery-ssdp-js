@@ -2,7 +2,7 @@ import * as expect from '@fantasticfiasco/expect';
 import * as dgram from 'dgram';
 import * as events from 'events';
 
-import { Log } from '../Log';
+import { Log } from '../logging/Log';
 
 /**
  * Abstract class acting as a SSDP socket.
