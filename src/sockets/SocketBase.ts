@@ -4,9 +4,6 @@ import * as events from 'events';
 
 import { log } from '../logging/Log';
 
-/**
- * Abstract class acting as a SSDP socket.
- */
 export abstract class SocketBase extends events.EventEmitter {
 
     protected socket: dgram.Socket;

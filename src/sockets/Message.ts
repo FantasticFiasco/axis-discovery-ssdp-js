@@ -1,5 +1,3 @@
-import * as _ from 'lodash';
-
 /**
  * Class describing a received SSDP message.
  */
@@ -8,9 +6,6 @@ export class Message {
     private readonly headers: { [name: string]: string } = {};
 
     constructor(
-        /**
-         * The remote address.
-         */
         readonly remoteAddress: string,
         message: Buffer) {
         this.parseHeaders(message);
@@ -64,13 +59,13 @@ export class Message {
 
         this.headers['method'] = method;
 
-        _.forEach(headers, (header) => {
+        for (const header of headers) {
             const indexOfValueSeparator = header.indexOf(':');
             const name = header.slice(0, indexOfValueSeparator).trim();
             const value = header.slice(indexOfValueSeparator + 1, header.length).trim();
 
             this.headers[name] = value;
-        });
+        }
     }
 
     private getHeaderValue(headerName: string): string {

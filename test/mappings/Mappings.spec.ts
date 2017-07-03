@@ -7,9 +7,9 @@ import * as ObjectMother from './../ObjectMother';
 
 const should = chai.should();
 
-describe('when mapping to device', function() {
-    describe('#fromMessage', function() {
-        it('should handle Notify messages', function() {
+describe('Mappings', function() {
+    describe('#mapFromMessage', function() {
+        it('should map Notify messages', function() {
             // Arrange
             const message = new Message(
                 ObjectMother.REMOTE_ADDRESS,
@@ -28,7 +28,20 @@ describe('when mapping to device', function() {
             should.not.exist(actual.presentationURL);
         });
 
-        it('should handle M-Search messages', function() {
+        it('should map Notify messages and convert MAC address to uppercase', function() {
+            // Arrange
+            const message = new Message(
+                ObjectMother.REMOTE_ADDRESS,
+                new Buffer(ObjectMother.NOTIFY_MESSAGE_WITH_LOWERCASE_MACADDRESS));
+
+            // Act
+            const actual = mapFromMessage(message);
+
+            // Assert
+            (actual.macAddress as string).should.equal('ACCC8E270AD8');
+        });
+
+        it('should map M-Search messages', function() {
             // Arrange
             const message = new Message(
                 ObjectMother.REMOTE_ADDRESS,
@@ -46,10 +59,23 @@ describe('when mapping to device', function() {
             should.not.exist(actual.modelNumber);
             should.not.exist(actual.presentationURL);
         });
+
+        it('should map M-Search messages and convert MAC address to uppercase', function() {
+            // Arrange
+            const message = new Message(
+                ObjectMother.REMOTE_ADDRESS,
+                new Buffer(ObjectMother.MSEARCH_MESSAGE_WITH_LOWERCASE_MACADDRESS));
+
+            // Act
+            const actual = mapFromMessage(message);
+
+            // Assert
+            (actual.macAddress as string).should.equal('ACCC8E270AD8');
+        });
     });
 
-    describe('#fromRootDescription', function() {
-        it('should handle root descriptions', async function() {
+    describe('#mapFromRootDescription', function() {
+        it('should map root descriptions', async function() {
             // Arrange
             const rootDescription = await RootDescription.parse(
                 ObjectMother.REMOTE_ADDRESS,
@@ -69,7 +95,7 @@ describe('when mapping to device', function() {
             (actual.presentationURL as string).should.equal('http://192.168.1.102:80/');
         });
 
-        it('should handle root descriptions describing default HTTP port', async function() {
+        it('should map root descriptions describing default HTTP port', async function() {
             // Arrange
             const rootDescription = await RootDescription.parse(
                 ObjectMother.REMOTE_ADDRESS,
@@ -82,7 +108,7 @@ describe('when mapping to device', function() {
             (actual.port as number).should.equal(80);
         });
 
-        it('should handle root descriptions describing default HTTPS port', async function() {
+        it('should map root descriptions describing default HTTPS port', async function() {
             // Arrange
             const rootDescription = await RootDescription.parse(
                 ObjectMother.REMOTE_ADDRESS,
@@ -95,7 +121,7 @@ describe('when mapping to device', function() {
             (actual.port as number).should.equal(443);
         });
 
-        it('should handle root descriptions describing no port', async function() {
+        it('should map root descriptions describing no port', async function() {
             // Arrange
             const rootDescription = await RootDescription.parse(
                 ObjectMother.REMOTE_ADDRESS,
@@ -106,6 +132,19 @@ describe('when mapping to device', function() {
 
             // Assert
             should.not.exist(actual.port);
+        });
+
+        it('should map root descriptions and convert MAC address to uppercase', async function() {
+            // Arrange
+            const rootDescription = await RootDescription.parse(
+                ObjectMother.REMOTE_ADDRESS,
+                ObjectMother.ROOT_DESCRIPTION_WITH_LOWERCASE_MACADDRESS);
+
+            // Act
+            const actual = mapFromRootDescription(rootDescription);
+
+            // Assert
+            (actual.macAddress as string).should.equal('ACCC8E270AD8');
         });
     });
 });

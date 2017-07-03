@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import * as os from 'os';
 
 /**
- * Returns all public IPv4 addresses from all network interface cards.
+ * Returns all public IPv4 addresses from all network interfaces.
  */
 export function getIPv4Addresses(): string[] {
     const interfaces = os.networkInterfaces();
