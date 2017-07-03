@@ -1,6 +1,6 @@
 import * as chai from 'chai';
 
-import { DeviceMapper } from './../../src/mappers/DeviceMapper';
+import { mapFromMessage, mapFromRootDescription } from './../../src/mappings/Mappings';
 import { RootDescription } from './../../src/root-descriptions/RootDescription';
 import { Message } from './../../src/sockets/Message';
 import * as ObjectMother from './../ObjectMother';
@@ -11,13 +11,12 @@ describe('when mapping to device', function() {
     describe('#fromMessage', function() {
         it('should handle Notify messages', function() {
             // Arrange
-            const subject = new DeviceMapper();
             const message = new Message(
                 ObjectMother.REMOTE_ADDRESS,
                 new Buffer(ObjectMother.NOTIFY_MESSAGE));
 
             // Act
-            const actual = subject.fromMessage(message);
+            const actual = mapFromMessage(message);
 
             // Assert
             actual.address.should.equal('192.168.1.102');
@@ -31,13 +30,12 @@ describe('when mapping to device', function() {
 
         it('should handle M-Search messages', function() {
             // Arrange
-            const subject = new DeviceMapper();
             const message = new Message(
                 ObjectMother.REMOTE_ADDRESS,
                 new Buffer(ObjectMother.MSEARCH_MESSAGE));
 
             // Act
-            const actual = subject.fromMessage(message);
+            const actual = mapFromMessage(message);
 
             // Assert
             actual.address.should.equal('192.168.1.102');
@@ -53,13 +51,12 @@ describe('when mapping to device', function() {
     describe('#fromRootDescription', function() {
         it('should handle root descriptions', async function() {
             // Arrange
-            const subject = new DeviceMapper();
             const rootDescription = await RootDescription.parse(
                 ObjectMother.REMOTE_ADDRESS,
                 ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Act
-            const actual = subject.fromRootDescription(rootDescription);
+            const actual = mapFromRootDescription(rootDescription);
 
             // Assert
             actual.address.should.equal('192.168.1.102');
@@ -74,13 +71,12 @@ describe('when mapping to device', function() {
 
         it('should handle root descriptions describing default HTTP port', async function() {
             // Arrange
-            const subject = new DeviceMapper();
             const rootDescription = await RootDescription.parse(
                 ObjectMother.REMOTE_ADDRESS,
                 ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Act
-            const actual = subject.fromRootDescription(rootDescription);
+            const actual = mapFromRootDescription(rootDescription);
 
             // Assert
             (actual.port as number).should.equal(80);
@@ -88,13 +84,12 @@ describe('when mapping to device', function() {
 
         it('should handle root descriptions describing default HTTPS port', async function() {
             // Arrange
-            const subject = new DeviceMapper();
             const rootDescription = await RootDescription.parse(
                 ObjectMother.REMOTE_ADDRESS,
                 ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTPS_PORT);
 
             // Act
-            const actual = subject.fromRootDescription(rootDescription);
+            const actual = mapFromRootDescription(rootDescription);
 
             // Assert
             (actual.port as number).should.equal(443);
@@ -102,13 +97,12 @@ describe('when mapping to device', function() {
 
         it('should handle root descriptions describing no port', async function() {
             // Arrange
-            const subject = new DeviceMapper();
             const rootDescription = await RootDescription.parse(
                 ObjectMother.REMOTE_ADDRESS,
                 ObjectMother.ROOT_DESCRIPTION_NO_PORT);
 
             // Act
-            const actual = subject.fromRootDescription(rootDescription);
+            const actual = mapFromRootDescription(rootDescription);
 
             // Assert
             should.not.exist(actual.port);

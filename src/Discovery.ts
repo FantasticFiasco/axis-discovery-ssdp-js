@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 
 import { Device } from './';
 import { log } from './logging/Log';
-import { DeviceMapper } from './mappers/DeviceMapper';
+import { mapFromMessage, mapFromRootDescription } from './mappings/Mappings';
 import { NetworkInterfaceMonitor } from './network-interfaces/NetworkInterfaceMonitor';
 import { RootDescriptionRequest } from './root-descriptions/RootDescriptionRequest';
 import { Message } from './sockets/Message';
@@ -18,7 +18,6 @@ export class Discovery {
 
     private readonly sockets = new Array<SocketBase>();
     private readonly networkInterfaceMonitor = new NetworkInterfaceMonitor();
-    private readonly deviceMapper = new DeviceMapper();
     private readonly eventEmitter = new events.EventEmitter();
 
     /**
@@ -85,22 +84,21 @@ export class Discovery {
 
     private onHelloMessage(message: Message) {
         // Emit initial hello
-        this.eventEmitter.emit('hello', this.deviceMapper.fromMessage(message));
+        this.eventEmitter.emit('hello', mapFromMessage(message));
 
         // Request root description
         this.requestRootDescription(message.remoteAddress, message.location);
     }
 
     private onGoodbyeMessage(message: Message) {
-        this.eventEmitter.emit('goodbye', this.deviceMapper.fromMessage(message));
+        this.eventEmitter.emit('goodbye', mapFromMessage(message));
     }
-
 
     private async requestRootDescription(remoteAddress: string, location: string): Promise<void> {
         try {
             const request = new RootDescriptionRequest(remoteAddress, location);
             const rootDescription = await request.send();
-            const device = this.deviceMapper.fromRootDescription(rootDescription);
+            const device = mapFromRootDescription(rootDescription);
             this.eventEmitter.emit('hello', device);
         } catch (error) {
             log(`Unable to get root description. ${error}`);
