@@ -8,6 +8,7 @@ import * as mocks from './Mocks';
 chai.should();
 
 describe('NetworkInterface', function() {
+
     describe('#getIPv4Addresses', function() {
 
         let osStub: sinon.SinonStub;

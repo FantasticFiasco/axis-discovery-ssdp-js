@@ -1,7 +1,7 @@
 import * as dgram from 'dgram';
 
 import { log } from '../logging/Log';
-import * as constants from './Constants';
+import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from './Constants';
 import { Message } from './Message';
 import { SocketBase } from './SocketBase';
 
@@ -21,7 +21,7 @@ export class NotifySocket extends SocketBase {
         log(`NOTIFY socket is now listening on ${this.socket.address().address}:${this.socket.address().port}`);
 
         for (const address of this.addresses) {
-            this.socket.addMembership(constants.SSDP_MULTICAST_ADDRESS, address);
+            this.socket.addMembership(SSDP_MULTICAST_ADDRESS, address);
         }
     }
 
@@ -42,7 +42,7 @@ export class NotifySocket extends SocketBase {
 
     protected bind(): Promise<void> {
         return new Promise<void>((resolve) => {
-            this.socket.bind(constants.SSDP_PORT, undefined, () => resolve());
+            this.socket.bind(SSDP_PORT, undefined, () => resolve());
         });
     }
 }

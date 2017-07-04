@@ -7,7 +7,9 @@ chai.should();
 const should = chai.should();
 
 describe('RootDescription', function() {
+
     describe('#remoteAddress', function() {
+
         it('should return remote address', async function() {
             // Act
             const subject = await RootDescription.parse(
