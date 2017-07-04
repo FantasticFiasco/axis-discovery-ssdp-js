@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### Added
+
+- Support for enabling logs using [debug](https://github.com/visionmedia/debug)
+
 ## [3.0.0] - 2017-06-26
 
 ### Changed
