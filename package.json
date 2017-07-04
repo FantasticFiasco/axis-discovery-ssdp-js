@@ -27,7 +27,7 @@
     "node": ">=4.6.1"
   },
   "scripts": {
-    "clean": "rimraf \"./+(src|test)/**/*.d.ts\" \"./+(src|test)/**/*.js.map\" \"./+(src|test)/**/*.js\" ./lib ./coverage",
+    "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|js|js.map)\" ./lib ./coverage",
     "prebuild": "yarn run clean",
     "build": "tsc",
     "postbuild": "cpx \"./src/**/*.{d.ts,js}\" ./lib/",
