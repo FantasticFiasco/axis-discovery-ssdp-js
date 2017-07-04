@@ -9,6 +9,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 - Support for enabling logs using [debug](https://github.com/visionmedia/debug)
 
+### Removed
+
+- Support for Node.js v5 (v6 is LTS)
+
 ## [3.0.0] - 2017-06-26
 
 ### Changed
