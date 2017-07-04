@@ -3,9 +3,10 @@ import * as _ from 'lodash';
 
 import { Device } from './';
 import { log } from './logging/Log';
-import { mapFromMessage, mapFromRootDescription } from './mappings/Mappings';
 import { getIPv4Addresses } from './network-interfaces/NetworkInterface';
+import { mapFromRootDescription } from './root-descriptions/Mappings';
 import { RootDescriptionRequest } from './root-descriptions/RootDescriptionRequest';
+import { mapFromMessage } from './sockets/Mappings';
 import { Message } from './sockets/Message';
 import { MSearchSocket } from './sockets/MSearchSocket';
 import { NotifySocket } from './sockets/NotifySocket';
