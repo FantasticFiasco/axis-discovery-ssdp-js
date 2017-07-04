@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [4.0.0] - 2017-07-04
+
 ### Added
 
 - Support for enabling logs using [debug](https://github.com/visionmedia/debug)
