@@ -2,40 +2,56 @@
  * Class describing a device on the network.
  */
 export class Device {
+    /**
+     * Initializes a new instance of the class.
+     * @param address The address.
+     * @param port The port.
+     * @param macAddress The MAC address. In most situations this is identical
+     * to the serial number. The exceptions are the Axis products which bundle
+     * multiple physical devices into a single casing with a shared network
+     * interface. Because of the shared network interface they also share the
+     * same MAC address.
+     * @param friendlyName The short description for the end user.
+     * @param modelName The model name.
+     * @param modelDescription The long model description for the end user.
+     * @param modelNumber The model number.
+     * @param presentationURL The URL to the web page of the device.
+     */
     constructor(
         /**
-         * The address.
+         * Gets the address.
          */
         readonly address: string,
         /**
-         * The port.
+         * Gets the port.
          */
         readonly port: number | undefined,
         /**
-         * The MAC address. In most situations this is identical to the serial number. The
-         * exceptions are the Axis products which bundle multiple physical devices into a single
-         * casing with a shared network interface. Because of the shared network interface they
-         * also share the same MAC address.
+         * Gets the MAC address. In most situations this is identical to the
+         * serial number. The exceptions are the Axis products which bundle
+         * multiple physical devices into a single casing with a shared network
+         * interface. Because of the shared network interface they also share
+         * the same MAC address.
          */
         readonly macAddress: string | undefined,
         /**
-         * The short description for the end user.
+         * Gets the short description for the end user.
          */
         readonly friendlyName: string | undefined,
         /**
-         * The model name.
+         * Gets the model name.
          */
         readonly modelName: string | undefined,
         /**
-         * The long model description for the end user.
+         * Gets the long model description for the end user.
          */
         readonly modelDescription: string | undefined,
         /**
-         * The model number.
+         * Gets the model number.
          */
         readonly modelNumber: string | undefined,
         /**
-         * The URL to presentation for device.
+         * Gets the URL to the web page of the device.
          */
         readonly presentationURL: string | undefined) {
     }

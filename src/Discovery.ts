@@ -1,11 +1,12 @@
 import * as events from 'events';
 import * as _ from 'lodash';
 
-import { Device } from './Device';
-import { DeviceMapper } from './DeviceMapper';
-import { Log } from './Log';
-import { NetworkInterfaceMonitor } from './network-interfaces/NetworkInterfaceMonitor';
-import { RootDescriptionRequest } from './root-description/RootDescriptionRequest';
+import { Device } from './';
+import { log } from './logging/Log';
+import { getIPv4Addresses } from './network-interfaces/NetworkInterface';
+import { mapFromRootDescription } from './root-descriptions/Mappings';
+import { RootDescriptionRequest } from './root-descriptions/RootDescriptionRequest';
+import { mapFromMessage } from './sockets/Mappings';
 import { Message } from './sockets/Message';
 import { MSearchSocket } from './sockets/MSearchSocket';
 import { NotifySocket } from './sockets/NotifySocket';
@@ -17,15 +18,16 @@ import { SocketBase } from './sockets/SocketBase';
 export class Discovery {
 
     private readonly sockets = new Array<SocketBase>();
-    private readonly networkInterfaceMonitor = new NetworkInterfaceMonitor();
-    private readonly deviceMapper = new DeviceMapper();
     private readonly eventEmitter = new events.EventEmitter();
 
     /**
-     * Start listen for SSDP advertisements on all network interface addresses.
+     * Start listen for device advertisements on all network interface
+     * addresses.
      */
     public async start(): Promise<void> {
-        const addresses = this.networkInterfaceMonitor.getIPv4Addresses();
+        log('Discovery#start');
+
+        const addresses = getIPv4Addresses();
 
         // Start passive SSDP
         await this.startSocket(new NotifySocket(addresses));
@@ -37,18 +39,22 @@ export class Discovery {
     }
 
     /**
-     * Stop listening for SSDP advertisements.
+     * Stop listening for device advertisements.
      */
     public async stop(): Promise<void> {
+        log('Discovery#stop');
+
         for (const socket of this.sockets.splice(0, this.sockets.length)) {
             await socket.stop();
         }
     }
 
     /**
-     * Triggers a new SSDP search for devices on the network.
+     * Triggers a new search for devices on the network.
      */
     public async search(): Promise<void> {
+        log('Discovery#search');
+
         const mSearchSockets = _.chain(this.sockets)
             .filter((socket) => socket instanceof MSearchSocket)
             .map((socket) => socket as MSearchSocket)
@@ -60,15 +66,16 @@ export class Discovery {
     }
 
     /**
-     * Register a callback that is invoked when a device is found on the network.
+     * Register a callback that is invoked when a device is found on the
+     * network.
      */
     public onHello(callback: (device: Device) => void) {
         this.eventEmitter.on('hello', (device: Device) => callback(device));
     }
 
     /**
-     * Register a callback that is invoked when a device intentionally is disconnecting from the
-     * network.
+     * Register a callback that is invoked when a device intentionally is
+     * disconnecting from the network.
      */
     public onGoodbye(callback: (device: Device) => void) {
         this.eventEmitter.on('goodbye', (device: Device) => callback(device));
@@ -82,25 +89,29 @@ export class Discovery {
     }
 
     private onHelloMessage(message: Message) {
+        log('Discovery#onHelloMessage - %s', message.remoteAddress);
+
         // Emit initial hello
-        this.eventEmitter.emit('hello', this.deviceMapper.fromMessage(message));
+        this.eventEmitter.emit('hello', mapFromMessage(message));
 
         // Request root description
         this.requestRootDescription(message.remoteAddress, message.location);
     }
 
     private onGoodbyeMessage(message: Message) {
-        this.eventEmitter.emit('goodbye', this.deviceMapper.fromMessage(message));
+        log('Discovery#onGoodbyeMessage - %s', message.remoteAddress);
+
+        this.eventEmitter.emit('goodbye', mapFromMessage(message));
     }
 
     private async requestRootDescription(remoteAddress: string, location: string): Promise<void> {
         try {
             const request = new RootDescriptionRequest(remoteAddress, location);
             const rootDescription = await request.send();
-            const device = this.deviceMapper.fromRootDescription(rootDescription);
+            const device = mapFromRootDescription(rootDescription);
             this.eventEmitter.emit('hello', device);
         } catch (error) {
-            Log.write(`Unable to get root description. ${error}`);
+            log('Discovery#requestRootDescription - %o', error);
         }
     }
 }

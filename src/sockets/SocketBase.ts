@@ -2,11 +2,8 @@ import * as expect from '@fantasticfiasco/expect';
 import * as dgram from 'dgram';
 import * as events from 'events';
 
-import { Log } from '../Log';
+import { log } from '../logging/Log';
 
-/**
- * Abstract class acting as a SSDP socket.
- */
 export abstract class SocketBase extends events.EventEmitter {
 
     protected socket: dgram.Socket;
@@ -43,6 +40,6 @@ export abstract class SocketBase extends events.EventEmitter {
     protected abstract bind(): Promise<void>;
 
     protected onError(error: Error) {
-        Log.write(`Socket error: ${error}`);
+        log('SocketBase#onError - %o', error);
     }
 }

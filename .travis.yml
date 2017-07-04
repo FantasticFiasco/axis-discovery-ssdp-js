@@ -4,7 +4,6 @@ node_js:
   - "node"  # Current - Latest features
   - "7"
   - "6"     # LTS - Recommended for most users
-  - "5"
 
 matrix:
   fast_finish: true

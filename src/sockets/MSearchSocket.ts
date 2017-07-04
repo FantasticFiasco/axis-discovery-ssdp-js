@@ -1,7 +1,7 @@
 import * as dgram from 'dgram';
 
-import { Log } from '../Log';
-import * as constants from './Constants';
+import { log } from '../logging/Log';
+import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from './Constants';
 import { Message } from './Message';
 import { MSearch } from './MSearch';
 import { SocketBase } from './SocketBase';
@@ -11,7 +11,7 @@ import { SocketBase } from './SocketBase';
  */
 export class MSearchSocket extends SocketBase {
     /**
-     * @address The network address to listen for M-SEARCH responses on.
+     * @param address The network address to listen for M-SEARCH responses on.
      */
     constructor(private address: string) {
         super();
@@ -21,6 +21,8 @@ export class MSearchSocket extends SocketBase {
      * Starts a search by using HTTP method M-SEARCH.
      */
     public search(): Promise<void> {
+        log('MSearchSocket#search - %s', this.address);
+
         const message = new MSearch().toBuffer();
 
         return new Promise<void>((resolve, reject) => {
@@ -28,11 +30,11 @@ export class MSearchSocket extends SocketBase {
                 message,
                 0,
                 message.length,
-                constants.SSDP_PORT,
-                constants.SSDP_MULTICAST_ADDRESS,
+                SSDP_PORT,
+                SSDP_MULTICAST_ADDRESS,
                 (error: Error) => {
                     if (error) {
-                        Log.write(`Socket error: ${error}`);
+                        log('MSearchSocket#search - %o', error);
                         reject(error);
                     } else {
                         resolve();
@@ -43,8 +45,7 @@ export class MSearchSocket extends SocketBase {
     }
 
     protected onListening() {
-        const address = this.socket.address();
-        Log.write(`M-SEARCH socket is now listening on ${address.address}:${address.port}`);
+        log('MSearchSocket#onListening - %o', this.socket.address());
     }
 
     protected onMessage(messageBuffer: Buffer, remote: dgram.AddressInfo) {

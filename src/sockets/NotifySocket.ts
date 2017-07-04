@@ -1,7 +1,7 @@
 import * as dgram from 'dgram';
 
-import { Log } from '../Log';
-import * as constants from './Constants';
+import { log } from '../logging/Log';
+import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from './Constants';
 import { Message } from './Message';
 import { SocketBase } from './SocketBase';
 
@@ -10,17 +10,19 @@ import { SocketBase } from './SocketBase';
  */
 export class NotifySocket extends SocketBase {
     /**
-     * @addresses The network addresses to listen for NOTIFY advertisements on.
+     * @param addresses The network addresses to listen for NOTIFY
+     * advertisements on.
      */
     constructor(private readonly addresses: string[]) {
         super();
     }
 
     protected onListening() {
-        Log.write(`NOTIFY socket is now listening on ${this.socket.address().address}:${this.socket.address().port}`);
+        log('NotifySocket#onListening - %o', this.socket.address());
 
         for (const address of this.addresses) {
-            this.socket.addMembership(constants.SSDP_MULTICAST_ADDRESS, address);
+            log('NotifySocket#onListening - add membership to %s', address);
+            this.socket.addMembership(SSDP_MULTICAST_ADDRESS, address);
         }
     }
 
@@ -41,7 +43,7 @@ export class NotifySocket extends SocketBase {
 
     protected bind(): Promise<void> {
         return new Promise<void>((resolve) => {
-            this.socket.bind(constants.SSDP_PORT, undefined, () => resolve());
+            this.socket.bind(SSDP_PORT, undefined, () => resolve());
         });
     }
 }

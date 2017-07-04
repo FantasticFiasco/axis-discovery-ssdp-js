@@ -5,8 +5,9 @@ import { Message } from './../../src/sockets/Message';
 
 chai.should();
 
-describe('when parsing message', function() {
-    it('should return remote address', function() {
+describe('Message', function() {
+
+    it('#remoteAddress', function() {
         // Arrange
         const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK'));
 
@@ -14,49 +15,7 @@ describe('when parsing message', function() {
         subject.remoteAddress.should.equal('192.168.1.100');
     });
 
-    it('should return required SSDP headers on M-SEARCH response', function() {
-        // Arrange
-        const subject = new Message('192.168.1.100', new Buffer(ObjectMother.MSEARCH_MESSAGE));
-
-        // Assert
-        subject.method.should.equal('HTTP/1.1 200 OK');
-        subject.location.should.equal('http://192.168.1.102:45895/rootdesc1.xml');
-        subject.usn.should.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
-    });
-
-    it('should throw error on missing SSDP headers on M-SEARCH response', function() {
-        // Arrange
-        const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
-
-        // Assert
-        (() => subject.location).should.throw();
-        (() => subject.usn).should.throw();
-    });
-
-    it('should return required SSDP headers on NOTIFY', function() {
-        // Arrange
-        const subject = new Message('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
-
-        // Assert
-        subject.method.should.equal('NOTIFY * HTTP/1.1');
-        subject.location.should.equal('http://192.168.1.102:45895/rootdesc1.xml');
-        subject.usn.should.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
-        subject.nt.should.equal('urn:axis-com:service:BasicService:1');
-        subject.nts.should.equal('ssdp:byebye');
-    });
-
-    it('should throw error on missing SSDP headers on NOTIFY', function() {
-        // Arrange
-        const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
-
-        // Assert
-        (() => subject.location).should.throw();
-        (() => subject.usn).should.throw();
-        (() => subject.nt).should.throw();
-        (() => subject.nts).should.throw();
-    });
-
-    it('should trim header value', function() {
+    it('should trim header values', function() {
         // Arrange
         const subject = new Message(
             '192.168.1.100',
@@ -66,5 +25,121 @@ describe('when parsing message', function() {
 
         // Assert
         subject.usn.should.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
+    });
+
+    describe('M-SEARCH response', () => {
+        it('#method', function() {
+            // Arrange
+            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.MSEARCH_MESSAGE));
+
+            // Assert
+            subject.method.should.equal('HTTP/1.1 200 OK');
+        });
+
+        it('#location', function() {
+            // Arrange
+            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.MSEARCH_MESSAGE));
+
+            // Assert
+            subject.location.should.equal('http://192.168.1.102:45895/rootdesc1.xml');
+        });
+
+        it('#usn', function() {
+            // Arrange
+            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.MSEARCH_MESSAGE));
+
+            // Assert
+            subject.usn.should.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
+        });
+
+        it('#location should fail if missing', function() {
+            // Arrange
+            const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
+
+            // Assert
+            (() => subject.location).should.throw();
+        });
+
+        it('#usn should fail if missing', function() {
+            // Arrange
+            const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
+
+            // Assert
+            (() => subject.usn).should.throw();
+        });
+    });
+
+    describe('NOTIFY', () => {
+        it('#method', function() {
+            // Arrange
+            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
+
+            // Assert
+            subject.method.should.equal('NOTIFY * HTTP/1.1');
+        });
+
+        it('#location', function() {
+            // Arrange
+            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
+
+            // Assert
+            subject.location.should.equal('http://192.168.1.102:45895/rootdesc1.xml');
+        });
+
+        it('#location should fail if missing', function() {
+            // Arrange
+            const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
+
+            // Assert
+            (() => subject.location).should.throw();
+        });
+
+        it('#usn', function() {
+            // Arrange
+            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
+
+            // Assert
+            subject.usn.should.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
+        });
+
+        it('#usn should fail if missing', function() {
+            // Arrange
+            const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
+
+            // Assert
+            (() => subject.usn).should.throw();
+        });
+
+        it('#nt', function() {
+            // Arrange
+            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
+
+            // Assert
+            subject.nt.should.equal('urn:axis-com:service:BasicService:1');
+        });
+
+        it('#nt should fail if missing', function() {
+            // Arrange
+            const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
+
+            // Assert
+            (() => subject.nt).should.throw();
+        });
+
+        it('#nts', function() {
+            // Arrange
+            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
+
+            // Assert
+            subject.nts.should.equal('ssdp:byebye');
+        });
+
+        it('#nts should fail if missing', function() {
+            // Arrange
+            const subject = new Message('192.168.1.100', new Buffer('HTTP/1.1 200 OK\r\n'));
+
+            // Assert
+            (() => subject.nts).should.throw();
+        });
     });
 });

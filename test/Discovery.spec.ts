@@ -4,11 +4,11 @@ import * as os from 'os';
 import * as sinon from 'sinon';
 
 import { Discovery } from './../src/Discovery';
-import * as data from './network-interfaces/NetworkInterfaceData';
+import * as networkInterfaceMocks from './network-interfaces/Mocks';
 
 chai.should();
 
-describe('when performing a discovery', function() {
+describe('Discovery', function() {
 
     let osStub: sinon.SinonStub;
     let dgramStub: sinon.SinonStub;
@@ -18,7 +18,7 @@ describe('when performing a discovery', function() {
     beforeEach(function() {
         // Mock os
         osStub = sinon.stub(os, 'networkInterfaces')
-            .returns(data.NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
+            .returns(networkInterfaceMocks.NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
 
         // Mock dgram
         socket = {
@@ -40,7 +40,7 @@ describe('when performing a discovery', function() {
         dgramStub.restore();
     });
 
-    describe('#start"', function() {
+    describe('#start', function() {
         it('should not send M-SEARCH messages', async function() {
             // Arrange
             const socketBind = sinon.stub(socket, 'bind')
@@ -56,8 +56,8 @@ describe('when performing a discovery', function() {
         });
     });
 
-    describe('#search"', function() {
-        it('should send M-SEARCH messages on all addresses', async function() {
+    describe('#search', function() {
+        it('should send M-SEARCH messages', async function() {
             // Arrange
             sinon.stub(socket, 'bind')
                 .callsFake((_, __, callback: (() => void)) => {
@@ -79,8 +79,8 @@ describe('when performing a discovery', function() {
         });
     });
 
-    describe('#stop"', function() {
-        it('should close all sockets', async function() {
+    describe('#stop', function() {
+        it('should close sockets', async function() {
             // Arrange
             sinon.stub(socket, 'bind')
                 .callsFake((_, __, callback: (() => void)) => {
