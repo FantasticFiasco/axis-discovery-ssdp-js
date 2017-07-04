@@ -25,6 +25,8 @@ export class Discovery {
      * addresses.
      */
     public async start(): Promise<void> {
+        log('Discovery#start');
+
         const addresses = getIPv4Addresses();
 
         // Start passive SSDP
@@ -40,6 +42,8 @@ export class Discovery {
      * Stop listening for device advertisements.
      */
     public async stop(): Promise<void> {
+        log('Discovery#stop');
+
         for (const socket of this.sockets.splice(0, this.sockets.length)) {
             await socket.stop();
         }
@@ -49,6 +53,8 @@ export class Discovery {
      * Triggers a new search for devices on the network.
      */
     public async search(): Promise<void> {
+        log('Discovery#search');
+
         const mSearchSockets = _.chain(this.sockets)
             .filter((socket) => socket instanceof MSearchSocket)
             .map((socket) => socket as MSearchSocket)
@@ -83,6 +89,8 @@ export class Discovery {
     }
 
     private onHelloMessage(message: Message) {
+        log('Discovery#onHelloMessage - %s', message.remoteAddress);
+
         // Emit initial hello
         this.eventEmitter.emit('hello', mapFromMessage(message));
 
@@ -91,6 +99,8 @@ export class Discovery {
     }
 
     private onGoodbyeMessage(message: Message) {
+        log('Discovery#onGoodbyeMessage - %s', message.remoteAddress);
+
         this.eventEmitter.emit('goodbye', mapFromMessage(message));
     }
 
@@ -101,7 +111,7 @@ export class Discovery {
             const device = mapFromRootDescription(rootDescription);
             this.eventEmitter.emit('hello', device);
         } catch (error) {
-            log(`Unable to get root description. ${error}`);
+            log('Discovery#requestRootDescription - %o', error);
         }
     }
 }

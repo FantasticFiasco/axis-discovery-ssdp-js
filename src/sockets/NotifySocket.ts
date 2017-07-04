@@ -18,9 +18,10 @@ export class NotifySocket extends SocketBase {
     }
 
     protected onListening() {
-        log(`NOTIFY socket is now listening on ${this.socket.address().address}:${this.socket.address().port}`);
+        log('NotifySocket#onListening - %o', this.socket.address());
 
         for (const address of this.addresses) {
+            log('NotifySocket#onListening - add membership to %s', address);
             this.socket.addMembership(SSDP_MULTICAST_ADDRESS, address);
         }
     }

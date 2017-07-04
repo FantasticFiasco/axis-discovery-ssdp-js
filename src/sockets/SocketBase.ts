@@ -40,6 +40,6 @@ export abstract class SocketBase extends events.EventEmitter {
     protected abstract bind(): Promise<void>;
 
     protected onError(error: Error) {
-        log(`Socket error: ${error}`);
+        log('SocketBase#onError - %o', error);
     }
 }

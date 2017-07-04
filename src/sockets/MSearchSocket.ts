@@ -21,6 +21,8 @@ export class MSearchSocket extends SocketBase {
      * Starts a search by using HTTP method M-SEARCH.
      */
     public search(): Promise<void> {
+        log('MSearchSocket#search - %s', this.address);
+
         const message = new MSearch().toBuffer();
 
         return new Promise<void>((resolve, reject) => {
@@ -32,7 +34,7 @@ export class MSearchSocket extends SocketBase {
                 SSDP_MULTICAST_ADDRESS,
                 (error: Error) => {
                     if (error) {
-                        log(`Socket error: ${error}`);
+                        log('MSearchSocket#search - %o', error);
                         reject(error);
                     } else {
                         resolve();
@@ -43,8 +45,7 @@ export class MSearchSocket extends SocketBase {
     }
 
     protected onListening() {
-        const address = this.socket.address();
-        log(`M-SEARCH socket is now listening on ${address.address}:${address.port}`);
+        log('MSearchSocket#onListening - %o', this.socket.address());
     }
 
     protected onMessage(messageBuffer: Buffer, remote: dgram.AddressInfo) {
