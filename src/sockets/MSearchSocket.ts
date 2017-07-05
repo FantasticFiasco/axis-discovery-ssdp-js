@@ -45,7 +45,7 @@ export class MSearchSocket extends SocketBase {
     }
 
     protected onListening() {
-        log('MSearchSocket#onListening - %o', this.socket.address());
+        log('MSearchSocket#onListening - %s:%d', this.socket.address().address, this.socket.address().port);
     }
 
     protected onMessage(messageBuffer: Buffer, remote: dgram.AddressInfo) {

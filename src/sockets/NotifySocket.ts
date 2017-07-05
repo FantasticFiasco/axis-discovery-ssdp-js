@@ -18,7 +18,7 @@ export class NotifySocket extends SocketBase {
     }
 
     protected onListening() {
-        log('NotifySocket#onListening - %o', this.socket.address());
+        log('NotifySocket#onListening - %s:%d', this.socket.address().address, this.socket.address().port);
 
         for (const address of this.addresses) {
             log('NotifySocket#onListening - add membership to %s', address);
