@@ -24,7 +24,7 @@
   "main": "./lib/index.js",
   "types": "./lib/index",
   "engines": {
-    "node": ">=4.6.1"
+    "node": ">=6.0.0"
   },
   "scripts": {
     "clean": "rimraf \"./+(src|test)/**/*.+(d.ts|js|js.map)\" ./lib ./coverage",
