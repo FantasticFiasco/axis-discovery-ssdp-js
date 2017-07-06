@@ -1,3 +1,4 @@
+import * as expect from '@fantasticfiasco/expect';
 import * as events from 'events';
 import * as _ from 'lodash';
 
@@ -17,42 +18,38 @@ import { SocketBase } from './sockets/SocketBase';
  */
 export class Discovery {
 
-    private readonly sockets = new Array<SocketBase>();
     private readonly eventEmitter = new events.EventEmitter();
+    private sockets?: SocketBase[];
 
     /**
      * Start listen for device advertisements on all network interface
      * addresses.
      */
     public async start(): Promise<void> {
+        expect.toNotExist(this.sockets, 'Discovery has already been started');
+
         log('Discovery#start');
 
-        const addresses = getIPv4Addresses();
-
-        // Start passive SSDP
-        await this.startSocket(new NotifySocket(addresses));
-
-        // Start active SSDP
-        for (const address of addresses) {
-            await this.startSocket(new MSearchSocket(address));
-        }
+        await this.setup();
     }
 
     /**
      * Stop listening for device advertisements.
      */
     public async stop(): Promise<void> {
+        expect.toExist(this.sockets, 'Discovery has not been started');
+
         log('Discovery#stop');
 
-        for (const socket of this.sockets.splice(0, this.sockets.length)) {
-            await socket.stop();
-        }
+        await this.teardown();
     }
 
     /**
      * Triggers a new search for devices on the network.
      */
     public async search(): Promise<void> {
+        expect.toExist(this.sockets, 'Discovery has not been started');
+
         log('Discovery#search');
 
         const mSearchSockets = _.chain(this.sockets)
@@ -81,11 +78,38 @@ export class Discovery {
         this.eventEmitter.on('goodbye', (device: Device) => callback(device));
     }
 
-    private async startSocket(socket: SocketBase): Promise<void> {
-        this.sockets.push(socket);
+    private async setup(): Promise<void> {
+        this.sockets = [];
+        const addresses = getIPv4Addresses();
+
+        // Passive SSDP
+        await this.setupSocket(new NotifySocket(addresses));
+
+        // Active SSDP
+        for (const address of addresses) {
+            await this.setupSocket(new MSearchSocket(address));
+        }
+    }
+
+    private async setupSocket(socket: SocketBase): Promise<void> {
+        (this.sockets as SocketBase[]).push(socket);
         socket.on('hello', (message: Message) => this.onHelloMessage(message));
         socket.on('goodbye', (message: Message) => this.onGoodbyeMessage(message));
         await socket.start();
+    }
+
+    private async teardown(): Promise<void> {
+        for (const socket of (this.sockets as SocketBase[])) {
+            this.teardownSocket(socket);
+        }
+
+        this.sockets = undefined;
+    }
+
+    private async teardownSocket(socket: SocketBase): Promise<void> {
+        socket.removeAllListeners('hello');
+        socket.removeAllListeners('goodbye');
+        await socket.stop();
     }
 
     private onHelloMessage(message: Message) {
