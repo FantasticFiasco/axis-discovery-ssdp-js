@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [4.0.1] - 2017-07-06
+
 ### Fixed
 
 - Issue where socket listeners remained alive when discovery was stopped
