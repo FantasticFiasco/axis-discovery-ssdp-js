@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import * as os from 'os';
 
 /**
@@ -6,14 +5,16 @@ import * as os from 'os';
  */
 export function getIPv4Addresses(): string[] {
     const interfaces = os.networkInterfaces();
+    const addresses: string[] = [];
 
-    const addresses = _.chain(interfaces)
-        .values()
-        .flatten()
-        .filter((entry: os.NetworkInterfaceInfo) => entry.family === 'IPv4')
-        .filter((entry: os.NetworkInterfaceInfo) => !entry.internal)
-        .map((entry: os.NetworkInterfaceInfo) => entry.address)
-        .value();
+    Object.keys(interfaces).forEach((interfaceIndex) => {
+        Object.keys(interfaces[interfaceIndex]).forEach((addressIndex) => {
+            const address = interfaces[interfaceIndex][addressIndex];
+            if (address.family === 'IPv4' && !address.internal) {
+                addresses.push(address.address);
+            }
+        });
+    });
 
     return addresses;
 }
