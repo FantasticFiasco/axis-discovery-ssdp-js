@@ -81,6 +81,7 @@ export class Discovery {
     private async setup(): Promise<void> {
         this.sockets = [];
         const addresses = getIPv4Addresses();
+        log('Discovery#setup - interface addresses: %o', addresses);
 
         // Passive SSDP
         await this.setupSocket(new NotifySocket(addresses));
