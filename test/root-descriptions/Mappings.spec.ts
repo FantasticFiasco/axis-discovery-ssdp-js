@@ -2,7 +2,13 @@ import * as chai from 'chai';
 
 import { mapFromRootDescription } from './../../src/root-descriptions/Mappings';
 import { RootDescription } from './../../src/root-descriptions/RootDescription';
-import * as ObjectMother from './../ObjectMother';
+import {} from './Mappings.mock';
+import {
+    ROOT_DESCRIPTION_DEFAULT_HTTP_PORT,
+    ROOT_DESCRIPTION_DEFAULT_HTTPS_PORT,
+    ROOT_DESCRIPTION_NO_PORT,
+    ROOT_DESCRIPTION_WITH_LOWERCASE_MACADDRESS
+} from './RootDescription.mock';
 
 const should = chai.should();
 
@@ -13,8 +19,8 @@ describe('Mappings', function() {
         it('should map root descriptions', async function() {
             // Arrange
             const rootDescription = await RootDescription.parse(
-                ObjectMother.REMOTE_ADDRESS,
-                ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
+                '192.168.1.102',
+                ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Act
             const actual = mapFromRootDescription(rootDescription);
@@ -33,8 +39,8 @@ describe('Mappings', function() {
         it('should map root descriptions with default HTTP port', async function() {
             // Arrange
             const rootDescription = await RootDescription.parse(
-                ObjectMother.REMOTE_ADDRESS,
-                ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
+                '192.168.1.102',
+                ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Act
             const actual = mapFromRootDescription(rootDescription);
@@ -46,8 +52,8 @@ describe('Mappings', function() {
         it('should map root descriptions with default HTTPS port', async function() {
             // Arrange
             const rootDescription = await RootDescription.parse(
-                ObjectMother.REMOTE_ADDRESS,
-                ObjectMother.ROOT_DESCRIPTION_DEFAULT_HTTPS_PORT);
+                '192.168.1.102',
+                ROOT_DESCRIPTION_DEFAULT_HTTPS_PORT);
 
             // Act
             const actual = mapFromRootDescription(rootDescription);
@@ -59,8 +65,8 @@ describe('Mappings', function() {
         it('should map root descriptions without port', async function() {
             // Arrange
             const rootDescription = await RootDescription.parse(
-                ObjectMother.REMOTE_ADDRESS,
-                ObjectMother.ROOT_DESCRIPTION_NO_PORT);
+                '192.168.1.102',
+                ROOT_DESCRIPTION_NO_PORT);
 
             // Act
             const actual = mapFromRootDescription(rootDescription);
@@ -72,8 +78,8 @@ describe('Mappings', function() {
         it('should map root descriptions and convert MAC address to uppercase', async function() {
             // Arrange
             const rootDescription = await RootDescription.parse(
-                ObjectMother.REMOTE_ADDRESS,
-                ObjectMother.ROOT_DESCRIPTION_WITH_LOWERCASE_MACADDRESS);
+                '192.168.1.102',
+                ROOT_DESCRIPTION_WITH_LOWERCASE_MACADDRESS);
 
             // Act
             const actual = mapFromRootDescription(rootDescription);

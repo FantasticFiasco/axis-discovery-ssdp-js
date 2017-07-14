@@ -3,7 +3,13 @@ import * as os from 'os';
 import * as sinon from 'sinon';
 
 import { getIPv4Addresses } from './../../src/network-interfaces/NetworkInterface';
-import * as mocks from './Mocks';
+import {
+    NETWORK_INTERFACE_WITH_TWO_ADDRESSES,
+    NETWORK_INTERFACES_WITH_INTERNAL_ADDRESSES,
+    NETWORK_INTERFACES_WITH_IPV6_ADDRESSES,
+    NETWORK_INTERFACES_WITH_TWO_ADDRESSES    ,
+    NO_NETWORK_INTERFACES
+} from './NetworkInterface.mock';
 
 chai.should();
 
@@ -20,7 +26,7 @@ describe('NetworkInterface', function() {
         it('should return addresses from one network interface', function() {
             // Arrange
             osStub = sinon.stub(os, 'networkInterfaces')
-                .returns(mocks.NETWORK_INTERFACE_WITH_TWO_ADDRESSES);
+                .returns(NETWORK_INTERFACE_WITH_TWO_ADDRESSES);
 
             // Act
             const addresses = getIPv4Addresses();
@@ -32,7 +38,7 @@ describe('NetworkInterface', function() {
         it('should return addresses from multiple network interfaces', function() {
             // Arrange
             osStub = sinon.stub(os, 'networkInterfaces')
-                .returns(mocks.NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
+                .returns(NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
 
             // Act
             const addresses = getIPv4Addresses();
@@ -44,7 +50,7 @@ describe('NetworkInterface', function() {
         it('should not return internal addresses', function() {
             // Arrange
             osStub = sinon.stub(os, 'networkInterfaces')
-                .returns(mocks.NETWORK_INTERFACES_WITH_INTERNAL_ADDRESSES);
+                .returns(NETWORK_INTERFACES_WITH_INTERNAL_ADDRESSES);
 
             // Act
             const addresses = getIPv4Addresses();
@@ -56,7 +62,7 @@ describe('NetworkInterface', function() {
         it('should not return IPv6 addresses', function() {
             // Arrange
             osStub = sinon.stub(os, 'networkInterfaces')
-                .returns(mocks.NETWORK_INTERFACES_WITH_IPV6_ADDRESSES);
+                .returns(NETWORK_INTERFACES_WITH_IPV6_ADDRESSES);
 
             // Act
             const addresses = getIPv4Addresses();
@@ -68,7 +74,7 @@ describe('NetworkInterface', function() {
         it('should not fail on systems without network interfaces', function() {
             // Arrange
             osStub = sinon.stub(os, 'networkInterfaces')
-                .returns(mocks.NO_NETWORK_INTERFACES);
+                .returns(NO_NETWORK_INTERFACES);
 
             // Act
             const addresses = getIPv4Addresses();

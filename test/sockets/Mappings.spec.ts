@@ -2,7 +2,15 @@ import * as chai from 'chai';
 
 import { mapFromMessage } from './../../src/sockets/Mappings';
 import { Message } from './../../src/sockets/Message';
-import * as ObjectMother from './../ObjectMother';
+import {
+    MSEARCH_MESSAGE,
+    NOTIFY_MESSAGE
+} from './Message.mock';
+import {
+    MSEARCH_MESSAGE_WITH_LOWERCASE_MACADDRESS,
+    NOTIFY_MESSAGE_WITH_LOWERCASE_MACADDRESS
+} from './../root-descriptions/Mappings.mock'
+
 
 const should = chai.should();
 
@@ -13,8 +21,8 @@ describe('Mappings', function() {
         it('should map Notify messages', function() {
             // Arrange
             const message = new Message(
-                ObjectMother.REMOTE_ADDRESS,
-                new Buffer(ObjectMother.NOTIFY_MESSAGE));
+                '192.168.1.102',
+                new Buffer(NOTIFY_MESSAGE));
 
             // Act
             const actual = mapFromMessage(message);
@@ -32,8 +40,8 @@ describe('Mappings', function() {
         it('should map Notify messages and convert MAC address to uppercase', function() {
             // Arrange
             const message = new Message(
-                ObjectMother.REMOTE_ADDRESS,
-                new Buffer(ObjectMother.NOTIFY_MESSAGE_WITH_LOWERCASE_MACADDRESS));
+                '192.168.1.102',
+                new Buffer(NOTIFY_MESSAGE_WITH_LOWERCASE_MACADDRESS));
 
             // Act
             const actual = mapFromMessage(message);
@@ -45,8 +53,8 @@ describe('Mappings', function() {
         it('should map M-Search messages', function() {
             // Arrange
             const message = new Message(
-                ObjectMother.REMOTE_ADDRESS,
-                new Buffer(ObjectMother.MSEARCH_MESSAGE));
+                '192.168.1.102',
+                new Buffer(MSEARCH_MESSAGE));
 
             // Act
             const actual = mapFromMessage(message);
@@ -64,8 +72,8 @@ describe('Mappings', function() {
         it('should map M-Search messages and convert MAC address to uppercase', function() {
             // Arrange
             const message = new Message(
-                ObjectMother.REMOTE_ADDRESS,
-                new Buffer(ObjectMother.MSEARCH_MESSAGE_WITH_LOWERCASE_MACADDRESS));
+                '192.168.1.102',
+                new Buffer(MSEARCH_MESSAGE_WITH_LOWERCASE_MACADDRESS));
 
             // Act
             const actual = mapFromMessage(message);
