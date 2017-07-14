@@ -36,9 +36,9 @@
   version "8.0.12"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.12.tgz#0560c3e8c9e3da0aa07d0b86e0b0a02b5fd29480"
 
-"@types/request@0.0.46":
-  version "0.0.46"
-  resolved "https://registry.yarnpkg.com/@types/request/-/request-0.0.46.tgz#918fdfae249090d018901fc291ae4c4ceac30e6b"
+"@types/request@0.0.47":
+  version "0.0.47"
+  resolved "https://registry.yarnpkg.com/@types/request/-/request-0.0.47.tgz#b8093530603ffd04782bf48e95aba5a25eb4f88b"
   dependencies:
     "@types/form-data" "*"
     "@types/node" "*"
