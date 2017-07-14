@@ -53,7 +53,7 @@
   "devDependencies": {
     "@types/chai": "4.0.0",
     "@types/debug": "0.0.29",
-    "@types/lodash": "4.14.68",
+    "@types/lodash": "4.14.69",
     "@types/mocha": "2.2.41",
     "@types/node": "8.0.12",
     "@types/request": "0.0.46",
