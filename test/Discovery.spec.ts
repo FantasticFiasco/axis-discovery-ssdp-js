@@ -4,7 +4,7 @@ import * as os from 'os';
 import * as sinon from 'sinon';
 
 import { Discovery } from './../src/Discovery';
-import * as networkInterfaceMocks from './network-interfaces/Mocks';
+import { NETWORK_INTERFACES_WITH_TWO_ADDRESSES } from './network-interfaces/NetworkInterface.mock';
 
 chai.should();
 
@@ -18,7 +18,7 @@ describe('Discovery', function() {
     beforeEach(function() {
         // Mock os
         osStub = sinon.stub(os, 'networkInterfaces')
-            .returns(networkInterfaceMocks.NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
+            .returns(NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
 
         // Mock dgram
         socket = {

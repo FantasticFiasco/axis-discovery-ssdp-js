@@ -1,6 +1,9 @@
 import * as chai from 'chai';
 
-import * as ObjectMother from '../ObjectMother';
+import {
+    MSEARCH_MESSAGE,
+    NOTIFY_MESSAGE
+} from './Message.mock';
 import { Message } from './../../src/sockets/Message';
 
 chai.should();
@@ -30,7 +33,7 @@ describe('Message', function() {
     describe('M-SEARCH response', () => {
         it('#method', function() {
             // Arrange
-            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.MSEARCH_MESSAGE));
+            const subject = new Message('192.168.1.100', new Buffer(MSEARCH_MESSAGE));
 
             // Assert
             subject.method.should.equal('HTTP/1.1 200 OK');
@@ -38,7 +41,7 @@ describe('Message', function() {
 
         it('#location', function() {
             // Arrange
-            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.MSEARCH_MESSAGE));
+            const subject = new Message('192.168.1.100', new Buffer(MSEARCH_MESSAGE));
 
             // Assert
             subject.location.should.equal('http://192.168.1.102:45895/rootdesc1.xml');
@@ -46,7 +49,7 @@ describe('Message', function() {
 
         it('#usn', function() {
             // Arrange
-            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.MSEARCH_MESSAGE));
+            const subject = new Message('192.168.1.100', new Buffer(MSEARCH_MESSAGE));
 
             // Assert
             subject.usn.should.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
@@ -72,7 +75,7 @@ describe('Message', function() {
     describe('NOTIFY', () => {
         it('#method', function() {
             // Arrange
-            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
+            const subject = new Message('192.168.1.100', new Buffer(NOTIFY_MESSAGE));
 
             // Assert
             subject.method.should.equal('NOTIFY * HTTP/1.1');
@@ -80,7 +83,7 @@ describe('Message', function() {
 
         it('#location', function() {
             // Arrange
-            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
+            const subject = new Message('192.168.1.100', new Buffer(NOTIFY_MESSAGE));
 
             // Assert
             subject.location.should.equal('http://192.168.1.102:45895/rootdesc1.xml');
@@ -96,7 +99,7 @@ describe('Message', function() {
 
         it('#usn', function() {
             // Arrange
-            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
+            const subject = new Message('192.168.1.100', new Buffer(NOTIFY_MESSAGE));
 
             // Assert
             subject.usn.should.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
@@ -112,7 +115,7 @@ describe('Message', function() {
 
         it('#nt', function() {
             // Arrange
-            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
+            const subject = new Message('192.168.1.100', new Buffer(NOTIFY_MESSAGE));
 
             // Assert
             subject.nt.should.equal('urn:axis-com:service:BasicService:1');
@@ -128,7 +131,7 @@ describe('Message', function() {
 
         it('#nts', function() {
             // Arrange
-            const subject = new Message('192.168.1.100', new Buffer(ObjectMother.NOTIFY_MESSAGE));
+            const subject = new Message('192.168.1.100', new Buffer(NOTIFY_MESSAGE));
 
             // Assert
             subject.nts.should.equal('ssdp:byebye');
