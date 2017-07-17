@@ -1,6 +1,5 @@
 import * as expect from '@fantasticfiasco/expect';
 import * as events from 'events';
-import * as _ from 'lodash';
 
 import { Device } from './';
 import { log } from './logging/Log';
@@ -52,13 +51,10 @@ export class Discovery {
 
         log('Discovery#search');
 
-        const mSearchSockets = _.chain(this.sockets)
-            .filter((socket) => socket instanceof MSearchSocket)
-            .map((socket) => socket as MSearchSocket)
-            .value();
-
-        for (const mSearchSocket of mSearchSockets) {
-            await mSearchSocket.search();
+        for (const socket of this.sockets as SocketBase[]) {
+            if (socket instanceof MSearchSocket) {
+                await socket.search();
+            }
         }
     }
 
@@ -81,6 +77,7 @@ export class Discovery {
     private async setup(): Promise<void> {
         this.sockets = [];
         const addresses = getIPv4Addresses();
+        log('Discovery#setup - interface addresses: %o', addresses);
 
         // Passive SSDP
         await this.setupSocket(new NotifySocket(addresses));
