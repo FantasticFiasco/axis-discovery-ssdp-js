@@ -50,7 +50,7 @@ export class RootDescription {
             return undefined;
         }
 
-        return (this.rootDescription['root']['device'][0]['serialNumber'][0] as string).toUpperCase();
+        return this.rootDescription['root']['device'][0]['serialNumber'][0]!.toUpperCase();
     }
 
     public get presentationUrl(): string | undefined {

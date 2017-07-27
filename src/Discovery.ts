@@ -51,7 +51,7 @@ export class Discovery {
 
         log('Discovery#search');
 
-        for (const socket of this.sockets as SocketBase[]) {
+        for (const socket of this.sockets!) {
             if (socket instanceof MSearchSocket) {
                 await socket.search();
             }
@@ -89,14 +89,14 @@ export class Discovery {
     }
 
     private async setupSocket(socket: SocketBase): Promise<void> {
-        (this.sockets as SocketBase[]).push(socket);
+        this.sockets!.push(socket);
         socket.on('hello', (message: Message) => this.onHelloMessage(message));
         socket.on('goodbye', (message: Message) => this.onGoodbyeMessage(message));
         await socket.start();
     }
 
     private async teardown(): Promise<void> {
-        for (const socket of (this.sockets as SocketBase[])) {
+        for (const socket of this.sockets!) {
             this.teardownSocket(socket);
         }
 

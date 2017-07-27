@@ -2,7 +2,6 @@ import * as chai from 'chai';
 
 import { mapFromRootDescription } from './../../src/root-descriptions/Mappings';
 import { RootDescription } from './../../src/root-descriptions/RootDescription';
-import {} from './Mappings.mock';
 import {
     ROOT_DESCRIPTION_DEFAULT_HTTP_PORT,
     ROOT_DESCRIPTION_DEFAULT_HTTPS_PORT,
@@ -12,11 +11,11 @@ import {
 
 const should = chai.should();
 
-describe('Mappings', function() {
+describe('Mappings', function () {
 
-    describe('#mapFromRootDescription', function() {
+    describe('#mapFromRootDescription', function () {
 
-        it('should map root descriptions', async function() {
+        it('should map root descriptions', async function () {
             // Arrange
             const rootDescription = await RootDescription.parse(
                 '192.168.1.102',
@@ -27,16 +26,16 @@ describe('Mappings', function() {
 
             // Assert
             actual.address.should.equal('192.168.1.102');
-            (actual.port as number).should.equal(80);
-            (actual.macAddress as string).should.equal('ACCC8E270AD8');
-            (actual.friendlyName as string).should.equal('AXIS M1014 - ACCC8E270AD8');
-            (actual.modelName as string).should.equal('AXIS M1014');
-            (actual.modelDescription as string).should.equal('AXIS M1014 Fixed Network Camera');
-            (actual.modelNumber as string).should.equal('M1014');
-            (actual.presentationURL as string).should.equal('http://192.168.1.102:80/');
+            actual.port!.should.equal(80);
+            actual.macAddress!.should.equal('ACCC8E270AD8');
+            actual.friendlyName!.should.equal('AXIS M1014 - ACCC8E270AD8');
+            actual.modelName!.should.equal('AXIS M1014');
+            actual.modelDescription!.should.equal('AXIS M1014 Fixed Network Camera');
+            actual.modelNumber!.should.equal('M1014');
+            actual.presentationURL!.should.equal('http://192.168.1.102:80/');
         });
 
-        it('should map root descriptions with default HTTP port', async function() {
+        it('should map root descriptions with default HTTP port', async function () {
             // Arrange
             const rootDescription = await RootDescription.parse(
                 '192.168.1.102',
@@ -46,10 +45,10 @@ describe('Mappings', function() {
             const actual = mapFromRootDescription(rootDescription);
 
             // Assert
-            (actual.port as number).should.equal(80);
+            actual.port!.should.equal(80);
         });
 
-        it('should map root descriptions with default HTTPS port', async function() {
+        it('should map root descriptions with default HTTPS port', async function () {
             // Arrange
             const rootDescription = await RootDescription.parse(
                 '192.168.1.102',
@@ -59,10 +58,10 @@ describe('Mappings', function() {
             const actual = mapFromRootDescription(rootDescription);
 
             // Assert
-            (actual.port as number).should.equal(443);
+            actual.port!.should.equal(443);
         });
 
-        it('should map root descriptions without port', async function() {
+        it('should map root descriptions without port', async function () {
             // Arrange
             const rootDescription = await RootDescription.parse(
                 '192.168.1.102',
@@ -75,7 +74,7 @@ describe('Mappings', function() {
             should.not.exist(actual.port);
         });
 
-        it('should map root descriptions and convert MAC address to uppercase', async function() {
+        it('should map root descriptions and convert MAC address to uppercase', async function () {
             // Arrange
             const rootDescription = await RootDescription.parse(
                 '192.168.1.102',
@@ -85,7 +84,7 @@ describe('Mappings', function() {
             const actual = mapFromRootDescription(rootDescription);
 
             // Assert
-            (actual.macAddress as string).should.equal('ACCC8E270AD8');
+            actual.macAddress!.should.equal('ACCC8E270AD8');
         });
     });
 });

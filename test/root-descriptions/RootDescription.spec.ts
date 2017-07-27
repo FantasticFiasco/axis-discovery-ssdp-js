@@ -9,11 +9,11 @@ import { RootDescription } from './../../src/root-descriptions/RootDescription';
 chai.should();
 const should = chai.should();
 
-describe('RootDescription', function() {
+describe('RootDescription', function () {
 
-    describe('#remoteAddress', function() {
+    describe('#remoteAddress', function () {
 
-        it('should return remote address', async function() {
+        it('should return remote address', async function () {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
@@ -24,8 +24,8 @@ describe('RootDescription', function() {
         });
     });
 
-    describe('#friendlyName', function() {
-        it('should return friendly name', async function() {
+    describe('#friendlyName', function () {
+        it('should return friendly name', async function () {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
@@ -36,18 +36,18 @@ describe('RootDescription', function() {
         });
     });
 
-    describe('#modelDescription', function() {
-        it('should return model description', async function() {
+    describe('#modelDescription', function () {
+        it('should return model description', async function () {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            (subject.modelDescription as string).should.equal('AXIS M1014 Fixed Network Camera');
+            subject.modelDescription!.should.equal('AXIS M1014 Fixed Network Camera');
         });
 
-        it('should not return model description if missing', async function() {
+        it('should not return model description if missing', async function () {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
@@ -58,8 +58,8 @@ describe('RootDescription', function() {
         });
     });
 
-    describe('#modelName', function() {
-        it('should return model name', async function() {
+    describe('#modelName', function () {
+        it('should return model name', async function () {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
@@ -70,18 +70,18 @@ describe('RootDescription', function() {
         });
     });
 
-    describe('#modelNumber', function() {
-        it('should return model number', async function() {
+    describe('#modelNumber', function () {
+        it('should return model number', async function () {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            (subject.modelNumber as string).should.equal('M1014');
+            subject.modelNumber!.should.equal('M1014');
         });
 
-        it('should not return model number if missing', async function() {
+        it('should not return model number if missing', async function () {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
@@ -92,18 +92,18 @@ describe('RootDescription', function() {
         });
     });
 
-    describe('#macAddress', function() {
-        it('should return MAC address', async function() {
+    describe('#macAddress', function () {
+        it('should return MAC address', async function () {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            (subject.macAddress as string).should.equal('ACCC8E270AD8');
+            subject.macAddress!.should.equal('ACCC8E270AD8');
         });
 
-        it('should not return MAC address if missing', async function() {
+        it('should not return MAC address if missing', async function () {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
@@ -114,18 +114,18 @@ describe('RootDescription', function() {
         });
     });
 
-    describe('#presentationUrl', function() {
-        it('should return presentation URL', async function() {
+    describe('#presentationUrl', function () {
+        it('should return presentation URL', async function () {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            (subject.presentationUrl as string).should.equal('http://192.168.1.102:80/');
+            subject.presentationUrl!.should.equal('http://192.168.1.102:80/');
         });
 
-        it('should not return presentation URL if missing', async function() {
+        it('should not return presentation URL if missing', async function () {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',

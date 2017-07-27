@@ -14,11 +14,11 @@ import {
 
 const should = chai.should();
 
-describe('Mappings', function() {
+describe('Mappings', function () {
 
-    describe('#mapFromMessage', function() {
+    describe('#mapFromMessage', function () {
 
-        it('should map Notify messages', function() {
+        it('should map Notify messages', function () {
             // Arrange
             const message = new Message(
                 '192.168.1.102',
@@ -29,7 +29,7 @@ describe('Mappings', function() {
 
             // Assert
             actual.address.should.equal('192.168.1.102');
-            (actual.macAddress as string).should.equal('ACCC8E270AD8');
+            actual.macAddress!.should.equal('ACCC8E270AD8');
             should.not.exist(actual.friendlyName);
             should.not.exist(actual.modelName);
             should.not.exist(actual.modelDescription);
@@ -37,7 +37,7 @@ describe('Mappings', function() {
             should.not.exist(actual.presentationURL);
         });
 
-        it('should map Notify messages and convert MAC address to uppercase', function() {
+        it('should map Notify messages and convert MAC address to uppercase', function () {
             // Arrange
             const message = new Message(
                 '192.168.1.102',
@@ -47,10 +47,10 @@ describe('Mappings', function() {
             const actual = mapFromMessage(message);
 
             // Assert
-            (actual.macAddress as string).should.equal('ACCC8E270AD8');
+            actual.macAddress!.should.equal('ACCC8E270AD8');
         });
 
-        it('should map M-Search messages', function() {
+        it('should map M-Search messages', function () {
             // Arrange
             const message = new Message(
                 '192.168.1.102',
@@ -61,7 +61,7 @@ describe('Mappings', function() {
 
             // Assert
             actual.address.should.equal('192.168.1.102');
-            (actual.macAddress as string).should.equal('ACCC8E270AD8');
+            actual.macAddress!.should.equal('ACCC8E270AD8');
             should.not.exist(actual.friendlyName);
             should.not.exist(actual.modelName);
             should.not.exist(actual.modelDescription);
@@ -69,7 +69,7 @@ describe('Mappings', function() {
             should.not.exist(actual.presentationURL);
         });
 
-        it('should map M-Search messages and convert MAC address to uppercase', function() {
+        it('should map M-Search messages and convert MAC address to uppercase', function () {
             // Arrange
             const message = new Message(
                 '192.168.1.102',
@@ -79,7 +79,7 @@ describe('Mappings', function() {
             const actual = mapFromMessage(message);
 
             // Assert
-            (actual.macAddress as string).should.equal('ACCC8E270AD8');
+            actual.macAddress!.should.equal('ACCC8E270AD8');
         });
     });
 });
