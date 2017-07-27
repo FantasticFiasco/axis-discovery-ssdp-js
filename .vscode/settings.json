@@ -2,11 +2,16 @@
 {
   "editor.formatOnSave": true,
   "files.exclude": {
-    "**/*.js": {"when": "$(basename).ts"},
-    "**/*.d.ts": {"when": "$(basename).ts"},
+    "**/*.js": {
+      "when": "$(basename).ts"
+    },
+    "**/*.d.ts": {
+      "when": "$(basename).ts"
+    },
     "**/*.js.map": true,
     "**/npm-debug.log": true
   },
+  "tslint.autoFixOnSave": true,
   "tslint.exclude": "**/test/**/*.ts",
   "typescript.tsdk": "node_modules/typescript/lib"
 }
