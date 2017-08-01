@@ -6,9 +6,9 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@fantasticfiasco/expect/-/expect-1.0.0.tgz#fc700aee52122b3bc62a95b8ab95ffa4b65967ba"
 
-"@types/chai@4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.0.0.tgz#4c9adabd2d04265769e6d9e847e86cc404dc7dcd"
+"@types/chai@4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.0.2.tgz#cce9666f5ee2fa27ffd505d2dfaf53bb02ed2584"
 
 "@types/debug@0.0.29":
   version "0.0.29"
