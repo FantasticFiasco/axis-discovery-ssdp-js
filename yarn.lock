@@ -35,9 +35,9 @@
     "@types/form-data" "*"
     "@types/node" "*"
 
-"@types/sinon@2.3.4":
-  version "2.3.4"
-  resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-2.3.4.tgz#2b3aa82dfc791eeff1d970b657a77eafff2899ff"
+"@types/sinon@2.3.5":
+  version "2.3.5"
+  resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-2.3.5.tgz#68f1e0ac15f2eb6cc682b7af87cd517acc77b589"
 
 "@types/xml2js@0.4.0":
   version "0.4.0"
