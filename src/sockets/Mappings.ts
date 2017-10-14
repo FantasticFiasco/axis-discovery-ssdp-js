@@ -4,10 +4,10 @@ import { Message } from './../sockets/Message';
 /**
  * Maps a SSDP message to a device.
  */
-export function mapFromMessage(message: Message): Device {
+export function mapFromMessage(message: Message): Device | null {
     const macAddressMatch = macAddressRegExp.exec(message.usn);
     if (macAddressMatch == null) {
-        throw new Error('Parameter USN on SSDP message does not contain uuid.');
+        return null;
     }
 
     const macAddress = macAddressMatch[1].toUpperCase();
