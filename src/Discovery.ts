@@ -112,17 +112,27 @@ export class Discovery {
     private onHelloMessage(message: Message) {
         log('Discovery#onHelloMessage - %s', message.remoteAddress);
 
-        // Emit initial hello
-        this.eventEmitter.emit('hello', mapFromMessage(message));
+        const device = mapFromMessage(message);
+        if (device) {
+            // Emit initial hello
+            this.eventEmitter.emit('hello', device);
 
-        // Request root description
-        this.requestRootDescription(message.remoteAddress, message.location);
+            // Request root description
+            this.requestRootDescription(message.remoteAddress, message.location);
+        } else {
+            log('Discovery#onHelloMessage - ignore %s since mapping was unsuccessful', message.remoteAddress);
+        }
     }
 
     private onGoodbyeMessage(message: Message) {
         log('Discovery#onGoodbyeMessage - %s', message.remoteAddress);
 
-        this.eventEmitter.emit('goodbye', mapFromMessage(message));
+        const device = mapFromMessage(message);
+        if (device) {
+            this.eventEmitter.emit('goodbye', device);
+        } else {
+            log('Discovery#onGoodbyeMessage - ignore %s since mapping was unsuccessful', message.remoteAddress);
+        }
     }
 
     private async requestRootDescription(remoteAddress: string, location: string): Promise<void> {

@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### Fixed
+
+- Issue where exception was thrown when received message didn't specify MAC address
+
 ## [4.0.1] - 2017-07-06
 
 ### Fixed
