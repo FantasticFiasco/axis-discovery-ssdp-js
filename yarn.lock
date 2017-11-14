@@ -43,9 +43,9 @@
   version "2.3.7"
   resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-2.3.7.tgz#e92c2fed3297eae078d78d1da032b26788b4af86"
 
-"@types/xml2js@0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@types/xml2js/-/xml2js-0.4.1.tgz#0e79b2c143adb3934fbe1551fa1bf0dc5ddedd10"
+"@types/xml2js@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@types/xml2js/-/xml2js-0.4.2.tgz#a4b84b3879ffd4710953fd92cabfde9a8a4e8456"
   dependencies:
     "@types/node" "*"
 
