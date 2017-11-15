@@ -28,9 +28,9 @@
   version "8.0.28"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.28.tgz#86206716f8d9251cf41692e384264cbd7058ad60"
 
-"@types/node@8.0.51":
-  version "8.0.51"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.51.tgz#b31d716fb8d58eeb95c068a039b9b6292817d5fb"
+"@types/node@8.0.52":
+  version "8.0.52"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.52.tgz#8e7f47747868e7687f2cd4922966e2d6af78d22d"
 
 "@types/request@2.0.8":
   version "2.0.8"
@@ -43,9 +43,9 @@
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-4.0.0.tgz#9a93ffa4ee1329e85166278a5ed99f81dc4c8362"
 
-"@types/xml2js@0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@types/xml2js/-/xml2js-0.4.1.tgz#0e79b2c143adb3934fbe1551fa1bf0dc5ddedd10"
+"@types/xml2js@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/@types/xml2js/-/xml2js-0.4.2.tgz#a4b84b3879ffd4710953fd92cabfde9a8a4e8456"
   dependencies:
     "@types/node" "*"
 
