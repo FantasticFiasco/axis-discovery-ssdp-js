@@ -4,7 +4,7 @@ import * as events from 'events';
 import { Device } from './';
 import { log } from './logging';
 import { getIPv4Addresses } from './network-interfaces';
-import { DefaultHttpRequest, IOptions } from './options';
+import { defaultGetRequest, IOptions } from './options';
 import { mapFromRootDescription, RootDescriptionRequest } from './root-descriptions';
 import { mapFromMessage, Message, MSearchSocket, NotifySocket, SocketBase } from './sockets';
 
@@ -142,7 +142,7 @@ export class Discovery {
 
     private async requestRootDescription(remoteAddress: string, location: string): Promise<void> {
         try {
-            const httpRequest = this.options.httpRequest || new DefaultHttpRequest();
+            const httpRequest = this.options.getRequest || defaultGetRequest;
             const rootDescriptionRequest = new RootDescriptionRequest(remoteAddress, location, httpRequest);
             const rootDescription = await rootDescriptionRequest.send();
             const device = mapFromRootDescription(rootDescription);

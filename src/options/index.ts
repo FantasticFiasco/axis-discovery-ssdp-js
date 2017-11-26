@@ -1,3 +1,2 @@
-export * from './DefaultHttpRequest';
-export * from './IHttpRequest';
+export * from './DefaultOptions';
 export * from './IOptions';
