@@ -2,17 +2,11 @@ import * as expect from '@fantasticfiasco/expect';
 import * as events from 'events';
 
 import { Device } from './';
-import { log } from './logging/Log';
-import { getIPv4Addresses } from './network-interfaces/NetworkInterface';
-import { DefaultHttpRequest } from './options/DefaultHttpRequest';
-import { IOptions } from './options/IOptions';
-import { mapFromRootDescription } from './root-descriptions/Mappings';
-import { RootDescriptionRequest } from './root-descriptions/RootDescriptionRequest';
-import { mapFromMessage } from './sockets/Mappings';
-import { Message } from './sockets/Message';
-import { MSearchSocket } from './sockets/MSearchSocket';
-import { NotifySocket } from './sockets/NotifySocket';
-import { SocketBase } from './sockets/SocketBase';
+import { log } from './logging';
+import { getIPv4Addresses } from './network-interfaces';
+import { DefaultHttpRequest, IOptions } from './options';
+import { mapFromRootDescription, RootDescriptionRequest } from './root-descriptions';
+import { mapFromMessage, Message, MSearchSocket, NotifySocket, SocketBase } from './sockets';
 
 /**
  * Class responsible for discovering Axis cameras on the network.
