@@ -9,7 +9,7 @@ export interface IOptions {
      * is required in an Electron application where one wish to benefit from
      * the proxy configuration provided by using Electron's
      * <a href="https://electronjs.org/docs/api/net">net.request</a>.
-     * @param url: Fully qualified URL.
+     * @param url Fully qualified URL.
      * @returns Promise with response body.
      */
     getRequest?(url: string): Promise<string>;

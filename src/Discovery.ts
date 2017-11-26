@@ -142,8 +142,8 @@ export class Discovery {
 
     private async requestRootDescription(remoteAddress: string, location: string): Promise<void> {
         try {
-            const httpRequest = this.options.getRequest || defaultGetRequest;
-            const rootDescriptionRequest = new RootDescriptionRequest(remoteAddress, location, httpRequest);
+            const getRequest = this.options.getRequest || defaultGetRequest;
+            const rootDescriptionRequest = new RootDescriptionRequest(remoteAddress, location, getRequest);
             const rootDescription = await rootDescriptionRequest.send();
             const device = mapFromRootDescription(rootDescription);
             this.eventEmitter.emit('hello', device);
