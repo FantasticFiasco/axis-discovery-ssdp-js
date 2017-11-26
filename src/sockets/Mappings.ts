@@ -1,5 +1,5 @@
 import { Device } from './..';
-import { Message } from './../sockets/Message';
+import { Message } from './Message';
 
 /**
  * Maps a SSDP message to a device.

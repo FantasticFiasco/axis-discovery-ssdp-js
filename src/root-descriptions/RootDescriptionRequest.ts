@@ -1,5 +1,5 @@
-import { IHttpRequest } from '../options/IHttpRequest';
-import { log } from './../logging/Log';
+import { IHttpRequest } from '../options';
+import { log } from './../logging';
 import { RootDescription } from './RootDescription';
 
 export class RootDescriptionRequest {
