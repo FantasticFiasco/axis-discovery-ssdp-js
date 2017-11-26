@@ -17,6 +17,10 @@ export class Discovery {
     private readonly eventEmitter = new events.EventEmitter();
     private sockets?: SocketBase[];
 
+    /**
+     * Initializes a new instance of the class.
+     * @param options The SSDP discovery options.
+     */
     constructor(options?: IOptions) {
         this.options = options || {};
     }
