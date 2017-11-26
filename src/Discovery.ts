@@ -4,6 +4,7 @@ import * as events from 'events';
 import { Device } from './';
 import { log } from './logging/Log';
 import { getIPv4Addresses } from './network-interfaces/NetworkInterface';
+import { DefaultRequestHandler, IOptions } from './options';
 import { mapFromRootDescription } from './root-descriptions/Mappings';
 import { RootDescriptionRequest } from './root-descriptions/RootDescriptionRequest';
 import { mapFromMessage } from './sockets/Mappings';
@@ -17,8 +18,13 @@ import { SocketBase } from './sockets/SocketBase';
  */
 export class Discovery {
 
+    private readonly options: IOptions;
     private readonly eventEmitter = new events.EventEmitter();
     private sockets?: SocketBase[];
+
+    constructor(options?: IOptions) {
+        this.options = options || {};
+    }
 
     /**
      * Start listen for device advertisements on all network interface
@@ -137,7 +143,8 @@ export class Discovery {
 
     private async requestRootDescription(remoteAddress: string, location: string): Promise<void> {
         try {
-            const request = new RootDescriptionRequest(remoteAddress, location);
+            const requestHandler = this.options.requestHandler || new DefaultRequestHandler();
+            const request = new RootDescriptionRequest(remoteAddress, location, requestHandler);
             const rootDescription = await request.send();
             const device = mapFromRootDescription(rootDescription);
             this.eventEmitter.emit('hello', device);
