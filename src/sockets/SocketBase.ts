@@ -2,7 +2,7 @@ import * as expect from '@fantasticfiasco/expect';
 import * as dgram from 'dgram';
 import * as events from 'events';
 
-import { log } from '../logging/Log';
+import { log } from '../logging';
 
 export abstract class SocketBase extends events.EventEmitter {
 

@@ -2,15 +2,11 @@ import * as expect from '@fantasticfiasco/expect';
 import * as events from 'events';
 
 import { Device } from './';
-import { log } from './logging/Log';
-import { getIPv4Addresses } from './network-interfaces/NetworkInterface';
-import { mapFromRootDescription } from './root-descriptions/Mappings';
-import { RootDescriptionRequest } from './root-descriptions/RootDescriptionRequest';
-import { mapFromMessage } from './sockets/Mappings';
-import { Message } from './sockets/Message';
-import { MSearchSocket } from './sockets/MSearchSocket';
-import { NotifySocket } from './sockets/NotifySocket';
-import { SocketBase } from './sockets/SocketBase';
+import { log } from './logging';
+import { getIPv4Addresses } from './network-interfaces';
+import { HttpClient, IOptions } from './options';
+import { mapFromRootDescription, RootDescriptionRequest } from './root-descriptions';
+import { mapFromMessage, Message, MSearchSocket, NotifySocket, SocketBase } from './sockets';
 
 /**
  * Class responsible for discovering Axis cameras on the network.
@@ -18,7 +14,16 @@ import { SocketBase } from './sockets/SocketBase';
 export class Discovery {
 
     private readonly eventEmitter = new events.EventEmitter();
+    private readonly options: IOptions;
     private sockets?: SocketBase[];
+
+    /**
+     * Initializes a new instance of the class.
+     * @param options The SSDP discovery options.
+     */
+    constructor(options?: IOptions) {
+        this.options = options || {};
+    }
 
     /**
      * Start listen for device advertisements on all network interface
@@ -137,8 +142,9 @@ export class Discovery {
 
     private async requestRootDescription(remoteAddress: string, location: string): Promise<void> {
         try {
-            const request = new RootDescriptionRequest(remoteAddress, location);
-            const rootDescription = await request.send();
+            const httpClient = this.options.httpClient || new HttpClient();
+            const rootDescriptionRequest = new RootDescriptionRequest(remoteAddress, location, httpClient);
+            const rootDescription = await rootDescriptionRequest.send();
             const device = mapFromRootDescription(rootDescription);
             this.eventEmitter.emit('hello', device);
         } catch (error) {

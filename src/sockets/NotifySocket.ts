@@ -1,6 +1,6 @@
 import * as dgram from 'dgram';
 
-import { log } from '../logging/Log';
+import { log } from '../logging';
 import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from './Constants';
 import { Message } from './Message';
 import { SocketBase } from './SocketBase';
