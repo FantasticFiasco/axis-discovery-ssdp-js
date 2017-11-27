@@ -3,7 +3,7 @@
  */
 export interface IHttpClient {
     /**
-     * Send GET requests over the network.
+     * Send GET request over the network.
      * @param url Fully qualified URL.
      * @returns Promise with response body.
      */
