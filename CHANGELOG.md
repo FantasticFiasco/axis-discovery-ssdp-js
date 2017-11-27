@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [4.1.0] - 2017-11-27
+
 ### Added
 
 - The option to specify a custom implementation of a HTTP client, where the default is based on [Request](https://www.npmjs.com/package/request). This can be useful if discovery is required in an Electron application where one wish to benefit from the proxy configuration provided by using Electron's [net.request](https://electronjs.org/docs/api/net).
