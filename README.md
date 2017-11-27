@@ -54,6 +54,12 @@ The `Discovery` class is the main class in the package. With it you can register
 ```javascript
 class Discovery {
     /**
+     * Initializes a new instance of the class.
+     * @param options The SSDP discovery options.
+     */
+    constructor(options?: IOptions);
+
+    /**
      * Start listen for device advertisements on all network interface
      * addresses.
      */
@@ -132,6 +138,39 @@ class Device {
      * Gets the URL to the web page of the device.
      */
     readonly presentationURL: string | undefined;
+}
+```
+
+### `Options`
+
+The `Options` class can be specified to configure SSDP discovery.
+
+```javascript
+/**
+ * The SSDP discovery options.
+ */
+export interface IOptions {
+    /**
+     * An implementation of a HTTP client. Default value is based
+     * on <a href="https://www.npmjs.com/package/request">Request</a> but a
+     * custom implementation can be provided. This can be useful if discovery
+     * is required in an Electron application where one wish to benefit from
+     * the proxy configuration provided by using Electron's
+     * <a href="https://electronjs.org/docs/api/net">net.request</a>.
+     */
+    httpClient?: IHttpClient;
+}
+
+/**
+ * Interface responsible for HTTP communication on the network.
+ */
+export interface IHttpClient {
+    /**
+     * Send GET request over the network.
+     * @param url Fully qualified URL.
+     * @returns Promise with response body.
+     */
+    get(url: string): Promise<string>;
 }
 ```
 
