@@ -5,7 +5,7 @@ import { IHttpClient } from './IHttpClient';
  */
 export interface IOptions {
     /**
-     * A implementation of a HTTP client. Default value is based
+     * An implementation of a HTTP client. Default value is based
      * on <a href="https://www.npmjs.com/package/request">Request</a> but a
      * custom implementations can be provided. This can be useful if discovery
      * is required in an Electron application where one wish to benefit from
