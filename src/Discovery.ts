@@ -4,7 +4,7 @@ import * as events from 'events';
 import { Device } from './';
 import { log } from './logging';
 import { getIPv4Addresses } from './network-interfaces';
-import { defaultGetRequest, IOptions } from './options';
+import { HttpClient, IOptions } from './options';
 import { mapFromRootDescription, RootDescriptionRequest } from './root-descriptions';
 import { mapFromMessage, Message, MSearchSocket, NotifySocket, SocketBase } from './sockets';
 
@@ -13,8 +13,8 @@ import { mapFromMessage, Message, MSearchSocket, NotifySocket, SocketBase } from
  */
 export class Discovery {
 
-    private readonly options: IOptions;
     private readonly eventEmitter = new events.EventEmitter();
+    private readonly options: IOptions;
     private sockets?: SocketBase[];
 
     /**
@@ -142,8 +142,8 @@ export class Discovery {
 
     private async requestRootDescription(remoteAddress: string, location: string): Promise<void> {
         try {
-            const getRequest = this.options.getRequest || defaultGetRequest;
-            const rootDescriptionRequest = new RootDescriptionRequest(remoteAddress, location, getRequest);
+            const httpClient = this.options.httpClient || new HttpClient();
+            const rootDescriptionRequest = new RootDescriptionRequest(remoteAddress, location, httpClient);
             const rootDescription = await rootDescriptionRequest.send();
             const device = mapFromRootDescription(rootDescription);
             this.eventEmitter.emit('hello', device);
