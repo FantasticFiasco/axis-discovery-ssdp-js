@@ -145,8 +145,11 @@ export class Discovery {
             const httpClient = this.options.httpClient || new HttpClient();
             const rootDescriptionRequest = new RootDescriptionRequest(remoteAddress, location, httpClient);
             const rootDescription = await rootDescriptionRequest.send();
+
             const device = mapFromRootDescription(rootDescription);
-            this.eventEmitter.emit('hello', device);
+            if (device !== null) {
+                this.eventEmitter.emit('hello', device);
+            }
         } catch (error) {
             log('Discovery#requestRootDescription - %o', error);
         }
