@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [5.0.0] - 2017-12-22
+
 ### Changed
 
 - The property `macAddress` on `Device` changed type from `string | undefined` to `string`. Devices without a MAC address are now omitted from search results.
