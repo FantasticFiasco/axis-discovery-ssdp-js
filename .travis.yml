@@ -2,8 +2,7 @@ language: node_js
 
 node_js:
   - "node"  # Current - Latest features
-  - "7"
-  - "6"     # LTS - Recommended for most users
+  - "8"     # LTS - Recommended for most users
 
 matrix:
   fast_finish: true
