@@ -18,9 +18,9 @@ before_script:
 
 script:
   - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
-  - if [ "$TRAVIS_NODE_VERSION" == "node" ]; then yarn run coverage:publish; fi
-  - if [ "$TRAVIS_NODE_VERSION" != "node" ]; then yarn run test; fi
-  - yarn run lint
+  - if [ "$TRAVIS_NODE_VERSION" == "node" ]; then yarn coverage:publish; fi
+  - if [ "$TRAVIS_NODE_VERSION" != "node" ]; then yarn test; fi
+  - yarn lint
 
 after_script:
   - greenkeeper-lockfile-upload
