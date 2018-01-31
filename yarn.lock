@@ -24,9 +24,9 @@
   dependencies:
     "@types/node" "*"
 
-"@types/mocha@2.2.47":
-  version "2.2.47"
-  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.47.tgz#30bbd880834d4af0f609025f282a69b8d4458f06"
+"@types/mocha@2.2.48":
+  version "2.2.48"
+  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.48.tgz#3523b126a0b049482e1c3c11877460f76622ffab"
 
 "@types/node@*":
   version "8.0.28"
