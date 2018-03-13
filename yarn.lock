@@ -1511,9 +1511,9 @@ request@2.79.0:
     tunnel-agent "~0.4.1"
     uuid "^3.0.0"
 
-request@2.84.0:
-  version "2.84.0"
-  resolved "https://registry.yarnpkg.com/request/-/request-2.84.0.tgz#59ca54a18663d7986aa37dbe4632aa8ada3a467f"
+request@2.85.0:
+  version "2.85.0"
+  resolved "https://registry.yarnpkg.com/request/-/request-2.85.0.tgz#5a03615a47c61420b3eb99b7dba204f83603e1fa"
   dependencies:
     aws-sign2 "~0.7.0"
     aws4 "^1.6.0"
