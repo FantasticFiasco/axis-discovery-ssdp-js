@@ -61,7 +61,7 @@
     "coveralls": "2.13.3",
     "cpx": "1.5.0",
     "istanbul": "0.4.5",
-    "mocha": "5.1.0",
+    "mocha": "5.1.1",
     "remap-istanbul": "0.11.0",
     "rimraf": "2.6.2",
     "sinon": "5.0.0",
