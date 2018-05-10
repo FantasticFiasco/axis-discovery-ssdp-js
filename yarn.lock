@@ -38,9 +38,9 @@
   version "8.0.28"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.28.tgz#86206716f8d9251cf41692e384264cbd7058ad60"
 
-"@types/node@10.0.3":
-  version "10.0.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.0.3.tgz#1f89840c7aac2406cc43a2ecad98fc02a8e130e4"
+"@types/node@10.0.7":
+  version "10.0.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.0.7.tgz#c1c9e2a68be8c1544c8761012cd6cf722949691f"
 
 "@types/request@2.47.0":
   version "2.47.0"
