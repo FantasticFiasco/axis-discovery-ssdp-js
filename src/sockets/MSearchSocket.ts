@@ -1,4 +1,4 @@
-import { AddressInfo } from 'net';
+import { AddressInfo } from 'dgram';
 
 import { log } from '../logging';
 import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from './Constants';
@@ -45,7 +45,9 @@ export class MSearchSocket extends SocketBase {
     }
 
     protected onListening() {
-        log('MSearchSocket#onListening - %s:%d', (<AddressInfo>this.socket.address()).address, (<AddressInfo>this.socket.address()).port);
+        log('MSearchSocket#onListening - %s:%d',
+            (this.socket.address() as AddressInfo).address,
+            (this.socket.address() as AddressInfo).port);
     }
 
     protected onMessage(messageBuffer: Buffer, remote: AddressInfo) {
