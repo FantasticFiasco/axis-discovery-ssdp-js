@@ -1,4 +1,4 @@
-import * as dgram from 'dgram';
+import { AddressInfo } from 'net';
 
 import { log } from '../logging';
 import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from './Constants';
@@ -18,7 +18,7 @@ export class NotifySocket extends SocketBase {
     }
 
     protected onListening() {
-        log('NotifySocket#onListening - %s:%d', this.socket.address().address, this.socket.address().port);
+        log('NotifySocket#onListening - %s:%d', (<AddressInfo>this.socket.address()).address, (<AddressInfo>this.socket.address()).port);
 
         for (const address of this.addresses) {
             log('NotifySocket#onListening - add membership to %s', address);
@@ -26,7 +26,7 @@ export class NotifySocket extends SocketBase {
         }
     }
 
-    protected onMessage(messageBuffer: Buffer, remote: dgram.AddressInfo) {
+    protected onMessage(messageBuffer: Buffer, remote: AddressInfo) {
         const message = new Message(remote.address, messageBuffer);
 
         if (message.method !== 'NOTIFY * HTTP/1.1' ||

@@ -1,4 +1,4 @@
-import * as dgram from 'dgram';
+import { AddressInfo } from 'net';
 
 import { log } from '../logging';
 import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from './Constants';
@@ -45,10 +45,10 @@ export class MSearchSocket extends SocketBase {
     }
 
     protected onListening() {
-        log('MSearchSocket#onListening - %s:%d', this.socket.address().address, this.socket.address().port);
+        log('MSearchSocket#onListening - %s:%d', (<AddressInfo>this.socket.address()).address, (<AddressInfo>this.socket.address()).port);
     }
 
-    protected onMessage(messageBuffer: Buffer, remote: dgram.AddressInfo) {
+    protected onMessage(messageBuffer: Buffer, remote: AddressInfo) {
         const message = new Message(remote.address, messageBuffer);
 
         if (message.method !== 'HTTP/1.1 200 OK') {
