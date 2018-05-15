@@ -1,7 +1,7 @@
 import * as expect from '@fantasticfiasco/expect';
+import { AddressInfo } from 'dgram';
 import * as dgram from 'dgram';
 import * as events from 'events';
-import { AddressInfo } from 'dgram';
 
 import { log } from '../logging';
 
