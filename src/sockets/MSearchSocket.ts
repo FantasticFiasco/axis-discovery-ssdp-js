@@ -1,4 +1,4 @@
-import { AddressInfo } from 'dgram';
+import { AddressInfo } from 'net';
 
 import { log } from '../logging';
 import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from './Constants';
