@@ -15,6 +15,7 @@ To also find cameras on the network using Bonjour, please see [axis-discovery](h
 
 - [Super simple to use](#super-simple-to-use)
 - [Installation](#installation)
+- [Who is using it?](#who-is-using-it)
 - [API](#api)
 - [Credit](#credit)
 
@@ -44,6 +45,10 @@ await discovery.search();
 ```sh
 npm install axis-discovery-ssdp
 ```
+
+## Who is using it?
+
+The application [Searchlight](https://fantasticfiasco.github.io/searchlight/) is depending on this package to find Axis cameras on the network using SSDP. Download and give it a spin!
 
 ## API
 
