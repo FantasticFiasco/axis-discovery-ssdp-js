@@ -73,9 +73,9 @@
     "@types/node" "*"
     "@types/tough-cookie" "*"
 
-"@types/sinon@5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-5.0.2.tgz#7a9d64df40b26dd48d673f745addc2fdb2bda193"
+"@types/sinon@5.0.7":
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/@types/sinon/-/sinon-5.0.7.tgz#0d9f89dd0c9988c4f1505a92a3a324ee7bdb18a6"
 
 "@types/tough-cookie@*":
   version "2.3.2"
