@@ -8,24 +8,24 @@ import { NETWORK_INTERFACES_WITH_TWO_ADDRESSES } from './network-interfaces/Netw
 
 chai.should();
 
-describe('Discovery', function() {
+describe('Discovery', function () {
 
     let osStub: sinon.SinonStub;
     let dgramStub: sinon.SinonStub;
     let socket: any;
     let discovery: Discovery;
 
-    beforeEach(function() {
+    beforeEach(function () {
         // Mock os
         osStub = sinon.stub(os, 'networkInterfaces')
             .returns(NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
 
         // Mock dgram
         socket = {
-            bind: function() { },
-            close: function() { },
-            on: function() { },
-            send: function() { },
+            bind: function () { },
+            close: function () { },
+            on: function () { },
+            send: function () { },
         };
 
         dgramStub = sinon.stub(dgram, 'createSocket')
@@ -35,18 +35,16 @@ describe('Discovery', function() {
         discovery = new Discovery();
     });
 
-    afterEach(function() {
+    afterEach(function () {
         osStub.restore();
         dgramStub.restore();
     });
 
-    describe('#start', function() {
-        it('should not send M-SEARCH messages', async function() {
+    describe('#start', function () {
+        it('should not send M-SEARCH messages', async function () {
             // Arrange
             const socketBind = sinon.stub(socket, 'bind')
-                .callsFake((_, __, callback: (() => void)) => {
-                    callback();
-                });
+                .callsArg(2);   // callback is the third argument
 
             // Act
             await discovery.start();
@@ -56,18 +54,14 @@ describe('Discovery', function() {
         });
     });
 
-    describe('#search', function() {
-        it('should send M-SEARCH messages', async function() {
+    describe('#search', function () {
+        it('should send M-SEARCH messages', async function () {
             // Arrange
             sinon.stub(socket, 'bind')
-                .callsFake((_, __, callback: (() => void)) => {
-                    callback();
-                });
+                .callsArg(2);   // callback is the third argument
 
             const socketSend = sinon.stub(socket, 'send')
-                .callsFake((_, __, ___, ____, _____, callback: (error: Error | null) => void) => {
-                    callback(null);
-                });
+                .callsArg(5);   // callback is the sixth argument
 
             await discovery.start();
 
@@ -79,18 +73,14 @@ describe('Discovery', function() {
         });
     });
 
-    describe('#stop', function() {
-        it('should close sockets', async function() {
+    describe('#stop', function () {
+        it('should close sockets', async function () {
             // Arrange
             sinon.stub(socket, 'bind')
-                .callsFake((_, __, callback: (() => void)) => {
-                    callback();
-                });
+                .callsArg(2);   // callback is the third argument
 
             const socketClose = sinon.stub(socket, 'close')
-                .callsFake((callback: (() => void)) => {
-                    callback();
-                });
+                .callsArg(0);   // callback is the first argument
 
             await discovery.start();
 
