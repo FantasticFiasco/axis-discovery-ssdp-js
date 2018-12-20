@@ -43,6 +43,8 @@ await discovery.search();
 
 ```sh
 npm install axis-discovery-ssdp
+# or
+yarn add axis-discovery-ssdp
 ```
 
 ## Who is using it?
