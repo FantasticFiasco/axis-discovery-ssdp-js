@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [5.0.1] - 2019-01-07
+
+### :syringe: Fixed
+
+- Update dependencies
+
 ## [5.0.0] - 2017-12-22
 
 ### :dizzy: Changed
