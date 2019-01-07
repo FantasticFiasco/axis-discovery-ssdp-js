@@ -1,26 +1,26 @@
-## Source code
-src
-test
+## Folders
+.github/
+.vscode/
+doc/
+src/
+test/
+
+## Files
+.editorconfig
 .gitattributes
-
-## Visual Studio Code settings
-.vscode
-
-## Documentation
-doc
-
-## NPM
+.gitignore
+.gitmind
 .npmignore
-*.tgz
-
-## Build files
 .travis.yml
 tsconfig.json
 tslint.json
-
-## Tests
+renovate.json
+*.tgz
 **/*.spec.js
 **/*.spec.d.ts
+
+## Sample application
+src/server*
 
 ## Code coverage
 coverage

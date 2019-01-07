@@ -8,10 +8,19 @@ matrix:
   fast_finish: true
 
 install:
-  - yarn install
+- yarn install
 
 script:
-  - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
-  - if [ "$TRAVIS_NODE_VERSION" == "node" ]; then yarn coverage:publish; fi
-  - if [ "$TRAVIS_NODE_VERSION" != "node" ]; then yarn test; fi
-  - yarn lint
+- echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
+- if [ "$TRAVIS_NODE_VERSION" == "node" ]; then yarn coverage:publish; fi
+- if [ "$TRAVIS_NODE_VERSION" != "node" ]; then yarn test; fi
+- yarn lint
+
+deploy:
+  skip_cleanup: true
+  provider: npm
+  email: mattias.kindborg@gmail.com
+  api_key:
+    secure: sDftAEWmbZbPLo2JIULud2Qs0tTNwP0eN3VOyqXuw03PP1HQD9HjdYvcPvqd7/KbaWvt6e4ltWrldBXtv/W81gW9PgUtwAegeHmFm3ZkLZI+iRZX2DbNJKym0+7YedpP3+k2ThjN22tphGaafD3Nb3uJJhAxZpv1HIJHhHMZIR0Q/qWbPl8rMktepfek91A1raoYtFnPCNbmEDQaMjKGHIZN6udJoTH2s2et1bF+bQcgn+NSQ3kyF4btVcOBHeCjdXOC9eQIobyC5NrbI5IugqigogZxIeRHLxfV9b0cnP/J8i+FwQEfmhzu+EP191XZfZOERFwoq7RBg3Hm3GzPHjdB6Xc9U1Ru8nUM9rjs/R+dgiRK//Umd/AP5VDohh9BmsLhqHgbg42nR8C+uHijuH3gG7O5CjPPuG3Aw031tzRefnn0G8ZKLNszcuUGcbeRpUIINvVpBCIUYPWQUTVLcXDFfdCEfxWCoNnkkln2wbuJLfQagJ285sjUVoWRwPoDApSNVnhJxbG4E3JD2YiLTn4eXfrVrV2xaVrsq7RPsPUzQZOHY0AX0/JICwWe+9pnjULTfQ+ibGDCEwggkatl1ZTISI0Pktf9R6fDMqd9PmFNjo44gbMA3kgnJLTspRePICS50sWyW765xo1gMHRdd/IyGfG5ZUBJ16h4BPnChOs=
+  on:
+    tags: true
