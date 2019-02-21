@@ -65,6 +65,6 @@
     "rimraf": "2.6.3",
     "sinon": "7.2.4",
     "tslint": "5.12.1",
-    "typescript": "3.3.3"
+    "typescript": "3.3.3333"
   }
 }
