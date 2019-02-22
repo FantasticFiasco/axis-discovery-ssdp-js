@@ -57,7 +57,7 @@
     "@types/sinon": "7.0.6",
     "@types/xml2js": "0.4.3",
     "chai": "4.2.0",
-    "coveralls": "3.0.2",
+    "coveralls": "3.0.3",
     "cpx": "1.5.0",
     "istanbul": "0.4.5",
     "mocha": "6.0.1",
