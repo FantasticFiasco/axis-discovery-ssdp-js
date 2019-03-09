@@ -66,5 +66,8 @@
     "sinon": "7.2.7",
     "tslint": "5.13.1",
     "typescript": "3.3.3333"
+  },
+  "resolutions": {
+    "sshpk": ">=1.13.2"
   }
 }

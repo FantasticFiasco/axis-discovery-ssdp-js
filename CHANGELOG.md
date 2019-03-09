@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### :policeman: Security
+
+- Security vulnerability in transient dependency `sshpk`
+
 ## [5.0.1] - 2019-01-07
 
 ### :syringe: Fixed
