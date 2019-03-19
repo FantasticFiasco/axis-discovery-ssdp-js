@@ -65,7 +65,7 @@
     "rimraf": "2.6.3",
     "sinon": "7.2.7",
     "tslint": "5.14.0",
-    "typescript": "3.3.3333"
+    "typescript": "3.3.4000"
   },
   "resolutions": {
     "sshpk": ">=1.13.2"
