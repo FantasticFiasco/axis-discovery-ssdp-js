@@ -68,6 +68,7 @@
     "typescript": "3.5.1"
   },
   "resolutions": {
+    "handlebars": ">=4.0.14",
     "sshpk": ">=1.13.2"
   }
 }
