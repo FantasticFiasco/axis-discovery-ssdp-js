@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### :policeman: Security
+
+- Security vulnerability in transient dependency `diff`
+
 ## [5.0.3] - 2019-06-07
 
 ### :policeman: Security
