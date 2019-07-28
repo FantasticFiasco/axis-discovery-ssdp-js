@@ -15,6 +15,7 @@ To also find cameras on the network using Bonjour, please see [axis-discovery](h
 - [Super simple to use](#super-simple-to-use)
 - [Installation](#installation)
 - [Who is using it?](#who-is-using-it)
+- [Family of packages](#family-of-packages)
 - [API](#api)
 - [Credit](#credit)
 
@@ -50,6 +51,15 @@ yarn add axis-discovery-ssdp
 ## Who is using it?
 
 The application [Searchlight](https://fantasticfiasco.github.io/searchlight/) is depending on this package to find Axis cameras on the network using SSDP. Download and give it a spin!
+
+## Family of packages
+
+The following NPM packages have been created to provide a smooth experience with devices from Axis Communications.
+
+- [axis-discovery](https://github.com/FantasticFiasco/axis-discovery-js) - A Node.js client library written in TypeScript capable of searching for Axis Communication cameras using Bonjour and SSDP (UPnP).
+    - [axis-discovery-bonjour](https://github.com/FantasticFiasco/axis-discovery-bonjour-js) - A Node.js Bonjour client library written in TypeScript capable of searching for Axis Communication cameras.
+    - `axis-discovery-ssdp` - This package
+- [axis-configuration](https://github.com/FantasticFiasco/axis-configuration-js) - A Node.js library written in TypeScript capable of configuring Axis Communication cameras.
 
 ## API
 
