@@ -75,7 +75,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### :zap: Added
 
-- [#2](https://github.com/FantasticFiasco/axis-discovery-ssdp/issues/2) - Calling `Discovery.stop()` stops listening for SSDP advertisements
+- [#2](https://github.com/FantasticFiasco/axis-discovery-ssdp-js/issues/2) - Calling `Discovery.stop()` stops listening for SSDP advertisements
 
 ### :dizzy: Changed
 
@@ -85,7 +85,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### :syringe: Fixed
 
-- [#40](https://github.com/FantasticFiasco/axis-discovery-ssdp/issues/40) - Calling `Discovery.search()` didn't trigger a new search
+- [#40](https://github.com/FantasticFiasco/axis-discovery-ssdp-js/issues/40) - Calling `Discovery.search()` didn't trigger a new search
 
 ## [1.0.1] - 2016-12-06
 

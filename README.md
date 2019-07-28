@@ -1,14 +1,14 @@
 # axis-discovery-ssdp
 
-[![Build Status](https://travis-ci.org/FantasticFiasco/axis-discovery-ssdp.svg?branch=master)](https://travis-ci.org/FantasticFiasco/axis-discovery-ssdp)
-[![Coverage Status](https://coveralls.io/repos/github/FantasticFiasco/axis-discovery-ssdp/badge.svg)](https://coveralls.io/github/FantasticFiasco/axis-discovery-ssdp)
+[![Build Status](https://travis-ci.org/FantasticFiasco/axis-discovery-ssdp-js.svg?branch=master)](https://travis-ci.org/FantasticFiasco/axis-discovery-ssdp-js)
+[![Coverage Status](https://coveralls.io/repos/github/FantasticFiasco/axis-discovery-ssdp-js/badge.svg)](https://coveralls.io/github/FantasticFiasco/axis-discovery-ssdp-js)
 [![npm version](https://img.shields.io/npm/v/axis-discovery-ssdp.svg)](https://www.npmjs.com/package/axis-discovery-ssdp)
-[![dependencies Status](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp/status.svg)](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp)
-[![devDependencies Status](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp/dev-status.svg)](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp?type=dev)
+[![dependencies Status](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp-js/status.svg)](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp-js)
+[![devDependencies Status](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp-js/dev-status.svg)](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp-js?type=dev)
 
 A Node.js SSDP (UPnP) client library written in TypeScript capable of searching for [Axis Communication](http://www.axis.com) cameras.
 
-To also find cameras on the network using Bonjour, please see [axis-discovery](https://github.com/FantasticFiasco/axis-discovery).
+To also find cameras on the network using Bonjour, please see [axis-discovery](https://github.com/FantasticFiasco/axis-discovery-js).
 
 ## Table of contents
 

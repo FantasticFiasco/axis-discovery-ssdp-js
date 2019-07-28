@@ -9,8 +9,8 @@ Please note we have a [code of conduct](./CODE_OF_CONDUCT.md), please follow it 
 The following commands will go from nothing to running the unit tests.
 
 ```
-git clone https://github.com/FantasticFiasco/axis-discovery-ssdp.git
-cd axis-discovery-ssdp
+git clone https://github.com/FantasticFiasco/axis-discovery-ssdp-js.git
+cd axis-discovery-ssdp-js
 yarn
 yarn test
 ```
