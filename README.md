@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/FantasticFiasco/axis-discovery-ssdp-js.svg?branch=master)](https://travis-ci.org/FantasticFiasco/axis-discovery-ssdp-js)
 [![Coverage Status](https://coveralls.io/repos/github/FantasticFiasco/axis-discovery-ssdp-js/badge.svg)](https://coveralls.io/github/FantasticFiasco/axis-discovery-ssdp-js)
 [![npm version](https://img.shields.io/npm/v/axis-discovery-ssdp.svg)](https://www.npmjs.com/package/axis-discovery-ssdp)
+[![SemVer compatible](https://img.shields.io/badge/%E2%9C%85-SemVer%20compatible-blue)](https://semver.org/)
 [![dependencies Status](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp-js/status.svg)](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp-js)
 [![devDependencies Status](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp-js/dev-status.svg)](https://david-dm.org/FantasticFiasco/axis-discovery-ssdp-js?type=dev)
 
