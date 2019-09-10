@@ -65,7 +65,7 @@
     "rimraf": "3.0.0",
     "sinon": "7.4.2",
     "tslint": "5.20.0",
-    "typescript": "3.6.2"
+    "typescript": "3.6.3"
   },
   "resolutions": {
     "diff": ">=3.5.0",
