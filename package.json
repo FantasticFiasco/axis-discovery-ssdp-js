@@ -64,7 +64,7 @@
     "remap-istanbul": "0.13.0",
     "rimraf": "3.0.0",
     "sinon": "7.5.0",
-    "tslint": "5.20.0",
+    "tslint": "5.20.1",
     "typescript": "3.7.2"
   },
   "resolutions": {
