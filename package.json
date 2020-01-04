@@ -60,7 +60,7 @@
     "copyfiles": "2.1.1",
     "coveralls": "3.0.9",
     "istanbul": "0.4.5",
-    "mocha": "6.2.2",
+    "mocha": "7.0.0",
     "remap-istanbul": "0.13.0",
     "rimraf": "3.0.0",
     "sinon": "8.0.2",
