@@ -11,13 +11,13 @@
     "ssdp",
     "upnp"
   ],
-  "homepage": "https://github.com/FantasticFiasco/axis-discovery-ssdp",
+  "homepage": "https://github.com/FantasticFiasco/axis-discovery-ssdp-js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/FantasticFiasco/axis-discovery-ssdp.git"
+    "url": "https://github.com/FantasticFiasco/axis-discovery-ssdp-js.git"
   },
   "bugs": {
-    "url": "https://github.com/FantasticFiasco/axis-discovery-ssdp/issues"
+    "url": "https://github.com/FantasticFiasco/axis-discovery-ssdp-js/issues"
   },
   "author": "Mattias Kindborg <mattias.kindborg@gmail.com> (https://twitter.com/FantasticFiasco)",
   "license": "Apache-2.0",
