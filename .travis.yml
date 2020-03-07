@@ -1,8 +1,8 @@
 language: node_js
 
 node_js:
-  - "node"  # Current - Latest features
-  - "10"    # LTS - Recommended for most users
+  - "node"   # Latest stable Node.js release
+  - "lts/*"  # Latest LTS Node.js release
 
 matrix:
   fast_finish: true
