@@ -1,26 +1,11 @@
-## Folders
 .github/
 .vscode/
+coverage/
 doc/
 src/
 test/
-
-## Files
-.editorconfig
-.gitattributes
-.gitignore
-.gitmind
-.npmignore
-.travis.yml
+.*
+renovate.json
 tsconfig.json
 tslint.json
-renovate.json
 *.tgz
-**/*.spec.js
-**/*.spec.d.ts
-
-## Sample application
-src/server*
-
-## Code coverage
-coverage
