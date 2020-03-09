@@ -19,6 +19,6 @@ export class MSearch {
      * Converts the M-SEARCH request into a buffer.
      */
     public toBuffer(): Buffer {
-        return new Buffer(MSearch.Payload);
+        return Buffer.from(MSearch.Payload);
     }
 }
