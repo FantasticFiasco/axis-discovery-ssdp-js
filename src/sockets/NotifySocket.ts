@@ -24,7 +24,11 @@ export class NotifySocket extends SocketBase {
 
         for (const address of this.addresses) {
             log('NotifySocket#onListening - add membership to %s', address);
-            this.socket.addMembership(SSDP_MULTICAST_ADDRESS, address);
+            try {
+                this.socket.addMembership(SSDP_MULTICAST_ADDRESS, address);
+            } catch (error) {
+                log('NotifySocket#onListening - %o', error);
+            }
         }
     }
 

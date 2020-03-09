@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### :syringe: Fixed
+
+- Add membership to port 1900 might throw error if already in use by another process
+
 ## [5.0.5] - 2019-12-27
 
 ### :policeman: Security

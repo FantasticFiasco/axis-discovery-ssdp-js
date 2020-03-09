@@ -24,7 +24,7 @@ describe('Mappings', function () {
             // Arrange
             const message = new Message(
                 '192.168.1.102',
-                new Buffer(NOTIFY_MESSAGE));
+                Buffer.from(NOTIFY_MESSAGE));
 
             // Act
             const actual = mapFromMessage(message);
@@ -43,7 +43,7 @@ describe('Mappings', function () {
             // Arrange
             const message = new Message(
                 '192.168.1.102',
-                new Buffer(NOTIFY_MESSAGE_WITH_LOWERCASE_MACADDRESS));
+                Buffer.from(NOTIFY_MESSAGE_WITH_LOWERCASE_MACADDRESS));
 
             // Act
             const actual = mapFromMessage(message);
@@ -56,7 +56,7 @@ describe('Mappings', function () {
             // Arrange
             const message = new Message(
                 '192.168.1.102',
-                new Buffer(NOTIFY_MESSAGE_WITHOUT_MAC_IN_USN));
+                Buffer.from(NOTIFY_MESSAGE_WITHOUT_MAC_IN_USN));
 
             // Act
             const actual = mapFromMessage(message);
@@ -69,7 +69,7 @@ describe('Mappings', function () {
             // Arrange
             const message = new Message(
                 '192.168.1.102',
-                new Buffer(MSEARCH_MESSAGE));
+                Buffer.from(MSEARCH_MESSAGE));
 
             // Act
             const actual = mapFromMessage(message);
@@ -88,7 +88,7 @@ describe('Mappings', function () {
             // Arrange
             const message = new Message(
                 '192.168.1.102',
-                new Buffer(MSEARCH_MESSAGE_WITH_LOWERCASE_MACADDRESS));
+                Buffer.from(MSEARCH_MESSAGE_WITH_LOWERCASE_MACADDRESS));
 
             // Act
             const actual = mapFromMessage(message);
@@ -101,7 +101,7 @@ describe('Mappings', function () {
             // Arrange
             const message = new Message(
                 '192.168.1.102',
-                new Buffer(MSEARCH_MESSAGE_WITHOUT_MAC_IN_USN));
+                Buffer.from(MSEARCH_MESSAGE_WITHOUT_MAC_IN_USN));
 
             // Act
             const actual = mapFromMessage(message);
