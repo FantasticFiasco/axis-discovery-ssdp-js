@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [5.0.6] - 2020-03-09
+
 ### :syringe: Fixed
 
 - Add membership to port 1900 might throw error if already in use by another process
