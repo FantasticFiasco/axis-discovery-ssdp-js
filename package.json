@@ -58,7 +58,7 @@
     "@types/xml2js": "0.4.5",
     "chai": "4.2.0",
     "copyfiles": "2.2.0",
-    "coveralls": "3.0.9",
+    "coveralls": "3.0.11",
     "istanbul": "0.4.5",
     "mocha": "7.1.1",
     "remap-istanbul": "0.13.0",
