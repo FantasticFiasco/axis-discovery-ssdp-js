@@ -52,7 +52,7 @@
     "@types/chai": "4.2.11",
     "@types/debug": "4.1.5",
     "@types/mocha": "7.0.2",
-    "@types/node": "13.9.2",
+    "@types/node": "13.9.3",
     "@types/request": "2.48.4",
     "@types/sinon": "7.5.2",
     "@types/xml2js": "0.4.5",
