@@ -1,5 +1,3 @@
-import * as chai from 'chai';
-
 import { mapFromMessage } from './../../src/sockets/Mappings';
 import { Message } from './../../src/sockets/Message';
 import {
@@ -14,13 +12,11 @@ import {
 } from './../root-descriptions/Mappings.mock'
 
 
-const should = chai.should();
+describe('Mappings', () => {
 
-describe('Mappings', function () {
+    describe('#mapFromMessage', () => {
 
-    describe('#mapFromMessage', function () {
-
-        it('should map Notify messages', function () {
+        test('should map Notify messages', () => {
             // Arrange
             const message = new Message(
                 '192.168.1.102',
@@ -30,29 +26,32 @@ describe('Mappings', function () {
             const actual = mapFromMessage(message);
 
             // Assert
-            actual!.address.should.equal('192.168.1.102');
-            actual!.macAddress!.should.equal('ACCC8E270AD8');
-            should.not.exist(actual!.friendlyName);
-            should.not.exist(actual!.modelName);
-            should.not.exist(actual!.modelDescription);
-            should.not.exist(actual!.modelNumber);
-            should.not.exist(actual!.presentationURL);
+            expect(actual!.address).toBe('192.168.1.102');
+            expect(actual!.macAddress!).toBe('ACCC8E270AD8');
+            expect(actual!.friendlyName).toBeFalsy();
+            expect(actual!.modelName).toBeFalsy();
+            expect(actual!.modelDescription).toBeFalsy();
+            expect(actual!.modelNumber).toBeFalsy();
+            expect(actual!.presentationURL).toBeFalsy();
         });
 
-        it('should map Notify messages and convert MAC address to uppercase', function () {
-            // Arrange
-            const message = new Message(
-                '192.168.1.102',
-                Buffer.from(NOTIFY_MESSAGE_WITH_LOWERCASE_MACADDRESS));
+        test(
+            'should map Notify messages and convert MAC address to uppercase',
+            () => {
+                // Arrange
+                const message = new Message(
+                    '192.168.1.102',
+                    Buffer.from(NOTIFY_MESSAGE_WITH_LOWERCASE_MACADDRESS));
 
-            // Act
-            const actual = mapFromMessage(message);
+                // Act
+                const actual = mapFromMessage(message);
 
-            // Assert
-            actual!.macAddress!.should.equal('ACCC8E270AD8');
-        });
+                // Assert
+                expect(actual!.macAddress!).toBe('ACCC8E270AD8');
+            }
+        );
 
-        it('should not map Notify messages without MAC in USN', function () {
+        test('should not map Notify messages without MAC in USN', () => {
             // Arrange
             const message = new Message(
                 '192.168.1.102',
@@ -62,10 +61,10 @@ describe('Mappings', function () {
             const actual = mapFromMessage(message);
 
             // Assert
-            should.not.exist(actual);
+            expect(actual).toBeFalsy();
         });
 
-        it('should map M-Search messages', function () {
+        test('should map M-Search messages', () => {
             // Arrange
             const message = new Message(
                 '192.168.1.102',
@@ -75,29 +74,32 @@ describe('Mappings', function () {
             const actual = mapFromMessage(message);
 
             // Assert
-            actual!.address.should.equal('192.168.1.102');
-            actual!.macAddress!.should.equal('ACCC8E270AD8');
-            should.not.exist(actual!.friendlyName);
-            should.not.exist(actual!.modelName);
-            should.not.exist(actual!.modelDescription);
-            should.not.exist(actual!.modelNumber);
-            should.not.exist(actual!.presentationURL);
+            expect(actual!.address).toBe('192.168.1.102');
+            expect(actual!.macAddress!).toBe('ACCC8E270AD8');
+            expect(actual!.friendlyName).toBeFalsy();
+            expect(actual!.modelName).toBeFalsy();
+            expect(actual!.modelDescription).toBeFalsy();
+            expect(actual!.modelNumber).toBeFalsy();
+            expect(actual!.presentationURL).toBeFalsy();
         });
 
-        it('should map M-Search messages and convert MAC address to uppercase', function () {
-            // Arrange
-            const message = new Message(
-                '192.168.1.102',
-                Buffer.from(MSEARCH_MESSAGE_WITH_LOWERCASE_MACADDRESS));
+        test(
+            'should map M-Search messages and convert MAC address to uppercase',
+            () => {
+                // Arrange
+                const message = new Message(
+                    '192.168.1.102',
+                    Buffer.from(MSEARCH_MESSAGE_WITH_LOWERCASE_MACADDRESS));
 
-            // Act
-            const actual = mapFromMessage(message);
+                // Act
+                const actual = mapFromMessage(message);
 
-            // Assert
-            actual!.macAddress!.should.equal('ACCC8E270AD8');
-        });
+                // Assert
+                expect(actual!.macAddress!).toBe('ACCC8E270AD8');
+            }
+        );
 
-        it('should not map M-Search messages without MAC in USN', function () {
+        test('should not map M-Search messages without MAC in USN', () => {
             // Arrange
             const message = new Message(
                 '192.168.1.102',
@@ -107,7 +109,7 @@ describe('Mappings', function () {
             const actual = mapFromMessage(message);
 
             // Assert
-            should.not.exist(actual);
+            expect(actual).toBeFalsy();
         });
     });
 });

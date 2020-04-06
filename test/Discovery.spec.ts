@@ -1,21 +1,17 @@
-import * as chai from 'chai';
 import * as dgram from 'dgram';
 import * as os from 'os';
-import * as sinon from 'sinon';
 
 import { Discovery } from './../src/Discovery';
 import { NETWORK_INTERFACES_WITH_TWO_ADDRESSES } from './network-interfaces/NetworkInterface.mock';
 
-chai.should();
-
-describe('Discovery', function () {
+describe('Discovery', () => {
 
     let osStub: sinon.SinonStub;
     let dgramStub: sinon.SinonStub;
     let socket: any;
     let discovery: Discovery;
 
-    beforeEach(function () {
+    beforeEach(() => {
         // Mock os
         osStub = sinon.stub(os, 'networkInterfaces')
             .returns(NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
@@ -35,13 +31,13 @@ describe('Discovery', function () {
         discovery = new Discovery();
     });
 
-    afterEach(function () {
+    afterEach(() => {
         osStub.restore();
         dgramStub.restore();
     });
 
-    describe('#start', function () {
-        it('should not send M-SEARCH messages', async function () {
+    describe('#start', () => {
+        test('should not send M-SEARCH messages', async () => {
             // Arrange
             const socketBind = sinon.stub(socket, 'bind')
                 .callsArg(2);   // callback is the third argument
@@ -50,12 +46,12 @@ describe('Discovery', function () {
             await discovery.start();
 
             // Assert
-            socketBind.callCount.should.equal(3);   // 1 passive and 2 active
+            expect(socketBind.callCount).toBe(3);   // 1 passive and 2 active
         });
     });
 
-    describe('#search', function () {
-        it('should send M-SEARCH messages', async function () {
+    describe('#search', () => {
+        test('should send M-SEARCH messages', async () => {
             // Arrange
             sinon.stub(socket, 'bind')
                 .callsArg(2);   // callback is the third argument
@@ -69,12 +65,12 @@ describe('Discovery', function () {
             await discovery.search();
 
             // Assert
-            socketSend.callCount.should.equal(2);
+            expect(socketSend.callCount).toBe(2);
         });
     });
 
-    describe('#stop', function () {
-        it('should close sockets', async function () {
+    describe('#stop', () => {
+        test('should close sockets', async () => {
             // Arrange
             sinon.stub(socket, 'bind')
                 .callsArg(2);   // callback is the third argument
@@ -88,7 +84,7 @@ describe('Discovery', function () {
             await discovery.stop();
 
             // Assert
-            socketClose.callCount.should.equal(3);   // 1 passive and 2 active
+            expect(socketClose.callCount).toBe(3);   // 1 passive and 2 active
         });
     });
 });

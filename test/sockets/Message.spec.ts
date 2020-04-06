@@ -1,24 +1,20 @@
-import * as chai from 'chai';
-
 import {
     MSEARCH_MESSAGE,
     NOTIFY_MESSAGE
 } from './Message.mock';
 import { Message } from './../../src/sockets/Message';
 
-chai.should();
+describe('Message', () => {
 
-describe('Message', function () {
-
-    it('#remoteAddress', function () {
+    test('#remoteAddress', () => {
         // Arrange
         const subject = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK'));
 
         // Assert
-        subject.remoteAddress.should.equal('192.168.1.100');
+        expect(subject.remoteAddress).toBe('192.168.1.100');
     });
 
-    it('should trim header values', function () {
+    test('should trim header values', () => {
         // Arrange
         const subject = new Message(
             '192.168.1.100',
@@ -27,122 +23,128 @@ describe('Message', function () {
                 ' USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1 \r\n'));
 
         // Assert
-        subject.usn.should.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
+        expect(subject.usn).toBe(
+            'uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1'
+        );
     });
 
     describe('M-SEARCH response', () => {
-        it('#method', function () {
+        test('#method', () => {
             // Arrange
             const subject = new Message('192.168.1.100', Buffer.from(MSEARCH_MESSAGE));
 
             // Assert
-            subject.method.should.equal('HTTP/1.1 200 OK');
+            expect(subject.method).toBe('HTTP/1.1 200 OK');
         });
 
-        it('#location', function () {
+        test('#location', () => {
             // Arrange
             const subject = new Message('192.168.1.100', Buffer.from(MSEARCH_MESSAGE));
 
             // Assert
-            subject.location.should.equal('http://192.168.1.102:45895/rootdesc1.xml');
+            expect(subject.location).toBe('http://192.168.1.102:45895/rootdesc1.xml');
         });
 
-        it('#usn', function () {
+        test('#usn', () => {
             // Arrange
             const subject = new Message('192.168.1.100', Buffer.from(MSEARCH_MESSAGE));
 
             // Assert
-            subject.usn.should.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
+            expect(subject.usn).toBe(
+                'uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1'
+            );
         });
 
-        it('#location should fail if missing', function () {
+        test('#location should fail if missing', () => {
             // Arrange
             const subject = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            (() => subject.location).should.throw();
+            expect(() => subject.location).toThrowError();
         });
 
-        it('#usn should fail if missing', function () {
+        test('#usn should fail if missing', () => {
             // Arrange
             const subject = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            (() => subject.usn).should.throw();
+            expect(() => subject.usn).toThrowError();
         });
     });
 
     describe('NOTIFY', () => {
-        it('#method', function () {
+        test('#method', () => {
             // Arrange
             const subject = new Message('192.168.1.100', Buffer.from(NOTIFY_MESSAGE));
 
             // Assert
-            subject.method.should.equal('NOTIFY * HTTP/1.1');
+            expect(subject.method).toBe('NOTIFY * HTTP/1.1');
         });
 
-        it('#location', function () {
+        test('#location', () => {
             // Arrange
             const subject = new Message('192.168.1.100', Buffer.from(NOTIFY_MESSAGE));
 
             // Assert
-            subject.location.should.equal('http://192.168.1.102:45895/rootdesc1.xml');
+            expect(subject.location).toBe('http://192.168.1.102:45895/rootdesc1.xml');
         });
 
-        it('#location should fail if missing', function () {
+        test('#location should fail if missing', () => {
             // Arrange
             const subject = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            (() => subject.location).should.throw();
+            expect(() => subject.location).toThrowError();
         });
 
-        it('#usn', function () {
+        test('#usn', () => {
             // Arrange
             const subject = new Message('192.168.1.100', Buffer.from(NOTIFY_MESSAGE));
 
             // Assert
-            subject.usn.should.equal('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
+            expect(subject.usn).toBe(
+                'uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1'
+            );
         });
 
-        it('#usn should fail if missing', function () {
+        test('#usn should fail if missing', () => {
             // Arrange
             const subject = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            (() => subject.usn).should.throw();
+            expect(() => subject.usn).toThrowError();
         });
 
-        it('#nt', function () {
+        test('#nt', () => {
             // Arrange
             const subject = new Message('192.168.1.100', Buffer.from(NOTIFY_MESSAGE));
 
             // Assert
-            subject.nt.should.equal('urn:axis-com:service:BasicService:1');
+            expect(subject.nt).toBe('urn:axis-com:service:BasicService:1');
         });
 
-        it('#nt should fail if missing', function () {
+        test('#nt should fail if missing', () => {
             // Arrange
             const subject = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            (() => subject.nt).should.throw();
+            expect(() => subject.nt).toThrowError();
         });
 
-        it('#nts', function () {
+        test('#nts', () => {
             // Arrange
             const subject = new Message('192.168.1.100', Buffer.from(NOTIFY_MESSAGE));
 
             // Assert
-            subject.nts.should.equal('ssdp:byebye');
+            expect(subject.nts).toBe('ssdp:byebye');
         });
 
-        it('#nts should fail if missing', function () {
+        test('#nts should fail if missing', () => {
             // Arrange
             const subject = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK\r\n'));
 
             // Assert
-            (() => subject.nts).should.throw();
+            expect(() => subject.nts).toThrowError();
         });
     });
 });
