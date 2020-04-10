@@ -1,90 +1,87 @@
-// import * as dgram from 'dgram';
-// import * as os from 'os';
+import * as dgram from 'dgram';
+import * as os from 'os';
+import { mocked } from 'ts-jest/utils';
 
-// import { Discovery } from './../src/Discovery';
-// import { NETWORK_INTERFACES_WITH_TWO_ADDRESSES } from './network-interfaces/NetworkInterface.mock';
+import { Discovery } from './../src/Discovery';
+import { NETWORK_INTERFACES_WITH_TWO_ADDRESSES } from './network-interfaces/NetworkInterface.mock';
 
-// describe('Discovery', () => {
+jest.mock('os');
 
-//     let osStub: sinon.SinonStub;
-//     let dgramStub: sinon.SinonStub;
-//     let socket: any;
-//     let discovery: Discovery;
+describe('Discovery', () => {
 
-//     beforeEach(() => {a
-//         // Mock os
-//         osStub = sinon.stub(os, 'networkInterfaces')
-//             .returns(NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
+    const osMock = mocked(os);
+    let dgramStub: sinon.SinonStub;
+    let socket: any;
+    let discovery: Discovery;
 
-//         // Mock dgram
-//         socket = {
-//             bind: function () { },
-//             close: function () { },
-//             on: function () { },
-//             send: function () { },
-//         };
+    beforeEach(() => {a
+        // Mock os
+        osMock.networkInterfaces.mockReturnValue(NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
 
-//         dgramStub = sinon.stub(dgram, 'createSocket')
-//             .returns(socket);
+        // Mock dgram
+        socket = {
+            bind: function () { },
+            close: function () { },
+            on: function () { },
+            send: function () { },
+        };
 
-//         // Create discovery
-//         discovery = new Discovery();
-//     });
+        dgramStub = sinon.stub(dgram, 'createSocket')
+            .returns(socket);
 
-//     afterEach(() => {
-//         osStub.restore();
-//         dgramStub.restore();
-//     });
+        // Create discovery
+        discovery = new Discovery();
+    });
 
-//     describe('#start', () => {
-//         test('should not send M-SEARCH messages', async () => {
-//             // Arrange
-//             const socketBind = sinon.stub(socket, 'bind')
-//                 .callsArg(2);   // callback is the third argument
+    describe('#start', () => {
+        test('should not send M-SEARCH messages', async () => {
+            // Arrange
+            const socketBind = sinon.stub(socket, 'bind')
+                .callsArg(2);   // callback is the third argument
 
-//             // Act
-//             await discovery.start();
+            // Act
+            await discovery.start();
 
-//             // Assert
-//             expect(socketBind.callCount).toBe(3);   // 1 passive and 2 active
-//         });
-//     });
+            // Assert
+            expect(socketBind.callCount).toBe(3);   // 1 passive and 2 active
+        });
+    });
 
-//     describe('#search', () => {
-//         test('should send M-SEARCH messages', async () => {
-//             // Arrange
-//             sinon.stub(socket, 'bind')
-//                 .callsArg(2);   // callback is the third argument
+    describe('#search', () => {
+        test('should send M-SEARCH messages', async () => {
+            // Arrange
+            sinon.stub(socket, 'bind')
+                .callsArg(2);   // callback is the third argument
 
-//             const socketSend = sinon.stub(socket, 'send')
-//                 .callsArg(5);   // callback is the sixth argument
+            const socketSend = sinon.stub(socket, 'send')
+                .callsArg(5);   // callback is the sixth argument
 
-//             await discovery.start();
+            await discovery.start();
 
-//             // Act
-//             await discovery.search();
+            // Act
+            await discovery.search();
 
-//             // Assert
-//             expect(socketSend.callCount).toBe(2);
-//         });
-//     });
+            // Assert
+            expect(socketSend.callCount).toBe(2);
+        });
+    });
 
-//     describe('#stop', () => {
-//         test('should close sockets', async () => {
-//             // Arrange
-//             sinon.stub(socket, 'bind')
-//                 .callsArg(2);   // callback is the third argument
+    describe('#stop', () => {
+        test('should close sockets', async () => {
+            // Arrange
+            sinon.stub(socket, 'bind')
+                .callsArg(2);   // callback is the third argument
 
-//             const socketClose = sinon.stub(socket, 'close')
-//                 .callsArg(0);   // callback is the first argument
+            const socketClose = sinon.stub(socket, 'close')
+                .callsArg(0);   // callback is the first argument
 
-//             await discovery.start();
+            await discovery.start();
 
-//             // Act
-//             await discovery.stop();
+            // Act
+            await discovery.stop();
 
-//             // Assert
-//             expect(socketClose.callCount).toBe(3);   // 1 passive and 2 active
-//         });
-//     });
-// });
+            // Assert
+            expect(socketClose.callCount).toBe(3);   // 1 passive and 2 active
+        });
+    });
+});
