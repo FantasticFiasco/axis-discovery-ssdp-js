@@ -33,7 +33,6 @@
     "postbuild": "copyfiles --up 1 \"./src/**/*.{d.ts,js}\" ./lib/",
     "prestart": "yarn build",
     "start": "node ./src/server.js",
-    "pretest": "yarn build",
     "test": "jest",
     "lint": "tslint \"./src/**/*.ts\" --exclude \"./**/*.d.ts\"",
     "coverage": "jest --coverage && coveralls < coverage/lcov.info"
