@@ -14,7 +14,7 @@ describe('Discovery', () => {
     let socket: any;
     let discovery: Discovery;
 
-    beforeEach(() => {a
+    beforeEach(() => {
         // Mock os
         osMock.networkInterfaces.mockReturnValue(NETWORK_INTERFACES_WITH_TWO_ADDRESSES);
 
