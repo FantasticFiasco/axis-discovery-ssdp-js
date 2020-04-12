@@ -1,138 +1,133 @@
-import * as chai from 'chai';
-
 import {
     ROOT_DESCRIPTION_DEFAULT_HTTP_PORT,
     ROOT_DESCRIPTION_REQUIRED_PROPERTIES
 } from './RootDescription.mock';
 import { RootDescription } from './../../src/root-descriptions/RootDescription';
 
-chai.should();
-const should = chai.should();
+describe('RootDescription', () => {
 
-describe('RootDescription', function () {
+    describe('#remoteAddress', () => {
 
-    describe('#remoteAddress', function () {
-
-        it('should return remote address', async function () {
+        test('should return remote address', async () => {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            subject.remoteAddress.should.equal('192.168.1.102');
+            expect(subject.remoteAddress).toBe('192.168.1.102');
         });
     });
 
-    describe('#friendlyName', function () {
-        it('should return friendly name', async function () {
+    describe('#friendlyName', () => {
+        test('should return friendly name', async () => {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            subject.friendlyName.should.equal('AXIS M1014 - ACCC8E270AD8');
+            expect(subject.friendlyName).toBe('AXIS M1014 - ACCC8E270AD8');
         });
     });
 
-    describe('#modelDescription', function () {
-        it('should return model description', async function () {
+    describe('#modelDescription', () => {
+        test('should return model description', async () => {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            subject.modelDescription!.should.equal('AXIS M1014 Fixed Network Camera');
+            expect(subject.modelDescription!).toBe('AXIS M1014 Fixed Network Camera');
         });
 
-        it('should not return model description if missing', async function () {
+        test('should not return model description if missing', async () => {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
 
             // Assert
-            should.not.exist(subject.modelDescription);
+            expect(subject.modelDescription).toBeFalsy();
         });
     });
 
-    describe('#modelName', function () {
-        it('should return model name', async function () {
+    describe('#modelName', () => {
+        test('should return model name', async () => {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            subject.modelName.should.equal('AXIS M1014');
+            expect(subject.modelName).toBe('AXIS M1014');
         });
     });
 
-    describe('#modelNumber', function () {
-        it('should return model number', async function () {
+    describe('#modelNumber', () => {
+        test('should return model number', async () => {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            subject.modelNumber!.should.equal('M1014');
+            expect(subject.modelNumber!).toBe('M1014');
         });
 
-        it('should not return model number if missing', async function () {
+        test('should not return model number if missing', async () => {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
 
             // Assert
-            should.not.exist(subject.modelNumber);
+            expect(subject.modelNumber).toBeFalsy();
         });
     });
 
-    describe('#macAddress', function () {
-        it('should return MAC address', async function () {
+    describe('#macAddress', () => {
+        test('should return MAC address', async () => {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            subject.macAddress!.should.equal('ACCC8E270AD8');
+            expect(subject.macAddress!).toBe('ACCC8E270AD8');
         });
 
-        it('should not return MAC address if missing', async function () {
+        test('should not return MAC address if missing', async () => {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
 
             // Assert
-            should.not.exist(subject.macAddress);
+            expect(subject.macAddress).toBeFalsy();
         });
     });
 
-    describe('#presentationUrl', function () {
-        it('should return presentation URL', async function () {
+    describe('#presentationUrl', () => {
+        test('should return presentation URL', async () => {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Assert
-            subject.presentationUrl!.should.equal('http://192.168.1.102:80/');
+            expect(subject.presentationUrl!).toBe('http://192.168.1.102:80/');
         });
 
-        it('should not return presentation URL if missing', async function () {
+        test('should not return presentation URL if missing', async () => {
             // Act
             const subject = await RootDescription.parse(
                 '192.168.1.102',
                 ROOT_DESCRIPTION_REQUIRED_PROPERTIES);
 
             // Assert
-            should.not.exist(subject.presentationUrl);
+            expect(subject.presentationUrl).toBeFalsy();
         });
     });
 });

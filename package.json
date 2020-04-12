@@ -33,14 +33,9 @@
     "postbuild": "copyfiles --up 1 \"./src/**/*.{d.ts,js}\" ./lib/",
     "prestart": "yarn build",
     "start": "node ./src/server.js",
-    "pretest": "yarn build",
-    "test": "mocha --recursive",
+    "test": "jest",
     "lint": "tslint \"./src/**/*.ts\" --exclude \"./**/*.d.ts\"",
-    "precoverage": "yarn build",
-    "coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec --recursive",
-    "postcoverage": "remap-istanbul --input coverage/coverage.json --type lcovonly --output coverage/lcov.info",
-    "precoverage:publish": "yarn coverage",
-    "coverage:publish": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "coverage": "jest --coverage && coveralls < coverage/lcov.info"
   },
   "dependencies": {
     "@fantasticfiasco/expect": "1.*",
@@ -49,21 +44,16 @@
     "xml2js": "0.*"
   },
   "devDependencies": {
-    "@types/chai": "4.2.11",
     "@types/debug": "4.1.5",
-    "@types/mocha": "7.0.2",
+    "@types/jest": "^25.2.1",
     "@types/node": "13.11.1",
     "@types/request": "2.48.4",
-    "@types/sinon": "9.0.0",
     "@types/xml2js": "0.4.5",
-    "chai": "4.2.0",
     "copyfiles": "2.2.0",
-    "coveralls": "3.0.11",
-    "istanbul": "0.4.5",
-    "mocha": "7.1.1",
-    "remap-istanbul": "0.13.0",
+    "coveralls": "3.0.9",
+    "jest": "^25.2.7",
     "rimraf": "3.0.2",
-    "sinon": "9.0.2",
+    "ts-jest": "^25.3.1",
     "tslint": "6.1.1",
     "typescript": "3.8.3"
   },

@@ -12,7 +12,7 @@ install:
 
 script:
 - echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
-- if [ "$TRAVIS_NODE_VERSION" == "node" ]; then yarn coverage:publish; fi
+- if [ "$TRAVIS_NODE_VERSION" == "node" ]; then yarn coverage; fi
 - if [ "$TRAVIS_NODE_VERSION" != "node" ]; then yarn test; fi
 - yarn lint
 
