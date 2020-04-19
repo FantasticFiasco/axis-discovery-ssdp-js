@@ -8,7 +8,7 @@ export function getIPv4Addresses(): string[] {
     const addresses: string[] = [];
 
     Object.keys(interfaces).forEach((interfaceIndex) => {
-        for (const address of interfaces[interfaceIndex]) {
+        for (const address of interfaces[interfaceIndex] ?? []) {
             if (address.family === 'IPv4' && !address.internal) {
                 addresses.push(address.address);
             }
