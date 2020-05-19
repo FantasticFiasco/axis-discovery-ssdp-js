@@ -34,7 +34,8 @@
     "start": "node ./src/server.js",
     "test": "jest",
     "lint": "tslint \"./src/**/*.ts\" --exclude \"./**/*.d.ts\"",
-    "coverage": "jest --coverage && coveralls < coverage/lcov.info"
+    "coverage": "jest --coverage && coveralls < coverage/lcov.info",
+    "prepack": "yarn build"
   },
   "dependencies": {
     "@fantasticfiasco/expect": "1.*",
