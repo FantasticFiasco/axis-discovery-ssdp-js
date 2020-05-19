@@ -7,13 +7,13 @@ import { log } from '../logging';
 
 export abstract class SocketBase extends events.EventEmitter {
 
-    protected socket: dgram.Socket;
+    protected socket?: dgram.Socket;
 
     /**
      * Start listen for advertisements.
      */
     public async start(): Promise<void> {
-        expect.toNotExist(this.socket, 'M-SEARCH socket has already been started');
+        expect.toNotExist(this.socket, 'Socket has already been started');
 
         this.socket = dgram.createSocket({ type: 'udp4', reuseAddr: true });
         this.socket.on('listening', () => this.onListening());
@@ -27,10 +27,10 @@ export abstract class SocketBase extends events.EventEmitter {
      * Stop listen for advertisements.
      */
     public stop(): Promise<void> {
-        expect.toExist(this.socket, 'M-SEARCH socket has never been started');
+        expect.toExist(this.socket, 'Socket has never been started');
 
         return new Promise<void>((resolve) => {
-            this.socket.close(() => resolve());
+            this.socket!.close(() => resolve());
         });
     }
 

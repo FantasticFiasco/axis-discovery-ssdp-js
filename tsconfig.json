@@ -1,16 +1,7 @@
 {
-	"compilerOptions": {
-		"target": "es6",
-		"module": "commonjs",
-		"declaration": true,
-		"sourceMap": true,
-		"strictNullChecks": true,
-		"forceConsistentCasingInFileNames": true,
-		"noUnusedParameters": true,
-		"noUnusedLocals": true
-	},
-	"exclude": [
-		"node_modules"
-	],
-	"compileOnSave": true
+	"files": [],
+  "references": [
+    { "path": "./src" },
+    { "path": "./test" }
+  ]
 }
