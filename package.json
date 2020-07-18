@@ -35,7 +35,9 @@
     "test": "jest",
     "lint": "tslint \"./src/**/*.ts\" --exclude \"./**/*.d.ts\"",
     "coverage": "jest --coverage && coveralls < coverage/lcov.info",
-    "prepack": "yarn build"
+    "prepack": "yarn build",
+    "preversion": "git add ./CHANGELOG.md",
+    "postversion": "git push --follow-tags"
   },
   "dependencies": {
     "@fantasticfiasco/expect": "1.*",
