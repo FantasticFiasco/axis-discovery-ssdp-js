@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [6.0.0] - 2020-10-11
+
 ### :dizzy: Changed
 
 - [BREAKING CHANGE] Renamed method `Discovery.onHello(callback: (device: Device) => void)` to `Discovery.on("hello", (device: Device) => void)`
