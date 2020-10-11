@@ -29,11 +29,11 @@ import * as ssdp from 'axis-discovery-ssdp';
 
 const discovery = new ssdp.Discovery();
 
-discovery.onHello((device: ssdp.Device) => {
+discovery.on('hello', (device: ssdp.Device) => {
     console.log(`Hello from ${device.address}`);
 });
 
-discovery.onGoodbye((device: ssdp.Device) => {
+discovery.on('goodbye', (device: ssdp.Device) => {
     console.log(`Goodbye from ${device.address}`);
 });
 
@@ -94,16 +94,16 @@ class Discovery {
     search(): Promise<void>;
 
     /**
-     * Register a callback that is invoked when a device is found on the
-     * network.
+     * Adds the listener function to the end of the listeners array for the event named eventName.
+     * No checks are made to see if the listener has already been added. Multiple calls passing the
+     * same combination of eventName and listener will result in the listener being added, and
+     * called, multiple times.
+     * @param eventName The name of the event.
+     * @param listener The callback function.
      */
-    onHello(callback: (device: Device) => void): void;
+    on(eventName: 'hello' | 'goodbye', listener: (device: Device) => void): this;
 
-    /**
-     * Register a callback that is invoked when a device intentionally is
-     * disconnecting from the network.
-     */
-    onGoodbye(callback: (device: Device) => void): void;
+    // The remaining implementation of EventEmitter has been removed for brevity
 }
 ```
 
