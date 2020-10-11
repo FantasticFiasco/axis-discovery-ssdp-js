@@ -1,4 +1,4 @@
-import * as xml2js from 'xml2js';
+import { parseString } from 'xml2js';
 
 export class RootDescription {
     private constructor(
@@ -8,7 +8,7 @@ export class RootDescription {
 
     public static parse(remoteAddress: string, xml: string): Promise<RootDescription> {
         return new Promise<RootDescription>((resolve, reject) => {
-            xml2js.parseString(xml, (error, result) => {
+            parseString(xml, (error, result) => {
                 if (error) {
                     reject(error);
                 } else {
