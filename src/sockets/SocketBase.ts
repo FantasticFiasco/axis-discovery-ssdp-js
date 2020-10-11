@@ -1,13 +1,13 @@
 import * as expect from '@fantasticfiasco/expect';
-import * as dgram from 'dgram';
-import * as events from 'events';
+import { createSocket, Socket } from 'dgram';
+import { EventEmitter } from 'events';
 import { AddressInfo } from 'net';
 
 import { log } from '../logging';
 
-export abstract class SocketBase extends events.EventEmitter {
+export abstract class SocketBase extends EventEmitter {
 
-    protected socket?: dgram.Socket;
+    protected socket?: Socket;
 
     /**
      * Start listen for advertisements.
@@ -15,7 +15,7 @@ export abstract class SocketBase extends events.EventEmitter {
     public async start(): Promise<void> {
         expect.toNotExist(this.socket, 'Socket has already been started');
 
-        this.socket = dgram.createSocket({ type: 'udp4', reuseAddr: true });
+        this.socket = createSocket({ type: 'udp4', reuseAddr: true });
         this.socket.on('listening', () => this.onListening());
         this.socket.on('message', (message: Buffer, remote: AddressInfo) => this.onMessage(message, remote));
         this.socket.on('error', (error: Error) => this.onError(error));

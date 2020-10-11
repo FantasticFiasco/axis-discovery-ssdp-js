@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+### :dizzy: Changed
+
+- [BREAKING CHANGE] Renamed method `Discovery.onHello(callback: (device: Device) => void)` to `Discovery.on("hello", (device: Device) => void)`
+- [BREAKING CHANGE] Renamed method `Discovery.onGoodbye(callback: (device: Device) => void)` to `Discovery.on("goodbye", (device: Device) => void)`
+
+### :zap: Added
+
+- Class `Discovery` implements `EventEmitter`
+
 ## [5.0.6] - 2020-03-09
 
 ### :syringe: Fixed
