@@ -1,22 +1,18 @@
 import { mapFromRootDescription } from './../../src/root-descriptions/Mappings';
 import { RootDescription } from './../../src/root-descriptions/RootDescription';
 import {
-    ROOT_DESCRIPTION_DEFAULT_HTTP_PORT,
     ROOT_DESCRIPTION_DEFAULT_HTTPS_PORT,
+    ROOT_DESCRIPTION_DEFAULT_HTTP_PORT,
     ROOT_DESCRIPTION_NO_PORT,
+    ROOT_DESCRIPTION_WITHOUT_MACADDRESS,
     ROOT_DESCRIPTION_WITH_LOWERCASE_MACADDRESS,
-    ROOT_DESCRIPTION_WITHOUT_MACADDRESS
 } from './RootDescription.mock';
 
 describe('Mappings', () => {
-
     describe('#mapFromRootDescription', () => {
-
         test('should map root descriptions', async () => {
             // Arrange
-            const rootDescription = await RootDescription.parse(
-                '192.168.1.102',
-                ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
+            const rootDescription = await RootDescription.parse('192.168.1.102', ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Act
             const actual = mapFromRootDescription(rootDescription);
@@ -34,9 +30,7 @@ describe('Mappings', () => {
 
         test('should map root descriptions with default HTTP port', async () => {
             // Arrange
-            const rootDescription = await RootDescription.parse(
-                '192.168.1.102',
-                ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
+            const rootDescription = await RootDescription.parse('192.168.1.102', ROOT_DESCRIPTION_DEFAULT_HTTP_PORT);
 
             // Act
             const actual = mapFromRootDescription(rootDescription);
@@ -45,27 +39,20 @@ describe('Mappings', () => {
             expect(actual!.port!).toBe(80);
         });
 
-        test(
-            'should map root descriptions with default HTTPS port',
-            async () => {
-                // Arrange
-                const rootDescription = await RootDescription.parse(
-                    '192.168.1.102',
-                    ROOT_DESCRIPTION_DEFAULT_HTTPS_PORT);
+        test('should map root descriptions with default HTTPS port', async () => {
+            // Arrange
+            const rootDescription = await RootDescription.parse('192.168.1.102', ROOT_DESCRIPTION_DEFAULT_HTTPS_PORT);
 
-                // Act
-                const actual = mapFromRootDescription(rootDescription);
+            // Act
+            const actual = mapFromRootDescription(rootDescription);
 
-                // Assert
-                expect(actual!.port!).toBe(443);
-            }
-        );
+            // Assert
+            expect(actual!.port!).toBe(443);
+        });
 
         test('should map root descriptions without port', async () => {
             // Arrange
-            const rootDescription = await RootDescription.parse(
-                '192.168.1.102',
-                ROOT_DESCRIPTION_NO_PORT);
+            const rootDescription = await RootDescription.parse('192.168.1.102', ROOT_DESCRIPTION_NO_PORT);
 
             // Act
             const actual = mapFromRootDescription(rootDescription);
@@ -74,27 +61,20 @@ describe('Mappings', () => {
             expect(actual!.port).toBeFalsy();
         });
 
-        test(
-            'should map root descriptions and convert MAC address to uppercase',
-            async () => {
-                // Arrange
-                const rootDescription = await RootDescription.parse(
-                    '192.168.1.102',
-                    ROOT_DESCRIPTION_WITH_LOWERCASE_MACADDRESS);
+        test('should map root descriptions and convert MAC address to uppercase', async () => {
+            // Arrange
+            const rootDescription = await RootDescription.parse('192.168.1.102', ROOT_DESCRIPTION_WITH_LOWERCASE_MACADDRESS);
 
-                // Act
-                const actual = mapFromRootDescription(rootDescription);
+            // Act
+            const actual = mapFromRootDescription(rootDescription);
 
-                // Assert
-                expect(actual!.macAddress!).toBe('ACCC8E270AD8');
-            }
-        );
+            // Assert
+            expect(actual!.macAddress!).toBe('ACCC8E270AD8');
+        });
 
         test('should not map root description without MAC address', async () => {
             // Arrange
-            const rootDescription = await RootDescription.parse(
-                '192.168.1.102',
-                ROOT_DESCRIPTION_WITHOUT_MACADDRESS);
+            const rootDescription = await RootDescription.parse('192.168.1.102', ROOT_DESCRIPTION_WITHOUT_MACADDRESS);
 
             // Act
             const actual = mapFromRootDescription(rootDescription);

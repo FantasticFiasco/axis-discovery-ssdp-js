@@ -1,6 +1,5 @@
 import * as expect from '@fantasticfiasco/expect';
 import { EventEmitter } from 'events';
-
 import { Device } from './';
 import { log } from './logging';
 import { getIPv4Addresses } from './network-interfaces';
@@ -13,14 +12,13 @@ import { mapFromMessage, Message, MSearchSocket, NotifySocket, SocketBase } from
  */
 interface Events {
     hello: Device;
-    goodbye: Device
+    goodbye: Device;
 }
 
 /**
  * Class responsible for discovering Axis cameras on the network.
  */
 export class Discovery implements EventEmitter {
-
     private readonly eventEmitter = new EventEmitter();
     private readonly options: IOptions;
     private sockets?: SocketBase[];

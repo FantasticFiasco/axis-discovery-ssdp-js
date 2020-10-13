@@ -1,6 +1,5 @@
 import * as os from 'os';
 import { mocked } from 'ts-jest/utils';
-
 import { Device, Discovery } from './../src/';
 import { NETWORK_INTERFACES_WITH_TWO_ADDRESSES } from './network-interfaces/NetworkInterface.mock';
 
@@ -110,9 +109,7 @@ describe('Discovery', () => {
         const fn = jest.fn();
 
         // Act
-        const self = discovery
-            .addListener('hello', fn)
-            .removeListener('hello', fn);
+        const self = discovery.addListener('hello', fn).removeListener('hello', fn);
 
         discovery.emit('hello', mockedDevice());
 
@@ -172,10 +169,7 @@ describe('Discovery', () => {
         const expected = 2;
 
         // Act
-        const actual = discovery
-            .on('hello', fn)
-            .on('hello', fn)
-            .listenerCount('hello');
+        const actual = discovery.on('hello', fn).on('hello', fn).listenerCount('hello');
 
         // Assert
         expect(actual).toBe(expected);
@@ -208,9 +202,7 @@ describe('Discovery', () => {
         const fn2 = jest.fn(() => (actual += '2'));
 
         // Act
-        const self = discovery
-            .on('hello', fn2)
-            .prependOnceListener('hello', fn1);
+        const self = discovery.on('hello', fn2).prependOnceListener('hello', fn1);
 
         discovery.emit('hello', mockedDevice());
 
@@ -255,10 +247,7 @@ describe('Discovery', () => {
             const fn = jest.fn();
 
             // Act
-            const actual = discovery
-                .on('hello', fn)
-                .on('goodbye', fn)
-                .eventNames();
+            const actual = discovery.on('hello', fn).on('goodbye', fn).eventNames();
 
             // Assert
             expect([...actual]).toStrictEqual(['hello', 'goodbye']);

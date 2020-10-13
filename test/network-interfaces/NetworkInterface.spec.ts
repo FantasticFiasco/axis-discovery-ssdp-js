@@ -1,21 +1,18 @@
 import * as os from 'os';
 import { mocked } from 'ts-jest/utils';
-
 import { getIPv4Addresses } from './../../src/network-interfaces/NetworkInterface';
 import {
-    NETWORK_INTERFACE_WITH_TWO_ADDRESSES,
     NETWORK_INTERFACES_WITH_INTERNAL_ADDRESSES,
     NETWORK_INTERFACES_WITH_IPV6_ADDRESSES,
     NETWORK_INTERFACES_WITH_TWO_ADDRESSES,
-    NO_NETWORK_INTERFACES
+    NETWORK_INTERFACE_WITH_TWO_ADDRESSES,
+    NO_NETWORK_INTERFACES,
 } from './NetworkInterface.mock';
 
 jest.mock('os');
 
 describe('NetworkInterface', () => {
-
     describe('#getIPv4Addresses', () => {
-
         const osMock = mocked(os);
 
         test('should return addresses from one network interface', () => {

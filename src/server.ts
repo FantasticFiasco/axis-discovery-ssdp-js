@@ -12,5 +12,4 @@ discovery.on('goodbye', (device: Device) => {
     console.log(`${new Date().toLocaleTimeString()} - Goodbye from ${device.macAddress} on ${device.address}`);
 });
 
-discovery.start()
-    .then(() => discovery.search());
+discovery.start().then(() => discovery.search());

@@ -1,6 +1,5 @@
 import * as expect from '@fantasticfiasco/expect';
 import { get } from 'request';
-
 import { IHttpClient } from './IHttpClient';
 
 export class HttpClient implements IHttpClient {

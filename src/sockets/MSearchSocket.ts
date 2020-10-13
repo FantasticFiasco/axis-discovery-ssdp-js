@@ -1,6 +1,5 @@
 import * as expect from '@fantasticfiasco/expect';
 import { AddressInfo } from 'net';
-
 import { log } from '../logging';
 import { SSDP_MULTICAST_ADDRESS, SSDP_PORT } from './Constants';
 import { Message } from './Message';
@@ -32,30 +31,21 @@ export class MSearchSocket extends SocketBase {
                 return;
             }
 
-            this.socket.send(
-                message,
-                0,
-                message.length,
-                SSDP_PORT,
-                SSDP_MULTICAST_ADDRESS,
-                (error: Error | null) => {
-                    if (error) {
-                        log('MSearchSocket#search - %o', error);
-                        reject(error);
-                    } else {
-                        resolve();
-                    }
-                },
-            );
+            this.socket.send(message, 0, message.length, SSDP_PORT, SSDP_MULTICAST_ADDRESS, (error: Error | null) => {
+                if (error) {
+                    log('MSearchSocket#search - %o', error);
+                    reject(error);
+                } else {
+                    resolve();
+                }
+            });
         });
     }
 
     protected onListening() {
         expect.toExist(this.socket, 'M-SEARCH socket has never been started');
 
-        log('MSearchSocket#onListening - %s:%d',
-            (this.socket!.address() as AddressInfo).address,
-            (this.socket!.address() as AddressInfo).port);
+        log('MSearchSocket#onListening - %s:%d', (this.socket!.address() as AddressInfo).address, (this.socket!.address() as AddressInfo).port);
     }
 
     protected onMessage(messageBuffer: Buffer, remote: AddressInfo) {

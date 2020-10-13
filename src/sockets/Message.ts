@@ -2,12 +2,9 @@
  * Class describing a received SSDP message.
  */
 export class Message {
-
     private readonly headers: { [name: string]: string } = {};
 
-    constructor(
-        readonly remoteAddress: string,
-        message: Buffer) {
+    constructor(readonly remoteAddress: string, message: Buffer) {
         this.parseHeaders(message);
     }
 
@@ -47,10 +44,7 @@ export class Message {
     }
 
     private parseHeaders(message: Buffer) {
-        const headers = message
-            .toString()
-            .trim()
-            .split('\r\n');
+        const headers = message.toString().trim().split('\r\n');
 
         const method = headers.shift();
         if (method === undefined) {

@@ -17,7 +17,8 @@ export function mapFromRootDescription(rootDescription: RootDescription): Device
         rootDescription.modelName,
         rootDescription.modelDescription,
         rootDescription.modelNumber,
-        rootDescription.presentationUrl);
+        rootDescription.presentationUrl
+    );
 }
 
 const portFromPresentationUrlRegExp = /:(\d+)\/?$/i;

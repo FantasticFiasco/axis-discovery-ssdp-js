@@ -12,15 +12,7 @@ export function mapFromMessage(message: Message): Device | null {
 
     const macAddress = macAddressMatch[1].toUpperCase();
 
-    return new Device(
-        message.remoteAddress,
-        undefined,
-        macAddress,
-        undefined,
-        undefined,
-        undefined,
-        undefined,
-        undefined);
+    return new Device(message.remoteAddress, undefined, macAddress, undefined, undefined, undefined, undefined, undefined);
 }
 
 const macAddressRegExp = /^uuid:.*([0-9a-f]{12})::.*$/i;

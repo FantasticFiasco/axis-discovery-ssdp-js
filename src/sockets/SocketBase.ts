@@ -2,11 +2,9 @@ import * as expect from '@fantasticfiasco/expect';
 import { createSocket, Socket } from 'dgram';
 import { EventEmitter } from 'events';
 import { AddressInfo } from 'net';
-
 import { log } from '../logging';
 
 export abstract class SocketBase extends EventEmitter {
-
     protected socket?: Socket;
 
     /**

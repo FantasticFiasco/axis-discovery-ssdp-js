@@ -1,11 +1,7 @@
-import {
-    MSEARCH_MESSAGE,
-    NOTIFY_MESSAGE
-} from './Message.mock';
 import { Message } from './../../src/sockets/Message';
+import { MSEARCH_MESSAGE, NOTIFY_MESSAGE } from './Message.mock';
 
 describe('Message', () => {
-
     test('#remoteAddress', () => {
         // Arrange
         const subject = new Message('192.168.1.100', Buffer.from('HTTP/1.1 200 OK'));
@@ -18,14 +14,11 @@ describe('Message', () => {
         // Arrange
         const subject = new Message(
             '192.168.1.100',
-            Buffer.from(
-                'HTTP/1.1 200 OK\r\n' +
-                ' USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1 \r\n'));
+            Buffer.from('HTTP/1.1 200 OK\r\n' + ' USN: uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1 \r\n')
+        );
 
         // Assert
-        expect(subject.usn).toBe(
-            'uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1'
-        );
+        expect(subject.usn).toBe('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
     });
 
     describe('M-SEARCH response', () => {
@@ -50,9 +43,7 @@ describe('Message', () => {
             const subject = new Message('192.168.1.100', Buffer.from(MSEARCH_MESSAGE));
 
             // Assert
-            expect(subject.usn).toBe(
-                'uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1'
-            );
+            expect(subject.usn).toBe('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
         });
 
         test('#location should fail if missing', () => {
@@ -102,9 +93,7 @@ describe('Message', () => {
             const subject = new Message('192.168.1.100', Buffer.from(NOTIFY_MESSAGE));
 
             // Assert
-            expect(subject.usn).toBe(
-                'uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1'
-            );
+            expect(subject.usn).toBe('uuid:Upnp-BasicDevice-1_0-ACCC8E270AD8::urn:axis-com:service:BasicService:1');
         });
 
         test('#usn should fail if missing', () => {

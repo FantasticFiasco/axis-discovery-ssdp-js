@@ -1,25 +1,24 @@
-// Place your settings in this file to overwrite default and user settings.
 {
-  "files.exclude": {
-    "**/*.js": {
-      "when": "$(basename).ts"
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
     },
-    "**/*.d.ts": {
-      "when": "$(basename).ts"
+    "files.exclude": {
+        "**/*.js": {
+            "when": "$(basename).ts"
+        },
+        "**/*.d.ts": {
+            "when": "$(basename).ts"
+        },
+        "**/*.js.map": true,
+        "**/*.d.ts.map": true,
+        "**/npm-debug.log": true
     },
-    "**/*.js.map": true,
-    "**/*.d.ts.map": true,
-    "**/npm-debug.log": true
-  },
-  "tslint.autoFixOnSave": true,
-  "tslint.exclude": "**/test/**/*.ts",
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "spellright.language": [
-    "English (American)"
-  ],
-  "spellright.documentTypes": [
-    "markdown",
-    "latex",
-    "plaintext"
-  ]
+    "tslint.exclude": "**/test/**/*.ts",
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "spellright.language": ["English (American)"],
+    "spellright.documentTypes": ["markdown", "latex", "plaintext"],
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    }
 }
